@@ -5,17 +5,13 @@
 <ul class="list-group py-1 sidebar-menu shadow-sm mb-1">
 	@if (is_array($data) && count($data) > 0)
 		@foreach ($data as $item)
-			<li class="list-group-item {{ ( sidebarActive($item['name']) )? '' : '' }}">
-				<a href="{{ $item['url'] }}">{{ $item['label'] }}</a>
-			</li>
+			@can($item['can'])
+				<li class="list-group-item {{ ( subMenuActive($item['name']) )? 'active' : '' }}">
+					<a href="{{ $item['url'] }}">{!! $item['label'] !!}</a>
+				</li>
+			@endcan
 		@endforeach
 	@else
 		{{ $slot }}
 	@endif
-	<li class="list-group-item">
-		<a href="#">About</a>
-	</li>
-	<li class="list-group-item">
-		<a href="#">Contact</a>
-	</li>
 </ul>

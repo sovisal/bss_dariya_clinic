@@ -1,7 +1,4 @@
 <x-app-layout>
-	<x-slot name="header">
-		<x-form.button href="{{ route('user.index') }}" color="danger" icon="bx bx-left-arrow-alt" label="{{ __('button.back') }}"/>
-	</x-slot>
 	<form action="{{ route('user.store') }}" method="POST" autocomplete="off">
 		@csrf
 		<x-card>

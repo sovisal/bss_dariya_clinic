@@ -1,8 +1,6 @@
 <x-app-layout>
+
 	<x-slot name="header">
-		@can('CreateUser')
-			<x-form.button href="{{ route('user.create') }}" :hideLabelOnXS="true" icon="bx bx-plus" label="{{ __('button.crud.create') }}"/>
-		@endcan
 	</x-slot>
 
 	<x-card :foot="false">
@@ -11,10 +9,6 @@
 				<tr>
 					<th width="6%" class="no-sort">
 						{!! __('table.no') !!}
-						{{-- <div class="checkbox">
-							<input type="checkbox" class="checkbox-input" name="check_all" id="check_all">
-							<label for="check_all"></label>
-						</div> --}}
 					</th>
 					<th>{!! __('table.name') !!}</th>
 					<th>{!! __('table.username') !!}</th>
@@ -28,10 +22,6 @@
 				<tr>
 					<td class="text-center">
 						{{ ++$key }}
-						{{-- <div class="checkbox">
-							<input type="checkbox" class="checkbox-input" name="check_ids[]" id="chb-{{ $user->id }}" value="{{ $user->id }}">
-							<label for="chb-{{ $user->id }}"></label>
-						</div> --}}
 					</td>
 					<td>
 						@if ($user->image)

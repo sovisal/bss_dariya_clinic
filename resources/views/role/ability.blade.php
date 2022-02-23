@@ -1,7 +1,4 @@
 <x-app-layout>
-	<x-slot name="header">
-		<a class="btn btn-danger" href="{{ route('role.index') }}"><i class="bx bx-left-arrow-alt"></i> {{ __('button.back') }}</a>
-	</x-slot>
 	<x-slot name="css">
 		<link rel="stylesheet" href="{{ asset('css/bootstrap-duallistbox.min.css') }}">
 		<style>

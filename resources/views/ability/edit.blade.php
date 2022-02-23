@@ -1,7 +1,4 @@
 <x-app-layout>
-	<x-slot name="header">
-		<a class="btn btn-danger" href="{{ route('ability.index') }}"><i class="bx bx-left-arrow-alt"></i> {{ __('button.back') }}</a>
-	</x-slot>
 	<x-slot name="js">
 		<script>
 			$(document).on('change', '[name="category[]"],[name="old_category[]"]', function () {

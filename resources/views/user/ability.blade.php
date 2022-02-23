@@ -1,7 +1,5 @@
 <x-app-layout>
-	
 	<x-slot name="css">
-		{{-- <link rel="stylesheet" href="{{ asset('css/bootstrap-duallistbox.min.css') }}"> --}}
 		<style>
 			#datatable-ability td{
 				background: #F2F4F4;
@@ -16,7 +14,6 @@
 	</x-slot>
 	
 	<x-slot name="js">
-		{{-- <script src="{{ asset('js/jquery.bootstrap-duallistbox.min.js') }}"></script> --}}
 		<script>
 			$('.chb_all').change(function () {
 				if ($(this).is(':checked')) {
@@ -36,7 +33,6 @@
 			$(document).ready(function () {
 				$('#datatable-ability tbody tr').each(function () {
 					if ($(this).find('.chb_child').length==0) {
-						// $(this).find('.chb_all').parent().parent().html($(this).find('.chb_all').parent().find('label').html());
 						$(this).find('.chb_all').parent().parent().parent().parent().parent().parent().remove()
 					}else if ($(this).find('.chb_child:checked').length == $(this).find('.chb_child').length) {
 						$(this).find('.chb_all').prop('checked', true);

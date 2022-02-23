@@ -1,10 +1,4 @@
 <x-app-layout>
-	<x-slot name="header">
-		@can('CreateRole')
-			<x-form.button href="{{ route('role.create') }}" icon="bx bx-plus" label="{{ __('button.crud.create') }}"/>
-		@endcan
-	</x-slot>
-
 	<x-card :foot="false">
 		<x-table class="table-hover" id="datatables" data-table="roles">
 			<x-slot name="thead">

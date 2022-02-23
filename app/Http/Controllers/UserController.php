@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Role;
 use App\Models\User;
-use App\Models\Ability;
 use Illuminate\Http\Request;
 use App\Models\AbilityModule;
 use App\Http\Requests\UserRequest;
@@ -13,9 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\UserUpdateRequest;
-use Illuminate\Validation\Rules\Password;
 use Illuminate\Validation\ValidationException;
-use App\Http\Requests\UserUpdatePasswordRequest;
 
 class UserController extends Controller
 {
@@ -72,7 +69,7 @@ class UserController extends Controller
 			'position' => $request->position,
 			'address' => $request->address,
 			'bio' => $request->bio,
-			'color' => auth()->user()->bg_random()
+			'color' => bg_random()
 		]);
 		$url = route('user.index');
 		if ($request->save_opt == 'save_create') {

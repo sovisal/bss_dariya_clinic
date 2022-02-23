@@ -1,5 +1,7 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+
 function InternetIsConnected(){
 	$connected = @fsockopen("www.google.com", 80);
 	if ($connected) {
@@ -14,30 +16,38 @@ function can($ability)
 	return auth()->user()->can($ability);
 }
 
-
-function sidebarActive($active){
-	$routename = explode('.', Route::currentRouteName());
-	if (count($routename) < 1) {
-		return false;
-	}elseif (count($routename) == 1){
-		$i = count($routename)-1;
-		return ($routename[$i] == $active);
-	}else{
-		$i = count($routename)-2;
-		return ($routename[$i] == $active);
-	}
+// function sidebarActive($active)
+// {
+// 	$routename = explode('.', Route::currentRouteName());
+// 	if (count($routename) < 1) {
+// 		return false;
+// 	}elseif (count($routename) == 1){
+// 		$i = count($routename)-1;
+// 		return ($routename[$i] == $active);
+// 	}else{
+// 		$i = count($routename)-2;
+// 		return ($routename[$i] == $active);
+// 	}
+// }
+function mainMenuActive($active)
+{
+	return ($active == module());
+}
+function subMenuActive($active)
+{
+	return ($active == subModule());
 }
 
 function module()
 {
 	$routename = explode('.', Route::currentRouteName());
-	return __('module.' . $routename[count($routename) > 1 ? count($routename)-2 : count($routename)-1]);
+	return $routename[count($routename) > 1 ? count($routename)-2 : count($routename)-1];
 }
 
 function subModule()
 {
 	$routename = explode('.', Route::currentRouteName());
-	return __('module.sub.'. $routename[count($routename)-1]);
+	return $routename[count($routename)-1];
 }
 
 function breadCrumb()
@@ -118,4 +128,21 @@ function zipFile( $zip_file = 'file-zip.zip', $path, $destination_path, $sub_fol
 	$zip->close();
 
 	return $output_path;
+}
+
+
+function bg_random()
+{
+	$bg = [
+		'blue-',
+		'green-',
+		'yellow-',
+		'red-',
+		'purple-',
+		'gray-',
+		'pink-',
+		'indigo-',
+	];
+	$string_bg = $bg[rand(0, 7)] . rand(3, 9) . '00';
+	return $string_bg;
 }

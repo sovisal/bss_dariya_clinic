@@ -42,6 +42,8 @@
 		{{ $attributes(['value' => old($name)]) }}
 	/>
 
+	<x-form.error name="{{ $name }}"/>
+
 	@if ($hasIcon!='' && $icon!='')
 			<div class="form-control-position">
 				<i class="{{ $icon }}"></i>
@@ -63,7 +65,5 @@
 			@endif
 		</div>
 	@endif
-
-	<x-form.error name="{{ $name }}"/>
 
 </x-form.field>

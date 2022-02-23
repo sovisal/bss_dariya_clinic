@@ -522,7 +522,7 @@ textarea.my-editor + .cke_chrome.cke_focus{
 	.sidebar-menu > li > a{
 		color: #596F88;
 		display: block;
-		padding: 1rem 1.1rem;
+		padding: 1rem 1.2rem;
 	}
 	.sidebar-menu > li > a:hover{
 		color: #5a8dee;

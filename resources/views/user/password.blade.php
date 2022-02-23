@@ -1,7 +1,4 @@
 <x-app-layout>
-	<x-slot name="header">
-		<a class="btn btn-danger" href="{{ route('user.index') }}"><i class="bx bx-left-arrow-alt"></i> {{ __('button.back') }}</a>
-	</x-slot>
 	<form action="{{ route('user.update_password', $user) }}" method="POST" autocomplete="off">
 		@method('PUT')
 		@csrf

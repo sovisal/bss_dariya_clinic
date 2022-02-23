@@ -1,7 +1,4 @@
 <x-app-layout>
-	<x-slot name="header">
-		<x-form.button href="{{ route('role.index') }}" color="danger" icon="bx bx-left-arrow-alt" label="{{ __('button.back') }}"/>
-	</x-slot>
 	<form action="{{ route('role.update', $role) }}" method="POST" autocomplete="off">
 		@method('PUT')
 		@csrf

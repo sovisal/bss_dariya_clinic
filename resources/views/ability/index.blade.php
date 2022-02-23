@@ -1,9 +1,4 @@
 <x-app-layout>
-	<x-slot name="header">
-		@can('CreateAbility')
-			<a class="btn btn-primary"  href="{{ route('ability.create') }}"><i class="bx bx-plus"></i> {{ __('button.crud.create') }}</a>
-		@endcan
-	</x-slot>
 	<x-slot name="js">
 		<script>
 			function getDetail(id) { 

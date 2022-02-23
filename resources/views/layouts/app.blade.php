@@ -12,26 +12,17 @@
 		<!-- Styles: End -->
 	</head>
 	<body>
-
-		@include('layouts._topbar')
+		<x-topbar :data="$menu" />
 
 		<div class="d-flex tw-px-2 tw-py-4">
-
-			{{-- {{ $sidebar ?? '' }} --}}
-
-			<ul class="list-group py-1 sidebar-menu shadow-sm mb-1">
-				<li class="list-group-item active">
-					<a href="#">Home</a>
-				</li>
-				<li class="list-group-item">
-					<a href="#">About</a>
-				</li>
-				<li class="list-group-item">
-					<a href="#">Contact</a>
-				</li>
-			</ul>
+			@if (isset($menu[module()]['sub']))
+				<x-sidebar :data="$menu[module()]['sub']" />
+			@endif
 
 			<div class="flex-fill wrap-content">
+				{{-- Header: Start --}}
+				{!! isset($header) && $header!='' ? '<div class="content-header tw-mb-2">'. $header .'</div>' : '' !!}
+				{{-- Header: End --}}
 
 				{{-- Alert Message: Start --}}
 				<x-alert-msg />
