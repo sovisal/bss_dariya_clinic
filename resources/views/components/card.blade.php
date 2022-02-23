@@ -9,7 +9,7 @@
 <div {{ $attributes->merge(['class'=>"card shadow-sm mb-1"]) }}>
 	@if ($head)
 		<div class="card-header {{ $headerClass }}">
-			{!! $header ?? '<h4 class="card-title">'. subModule() .'</h4>' !!}
+			{!! $header ?? '<h4 class="card-title">'. __('module.sub.'. subModule()) .'</h4>' !!}
 			@if ($actionShow)
 				<a class="heading-elements-toggle">
 					<i class='bx bx-dots-vertical font-medium-3'></i>

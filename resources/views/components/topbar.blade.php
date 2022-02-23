@@ -3,7 +3,12 @@
 ])
 
 <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm">
-	<a class="navbar-brand" href="#">Clinic</a>
+	<a class="navbar-brand" href="#">
+		<div class="avatar tw-mr-1 avatar-sm">
+			<img src="{{ asset('images/site/logo.png') }}" alt="avtar img holder">
+		</div>
+		Dariya Clinic
+	</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
 	</button>

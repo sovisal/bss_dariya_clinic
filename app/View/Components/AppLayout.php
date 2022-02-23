@@ -81,7 +81,13 @@ class AppLayout extends Component
 						'label' => 'Create',
 					],
 				]
-			]
+			],
+
+			'setting' => [
+				'can' => 'UpdateSetting',
+				'url' => route('setting.edit'),
+				'label' => 'Setting',
+			],
 		];
 
 		return view('layouts.app', compact('menu'));
