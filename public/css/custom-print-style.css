@@ -1,0 +1,84 @@
+@import url('vendors.min.css');
+
+@font-face {
+	font-family: 'Rubik';
+	src: url('../../fonts/en/Rubik-Regular.ttf');
+}
+@font-face {
+	font-family: 'Rubik';
+	font-weight: Bold;
+	src: url('../../fonts/en/Rubik-Medium.ttf');
+}
+@font-face {
+	font-family: 'Rubik Light';
+	src: url('../../fonts/en/Rubik-Light.ttf');
+}
+@font-face {
+	font-family: 'Rubik-Medium';
+	src: url('../../fonts/en/Rubik-Medium.ttf');
+}
+@font-face {
+	font-family: 'Koulen';
+	src: url('../../fonts/kh/Koulen-Regular.ttf');
+}
+@font-face {
+	font-family: 'Khmer OS Battambang';
+	src: url('../../fonts/kh/KhmerOSbattambang.ttf');
+}
+body{
+	margin: 0;
+}
+body *{
+	font-family: 'Rubik', 'Khmer OS Battambang';
+}
+img{
+	max-width: 100% !important;
+}
+hr{
+	box-sizing: content-box;
+	height: 0;
+	border: 0;
+	border-top: 1px solid #dfe3e7;
+	margin: 3px 0;
+}
+h1,h2,h3,h4,h5,h6,p{
+	margin: 0;
+	font-weight: normal;
+}
+table{
+	border-collapse: collapse;
+}
+* {
+-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+		box-sizing: border-box;
+}
+*:before,
+*:after {
+-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+		box-sizing: border-box;
+}
+@page{
+	margin: 0;
+}
+.text-center{
+	text-align: center;
+}
+.text-right{
+	text-align: right;
+}
+.text-left{
+	text-align: left;
+}
+.float-left{
+	float: left;
+}
+table { page-break-inside:auto!important; }
+tr { page-break-inside:avoid!important; page-break-after:auto!important; }
+table thead { display: table-row-group!important; }
+table tfoot { display: table-row-group!important; }
+/* When Print */
+@media print{
+	
+}

@@ -1,0 +1,57 @@
+<?php
+
+return [
+
+	'no' => 'N&deg;',
+	'none' => 'None',
+	'filter' => 'Filter',
+	'date' => 'Date',
+	'time' => 'Time',
+	'amount' => 'Amount',
+	'note' => 'Note',
+	'label' => 'Label',
+	'icon' => 'Icon',
+	'username' => 'Username',
+	'name' => 'Name',
+	'email' => 'E-mail',
+	'phone' => 'Phone',
+	'category' => 'Category',
+	'status' => 'Status',
+	'active' => 'Active',
+	'inactive' => 'Inactive',
+	'suspended' => 'Suspended',
+	'role' => 'Role',
+	'position' => 'Position',
+	'thumbnail' => 'Thnumbnail',
+	'image' => 'Image', 
+	'description' => 'Description',
+	'url' => 'URL',
+	'created_by' => 'Created By',
+	'updated_by' => 'Updated By',
+	'exported_by' => 'Exported By',
+	'created_at' => 'Created at',
+	'updated_at' => 'Updated at',
+	'exported_at' => 'Exported At',
+	'action' => 'Action',
+	'address' => 'Address',
+	'active' => 'Active',
+	'inActive' => 'Inactive',
+	'note' => 'Note',
+	'vattin' => 'Vattin',
+
+	'ability' => [
+		'module' => 'Module',
+		'abilities' => 'Abilities',
+		'create' => 'Creat',
+		'update' => 'Update',
+		'delete' => 'Delete',
+		'viewany' => 'ViewAny',
+		'other' => 'Other',
+	],
+
+	'db_backup' => [
+		'file_type' => 'File Type',
+		'download' => 'Download',
+	],
+
+];

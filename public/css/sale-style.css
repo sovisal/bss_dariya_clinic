@@ -1,0 +1,172 @@
+/* body{
+	min-height: 100%;
+} */
+.content-wrapper{
+	padding: 15px !important;
+}
+[data-visible="hide"] {
+	visibility: hidden;
+}
+[data-visible="show"] {
+	visibility: visible;
+}
+/* #btn-main-menu {
+	background: #5A8DEE;
+	color: #FFF;
+	display: block;
+	box-shadow: -3px 0 8px rgb(0 0 0 / 10%);
+	border-top-right-radius: 6px;
+	border-bottom-right-radius: 6px;
+	position: fixed	;
+	top: 50%;
+	width: 38px;
+	height: 38px;
+	left: 0px;
+	text-align: center;
+	line-height: 44px;
+	cursor: pointer;
+	z-index: 999;
+}
+#btn-main-menu.show{
+	top: 13px;
+	left: 208px;
+	box-shadow: none;
+	border-radius: 6px;
+} */
+.sale-item-grid{
+	border: 2px solid #f1f1f1;
+	position: relative;
+	display: inline-block;
+	cursor: pointer;
+	transition: border 0.2s ease-out;
+}
+.sale-item-grid:hover{
+	border: 2px solid #437DEC;
+}
+.sale-item-grid .price{
+	position: absolute;
+	background: rgba(255, 255, 255, 1);
+	text-align: center;
+	top: 8px;
+	left: 8px;
+	border-radius: 2px;
+	padding: 2px 5px;
+}
+.sale-item-grid .popular{
+	position: absolute;
+	background: rgba(255, 255, 255, 1);
+	text-align: center;
+	top: 8px;
+	right: 8px;
+	border-radius: 2px;
+	padding: 2px 5px;
+}
+.sale-item-grid .title{
+	position: absolute;
+	width: 100%;
+	background: rgba(255, 255, 255, 0.92);
+	text-align: center;
+	bottom: 0;
+	left: 0;
+	color: #222;
+	border-radius: 2px;
+	padding: 2px 5px;
+	padding: 3px 0;
+}
+.sale-item-grid:hover .title{
+	background: rgba(255, 255, 255, 1);
+	color: #437DEC;
+}
+#search-result{
+	width: 100%;
+	z-index: 9999;
+	background: rgba(255, 255, 255, 0.99);
+	box-shadow: 5px 10px 15px rgba(0, 0, 0, 0.1);
+}
+#search-result ul li:not(.searching):hover{
+	background: #f9f9f9;
+	cursor: pointer;
+}
+#btn-change-exchange-rate,
+#btn-change-tax-rate,
+.btn-change-discount{
+	cursor: pointer;
+}
+.table-transaction-detail td{
+	border: none;
+	vertical-align: top !important;
+}
+#detail-action-button .col:not(:first-child){
+	padding: 0 5px;
+}
+#detail-action-button .col:first-child{
+	padding-right: 5px;
+}
+#detail-action-button .col:last-child{
+	padding-left: 5px;
+}
+.app-content,
+.content-wrapper,
+.content-body,
+#sale > .row,
+#sale > .row > div,
+#sale{
+	height: 100% !important;
+}
+#side-item{
+	position: relative;
+	height: 100%;
+	overflow-y: scroll;
+}
+/* #side-order.side-sticky-top{
+	position: fixed;
+	height: calc(100vh);
+	width: calc(33.3333333% - 15px);
+	top: 0;
+	z-index: 1030;
+	background: #fff;
+} */
+#side-order{
+	height: 100%;
+	position: relative;
+}
+#side-order #side-order-container{
+	height: 100%;
+	overflow-y: scroll;
+}
+#side-order.side-sticky-top .card{
+	box-shadow: none !important;
+}
+#side-order.side-sticky-top .ps__rail-x,
+#side-order.side-sticky-top .ps__rail-y {   opacity: 0.03 !important; }
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) and (max-width: 767.98px) {
+	#side-order.side-sticky-top{
+		position: static;
+		height: auto;
+		width: auto;
+		background: none;
+	}
+	#side-order.side-sticky-top #side-order-container{
+		position: static;
+		height: auto;
+		width: auto;
+		overflow-y: auto;
+	}
+}
+/* Extra small devices (portrait phones, less than 576px) */
+@media (max-width: 575.98px) {
+	#side-order.side-sticky-top{
+		position: static;
+		height: auto;
+		width: auto;
+		background: none;
+	}
+	#side-order.side-sticky-top #side-order-container{
+		position: static;
+		height: auto;
+		width: auto;
+		overflow-y: auto;
+	}
+}

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="">
+</head>
+<body>
+
+  
+  <textarea  id="editor">
+    <h1>Hello world!</h1>
+    <p>I'm an instance of <a href="https://ckeditor.com">CKEditor</a>.</p>
+  </textarea >
+  
+  <script src="ckeditor.js"></script>
+  <script>
+
+    
+    var editor = CKEDITOR.replace('editor', {
+      height: '350',
+      font_names: 'Calibrib Bold; Calibri Italic; Calibri; Roboto Regular; Roboto Bold; Khmer OS Battambang; Khmer OS Muol Light; Khmer OS Content; Khmer OS Kuolen;',
+      extraPlugins: ['mathjax','emoji'],
+      mathJaxLib: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/MathJax.js',
+      toolbar: [
+        { name: 'document', items: [ 'Source', '-', 'Save', 'NewPage', 'ExportPdf', 'Preview', 'Print', '-', 'Templates' ] },
+        { name: 'clipboard', items: [ 'Undo', 'Redo', '-', 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', ] },
+        { name: 'editing', items: [ 'Find', 'Replace', 'SelectAll', '-', 'Blockquote', 'CreateDiv' ] },
+        { name: 'insert', items: [ 'Image', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'Mathjax', 'PageBreak', 'Iframe' ] },
+        { name: 'tools', items: [ 'ShowBlocks', 'Maximize' ] },
+        '/',
+        { name: 'basicstyles', items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'CopyFormatting', 'RemoveFormat' ] },
+        { name: 'paragraph', items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'] },
+        { name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize' ] },
+        { name: 'colors', items: [ 'TextColor', 'BGColor' ] },
+      ]
+    });   
+
+    // CKEDITOR.editorConfig = function( config ) {
+    //   config.toolbar = [
+    //     { name: 'document', items: [ 'Source', '-', 'Save', 'NewPage', 'ExportPdf', 'Preview', 'Print', '-', 'Templates' ] },
+    //     { name: 'clipboard', items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },
+    //     { name: 'editing', items: [ 'Find', 'Replace', '-', 'SelectAll', '-', 'Scayt' ] },
+    //     { name: 'forms', items: [ 'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField' ] },
+    //     '/',
+    //     { name: 'basicstyles', items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'CopyFormatting', 'RemoveFormat' ] },
+    //     { name: 'paragraph', items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl', 'Language' ] },
+    //     { name: 'links', items: [ 'Link', 'Unlink', 'Anchor' ] },
+    //     { name: 'insert', items: [ 'Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe' ] },
+    //     '/',
+    //     { name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize' ] },
+    //     { name: 'colors', items: [ 'TextColor', 'BGColor' ] },
+    //     { name: 'tools', items: [ 'Maximize', 'ShowBlocks' ] },
+    //     { name: 'about', items: [ 'About' ] }
+    //   ];
+
+    //   config.removeButtons = 'SelectAll,Form,Checkbox,Radio,TextField,Textarea,Select,Button,ImageButton,HiddenField,BidiRtl,BidiLtr,Language,About,Styles,Link,Unlink,Anchor';
+    // };
+
+    // CKEDITOR.replace( 'editor', function(  ) {
+    //   config.toolbar = [
+    //     { name: 'document', items: [ 'Source', '-', 'Save', 'NewPage', 'ExportPdf', 'Preview', 'Print', '-', 'Templates' ] },
+    //     { name: 'clipboard', items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },
+    //     { name: 'editing', items: [ 'Find', 'Replace', '-', 'SelectAll', '-', 'Scayt' ] },
+    //     { name: 'forms', items: [ 'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField' ] },
+    //     '/',
+    //     { name: 'basicstyles', items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'CopyFormatting', 'RemoveFormat' ] },
+    //     { name: 'paragraph', items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl', 'Language' ] },
+    //     { name: 'links', items: [ 'Link', 'Unlink', 'Anchor' ] },
+    //     { name: 'insert', items: [ 'Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe' ] },
+    //     '/',
+    //     { name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize' ] },
+    //     { name: 'colors', items: [ 'TextColor', 'BGColor' ] },
+    //     { name: 'tools', items: [ 'Maximize', 'ShowBlocks' ] },
+    //     { name: 'about', items: [ 'About' ] }
+    //   ];
+    // });
+    
+    // var editorElement = CKEDITOR.document.getById( 'editor' );
+
+    // editorElement.setAttribute( 'contenteditable', 'true' );
+    // CKEDITOR.inline( 'editor' );
+
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@import 'animate.css/animate.min.css';
+@import 'select2/dist/css/select2.min.css';
+@import 'pace-js/pace-theme-default.min.css';
+@import 'croppie/croppie.css';
+@import 'perfect-scrollbar/css/perfect-scrollbar.css';
+@import 'datatables.net-bs4/css/dataTables.bootstrap4.css';
+@import './bootstrap-datetimepicker.css';
+@import './daterangepicker.css';
