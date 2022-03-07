@@ -76,6 +76,12 @@ class AppLayout extends Component
 				]
 			],
 
+			'address' => [
+				'can' => 'UpdateSetting', // not yet create abilities
+				'url' => route('address.index'),
+				'label' => 'Address',
+			],
+
 			'setting' => [
 				'can' => 'UpdateSetting',
 				'url' => route('setting.edit'),

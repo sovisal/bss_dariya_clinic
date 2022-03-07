@@ -43,3 +43,4 @@ Route::middleware(['auth'])->prefix('patient')->name('patient.')->group(function
 
 
 	require __DIR__.'/user-route.php';
+	require __DIR__.'/address-route.php';
