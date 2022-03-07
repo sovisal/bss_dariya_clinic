@@ -1,14 +1,12 @@
 <x-app-layout>
+	<x-slot name="header">
+		<x-form.button href="{{ route('role.create') }}" icon="bx bx-plus" label="Create" />
+	</x-slot>
+
 	<x-card :foot="false">
 		<x-table class="table-hover" id="datatables" data-table="roles">
 			<x-slot name="thead">
 				<tr>
-					<th width="6%" class="no-sort">
-						<div class="checkbox">
-							<input type="checkbox" class="checkbox-input" name="check_all" id="check_all">
-							<label for="check_all"></label>
-						</div>
-					</th>
 					<th>{!! __('table.label') !!}</th>
 					<th>{!! __('table.name') !!}</th>
 					<th width="10%">{!! __('table.action') !!}</th>
@@ -16,12 +14,6 @@
 			</x-slot>
 			@foreach ($roles as $key => $role)
 				<tr>
-					<td class="text-center">
-						<div class="checkbox">
-							<input type="checkbox" class="checkbox-input" name="check_ids[]" id="chb-{{ $role->id }}" value="{{ $role->id }}">
-							<label for="chb-{{ $role->id }}"></label>
-						</div>
-					</td>
 					<td>{!! $role->label !!}</td>
 					<td>{!! $role->name !!}</td>
 					<td class="text-center">

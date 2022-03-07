@@ -1,4 +1,8 @@
 <x-app-layout>
+	<x-slot name="header">
+		<x-form.button href="{{ route('role.index') }}" color="danger" icon="bx bx-left-arrow-alt" label="Back" />
+	</x-slot>
+
 	<x-slot name="css">
 		<link rel="stylesheet" href="{{ asset('css/bootstrap-duallistbox.min.css') }}">
 		<style>

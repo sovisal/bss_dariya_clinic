@@ -19,14 +19,4 @@
 
 		<x-form.error name="{{ $name }}"/>
 	</div>
-{{-- 
-	@if ($inputGroup)
-			@if ($append != '')
-				<div class="input-group-append">
-					{!! $append !!}
-				</div>
-			@endif
-		</div>
-	@endif --}}
-
 </x-form.field>

@@ -1,6 +1,6 @@
 <x-app-layout>
-
 	<x-slot name="header">
+		<x-form.button href="{{ route('user.create') }}" icon="bx bx-plus" label="Create" />
 	</x-slot>
 
 	<x-card :foot="false">

@@ -496,11 +496,16 @@ textarea.my-editor + .cke_chrome.cke_focus{
 		width: auto !important;
 		min-width: 22em !important;
 	}
+	.bootstrap-datetimepicker-widget th,
+	.bootstrap-datetimepicker-widget td{
+		border: none !important;
+		padding: 6px 5px !important;
+	}
 
 	.sidebar-menu{
 		border-radius: 0.22rem;
 		background: #fff;
-		min-width: 250px;
+		min-width: 200px;
 		margin-right: 35px;
 	}
 	.sidebar-menu > li{

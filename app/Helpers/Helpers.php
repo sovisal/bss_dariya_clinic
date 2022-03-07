@@ -35,6 +35,9 @@ function mainMenuActive($active)
 }
 function subMenuActive($active)
 {
+	if (is_array($active)) {
+		return in_array(subModule(), $active);
+	}
 	return ($active == subModule());
 }
 
