@@ -33,7 +33,7 @@
 					{{ auth()->user()->name }}
 				</a>
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="#"><i class="bx bx-user mr-50"></i> Account</a>
+					<a class="dropdown-item" href="{{ route('user.account', 'general') }}"><i class="bx bx-user mr-50"></i> Account</a>
 					<div class="dropdown-divider"></div>
 					<a class="dropdown-item" href="#"><i class="bx bx-power-off mr-50"></i> Log out</a>
 				</div>
