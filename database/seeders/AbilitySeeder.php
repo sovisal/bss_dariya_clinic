@@ -37,11 +37,6 @@ class AbilitySeeder extends Seeder
 			[ 'ability_module_id' => '2', 'category' => 'Other', 'name' => 'AssignUserRole', 'label' => 'User Assign Role' ],
 			[ 'ability_module_id' => '2', 'category' => 'Other', 'name' => 'AssignUserAbility', 'label' => 'User Assign Ability' ],
 
-			[ 'ability_module_id' => '1', 'category' => 'ViewAny', 'name' => 'ViewAnyRole', 'label' => 'Role View List' ],
-			[ 'ability_module_id' => '1', 'category' => 'Create', 'name' => 'CreateRole', 'label' => 'Role Create' ],
-			[ 'ability_module_id' => '1', 'category' => 'Update', 'name' => 'UpdateRole', 'label' => 'Role Update' ],
-			[ 'ability_module_id' => '1', 'category' => 'Delete', 'name' => 'DeleteRole', 'label' => 'Role Delete' ],
-
 		]);
 	}
 }

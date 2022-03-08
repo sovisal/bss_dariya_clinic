@@ -30,7 +30,7 @@ class AppLayout extends Component
 					[
 						'can' => 'ViewAnyPatient',
 						'url' => route('patient.index'),
-						'name' => ['index', 'create'],
+						'name' => ['index', 'create', 'edit', 'show'],
 						'label' => 'Patient',
 					],
 					[

@@ -40,8 +40,8 @@
 						label="Gender"
 					>
 						<option value="">---- None ----</option>
-						<option value="Male" {{ ($patient->gender=="Male") ? 'selected' : '' }}>Male</option>
-						<option value="Female" {{ ($patient->gender=="Female") ? 'selected' : '' }}>Female</option>
+						<option value="Male" {{ (old('gender', $patient->gender)=="Male") ? 'selected' : '' }}>Male</option>
+						<option value="Female" {{ (old('gender', $patient->gender)=="Female") ? 'selected' : '' }}>Female</option>
 					</x-form.select>
 				</div>
 				<div class="col-md-3">
@@ -82,8 +82,8 @@
 						label="Nationality"
 					>
 						<option value="">---- None ----</option>
-						<option value="Khmer" {{ ($patient->nationality=="Khmer") ? 'selected' : '' }}>Khmer (KH)</option>
-						<option value="American" {{ ($patient->nationality=="American") ? 'selected' : '' }}>American (US)</option>
+						<option value="Khmer" {{ (old('nationality', $patient->nationality)=="Khmer") ? 'selected' : '' }}>Khmer (KH)</option>
+						<option value="American" {{ (old('nationality', $patient->nationality)=="American") ? 'selected' : '' }}>American (US)</option>
 					</x-form.select>
 				</div>
 				<div class="col-md-3">
@@ -93,9 +93,9 @@
 						label="Marital Status"
 					>
 						<option value="">---- None ----</option>
-						<option value="Single" {{ ($patient->marital_status=="Single") ? 'selected' : '' }}>Single</option>
-						<option value="Married" {{ ($patient->marital_status=="Married") ? 'selected' : '' }}>Married</option>
-						<option value="Widow" {{ ($patient->marital_status=="Widow") ? 'selected' : '' }}>Widow</option>
+						<option value="Single" {{ (old('marital_status', $patient->marital_status)=="Single") ? 'selected' : '' }}>Single</option>
+						<option value="Married" {{ (old('marital_status', $patient->marital_status)=="Married") ? 'selected' : '' }}>Married</option>
+						<option value="Widow" {{ (old('marital_status', $patient->marital_status)=="Widow") ? 'selected' : '' }}>Widow</option>
 					</x-form.select>
 				</div>
 				<div class="col-md-3">
@@ -162,10 +162,10 @@
 						data-no_search="true"
 					>
 						<option value="">---- None ----</option>
-						<option value="Group A" {{ ($patient->blood_type=="Group A") ? 'selected' : '' }}>Group A</option>
-						<option value="Group B" {{ ($patient->blood_type=="Group B") ? 'selected' : '' }}>Group B</option>
-						<option value="Group AB" {{ ($patient->blood_type=="Group AB") ? 'selected' : '' }}>Group AB</option>
-						<option value="Group O" {{ ($patient->blood_type=="Group O") ? 'selected' : '' }}>Group O</option>
+						<option value="Group A" {{ (old('blood_type', $patient->blood_type)=="Group A") ? 'selected' : '' }}>Group A</option>
+						<option value="Group B" {{ (old('blood_type', $patient->blood_type)=="Group B") ? 'selected' : '' }}>Group B</option>
+						<option value="Group AB" {{ (old('blood_type', $patient->blood_type)=="Group AB") ? 'selected' : '' }}>Group AB</option>
+						<option value="Group O" {{ (old('blood_type', $patient->blood_type)=="Group O") ? 'selected' : '' }}>Group O</option>
 					</x-form.select>
 				</div>
 				<div class="col-md-6">

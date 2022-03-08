@@ -70,7 +70,7 @@ class PatientController extends Controller
 		]);
 
 		if ($request->file('photo')) {
-			$path = public_path().'/images/echoes/';
+			$path = public_path().'/images/patients/';
 			File::makeDirectory($path, 0777, true, true);
 			$photo = $request->file('photo');
 			$photo_name = time() .'_'. $patient->id .'.png';
