@@ -1,11 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PatientController;
-use App\Http\Controllers\CustomerController;
-use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\ConsultationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,7 +35,7 @@ Route::middleware(['auth'])->prefix('patient')->name('patient.')->group(function
 	Route::put('/{patient}/update', [PatientController::class, 'update'])->name('update')->middleware('can:UpdatePatient');
 	Route::delete('/{patient}/delete', [PatientController::class, 'destroy'])->name('delete')->middleware('can:DeletePatient');
 
-	Route::get('/consulting', [PatientController::class, 'consulting'])->name('consulting')->middleware('can:CreatePatientConsulting');
+	Route::get('/consultation/{patient}/create', [ConsultationController::class, 'create'])->name('consultation_create')->middleware('can:CreateConsultation');
 
 });
 

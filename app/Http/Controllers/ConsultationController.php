@@ -4,11 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Patient;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
-use App\Http\Requests\PatientRequest;
-use Intervention\Image\Facades\Image;
 
-class PatientController extends Controller
+class ConsultationController extends Controller
 {
 	/**
 	 * Display a listing of the resource.
@@ -29,12 +26,12 @@ class PatientController extends Controller
 	/**
 	 * Show the form for creating a new resource.
 	 */
-	public function create()
+	public function create(Patient $patient)
 	{
 		$data = [
-			
+			'patient' => $patient
 		];
-		return view('patient.create', $data);
+		return view('consultation.create', $data);
 	}
 
 	/**
