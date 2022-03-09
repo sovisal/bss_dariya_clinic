@@ -502,6 +502,22 @@ textarea.my-editor + .cke_chrome.cke_focus{
 		padding: 6px 5px !important;
 	}
 
+	.navbar-top{
+		min-height: auto;
+	}
+	.navbar-top .navbar-brand{
+		padding: 0 1rem !important;
+		margin: 0 !important;
+		/* border: 1px solid red; */
+	}
+	.navbar-top .navbar-nav .nav-item a.nav-link{
+		display: block;
+		padding: 1.2rem .6rem;
+	}
+	.navbar-top .navbar-nav .nav-item.active .nav-link{
+		background: rgba(0, 0, 0, 0.25);
+	}
+
 	.sidebar-menu{
 		border-radius: 0.22rem;
 		background: #fff;
