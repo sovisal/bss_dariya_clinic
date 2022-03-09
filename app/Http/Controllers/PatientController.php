@@ -31,8 +31,11 @@ class PatientController extends Controller
 	 */
 	public function create()
 	{
+		
+		$_4level_address = new \App\Http\Controllers\FourLevelAddressController();
+		$_4level_level = $_4level_address->BSSFullAddress('null', 'selection');
 		$data = [
-			
+			'_4level_level' => $_4level_level
 		];
 		return view('patient.create', $data);
 	}

@@ -3,6 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FourLevelAddressController;
 
-Route::middleware(['auth'])->group(function () {
-    Route::get('/address', [FourLevelAddressController::class, 'index'])->name('address.index');
+Route::middleware(['auth'])->prefix('address')->group(function () {
+    Route::get('/', [FourLevelAddressController::class, 'index'])->name('address.index');
+	Route::post('/getFullAddress', [FourLevelAddressController::class, 'BSSFullAddress'])->name('getFullAddress');
+	Route::post('/getProvinceChileSelection', [FourLevelAddressController::class, 'District'])->name('getProvinceChileSelection');
+	Route::post('/getDistrictChileSelection', [FourLevelAddressController::class, 'Commune'])->name('getDistrictChileSelection');
+	Route::post('/getCommuneChileSelection', [FourLevelAddressController::class, 'Village'])->name('getCommuneChileSelection');
 });

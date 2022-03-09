@@ -172,47 +172,244 @@
 				</div>
 			</div>
 			<div class="tab-pane active" id="past-medical-record" aria-labelledby="past-medical-record-tab" role="tabpanel">
-				<div class="form-gorup">
+				<table class="table table-bordered table-striped">
+
+					{{-- Vaccination --}}
+					<tr>
+						<td rowspan="3" class="text-right">Vaccination</td>
+						<td>
+							<x-form.checkbox name='bgc_hepb' label="BCG/HepB" />
+						</td>
+						<td>
+							<x-form.checkbox name='opv_dpt_depb_hib1' label="OPV+DPT+HepB-Hib1" />
+						</td>
+						<td>
+							<x-form.checkbox name='opv_dpt_depb_hib2' label="OPV+DPT+HepB-Hib2" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<x-form.checkbox name='opv_dpt_depb_hib3' label="OPV+DPT+HepB-Hib3" />
+						</td>
+						<td>
+							<x-form.checkbox name='measles_jdtofrech' label="Measles+JDToFrench(juliandaycount)" />
+						</td>
+						<td>
+							<x-form.checkbox name='tetanus' label="Tetanus" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<x-form.checkbox name='none' label="None" />
+						</td>
+						<td colspan="2"></td>
+					</tr>
+
+					{{-- Over Blood Pressure --}}
+					<tr>
+						<td>
+							<x-form.checkbox name='over_blood_pressure' label="Over blood pressure" />
+						</td>
+						<td>
+							<x-form.checkbox name='diabet' label="Diabet" />
+						</td>
+						<td>
+							<x-form.checkbox name='tuberculosis' label="Tuberculosis" />
+						</td>
+						<td></td>
+					</tr>
+
+					{{-- Cardio Vascular --}}
+					<tr>
+						<td class="text-right">
+							<x-form.checkbox name='cardio_vascular' label="Cardio Vascular" />
+						</td>
+						<td>
+							<div class="tw-mb-2">
+								<x-form.checkbox name='coronary_disease' label="Coronary Disease" />
+							</div>
+							<div class="tw-mb-2">
+								<x-form.checkbox name='myocardio_disease' label="Myocardio Disease" />
+							</div>
+							<div>
+								<x-form.checkbox name='valvulopathies' label="Valvulopathies" />
+							</div>
+						</td>
+						<td class="text-right">
+							<x-form.checkbox name='drugs' label="Drugs" />
+						</td>
+						<td>
+							<div class="tw-mb-2">
+								<x-form.checkbox name='amphetamin' label="Amphetamin" />
+							</div>
+							<div class="tw-mb-2">
+								<x-form.checkbox name='methamphetamine' label="Methamphetamine" />
+							</div>
+							<div class="tw-mb-2">
+								<x-form.checkbox name='morphin' label="Morphin" />
+							</div>
+							<div>
+								<x-form.checkbox name='other' label="Other" />
+							</div>
+						</td>
+					</tr>
+
+					{{-- Drink --}}
+					<tr>
+						<td rowspan="3">
+							<x-form.checkbox name='drinking' label="Drinking" />
+						</td>
+						<td class="text-right">
+							How long?
+						</td>
+						<td>
+							<input type="text" name="drinking_how_long" class="form-control" />
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td class="text-right">
+							What kind?
+						</td>
+						<td>
+							<input type="text" name="drinking_what_kind" class="form-control" />
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td class="text-right">
+							How many?
+						</td>
+						<td>
+							<input type="text" name="drinking_how_many" class="form-control" />
+						</td>
+						<td></td>
+					</tr>
+
+					{{-- Operation --}}
+					<tr>
+						<td rowspan="2">
+							<x-form.checkbox name='operation' label="Operation" />
+						</td>
+						<td class="text-right">
+							At age
+						</td>
+						<td>
+							<input type="text" name="operation_at_age" class="form-control" />
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td class="text-right">
+							What kind?
+						</td>
+						<td>
+							<input type="text" name="operation_what_kind" class="form-control" />
+						</td>
+						<td></td>
+					</tr>
+
+					{{-- Smoking --}}
+					<tr>
+						<td>
+							<x-form.checkbox name='smoking' label="Smoking" />
+						</td>
+						<td class="text-right">
+							How many?
+						</td>
+						<td>
+							<input type="text" name="smoking_how_many" class="form-control" />
+						</td>
+						<td></td>
+					</tr>
+
+					{{-- Other --}}
+					<tr>
+						<td>
+							<x-form.checkbox name='other' label="Other" />
+						</td>
+						<td>
+							<textarea type="text" name="other" rows="2" class="form-control" placeholder="If others, please tell more."></textarea>
+						</td>
+						<td>
+							<x-form.checkbox name='medication' label="Medication" />
+						</td>
+						<td>
+							<textarea type="text" name="other" rows="2" class="form-control" placeholder="Please list the medicals."></textarea>
+						</td>
+					</tr>
+
+					{{-- Childhood & Development History --}}
+					<tr>
+						<td class="text-right">
+							Childhood & Development History
+						</td>
+						<td>
+							<textarea type="text" name="childhood_development_history" rows="2" class="form-control"></textarea>
+						</td>
+						<td class="text-right">
+							Mental Illness History
+						</td>
+						<td>
+							<textarea type="text" name="mental_illess_history" rows="2" class="form-control"></textarea>
+						</td>
+					</tr>
+
+					{{-- Family History --}}
+					<tr>
+						<td class="text-right">
+							Family History
+						</td>
+						<td>
+							<textarea type="text" name="childhood_development_history" rows="2" class="form-control"></textarea>
+						</td>
+						<td></td>
+						<td></td>
+					</tr>
+
+				</table>
+
+				{{-- <div class="form-gorup">
 					<label for="">Vaccination</label>
-					<div class="form-control">
+					<div class="border tw-p-2">
 						<div class="row">
-							<div class="col">
+							<div class="col-sm-4">
 								<x-form.checkbox
 									name='bgc_hepb'
 									label="BCG/HepB"
 								/>
 							</div>
-							<div class="col">
+							<div class="col-sm-4">
 								<x-form.checkbox
 									name='opv_dpt_depb_hib1'
 									label="OPV+DPT+HepB-Hib1"
 								/>
 							</div>
-							<div class="col">
+							<div class="col-sm-4">
 								<x-form.checkbox
 									name='opv_dpt_depb_hib2'
 									label="OPV+DPT+HepB-Hib2"
 								/>
 							</div>
-							<div class="col">
+							<div class="col-sm-4">
 								<x-form.checkbox
 									name='opv_dpt_depb_hib3'
 									label="OPV+DPT+HepB-Hib3"
 								/>
 							</div>
-							<div class="col">
+							<div class="col-sm-4">
 								<x-form.checkbox
 									name='measles_jdtofrech'
 									label="Measles+JDToFrench(juliandaycount)"
 								/>
 							</div>
-							<div class="col">
+							<div class="col-sm-4">
 								<x-form.checkbox
 									name='tetanus'
 									label="Tetanus"
 								/>
 							</div>
-							<div class="col">
+							<div class="col-sm-4">
 								<x-form.checkbox
 									name='none'
 									label="None"
@@ -220,7 +417,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> --}}
 			</div>
 			<div class="tab-pane" id="examination" aria-labelledby="examination-tab" role="tabpanel">
 				<p>

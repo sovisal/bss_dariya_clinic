@@ -175,20 +175,41 @@
 						label="House Number"
 					/>
 				</div>
-				<div class="col-sm-6">
+				<div class="col-sm-3">
 					<x-form.input
 						name="street_no"
 						label="Street Number"
 					/>
 				</div>
-				<div class="col-sm-6">
+				<div class="col-sm-3">
 					<x-form.input
 						name="zip_code"
-						label="zip_code"
+						label="Zip code"
 					/>
 				</div>
 				<div class="col-sm-6">
-					
+					<x-form.select
+						name="pt_province_id"
+						label="Province"
+					>
+						<option value="">---- None ----</option>
+						{!! str_replace("</select>","", str_replace("<select __ATTRIBUTES__>","",$_4level_level[0])) !!}
+					</x-form.select>
+				</div>
+				<div class="col-sm-6">
+					<x-form.select name="pt_district_id" label="District" />
+				</div>
+				<div class="col-sm-6">
+					<x-form.select
+						name="pt_commune_id"
+						label="Commune"
+					/>
+				</div>
+				<div class="col-sm-6">
+					<x-form.select
+						name="pt_village_id"
+						label="Village"
+					/>
 				</div>
 			</div>
 
