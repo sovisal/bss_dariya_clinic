@@ -49,19 +49,19 @@
 			</div>
 		</div>
 
-		<ul class="nav nav-tabs" role="tablist">
+		<ul class="nav nav-tabs mt-2" role="tablist">
 			<li class="nav-item">
 				<a class="nav-link" id="vital-sign-tab" data-toggle="tab" href="#vital-sign" aria-controls="vital-sign" role="tab" aria-selected="true">
 					<span class="align-middle">Vital Sign</span>
 				</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link active" id="past-medical-record-tab" data-toggle="tab" href="#past-medical-record" aria-controls="past-medical-record" role="tab" aria-selected="false">
+				<a class="nav-link" id="past-medical-record-tab" data-toggle="tab" href="#past-medical-record" aria-controls="past-medical-record" role="tab" aria-selected="false">
 					<span class="align-middle">Past medical Record</span>
 				</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" id="examination-tab" data-toggle="tab" href="#examination" aria-controls="examination" role="tab" aria-selected="false">
+				<a class="nav-link active" id="examination-tab" data-toggle="tab" href="#examination" aria-controls="examination" role="tab" aria-selected="false">
 					<span class="align-middle">Examination</span>
 				</a>
 			</li>
@@ -171,9 +171,8 @@
 					</div>
 				</div>
 			</div>
-			<div class="tab-pane active" id="past-medical-record" aria-labelledby="past-medical-record-tab" role="tabpanel">
+			<div class="tab-pane" id="past-medical-record" aria-labelledby="past-medical-record-tab" role="tabpanel">
 				<table class="table table-bordered table-striped">
-
 					{{-- Vaccination --}}
 					<tr>
 						<td rowspan="3" class="text-right">Vaccination</td>
@@ -419,15 +418,347 @@
 					</div>
 				</div> --}}
 			</div>
-			<div class="tab-pane" id="examination" aria-labelledby="examination-tab" role="tabpanel">
-				<p>
-					Examination
-				</p>
+			<div class="tab-pane active" id="examination" aria-labelledby="examination-tab" role="tabpanel">
+				<table class="table table-bordered table-striped">
+					<tr>
+						<th colspan="4" class="tw-bg-gray-100">
+							General Appear
+						</th>
+					</tr>
+					<tr>
+						<td>
+							<x-form.checkbox name='examination_good' label="Good" />
+						</td>
+						<td>
+							<x-form.checkbox name='examination_not_good' label="Not Good" />
+						</td>
+						<td>
+							<x-form.checkbox name='examination_serious' label="Not Good" />
+						</td>
+						<td>
+							<x-form.checkbox name='examination_too_serious' label="Not Good" />
+						</td>
+					</tr>
+
+					<tr>
+						<th colspan="4" class="tw-bg-gray-100">
+							Neurological System
+						</th>
+					</tr>
+					<tr>
+						<td>
+							<x-form.checkbox name='examination_consciousness' label="Consciousness" />
+						</td>
+						<td>
+							<x-form.checkbox name='examination_fantasy' label="Fantasy" />
+						</td>
+						<td>
+							<x-form.checkbox name='examination_unconscious' label="Unconscious" />
+						</td>
+						<td>
+							<x-form.checkbox name='examination_seizures' label="Seizures" />
+						</td>
+					</tr>
+
+					<tr>
+						<td colspan="4" class="text-center">
+							Mental Status
+						</td>
+					</tr>
+					<tr>
+						<td class="text-right">
+							Speech
+						</td>
+						<td>
+							<input type="text" name="examination_speech" class="form-control" />
+						</td>
+						<td class="text-right">
+							Mood and effect
+						</td>
+						<td>
+							<input type="text" name="examination_mood_and_effect" class="form-control" />
+						</td>
+					</tr>
+					<tr>
+						<td class="text-right">
+							Thought
+						</td>
+						<td>
+							<input type="text" name="examination_thought" class="form-control" />
+						</td>
+						<td class="text-right">
+							Perception
+						</td>
+						<td>
+							<input type="text" name="examination_perception" class="form-control" />
+						</td>
+					</tr>
+					<tr>
+						<td class="text-right">
+							Insight and Judgment
+						</td>
+						<td>
+							<input type="text" name="examination_insight_and_judgment" class="form-control" />
+						</td>
+						<td colspan="2"></td>
+					</tr>
+
+					<tr>
+						<th colspan="4" class="tw-bg-gray-100">
+							Score de Glasgow
+						</th>
+					</tr>
+					<tr>
+						<td class="text-right">
+							Eyes
+						</td>
+						<td>
+							<input type="text" name="examination_score_de_glasgow_eyes" class="form-control" />
+						</td>
+						<td class="text-right">
+							Verbal
+						</td>
+						<td>
+							<input type="text" name="examination_score_de_glasgow_verbal" class="form-control" />
+						</td>
+					</tr>
+					<tr>
+						<td class="text-right">
+							Motion
+						</td>
+						<td>
+							<input type="text" name="examination_score_de_glasgow_motion" class="form-control" />
+						</td>
+						<td class="text-right">
+							Percussion
+						</td>
+						<td>
+							<input type="text" name="examination_score_de_glasgow_percussion" class="form-control" />
+						</td>
+					</tr>
+					<tr>
+						<td class="text-right">
+							Auscultation
+						</td>
+						<td>
+							<input type="text" name="examination_score_de_glasgow_auscultation" class="form-control" />
+						</td>
+						<td colspan="2"></td>
+					</tr>
+
+					<tr>
+						<th colspan="4" class="tw-bg-gray-100">
+							Cardiovascular System
+						</th>
+					</tr>
+					<tr>
+						<td class="text-right">
+							Inspection
+						</td>
+						<td>
+							<input type="text" name="examination_cardiovascular_inspection" class="form-control" />
+						</td>
+						<td class="text-right">
+							Palpation
+						</td>
+						<td>
+							<input type="text" name="examination_cardiovascular_palpation" class="form-control" />
+						</td>
+					</tr>
+					<tr>
+						<td class="text-right">
+							Percussion
+						</td>
+						<td>
+							<input type="text" name="examination_cardiovascular_percussion" class="form-control" />
+						</td>
+						<td class="text-right">
+							Auscultation
+						</td>
+						<td>
+							<input type="text" name="examination_cardiovascular_auscultation" class="form-control" />
+						</td>
+					</tr>
+					<tr>
+						<td class="text-right">
+							Other
+						</td>
+						<td>
+							<textarea rows="2" name="examination_cardiovascular_other" class="form-control"></textarea>
+						</td>
+						<td colspan="2"></td>
+					</tr>
+
+					<tr>
+						<th colspan="4" class="tw-bg-gray-100">
+							Eyes
+						</th>
+					</tr>
+					<tr>
+						<td class="text-right">
+							Left
+						</td>
+						<td>
+							<input type="text" name="examination_eye_left" class="form-control" />
+						</td>
+						<td class="text-right">
+							Right
+						</td>
+						<td>
+							<input type="text" name="examination_eye_right" class="form-control" />
+						</td>
+					</tr>
+					<tr>
+						<td class="text-right">
+							Fondus
+						</td>
+						<td>
+							<input type="text" name="examination_eye_fondus" class="form-control" />
+						</td>
+						<td class="text-right">
+							Other
+						</td>
+						<td>
+							<textarea rows="2" name="examination_eye_other" class="form-control"></textarea>
+						</td>
+					</tr>
+
+					<tr>
+						<th colspan="4" class="tw-bg-gray-100">
+							Ears
+						</th>
+					</tr>
+					<tr>
+						<td class="text-right">
+							Left
+						</td>
+						<td>
+							<input type="text" name="examination_ear_left" class="form-control" />
+						</td>
+						<td class="text-right">
+							Right
+						</td>
+						<td>
+							<input type="text" name="examination_ear_right" class="form-control" />
+						</td>
+					</tr>
+					<tr>
+						<td class="text-right">
+							Head
+						</td>
+						<td>
+							<input type="text" name="examination_ear_head" class="form-control" />
+						</td>
+						<td class="text-right">
+							Other
+						</td>
+						<td>
+							<textarea rows="2" name="examination_ear_other" class="form-control"></textarea>
+						</td>
+					</tr>
+
+					<tr>
+						<th colspan="4" class="tw-bg-gray-100">
+							Other body parts
+						</th>
+					</tr>
+					<tr>
+						<td class="text-right">
+							Nose
+						</td>
+						<td>
+							<input type="text" name="examination_nose" class="form-control" />
+						</td>
+						<td class="text-right">
+							pharynxl
+						</td>
+						<td>
+							<input type="text" name="examination_pharynxl" class="form-control" />
+						</td>
+					</tr>
+					<tr>
+						<td class="text-right">
+							Neck
+						</td>
+						<td>
+							<input type="text" name="examination_nech" class="form-control" />
+						</td>
+						<td class="text-right">
+							Lymphadenopathy
+						</td>
+						<td>
+							<input type="text" name="examination_lymphadenopathy" class="form-control" />
+						</td>
+					</tr>
+					<tr>
+						<td class="text-right">
+							Geneto-urinary
+						</td>
+						<td>
+							<input type="text" name="examination_geneto_urinary" class="form-control" />
+						</td>
+						<td class="text-right">
+							Extremities
+						</td>
+						<td>
+							<input type="text" name="examination_extremities" class="form-control" />
+						</td>
+					</tr>
+					<tr>
+						<td class="text-right">
+							Musculosqueletal
+						</td>
+						<td>
+							<input type="text" name="examination_musculosqueletal" class="form-control" />
+						</td>
+						<td class="text-right">
+							Other
+						</td>
+						<td>
+							<textarea rows="2" name="examination_other_body_part_other" class="form-control"></textarea>
+						</td>
+					</tr>
+				</table>
 			</div>
 			<div class="tab-pane" id="evaluation" aria-labelledby="evaluation-tab" role="tabpanel">
-				<p>
-					Evaluation
-				</p>
+				<table class="table table-bordered table-striped">
+					<tr>
+						<td class="text-right">
+							Evaluation Summary
+						</td>
+						<td>
+							<textarea name="evaluation_summary" rows="4" class="form-control"></textarea>
+						</td>
+					</tr>
+					<tr>
+						<td class="text-right">
+							Category
+						</td>
+						<td>
+							<select name="evaluation_category" class="form-control">
+								<option value="">Select Category</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td class="text-right">
+							Indication
+						</td>
+						<td>
+							<select name="evaluation_indication" class="form-control">
+								<option value="">Select Category</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td class="text-right">
+							Information Diagnosis <small class="required">*</small>
+						</td>
+						<td>
+							<textarea name="evaluation_summary" rows="4" class="form-control"></textarea>
+						</td>
+					</tr>
+				</table>
 			</div>
 			<div class="tab-pane" id="treatment-plan" aria-labelledby="treatment-plan-tab" role="tabpanel">
 				<p>

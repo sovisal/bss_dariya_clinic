@@ -50,7 +50,7 @@ body *{
 	user-select: none;
 }
 img{ max-width: 100%; }
-.form-group label small.required{
+small.required{
 	color: red;
 }
 .form-group .form-control{
