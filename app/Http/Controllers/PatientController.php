@@ -81,7 +81,7 @@ class PatientController extends Controller
 			$patient->update(['photo' => $photo_name]);
 		}
 
-		return redirect()->route('patient.consultation.create', $patient->id)->with('success', __('alert.message.success.crud.create'));
+		return redirect()->route('patient.consultation_create', $patient->id)->with('success', __('alert.message.success.crud.create'));
 	}
 
 	/**

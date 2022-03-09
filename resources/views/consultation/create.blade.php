@@ -51,7 +51,7 @@
 
 		<ul class="nav nav-tabs mt-2" role="tablist">
 			<li class="nav-item">
-				<a class="nav-link" id="vital-sign-tab" data-toggle="tab" href="#vital-sign" aria-controls="vital-sign" role="tab" aria-selected="true">
+				<a class="nav-link active" id="vital-sign-tab" data-toggle="tab" href="#vital-sign" aria-controls="vital-sign" role="tab" aria-selected="true">
 					<span class="align-middle">Vital Sign</span>
 				</a>
 			</li>
@@ -61,7 +61,7 @@
 				</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link active" id="examination-tab" data-toggle="tab" href="#examination" aria-controls="examination" role="tab" aria-selected="false">
+				<a class="nav-link" id="examination-tab" data-toggle="tab" href="#examination" aria-controls="examination" role="tab" aria-selected="false">
 					<span class="align-middle">Examination</span>
 				</a>
 			</li>
@@ -77,7 +77,7 @@
 			</li>
 		</ul>
 		<div class="tab-content">
-			<div class="tab-pane" id="vital-sign" aria-labelledby="vital-sign-tab" role="tabpanel">
+			<div class="tab-pane active" id="vital-sign" aria-labelledby="vital-sign-tab" role="tabpanel">
 				<div class="row">
 					<div class="col-sm-6">
 						<x-form.input
@@ -418,7 +418,7 @@
 					</div>
 				</div> --}}
 			</div>
-			<div class="tab-pane active" id="examination" aria-labelledby="examination-tab" role="tabpanel">
+			<div class="tab-pane" id="examination" aria-labelledby="examination-tab" role="tabpanel">
 				<table class="table table-bordered table-striped">
 					<tr>
 						<th colspan="4" class="tw-bg-gray-100">

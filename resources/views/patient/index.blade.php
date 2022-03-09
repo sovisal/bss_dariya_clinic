@@ -20,7 +20,11 @@
 			</x-slot>
 			@foreach ($patients as $key => $patient)
 				<tr>
-					<td class="text-center">PT-{!! str_pad($patient->id, 6, '0', STR_PAD_LEFT) !!}</td>
+					<td class="text-center">
+						<a href="{{ route('patient.consultation_create', $patient) }}">
+							PT-{!! str_pad($patient->id, 6, '0', STR_PAD_LEFT) !!}
+						</a>
+					</td>
 					<td>{!! $patient->name_kh !!}</td>
 					<td>{!! $patient->name_en !!}</td>
 					<td>{!! date('d/M/Y', strtotime($patient->date_of_birth)) !!}</td>
