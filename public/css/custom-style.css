@@ -551,8 +551,19 @@ textarea.my-editor + .cke_chrome.cke_focus{
 	.sidebar-menu > li.active > a{
 		color: #fff;
 	}
-	.wrap-content{
-
+	.table-form{
+		width: 100%;
+	}
+	.table-form > thead > tr > th,
+	.table-form > tfoot > tr > th,
+	.table-form > tbody > tr > th,
+	.table-form > tbody > tr > td{
+		border: 1px solid #dfe3e7;
+		padding: 13px 10px;
+	}
+	.table-form.striped > tr:nth-of-type(odd),
+	.table-form.striped > tbody > tr:nth-of-type(odd){
+		background-color: #fafbfb;
 	}
 
 

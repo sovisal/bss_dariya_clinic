@@ -21,7 +21,7 @@
 			@foreach ($patients as $key => $patient)
 				<tr>
 					<td class="text-center">
-						<a href="{{ route('patient.consultation_create', $patient) }}">
+						<a href="{{ route('patient.show', $patient) }}">
 							PT-{!! str_pad($patient->id, 6, '0', STR_PAD_LEFT) !!}
 						</a>
 					</td>

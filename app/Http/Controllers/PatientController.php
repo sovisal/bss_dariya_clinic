@@ -81,7 +81,7 @@ class PatientController extends Controller
 			$patient->update(['photo' => $photo_name]);
 		}
 
-		return redirect()->route('patient.consultation_create', $patient->id)->with('success', __('alert.message.success.crud.create'));
+		return redirect()->route('patient.show', $patient->id)->with('success', __('alert.message.success.crud.create'));
 	}
 
 	/**
@@ -89,7 +89,17 @@ class PatientController extends Controller
 	 */
 	public function show(Patient $patient)
 	{
-		//
+		
+		// $consultation = Consultation::where('patient_id', $patient->id)->first();
+		$consultation = 'null';
+		if ($consultation) {
+			$data = [
+				'patient' => $patient,
+			];
+			return view('patient.show', $data);
+		}
+
+		return redirect()->route('patient.consultation_create', $patient->id);
 	}
 
 	/**

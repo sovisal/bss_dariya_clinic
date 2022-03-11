@@ -5,7 +5,7 @@
 	<form action="{{ route('patient.store') }}" method="POST" autocomplete="off" enctype="multipart/form-data">
 		@csrf
 		<x-card bodyClass="pb-0">
-			<div class="divider">
+			{{-- <div class="divider">
 				<div class="divider-text text-primary">PATIENT INFORMATION</div>
 			</div>
 			<div class="row">
@@ -211,219 +211,184 @@
 						label="Village"
 					/>
 				</div>
-			</div>
+			</div> --}}
 
-			{{-- <x-table class="table-bordered table-hover mb-1">
-
-				<x-slot name="thead">
-					<tr>
-						<th colspan="4" class="text-left tw-bg-gray-100">Patient Information</th>
-					</tr>
-				</x-slot>
+			<table class="table-form striped">
 				<tr>
-					<td width="20%" class="text-right">
-						Name in Khmer <small class='text-danger'>*</small>
-					</td>
+					<th colspan="4" class="text-left tw-bg-gray-100">Patient Information</th>
+				</tr>
+				<tr>
+					<td width="20%" class="text-right">Name in Khmer <small class='required'>*</small></td>
 					<td width="30%">
-						<input type="text" name="name_kh" class="form-control" required autofocus />
+						<x-bss-form.input name="name_kh" required autofocus />
 					</td>
 					<td width="20%" class="text-right">
 						Name in English
 					</td>
 					<td width="30%">
-						<input type="text" name="name_en" class="form-control" />
+						<x-bss-form.input name="name_en" />
 					</td>
 				</tr>
 				<tr>
-					<td class="text-right">
-						Identity Number
-					</td>
+					<td class="text-right">Identity Card Number</td>
 					<td>
-						<input type="text" name="id_card_no" class="form-control" />
+						<x-bss-form.input name="id_card_no" />
 					</td>
 					<td colspan="2"></td>
 				</tr>
 				<tr>
-					<td class="text-right">
-						E-mail
-					</td>
+					<td class="text-right">E-mail</td>
 					<td>
-						<input type="text" name="email" class="form-control" />
+						<x-bss-form.input type="email" name="email" />
 					</td>
-					<td class="text-right">
-						Gender
-					</td>
+					<td class="text-right">Gender</td>
 					<td>
-						<select name="gender" class="form-control custom-select2" data-no_search="true">
-							<option value="1">Male</option>
-							<option value="2">Female</option>
-						</select>
+						<x-bss-form.select name="gender" data-no_search="true">
+							<option value="">---- None ----</option>
+							<option value="Male" {{ (old('gender')=="Male") ? 'selected' : '' }}>Male</option>
+							<option value="Female" {{ (old('gender')=="Female") ? 'selected' : '' }}>Female</option>
+						</x-bss-form.select>
 					</td>
 				</tr>
 				<tr>
-					<td class="text-right">
-						Date of Birth
-					</td>
+					<td class="text-right">Date of Birth</td>
 					<td>
-						<div class="position-relative">
-							<input name="date_of_birth" class="form-control date-picker" />
-						</div>
+						<x-bss-form.input name="date_of_birth" class="date-picker" hasIcon="right" icon="bx bx-calendar" />
 					</td>
-					<td class="text-right">
-						Age
-					</td>
+					<td class="text-right">Age</td>
 					<td>
-						<input type="number" name="age" class="form-control is_number" />
+						<x-bss-form.input type="number" name="age" />
 					</td>
 				</tr>
 				<tr>
-					<td class="text-right">
-						Registered Date
-					</td>
+					<td class="text-right">Registered Date</td>
 					<td>
-						<div class="position-relative">
-							<input name="date_of_birth" class="form-control date-time-picker" value="{{ date('Y-m-d h:i:s') }}" />
-						</div>
+						<x-bss-form.input name="registered_at" class="date-time-picker" hasIcon="right" icon="bx bx-calendar" value="{{ date('Y-m-d H:i:s') }}" />
 					</td>
-					<td class="text-right">
-						Blood Type
-					</td>
+					<td class="text-right">Blood Type</td>
 					<td>
-						<select name="gender" class="form-control custom-select2" data-no_search="true">
-							<option value="single">Single</option>
-							<option value="married">Married</option>
-							<option value="widow">Widow</option>
-						</select>
+						<x-bss-form.select name="blood_type" data-no_search="true">
+							<option value="">---- None ----</option>
+							<option value="Group A" {{ (old('blood_type')=="Group A") ? 'selected' : '' }}>Group A</option>
+							<option value="Group B" {{ (old('blood_type')=="Group B") ? 'selected' : '' }}>Group B</option>
+							<option value="Group AB" {{ (old('blood_type')=="Group AB") ? 'selected' : '' }}>Group AB</option>
+							<option value="Group O" {{ (old('blood_type')=="Group O") ? 'selected' : '' }}>Group O</option>
+						</x-bss-form.select>
 					</td>
 				</tr>
 				<tr>
-					<td class="text-right">
-						Position
-					</td>
+					<td class="text-right">Position</td>
 					<td>
-						<input type="text" name="position" class="form-control" />
+						<x-bss-form.input name="position" />
 					</td>
-					<td class="text-right">
-						Enterprise
-					</td>
+					<td class="text-right">Enterprise</td>
 					<td>
-						<input type="text" name="enterprise" class="form-control" />
+						<x-bss-form.input name="enterprise" />
 					</td>
 				</tr>
 				<tr>
-					<td class="text-right">
-						Father Name
-					</td>
+					<td class="text-right">Father Name</td>
 					<td>
-						<input type="text" name="father_name" class="form-control" />
+						<x-bss-form.input name="father_name" />
 					</td>
-					<td class="text-right">
-						Father Position
-					</td>
+					<td class="text-right">Father Position</td>
 					<td>
-						<input type="text" name="father_position" class="form-control" />
+						<x-bss-form.input name="father_position" />
 					</td>
 				</tr>
 				<tr>
-					<td class="text-right">
-						Mother Name
-					</td>
+					<td class="text-right">Mother Name</td>
 					<td>
-						<input type="text" name="mother_name" class="form-control" />
+						<x-bss-form.input name="mother_name" />
 					</td>
-					<td class="text-right">
-						Mother Position
-					</td>
+					<td class="text-right">Mother Position</td>
 					<td>
-						<input type="text" name="mother_position" class="form-control" />
+						<x-bss-form.input name="mother_position" />
 					</td>
 				</tr>
 				<tr>
-					<td class="text-right">
-						Phone
-					</td>
+					<td class="text-right">Phone</td>
 					<td>
-						<input type="text" name="phone" class="form-control" />
+						<x-bss-form.input name="phone" />
 					</td>
-					<td class="text-right">
-						Education
-					</td>
+					<td class="text-right">Education</td>
 					<td>
-						<input type="text" name="education" class="form-control" />
+						<x-bss-form.input name="education" />
 					</td>
 				</tr>
 				<tr>
-					<td class="text-right">
-						Nationality
-					</td>
+					<td class="text-right">Nationality</td>
 					<td>
-						<select name="gender" class="form-control custom-select2" data-no_search="true">
-							<option value="khmer">Khmer (KH)</option>
-							<option value="american">American (US)</option>
-						</select>
+						<x-bss-form.select name="nationality" data-no_search="true">
+							<option value="">---- None ----</option>
+							<option value="Khmer" {{ (old('nationality')=="Khmer") ? 'selected' : '' }}>Khmer (KH)</option>
+							<option value="American" {{ (old('nationality')=="American") ? 'selected' : '' }}>American (US)</option>
+						</x-bss-form.select>
 					</td>
-					<td class="text-right">
-						Marital Status
-					</td>
+					<td class="text-right">Marital Status</td>
 					<td>
-						<select name="gender" class="form-control custom-select2" data-no_search="true">
-							<option value="single">Single</option>
-							<option value="married">Married</option>
-							<option value="widow">Widow</option>
-						</select>
+						<x-bss-form.select name="marital_status" data-no_search="true">
+							<option value="">---- None ----</option>
+							<option value="Single" {{ (old('marital_status')=="Single") ? 'selected' : '' }}>Single</option>
+							<option value="Married" {{ (old('marital_status')=="Married") ? 'selected' : '' }}>Married</option>
+							<option value="Widow" {{ (old('marital_status')=="Widow") ? 'selected' : '' }}>Widow</option>
+						</x-bss-form.select>
 					</td>
 				</tr>
 				<tr>
-					<td class="text-right">
-						Photo
-					</td>
+					<td class="text-right">Photo</td>
 					<td>
-						<div class="custom-file">
-							<input
-								class="@error('photo')is-invalid @enderror form-control custom-file-input"
-								type="file"
-								name="photo"
-								id="photo"
-								value="{{ old('photo') }}"
-							/>
-							<label class="custom-file-label" for="photo">Choose file</label>
-							<x-form.error name="photo"/>
-						</div>
+						<x-bss-form.input-file-custom name="photo" />
 					</td>
 					<td colspan="2"></td>
 				</tr>
-			</x-table> --}}
+			</table>
 
-			{{-- <x-table class="table-bordered table-hover mb-0">
-				<x-slot name="thead">
-					<tr>
-						<th colspan="4" class="text-left tw-bg-gray-100">Patient Address</th>
-					</tr>
-				</x-slot>
+			<table class="table-form striped mt-2">
 				<tr>
-					<td width="20%" class="text-right">
-						House Number
-					</td>
+					<th colspan="4" class="text-left tw-bg-gray-100">Patient Address</th>
+				</tr>
+				<tr>
+					<td width="20%" class="text-right">House Number</td>
 					<td width="30%">
-						<input type="text" name="house_no" class="form-control" required autofocus />
+						<input type="text" name="house_no" class="form-control"/>
 					</td>
-					<td width="20%" class="text-right">
-						Name in English
-					</td>
+					<td width="20%" class="text-right">Street</td>
 					<td width="30%">
 						<input type="text" name="street_no" class="form-control" />
 					</td>
 				</tr>
 				<tr>
-					<td width="20%" class="text-right">
-						Zip Code
-					</td>
-					<td width="30%">
+					<td class="text-right">Zip Code</td>
+					<td>
 						<input type="text" name="zip_code" class="form-control" />
 					</td>
 					<td colspan="2"></td>
 				</tr>
-			</x-table> --}}
+				<tr>
+					<td class="text-right">Province</td>
+					<td>
+						<x-bss-form.select name="pt_province_id">
+							<option value="">---- None ----</option>
+							{!! str_replace("</select>","", str_replace("<select __ATTRIBUTES__>","",$_4level_level[0])) !!}
+						</x-bss-form.select>
+					</td>
+					<td class="text-right">District</td>
+					<td>
+						<x-bss-form.select name="pt_district_id" />
+					</td>
+				</tr>
+				<tr>
+					<td class="text-right">Commune</td>
+					<td>
+						<x-bss-form.select name="pt_commune_id" />
+					</td>
+					<td class="text-right">Village</td>
+					<td>
+						<x-bss-form.select name="pt_village_id" />
+					</td>
+				</tr>
+			</table>
 
 			<x-slot name="footer">
 				<x-form.button type="submit" icon="bx bx-save" label="Save" />

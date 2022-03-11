@@ -1,84 +1,218 @@
 <x-app-layout>
+	<x-slot name="css">
+		<style>
+		</style>
+	</x-slot>
 
 	<x-card :foot="false">
 		<x-slot name="header">
-			New Consultation
+			<h3>New Consultation</h3>
 		</x-slot>
-		
-		<div class="row">
-			<div class="col-sm-6">
-				<x-form.select
-					name="patient"
-					:select2="false"
-					label="Patient <small class='required'>*</small>"
-					readonly
-				>
-					<option value="{{ $patient->id }}">{{ $patient->name_kh }}</option>
-				</x-form.select>
-			</div>
-			<div class="col-sm-6">
-				<x-form.select
-					name="payment_type"
-					data-no_search="true"
-					label="Payment Type"
-				>
-					<option value="">Select payment type</option>
-					<option value="Cash">Cash</option>
-				</x-form.select>
-			</div>
-			<div class="col-sm-6">
-				<x-form.select
-					name="doctor"
-					label="Doctor <small class='required'>*</small>"
-				>
-					<option value="1">Krouk Puthea</option>
-					{{-- @foreach ($doctors as $doctor)
-						<option value="{{ $doctor->id }}">{{ $doctor->name }}</option>
-					@endforeach --}}
-				</x-form.select>
-			</div>
-			<div class="col-sm-6">
-				<x-form.input
-					name="evaluate_at"
-					class="date-picker"
-					hasIcon="right"
-					icon="bx bx-calendar"
-					value="{{ date('Y-m-d H:i:s') }}"
-					label="Evaluate at <small class='required'>*</small>"
-				/>
-			</div>
-		</div>
+		<table class="table-form">
+			<tr>
+				<td class="text-right">
+					Patient <small class='required'>*</small>
+				</td>
+				<td class="text-right">
+					<select name="patient" class="form-control" readonly>
+						<option value="{{ $patient->id }}" selected>{{ $patient->name_kh }}</option>
+					</select>
+				</td>
+				<td class="text-right">
+					Payment Type
+				</td>
+				<td class="text-right">
+					<select name="payment_type" class="form-control">
+						<option value="">Select payment type</option>
+						<option value="Cash">Cash</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td class="text-right">
+					Doctor <small class='required'>*</small>
+				</td>
+				<td class="text-right">
+					<select name="doctor" class="form-control">
+						<option value="1">Krouk Puthea</option>
+						{{-- @foreach ($doctors as $doctor)
+							<option value="{{ $doctor->id }}">{{ $doctor->name }}</option>
+						@endforeach --}}
+					</select>
+				</td>
+				<td class="text-right">
+					Evaluate at <small class='required'>*</small>
+				</td>
+				<td class="text-right">
+					<div class="position-relative has-icon-right">
+						<input type="text" name="evaluate_at" class="form-control date-time-picker" value="{{ date('Y-m-d H:i:s') }}">
+						<div class="form-control-position">
+							<i class="bx bx-calendar"></i>
+						</div>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</x-card>
 
-		<ul class="nav nav-tabs mt-2" role="tablist">
-			<li class="nav-item">
-				<a class="nav-link active" id="vital-sign-tab" data-toggle="tab" href="#vital-sign" aria-controls="vital-sign" role="tab" aria-selected="true">
-					<span class="align-middle">Vital Sign</span>
-				</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" id="past-medical-record-tab" data-toggle="tab" href="#past-medical-record" aria-controls="past-medical-record" role="tab" aria-selected="false">
-					<span class="align-middle">Past medical Record</span>
-				</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" id="examination-tab" data-toggle="tab" href="#examination" aria-controls="examination" role="tab" aria-selected="false">
-					<span class="align-middle">Examination</span>
-				</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" id="evaluation-tab" data-toggle="tab" href="#evaluation" aria-controls="evaluation" role="tab" aria-selected="false">
-					<span class="align-middle">Evaluation</span>
-				</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link" id="treatment-plan-tab" data-toggle="tab" href="#treatment-plan" aria-controls="treatment-plan" role="tab" aria-selected="false">
-					<span class="align-middle">Treament Plan</span>
-				</a>
-			</li>
-		</ul>
+	
+
+	<ul class="nav nav-tabs mt-3 mb-0" role="tablist">
+		<li class="nav-item">
+			<a class="nav-link active" id="vital-sign-tab" data-toggle="tab" href="#vital-sign" aria-controls="vital-sign" role="tab" aria-selected="true">
+				<span class="align-middle">Vital Sign</span>
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" id="past-medical-record-tab" data-toggle="tab" href="#past-medical-record" aria-controls="past-medical-record" role="tab" aria-selected="false">
+				<span class="align-middle">Past medical Record</span>
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" id="examination-tab" data-toggle="tab" href="#examination" aria-controls="examination" role="tab" aria-selected="false">
+				<span class="align-middle">Examination</span>
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" id="evaluation-tab" data-toggle="tab" href="#evaluation" aria-controls="evaluation" role="tab" aria-selected="false">
+				<span class="align-middle">Evaluation</span>
+			</a>
+		</li>
+		<li class="nav-item">
+			<a class="nav-link" id="treatment-plan-tab" data-toggle="tab" href="#treatment-plan" aria-controls="treatment-plan" role="tab" aria-selected="false">
+				<span class="align-middle">Treament Plan</span>
+			</a>
+		</li>
+	</ul>
+	<x-card :foot="false" :head="false">
 		<div class="tab-content">
 			<div class="tab-pane active" id="vital-sign" aria-labelledby="vital-sign-tab" role="tabpanel">
-				<div class="row">
+				<table class="table-form striped">
+					<tr>
+						<td>Systolic (mmHg)</td>
+						<td>
+							<div class="input-group">
+								<input type="text" name="systolic" class="form-control tw-border-r-0" />
+								<div class="input-group-prepend">
+									<span class="input-group-text bg-white tw-border-l-0">
+										mmHg
+									</span>
+								</div>
+							</div>
+						</td>
+						<td>Diastolic (mmHg)</td>
+						<td>
+							<div class="input-group">
+								<input type="text" name="diastolic" class="form-control tw-border-r-0" />
+								<div class="input-group-prepend">
+									<span class="input-group-text bg-white tw-border-l-0">
+										mmHg
+									</span>
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>Pulse (/mn)</td>
+						<td>
+							<div class="input-group">
+								<input type="text" name="pulse" class="form-control tw-border-r-0" />
+								<div class="input-group-prepend">
+									<span class="input-group-text bg-white tw-border-l-0">
+										/mn
+									</span>
+								</div>
+							</div>
+						</td>
+						<td>Breath (/mn)</td>
+						<td>
+							<div class="input-group">
+								<input type="text" name="breath" class="form-control tw-border-r-0" />
+								<div class="input-group-prepend">
+									<span class="input-group-text bg-white tw-border-l-0">
+										/mn
+									</span>
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>Temperature (&deg;C)</td>
+						<td>
+							<div class="input-group">
+								<input type="text" name="temperature" class="form-control tw-border-r-0" />
+								<div class="input-group-prepend">
+									<span class="input-group-text bg-white tw-border-l-0">
+										&deg;C
+									</span>
+								</div>
+							</div>
+						</td>
+						<td>O2sat (%)</td>
+						<td>
+							<div class="input-group">
+								<input type="text" name="o2sat" class="form-control tw-border-r-0" />
+								<div class="input-group-prepend">
+									<span class="input-group-text bg-white tw-border-l-0">
+										%
+									</span>
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>Height (cm)</td>
+						<td>
+							<div class="input-group">
+								<input type="text" name="height" class="form-control tw-border-r-0" />
+								<div class="input-group-prepend">
+									<span class="input-group-text bg-white tw-border-l-0">
+										cm
+									</span>
+								</div>
+							</div>
+						</td>
+						<td>Weight (kg)</td>
+						<td>
+							<div class="input-group">
+								<input type="text" name="weight" class="form-control tw-border-r-0" />
+								<div class="input-group-prepend">
+									<span class="input-group-text bg-white tw-border-l-0">
+										%
+									</span>
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>Glucose (mg/dl)</td>
+						<td>
+							<div class="input-group">
+								<input type="text" name="glucose" class="form-control tw-border-r-0" />
+								<div class="input-group-prepend">
+									<span class="input-group-text bg-white tw-border-l-0">
+										mg/dl
+									</span>
+								</div>
+							</div>
+						</td>
+						<td>Chief Complain</td>
+						<td>
+							<input type="text" name="chief_complain" class="form-control tw-border-r-0" />
+						</td>
+					</tr>
+					<tr>
+						<td>History of present illness</td>
+						<td>
+							<input type="text" name="history_of_illness" class="form-control tw-border-r-0" />
+						</td>
+						<td>Current Medication</td>
+						<td>
+							<input type="text" name="current_medication" class="form-control tw-border-r-0" />
+						</td>
+					</tr>
+				</table>
+				{{-- <div class="row">
 					<div class="col-sm-6">
 						<x-form.input
 							name="systolic"
@@ -169,10 +303,10 @@
 							label="Current Medication"
 						/>
 					</div>
-				</div>
+				</div> --}}
 			</div>
 			<div class="tab-pane" id="past-medical-record" aria-labelledby="past-medical-record-tab" role="tabpanel">
-				<table class="table table-bordered table-striped">
+				<table class="table-form striped">
 					{{-- Vaccination --}}
 					<tr>
 						<td rowspan="3" class="text-right">Vaccination</td>
@@ -203,7 +337,7 @@
 						</td>
 						<td colspan="2"></td>
 					</tr>
-
+	
 					{{-- Over Blood Pressure --}}
 					<tr>
 						<td>
@@ -217,7 +351,7 @@
 						</td>
 						<td></td>
 					</tr>
-
+	
 					{{-- Cardio Vascular --}}
 					<tr>
 						<td class="text-right">
@@ -252,7 +386,7 @@
 							</div>
 						</td>
 					</tr>
-
+	
 					{{-- Drink --}}
 					<tr>
 						<td rowspan="3">
@@ -284,7 +418,7 @@
 						</td>
 						<td></td>
 					</tr>
-
+	
 					{{-- Operation --}}
 					<tr>
 						<td rowspan="2">
@@ -307,7 +441,7 @@
 						</td>
 						<td></td>
 					</tr>
-
+	
 					{{-- Smoking --}}
 					<tr>
 						<td>
@@ -321,7 +455,7 @@
 						</td>
 						<td></td>
 					</tr>
-
+	
 					{{-- Other --}}
 					<tr>
 						<td>
@@ -337,7 +471,7 @@
 							<textarea type="text" name="other" rows="2" class="form-control" placeholder="Please list the medicals."></textarea>
 						</td>
 					</tr>
-
+	
 					{{-- Childhood & Development History --}}
 					<tr>
 						<td class="text-right">
@@ -353,7 +487,7 @@
 							<textarea type="text" name="mental_illess_history" rows="2" class="form-control"></textarea>
 						</td>
 					</tr>
-
+	
 					{{-- Family History --}}
 					<tr>
 						<td class="text-right">
@@ -365,61 +499,11 @@
 						<td></td>
 						<td></td>
 					</tr>
-
+	
 				</table>
-
-				{{-- <div class="form-gorup">
-					<label for="">Vaccination</label>
-					<div class="border tw-p-2">
-						<div class="row">
-							<div class="col-sm-4">
-								<x-form.checkbox
-									name='bgc_hepb'
-									label="BCG/HepB"
-								/>
-							</div>
-							<div class="col-sm-4">
-								<x-form.checkbox
-									name='opv_dpt_depb_hib1'
-									label="OPV+DPT+HepB-Hib1"
-								/>
-							</div>
-							<div class="col-sm-4">
-								<x-form.checkbox
-									name='opv_dpt_depb_hib2'
-									label="OPV+DPT+HepB-Hib2"
-								/>
-							</div>
-							<div class="col-sm-4">
-								<x-form.checkbox
-									name='opv_dpt_depb_hib3'
-									label="OPV+DPT+HepB-Hib3"
-								/>
-							</div>
-							<div class="col-sm-4">
-								<x-form.checkbox
-									name='measles_jdtofrech'
-									label="Measles+JDToFrench(juliandaycount)"
-								/>
-							</div>
-							<div class="col-sm-4">
-								<x-form.checkbox
-									name='tetanus'
-									label="Tetanus"
-								/>
-							</div>
-							<div class="col-sm-4">
-								<x-form.checkbox
-									name='none'
-									label="None"
-								/>
-							</div>
-						</div>
-					</div>
-				</div> --}}
 			</div>
 			<div class="tab-pane" id="examination" aria-labelledby="examination-tab" role="tabpanel">
-				<table class="table table-bordered table-striped">
+				<table class="table-form striped">
 					<tr>
 						<th colspan="4" class="tw-bg-gray-100">
 							General Appear
@@ -439,7 +523,7 @@
 							<x-form.checkbox name='examination_too_serious' label="Not Good" />
 						</td>
 					</tr>
-
+	
 					<tr>
 						<th colspan="4" class="tw-bg-gray-100">
 							Neurological System
@@ -459,7 +543,7 @@
 							<x-form.checkbox name='examination_seizures' label="Seizures" />
 						</td>
 					</tr>
-
+	
 					<tr>
 						<td colspan="4" class="text-center">
 							Mental Status
@@ -502,7 +586,7 @@
 						</td>
 						<td colspan="2"></td>
 					</tr>
-
+	
 					<tr>
 						<th colspan="4" class="tw-bg-gray-100">
 							Score de Glasgow
@@ -545,7 +629,7 @@
 						</td>
 						<td colspan="2"></td>
 					</tr>
-
+	
 					<tr>
 						<th colspan="4" class="tw-bg-gray-100">
 							Cardiovascular System
@@ -588,7 +672,7 @@
 						</td>
 						<td colspan="2"></td>
 					</tr>
-
+	
 					<tr>
 						<th colspan="4" class="tw-bg-gray-100">
 							Eyes
@@ -622,7 +706,7 @@
 							<textarea rows="2" name="examination_eye_other" class="form-control"></textarea>
 						</td>
 					</tr>
-
+	
 					<tr>
 						<th colspan="4" class="tw-bg-gray-100">
 							Ears
@@ -656,7 +740,7 @@
 							<textarea rows="2" name="examination_ear_other" class="form-control"></textarea>
 						</td>
 					</tr>
-
+	
 					<tr>
 						<th colspan="4" class="tw-bg-gray-100">
 							Other body parts
@@ -721,7 +805,7 @@
 				</table>
 			</div>
 			<div class="tab-pane" id="evaluation" aria-labelledby="evaluation-tab" role="tabpanel">
-				<table class="table table-bordered table-striped">
+				<table class="table-form striped">
 					<tr>
 						<td class="text-right">
 							Evaluation Summary
@@ -761,12 +845,11 @@
 				</table>
 			</div>
 			<div class="tab-pane" id="treatment-plan" aria-labelledby="treatment-plan-tab" role="tabpanel">
-				<p>
-					Treatment Plan
-				</p>
+				<table class="table-form striped">
+
+				</table>
 			</div>
 		</div>
-
 	</x-card>
 
 </x-app-layout>
