@@ -90,7 +90,7 @@ class PatientController extends Controller
 	{
 		
 		// $consultation = Consultation::where('patient_id', $patient->id)->first();
-		$consultation = null;
+		$consultation = 'null';
 		if ($consultation) {
 			$data = [
 				'patient' => $patient,

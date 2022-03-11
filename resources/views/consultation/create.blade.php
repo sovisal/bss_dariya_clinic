@@ -6,7 +6,7 @@
 
 	<x-card :foot="false">
 		<x-slot name="header">
-			<h3>New Consultation</h3>
+			<h4>New Consultation</h4>
 		</x-slot>
 		<table class="table-form">
 			<tr>
