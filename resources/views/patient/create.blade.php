@@ -351,17 +351,17 @@
 				<tr>
 					<td width="20%" class="text-right">House Number</td>
 					<td width="30%">
-						<input type="text" name="house_no" class="form-control"/>
+						<x-bss-form.input name="house_no" />
 					</td>
 					<td width="20%" class="text-right">Street</td>
 					<td width="30%">
-						<input type="text" name="street_no" class="form-control" />
+						<x-bss-form.input name="street_no" />
 					</td>
 				</tr>
 				<tr>
 					<td class="text-right">Zip Code</td>
 					<td>
-						<input type="text" name="zip_code" class="form-control" />
+						<x-bss-form.input name="zip_code" />
 					</td>
 					<td colspan="2"></td>
 				</tr>

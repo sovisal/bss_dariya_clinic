@@ -31,7 +31,6 @@ class PatientController extends Controller
 	 */
 	public function create()
 	{
-		
 		$_4level_address = new \App\Http\Controllers\FourLevelAddressController();
 		$_4level_level = $_4level_address->BSSFullAddress('null', 'selection');
 		$data = [
@@ -91,7 +90,7 @@ class PatientController extends Controller
 	{
 		
 		// $consultation = Consultation::where('patient_id', $patient->id)->first();
-		$consultation = 'null';
+		$consultation = null;
 		if ($consultation) {
 			$data = [
 				'patient' => $patient,
@@ -107,7 +106,10 @@ class PatientController extends Controller
 	 */
 	public function edit(Patient $patient)
 	{
+		$_4level_address = new \App\Http\Controllers\FourLevelAddressController();
+		$_4level_level = $_4level_address->BSSFullAddress('null', 'selection');
 		$data = [
+			'_4level_level' => $_4level_level,
 			'patient' => $patient
 		];
 		return view('patient.edit', $data);
