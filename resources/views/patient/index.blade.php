@@ -27,11 +27,11 @@
 					</td>
 					<td>{!! $patient->name_kh !!}</td>
 					<td>{!! $patient->name_en !!}</td>
-					<td>{!! date('d/M/Y', strtotime($patient->date_of_birth)) !!}</td>
+					<td>{!! date('d-M-Y', strtotime($patient->date_of_birth)) !!}</td>
 					<td>{!! $patient->gender !!}</td>
 					<td>{!! $patient->phone !!}</td>
-					<td>{!! date('d/M/Y H:i:s', strtotime($patient->registered_at)) !!}</td>
-					<td>{!! date('d/M/Y H:i:s', strtotime($patient->updated_at)) !!}</td>
+					<td>{!! date('d-M-Y H:i', strtotime($patient->registered_at)) !!}</td>
+					<td>{!! date('d-M-Y H:i', strtotime($patient->updated_at)) !!}</td>
 					<td>{!! $patient->updated_by_name !!}</td>
 					<td class="text-center">
 						@can('UpdatePatient')

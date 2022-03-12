@@ -66,6 +66,12 @@ small.required{
 	border: 1px solid #dfe3e7;
 	padding: 13px 10px;
 }
+.table-form.border-none > thead > tr > th,
+.table-form.border-none > tfoot > tr > th,
+.table-form.border-none > tbody > tr > th,
+.table-form.border-none > tbody > tr > td{
+	border: none;
+}
 .table-form.striped > tr:nth-of-type(odd),
 .table-form.striped > tbody > tr:nth-of-type(odd){
 	background-color: #fafbfb;
