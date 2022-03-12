@@ -25,8 +25,20 @@ class HomeController extends Controller
 
 	public function setting()
 	{
+		$setting = Setting::first();
+		if (!$setting) {
+			$setting = Setting::Create([
+									'clinic_name_kh' => 'Clinic KH',
+									'clinic_name_en' => 'Clinic EN',
+									'sign_name_kh' => 'Name KH',
+									'sign_name_en' => 'Name EN',
+									'phone' => 'Phone',
+									'address' => 'Address',
+									'description' => 'Description',
+								]);
+		}
 		$data = [
-			'setting' => Setting::first()
+			'setting' => $setting
 		];
 		return view('setting', $data);
 	}

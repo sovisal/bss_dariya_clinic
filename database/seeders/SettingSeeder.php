@@ -15,6 +15,7 @@ class SettingSeeder extends Seeder
 	public function run()
 	{
 		Setting::firstOrCreate([
+			'id' => 1,
 			'clinic_name_kh' => 'Clinic KH',
 			'clinic_name_en' => 'Clinic EN',
 			'sign_name_kh' => 'Name KH',
