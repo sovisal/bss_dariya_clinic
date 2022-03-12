@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Models\Setting;
 use Illuminate\View\Component;
 
 class AppLayout extends Component
@@ -88,7 +89,19 @@ class AppLayout extends Component
 				'label' => 'Setting',
 			],
 		];
+		$setting = Setting::first();
+		if (!$setting) {
+			$setting = Setting::Create([
+									'clinic_name_kh' => 'Clinic KH',
+									'clinic_name_en' => 'Clinic EN',
+									'sign_name_kh' => 'Name KH',
+									'sign_name_en' => 'Name EN',
+									'phone' => 'Phone',
+									'address' => 'Address',
+									'description' => 'Description',
+								]);
+		}
 
-		return view('layouts.app', compact('menu'));
+		return view('layouts.app', compact('menu', 'setting'));
 	}
 }

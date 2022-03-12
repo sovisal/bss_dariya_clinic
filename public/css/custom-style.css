@@ -527,9 +527,12 @@ textarea.my-editor + .cke_chrome.cke_focus{
 		min-height: auto;
 	}
 	.navbar-top .navbar-brand{
-		padding: 0 1rem !important;
+		padding: 0 0.5rem !important;
 		margin: 0 !important;
-		/* border: 1px solid red; */
+		max-width: 220px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
 	}
 	.navbar-top .navbar-nav .nav-item a.nav-link{
 		display: block;

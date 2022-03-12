@@ -1,5 +1,6 @@
 @props([
-	'data' => []
+	'setting',
+	'data' => [],
 ])
 
 <nav class="navbar navbar-top navbar-expand-lg header-navbar bg-secondary navbar-dark shadow-sm">
@@ -7,7 +8,7 @@
 		<div class="avatar tw-mr-1 avatar-sm">
 			<img src="{{ asset('images/site/logo.png') }}" alt="avtar img holder">
 		</div>
-		Dariya Clinic
+		{{ $setting->clinic_name_kh }}
 	</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>
