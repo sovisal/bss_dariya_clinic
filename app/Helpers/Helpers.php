@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Setting;
 use Illuminate\Support\Facades\Route;
 
 function InternetIsConnected(){
@@ -16,35 +17,38 @@ function can($ability)
 	return auth()->user()->can($ability);
 }
 
-// function sidebarActive($active)
-// {
-// 	$routename = explode('.', Route::currentRouteName());
-// 	if (count($routename) < 1) {
-// 		return false;
-// 	}elseif (count($routename) == 1){
-// 		$i = count($routename)-1;
-// 		return ($routename[$i] == $active);
-// 	}else{
-// 		$i = count($routename)-2;
-// 		return ($routename[$i] == $active);
-// 	}
-// }
 function mainMenuActive($active)
 {
-	return ($active == module());
+	return ($active == mainActive());
 }
-function subMenuActive($active)
+function subMenuActive($active, $sub = '')
 {
-	if (is_array($active)) {
-		return in_array(subModule(), $active);
+	if ($sub!='') {
+		$sub = $sub .'.';
 	}
-	return ($active == subModule());
+	if (is_array($active)) {
+		foreach ($active as $key => $act) {
+			if ($sub . $act== module() .'.'. subModule()) {
+				return true;
+			}
+		}
+	}else{
+		return ($sub . $active == module() .'.'. subModule());
+	} 
 }
 
 function module()
 {
 	$routename = explode('.', Route::currentRouteName());
 	return $routename[count($routename) > 1 ? count($routename)-2 : count($routename)-1];
+}
+
+function mainActive()
+{
+	$routename = explode('.', Route::currentRouteName());
+	if (count($routename) > 0) {
+		return $routename[0];
+	}
 }
 
 function subModule()
@@ -132,6 +136,10 @@ function zipFile( $zip_file = 'file-zip.zip', $path, $destination_path, $sub_fol
 
 	return $output_path;
 }
+
+// function setting(){
+// 	return Setting::first();
+// }
 
 
 function bg_random()

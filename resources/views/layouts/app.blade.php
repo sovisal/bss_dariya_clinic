@@ -13,10 +13,9 @@
 	</head>
 	<body>
 		<x-topbar :data="$menu" :setting="$setting" />
-
 		<div class="d-flex tw-px-2 tw-py-4">
-			@if (isset($menu[module()]['sub']))
-				<x-sidebar :data="$menu[module()]['sub']" />
+			@if (isset($menu[mainActive()]['sub']))
+				<x-sidebar :data="$menu[mainActive()]['sub']" />
 			@endif
 
 			<div class="flex-fill wrap-content">

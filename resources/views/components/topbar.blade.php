@@ -6,7 +6,7 @@
 <nav class="navbar navbar-top navbar-expand-lg header-navbar bg-secondary navbar-dark shadow-sm">
 	<a class="navbar-brand" href="#">
 		<div class="avatar tw-mr-1 avatar-sm">
-			<img src="{{ asset('images/site/logo.png') }}" alt="avtar img holder">
+			{{-- <img src="{{ asset('images/site/logo.png') }}" alt="avtar img holder"> --}}
 		</div>
 		{{ $setting->clinic_name_kh }}
 	</a>

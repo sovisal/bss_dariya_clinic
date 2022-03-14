@@ -1,4 +1,7 @@
 <x-app-layout>
+	<x-slot name="header">
+		<x-form.button href="{{ route('user.ability.index') }}" color="danger" icon="bx bx-left-arrow-alt" label="Back" />
+	</x-slot>
 	<x-slot name="js">
 		<script>
 			$(document).on('change', '[name="category[]"],[name="old_category[]"]', function () {
@@ -69,7 +72,7 @@
 
 		</script>
 	</x-slot>
-	<form action="{{ route('ability.update', $ability_module) }}" method="POST" autocomplete="off">
+	<form action="{{ route('user.ability.update', $ability_module) }}" method="POST" autocomplete="off">
 		@method('PUT')
 		@csrf
 		<x-card>

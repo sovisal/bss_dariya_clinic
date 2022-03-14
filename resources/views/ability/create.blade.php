@@ -1,4 +1,7 @@
 <x-app-layout>
+	<x-slot name="header">
+		<x-form.button href="{{ route('user.ability.index') }}" color="danger" icon="bx bx-left-arrow-alt" label="Back" />
+	</x-slot>
 	<x-slot name="js">
 		<script>
 			$(document).on('change', '[name="category[]"]', function () {
@@ -223,7 +226,8 @@
 			});
 		</script>
 	</x-slot>
-	<form action="{{ route('ability.store') }}" method="POST" autocomplete="off">
+
+	<form action="{{ route('user.ability.store') }}" method="POST" autocomplete="off">
 		@csrf
 		<x-card>
 			<x-form.input

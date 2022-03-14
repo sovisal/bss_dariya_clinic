@@ -28,65 +28,95 @@ class AppLayout extends Component
 				'label' => 'Patient',
 
 				'sub' => [
-					[
+					'patient' => [
 						'can' => 'ViewAnyPatient',
 						'url' => route('patient.index'),
 						'name' => ['index', 'create', 'edit', 'show'],
 						'label' => 'Patient',
 					],
-					[
+					'consultation' => [
 						'can' => 'ViewAnyConsultation',
-						'url' => route('patient.consultation_index'),
-						'name' => ['consultation_index', 'consultation_create'],
+						'url' => route('patient.consultation.index'),
+						'name' => ['index', 'create'],
 						'label' => 'Consulting',
 					],
 				],
 
 			],
+			
+
+			'para_clinic' => [
+				'can' => 'ViewAnyParaClinic',
+				'url' => route('para_clinic.index'),
+				'label' => 'Para Clinic',
+				
+				'sub' => [
+					'labor' => [
+						'can' => 'ViewAnyLabor',
+						'url' => route('para_clinic.labor.index'),
+						'name' => ['index', 'create', 'edit', 'show'],
+						'label' => 'Labor',
+					],
+					'echography' => [
+						'can' => 'ViewAnyEchography',
+						'url' => route('para_clinic.echography.index'),
+						'name' => ['index', 'create', 'edit', 'show'],
+						'label' => 'Echography',
+					],
+					'x_ray' => [
+						'can' => 'ViewAnyX-Ray',
+						'url' => route('para_clinic.x_ray.index'),
+						'name' => ['index', 'create', 'edit', 'show'],
+						'label' => 'X-Ray',
+					],
+				],
+			],
 
 			'user' => [
 				'can' => 'ViewAnyUser',
 				'url' => route('user.index'),
-				'label' => 'User',
-			],
-			
-			'role' => [
-				'can' => 'ViewAnyRole',
-				'url' => route('role.index'),
-				'label' => 'Role',
-			],
-
-			'ability' => [
-				'can' => 'ViewAnyAbility',
-				'url' => route('ability.index'),
-				'label' => 'Ability',
-
+				'label' => 'User Managment',
 				'sub' => [
-					[
+					'user' => [
+						'can' => 'ViewAnyUser',
+						'url' => route('user.index'),
+						'name' => ['index','create', 'edit', 'ability'],
+						'label' => 'User',
+					],
+					'role' => [
+						'can' => 'ViewAnyRole',
+						'url' => route('user.role.index'),
+						'name' => ['index','create', 'edit', 'ability'],
+						'label' => 'Role',
+					],
+					'ability' => [
 						'can' => 'ViewAnyAbility',
-						'url' => route('ability.index'),
-						'name' => 'index',
-						'label' => 'Ability List',
+						'url' => route('user.ability.index'),
+						'name' => ['index','create', 'edit'],
+						'label' => 'Ability',
 					],
-					[
-						'can' => 'CreateAbility',
-						'url' => route('ability.create'),
-						'name' => 'create',
-						'label' => 'Create',
-					],
-				]
-			],
-
-			'address' => [
-				'can' => 'UpdateSetting', // not yet create abilities
-				'url' => route('address.index'),
-				'label' => 'Address',
+				],
 			],
 
 			'setting' => [
-				'can' => 'UpdateSetting',
+				'can' => 'DeveloperMode',
 				'url' => route('setting.edit'),
 				'label' => 'Setting',
+				
+				'sub' => [
+					'setting' => [
+						'can' => 'UpdateSetting',
+						'url' => route('setting.edit'),
+						'name' => ['edit'],
+						'label' => 'Setting',
+					],
+					'address' => [
+						'can' => 'UpdateSetting', // not yet create abilities
+						'url' => route('setting.address.index'),
+						'name' => ['index','create', 'edit'],
+						'label' => 'Address',
+					],
+				],
 			],
 		];
 		$setting = Setting::first();

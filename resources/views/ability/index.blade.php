@@ -1,11 +1,15 @@
 <x-app-layout>
+	<x-slot name="header">
+		<x-form.button href="{{ route('user.ability.create') }}" icon="bx bx-plus" label="Create" />
+	</x-slot>
+
 	<x-slot name="js">
 		<script>
 			function getDetail(id) { 
 				pageLoading('hide');
 				$.ajax({
 					type: "POST",
-					url: "{{ route('ability.show') }}",
+					url: "{{ route('user.ability.show') }}",
 					data: {
 						'id': id
 					},
@@ -60,7 +64,7 @@
 								@can('UpdateAbility')
 									<a
 										class="dropdown-item"
-										href="{{ route('ability.edit', $ability_module->id) }}"
+										href="{{ route('user.ability.edit', $ability_module->id) }}"
 									>
 										<i class="bx bx-edit-alt mr-1"></i> 
 										{{ __('button.crud.edit') }}
@@ -75,7 +79,7 @@
 										<i class="bx bx-trash mr-1"></i> 
 										{{ __('button.crud.delete') }}
 									</a>
-									<form class="sr-only" id="form-delete-{{ $ability_module->id }}" action="{{ route('ability.delete', $ability_module->id) }}" method="POST">
+									<form class="sr-only" id="form-delete-{{ $ability_module->id }}" action="{{ route('user.ability.delete', $ability_module->id) }}" method="POST">
 										@csrf
 										@method('DELETE')
 									</form>

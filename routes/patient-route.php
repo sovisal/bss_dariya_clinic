@@ -16,7 +16,7 @@ Route::middleware(['auth'])->prefix('patient')->name('patient.')->group(function
 	Route::get('/{patient}/show', [PatientController::class, 'show'])->name('show')->middleware('can:ViewAnyPatient');
 
 	Route::prefix('consultation')->group(function () {
-		Route::get('/', [ConsultationController::class, 'index'])->name('consultation_index')->middleware('can:ViewAnyConsultation');
-		Route::get('/{patient}/create', [ConsultationController::class, 'create'])->name('consultation_create')->middleware('can:CreateConsultation');
+		Route::get('/', [ConsultationController::class, 'index'])->name('consultation.index')->middleware('can:ViewAnyConsultation');
+		Route::get('/{patient}/create', [ConsultationController::class, 'create'])->name('consultation.create')->middleware('can:CreateConsultation');
 	});
 });

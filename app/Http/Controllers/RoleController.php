@@ -36,11 +36,11 @@ class RoleController extends Controller
 	public function store(RoleRequest $request)
 	{
 		$role = Role::create($request->only(['name', 'label']));
-		$url = route('role.index');
+		$url = route('user.role.index');
 		if ($request->save_opt == 'save_create') {
-			$url = route('role.create');
+			$url = route('user.role.create');
 		}else if($request->save_opt == 'save_edit'){
-			$url = route('role.edit', $role->id);
+			$url = route('user.role.edit', $role->id);
 		}
 		return redirect($url)->with('success', __('alert.message.success.crud.create'));
 	}

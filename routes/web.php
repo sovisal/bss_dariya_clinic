@@ -20,11 +20,10 @@ Route::middleware(['auth'])->group(function () {
 	Route::get('/', [HomeController::class, 'index'])->name('home');
 	Route::get('/git_pull', [HomeController::class, 'git_pull'])->name('git_pull');
 
-	Route::get('/setting', [HomeController::class, 'setting'])->name('setting.edit');
-	Route::put('/setting/update', [HomeController::class, 'setting_update'])->name('setting.update');
 });
 
 
-	require __DIR__.'/patient-route.php';
-	require __DIR__.'/user-route.php';
-	require __DIR__.'/address-route.php';
+require __DIR__.'/patient-route.php';
+require __DIR__.'/para-clinic-route.php';
+require __DIR__.'/user-route.php';
+require __DIR__.'/setting-route.php';

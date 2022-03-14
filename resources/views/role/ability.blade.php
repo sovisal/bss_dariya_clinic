@@ -1,6 +1,6 @@
 <x-app-layout>
 	<x-slot name="header">
-		<x-form.button href="{{ route('role.index') }}" color="danger" icon="bx bx-left-arrow-alt" label="Back" />
+		<x-form.button href="{{ route('user.role.index') }}" color="danger" icon="bx bx-left-arrow-alt" label="Back" />
 	</x-slot>
 
 	<x-slot name="css">
@@ -23,16 +23,16 @@
 		<script>
 			$('.chb_all').change(function () {
 				if ($(this).is(':checked')) {
-					$(this).parent().parent().parent().parent().parent().parent().find('.chb_child').prop('checked', true);
+					$(this).closest('tr').find('.chb_child').prop('checked', true);
 				} else {
-					$(this).parent().parent().parent().parent().parent().parent().find('.chb_child').prop('checked', false);
+					$(this).closest('tr').find('.chb_child').prop('checked', false);
 				}
 			});
 			$('.chb_child').change(function () {
-				if ($(this).is(':checked') && $(this).parent().parent().parent().parent().find('.chb_child:checked').length == $(this).parent().parent().parent().parent().find('.chb_child').length) {
-					$(this).parent().parent().parent().parent().parent().parent().find('.chb_all').prop('checked', true);
+				if ($(this).is(':checked') && $(this).closest('tr').find('.chb_child:checked').length == $(this).closest('tr').find('.chb_child').length) {
+					$(this).closest('tr').find('.chb_all').prop('checked', true);
 				} else {
-					$(this).parent().parent().parent().parent().parent().parent().find('.chb_all').prop('checked', false);
+					$(this).closest('tr').find('.chb_all').prop('checked', false);
 				}
 			});
 
@@ -40,7 +40,7 @@
 				$('#datatable-ability tbody tr').each(function () {
 					if ($(this).find('.chb_child').length==0) {
 						// $(this).find('.chb_all').parent().parent().html($(this).find('.chb_all').parent().find('label').html());
-						$(this).find('.chb_all').parent().parent().parent().parent().parent().parent().remove()
+						$(this).find('.chb_all').closest('tr').remove()
 					}else if ($(this).find('.chb_child:checked').length == $(this).find('.chb_child').length) {
 						$(this).find('.chb_all').prop('checked', true);
 					}
@@ -50,7 +50,7 @@
 	</x-slot>
 
 
-	<form action="{{ route('role.assign_ability', $role) }}" method="POST" autocomplete="off">
+	<form action="{{ route('user.role.assign_ability', $role) }}" method="POST" autocomplete="off">
 		@method('PUT')
 		@csrf
 		<x-card>

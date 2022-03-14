@@ -46,11 +46,11 @@ class AbilityController extends Controller
 				'ability_module_id' => $ability_module->id,
 			]);
 		}
-		$url = route('ability.index');
+		$url = route('user.ability.index');
 		if ($request->save_opt == 'save_create') {
-			$url = route('ability.create');
+			$url = route('user.ability.create');
 		}else if($request->save_opt == 'save_edit'){
-			$url = route('ability.edit', $ability_module->id);
+			$url = route('user.ability.edit', $ability_module->id);
 		}
 		return redirect($url)->with('success', __('alert.message.success.crud.create'));
 	}
@@ -75,7 +75,7 @@ class AbilityController extends Controller
 				'success' => true,
 				'ability_module' => $ability_module,
 				'tbody' => $tbody,
-				'url' => route('ability.edit', $ability_module->id),
+				'url' => route('user.ability.edit', $ability_module->id),
 			]);
 		}
 		return response()->json([

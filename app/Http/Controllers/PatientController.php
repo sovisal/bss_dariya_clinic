@@ -98,7 +98,7 @@ class PatientController extends Controller
 			return view('patient.show', $data);
 		}
 
-		return redirect()->route('patient.consultation_create', $patient->id);
+		return redirect()->route('patient.consultation.create', $patient->id);
 	}
 
 	/**
