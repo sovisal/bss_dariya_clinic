@@ -44,6 +44,11 @@ class AppLayout extends Component
 
 			],
 			
+			'prescription' => [
+				'can' => 'ViewAnyParaClinic',
+				'url' => route('para_clinic.index'),
+				'label' => 'Prescription',
+			],
 
 			'para_clinic' => [
 				'can' => 'ViewAnyParaClinic',
@@ -72,6 +77,57 @@ class AppLayout extends Component
 				],
 			],
 
+			'setting' => [
+				'can' => 'DeveloperMode',
+				'url' => route('setting.edit'),
+				'label' => 'Setting',
+				
+				'sub' => [
+					'setting' => [
+						'can' => 'UpdateSetting',
+						'url' => route('setting.edit'),
+						'name' => ['edit'],
+						'label' => 'Setting',
+					],
+					'doctor' => [
+						'can' => 'UpdateSetting',
+						'url' => route('setting.edit'),
+						'name' => ['edit'],
+						'label' => 'Doctor',
+					],
+					'labor_template' => [
+						'can' => 'UpdateSetting',
+						'url' => route('setting.edit'),
+						'name' => ['edit'],
+						'label' => 'Labor Template',
+					],
+					'ecg_template' => [
+						'can' => 'UpdateSetting',
+						'url' => route('setting.edit'),
+						'name' => ['edit'],
+						'label' => 'ECG Template',
+					],
+					'xray_template' => [
+						'can' => 'UpdateSetting',
+						'url' => route('setting.edit'),
+						'name' => ['edit'],
+						'label' => 'Xray Template',
+					],
+					'data' => [
+						'can' => 'UpdateSetting',
+						'url' => route('setting.edit'),
+						'name' => ['edit'],
+						'label' => 'Data',
+					],
+					'address' => [
+						'can' => 'UpdateSetting', // not yet create abilities
+						'url' => route('setting.address.index'),
+						'name' => ['index','create', 'edit'],
+						'label' => 'Address',
+					],
+				],
+			],
+
 			'user' => [
 				'can' => 'ViewAnyUser',
 				'url' => route('user.index'),
@@ -94,27 +150,6 @@ class AppLayout extends Component
 						'url' => route('user.ability.index'),
 						'name' => ['index','create', 'edit'],
 						'label' => 'Ability',
-					],
-				],
-			],
-
-			'setting' => [
-				'can' => 'DeveloperMode',
-				'url' => route('setting.edit'),
-				'label' => 'Setting',
-				
-				'sub' => [
-					'setting' => [
-						'can' => 'UpdateSetting',
-						'url' => route('setting.edit'),
-						'name' => ['edit'],
-						'label' => 'Setting',
-					],
-					'address' => [
-						'can' => 'UpdateSetting', // not yet create abilities
-						'url' => route('setting.address.index'),
-						'name' => ['index','create', 'edit'],
-						'label' => 'Address',
 					],
 				],
 			],
