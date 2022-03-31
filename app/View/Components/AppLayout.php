@@ -91,8 +91,8 @@ class AppLayout extends Component
 					],
 					'doctor' => [
 						'can' => 'UpdateSetting',
-						'url' => route('setting.edit'),
-						'name' => ['edit'],
+						'url' => route('setting.doctor.index'),
+						'name' => ['index','create', 'edit', 'ability'],
 						'label' => 'Doctor',
 					],
 					'labor_template' => [
@@ -100,6 +100,12 @@ class AppLayout extends Component
 						'url' => route('setting.edit'),
 						'name' => ['edit'],
 						'label' => 'Labor Template',
+					],
+					'echo_template' => [
+						'can' => 'UpdateSetting',
+						'url' => route('setting.edit'),
+						'name' => ['edit'],
+						'label' => 'Echo Template',
 					],
 					'ecg_template' => [
 						'can' => 'UpdateSetting',
