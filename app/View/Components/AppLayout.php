@@ -113,10 +113,10 @@ class AppLayout extends Component
 						'name' => ['edit'],
 						'label' => 'Xray Template',
 					],
-					'data' => [
+					'data-parent' => [
 						'can' => 'UpdateSetting',
-						'url' => route('setting.edit'),
-						'name' => ['edit'],
+						'url' => route('setting.data-parent.index'),
+						'name' => ['index','create', 'edit', 'ability'],
 						'label' => 'Data',
 					],
 					'address' => [

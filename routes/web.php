@@ -27,3 +27,4 @@ require __DIR__.'/patient-route.php';
 require __DIR__.'/para-clinic-route.php';
 require __DIR__.'/user-route.php';
 require __DIR__.'/setting-route.php';
+require __DIR__.'/data-parent-route.php';
