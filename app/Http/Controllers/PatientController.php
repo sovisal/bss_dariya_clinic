@@ -98,7 +98,7 @@ class PatientController extends Controller
 			return view('patient.show', $data);
 		}
 
-		return redirect()->route('patient.consultation.create', $patient->id);
+		return redirect()->route('patient.consultation.create', ['patient' => $patient->id]);
 	}
 
 	/**
@@ -167,6 +167,12 @@ class PatientController extends Controller
 			return back()->with('success', __('alert.message.success.crud.delete'));
 		}
 		return back()->with('error', __('alert.message.error.crud.delete'));
+	}
+
+	// get Product Select2
+	public function getSelect2()
+	{
+		return Patient::getSelect2(['status'=>'active'], ['name_kh', 'asc'], ['id', 'name_kh']);
 	}
 
 }

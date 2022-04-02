@@ -87,7 +87,7 @@ small.required{
 }
 .table-padding-sm tbody th,
 .table-padding-sm tbody td{
-	padding: 8px 8px !important;
+	padding: 5px 5px !important;
 }
 .table tbody td{
 	vertical-align: middle;

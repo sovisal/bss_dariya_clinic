@@ -14,27 +14,19 @@ class ConsultationController extends Controller
 	public function index()
 	{
 		$data = [
-			'patients' => Patient::select([
-										'patients.*',
-										'updatedBy.name AS updated_by_name',
-									])
-									->join('users AS updatedBy', 'updatedBy.id', '=' ,'patients.updated_by')
-									->orderBy('name_kh', 'asc')->get()
+			'consultations' => [0,1,2,3,4,5,6,7,8,9]
 		];
-		return view('patient.index', $data);
+		return view('consultation.index', $data);
 	}
 
 	/**
 	 * Show the form for creating a new resource.
 	 */
-	public function create(Patient $patient)
+	public function create(Consultation $consultation)
 	{
-		// $consultation = Consultation::where('patient_id', $patient->id)->where('status', 'pending')->first();
-		$consultation = null;
-
+		$patient = Patient::find(request()->patient) ?? null;
 		$data = [
-			'patient' => $patient,
-			'consultation' => $consultation
+			'patient' => $patient
 		];
 		return view('consultation.create', $data);
 	}
@@ -46,13 +38,13 @@ class ConsultationController extends Controller
 	{
 		dd($request);
 
-		return redirect()->route('patient.index')->with('success', __('alert.message.success.crud.create'));
+		return redirect()->route('consultation.index')->with('success', __('alert.message.success.crud.create'));
 	}
 
 	/**
 	 * Display the specified resource.
 	 */
-	public function show(Patient $patient)
+	public function show(Consultation $consultation)
 	{
 		//
 	}
@@ -60,17 +52,17 @@ class ConsultationController extends Controller
 	/**
 	 * Update the specified resource in storage.
 	 */
-	// public function update(Request $request, Patient $patient)
+	// public function update(Request $request, Consultation $consultation)
 	// {
-	// 	return redirect()->route('patient.index')->with('success', __('alert.message.success.crud.create'));
+	// 	return redirect()->route('consultation.index')->with('success', __('alert.message.success.crud.create'));
 	// }
 
 	/**
 	 * Remove the specified resource from storage.
 	 */
-	public function destroy(Patient $patient)
+	public function destroy(Consultation $consultation)
 	{
-		if ($patient->delete()) {
+		if ($consultation->delete()) {
 			return back()->with('success', __('alert.message.success.crud.delete'));
 		}
 		return back()->with('error', __('alert.message.error.crud.delete'));

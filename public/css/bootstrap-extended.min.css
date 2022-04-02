@@ -797,7 +797,9 @@ input[type="number"]::-webkit-outer-spin-button {
 	padding-top: calc(0.467rem - 1px);
 	padding-bottom: calc(0.467rem - 1px);
 }
-.btn i.bx {
+.btn i.bx ,
+.btn-remove-service-category i.bx ,
+.table-form i.bx {
 	position: relative;
 	top: 3px;
 }
@@ -815,7 +817,8 @@ input[type="number"]::-webkit-outer-spin-button {
 	padding: 0.4rem 0.6rem;
 }
 .btn.btn-sm.btn-icon {
-	padding: 0.5rem;
+	/* padding: 0.5rem; */
+	padding: 0.2rem 0.3rem;
 }
 .btn.btn-lg.btn-icon {
 	padding: 1rem;

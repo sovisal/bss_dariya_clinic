@@ -15,7 +15,7 @@ class BaseModel extends Model
 	}
 
 	// get Data Select2
-	static function getDataSelect2($default_filter = [], $orderBy = [], $select = [])
+	static function getSelect2($default_filter = [], $orderBy = [], $select = [])
 	{
 		$order_by = '';
 		$orderBy = $orderBy ?: ['name', 'ASC'];
@@ -36,7 +36,6 @@ class BaseModel extends Model
 		request()->merge($default_filter);
 		$collection = parent::orderByRaw($order_by)
 							->select($select)
-							->filter()
 							->limit(5)->get();
 		$response = array();
 		foreach($collection as $item){

@@ -35,10 +35,10 @@
 					<td>{!! $patient->updated_by_name !!}</td>
 					<td class="text-center">
 						@can('UpdatePatient')
-							<x-form.button color="secondary" href="{{ route('patient.edit', $patient->id) }}" icon="bx bx-edit-alt" />
+							<x-form.button color="secondary" class="btn-sm" href="{{ route('patient.edit', $patient->id) }}" icon="bx bx-edit-alt" />
 						@endcan
 						@can('DeletePatient')
-							<x-form.button color="danger" class="confirmDelete" data-id="{{ $patient->id }}" icon="bx bx-trash" />
+							<x-form.button color="danger" class="confirmDelete btn-sm" data-id="{{ $patient->id }}" icon="bx bx-trash" />
 							<form class="sr-only" id="form-delete-{{ $patient->id }}" action="{{ route('patient.delete', $patient->id) }}" method="POST">
 								@csrf
 								@method('DELETE')

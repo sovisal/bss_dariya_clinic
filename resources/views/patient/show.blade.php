@@ -174,10 +174,10 @@
 			<div class="tab-pane" id="prescription" aria-labelledby="prescription-tab" role="tabpanel">
 				Prescription
 			</div>
-			<div class="tab-pane" id="paraclinic-plan" aria-labelledby="paraclinic-plan-tab" role="tabpanel">
+			<div class="tab-pane" id="paraclinic" aria-labelledby="paraclinic-tab" role="tabpanel">
 				Paraclincs
 			</div>
-			<div class="tab-pane" id="invoice-plan" aria-labelledby="invoice-plan-tab" role="tabpanel">
+			<div class="tab-pane" id="invoice" aria-labelledby="invoice-tab" role="tabpanel">
 				Invoices
 			</div>
 		</div>

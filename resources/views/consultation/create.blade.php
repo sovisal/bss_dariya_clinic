@@ -3,6 +3,365 @@
 		<style>
 		</style>
 	</x-slot>
+	<x-slot name="js">
+		<script>
+			$('.btn-treatment-toggle').click(function(){
+				var body = `<table class="table-form table-padding-sm striped">
+								<tr>
+									<td width="20%" class="text-right">Requested Date</td>
+									<td>
+										<x-bss-form.input
+											name="date"
+											hasIcon="right"
+											icon="bx bx-calendar"
+											placeholder="Date"
+										/>
+									</td>
+									<td width="20%" class="text-right"><small class="required">*</small> Choose Type</td>
+									<td>
+										<div class="d-flex">
+											<x-bss-form.select2
+												name="template"
+												data-url="#"
+												data-placeholder="Select template x-ray"
+											/>
+											<x-form.button color="light" class="btn-add-new-template tw-ml-2" icon="bx bx-plus" label="" />
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td class="text-right">Analysed by</td>
+									<td>
+										<x-bss-form.select2
+											name="analysed_by"
+											data-url="#"
+											data-placeholder="Select template x-ray"
+										/>
+									</td>
+									<td class="text-right">Selected Type</td>
+									<td>
+										<i class="cursor-pointer">No imagery type selected!</i>
+									</td>
+								</tr>
+							</table>`,
+					type = $(this).data('type'),
+					title = 'Create new '+ type.toUpperCase();
+				if (type=='prescription') {
+					title = 'Create new Prescription';
+					body = `<table class="table-form table-padding-sm table-striped table-medicine">
+								<thead>
+									<tr>
+										<th colspan="10" class="tw-bg-gray-100">
+											<div class="d-flex justify-content-between align-items-center">
+												<x-bss-form.input
+													name="date"
+													hasIcon="right"
+													icon="bx bx-calendar"
+													placeholder="Date"
+												/>
+												<div>
+													<x-form.button class="btn-add-medicine" icon="bx bx-plus" label="Add Medicine" />
+												</div>
+											</div>
+										</th>
+									</tr>
+									<tr>
+										<th width="15%">Medicine <small class="required">*</small></th>
+										<th width="9%">Qty <small class="required">*</small></th>
+										<th width="9%">U/D <small class="required">*</small></th>
+										<th width="9%">NoD <small class="required">*</small></th>
+										<th width="5%">Total</th>
+										<th width="5%">Unit</th>
+										<th width="15%">Usage</th>
+										<th width="12%">Usage Time</th>
+										<th>Note</th>
+										<th width="8%">Action</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>
+											<x-bss-form.select2
+												name="medicine"
+												data-url="#"
+												data-placeholder="Select medicine"
+											/>
+										</td>
+										<td>
+											<x-bss-form.input name="qty" class="is_number"/>
+										</td>
+										<td>
+											<x-bss-form.input name="ud" class="is_number"/>
+										</td>
+										<td>
+											<x-bss-form.input name="nod" class="is_number"/>
+										</td>
+										<td></td>
+										<td></td>
+										<td>
+											<x-bss-form.select2
+												name="usage"
+												data-url="#"
+												data-placeholder="Select medicine"
+											/>
+										</td>
+										<td>
+											<div class="d-flex justify-content-between">
+												<x-form.checkbox name='morning' label="Morning" />
+												<x-form.checkbox name='noon' label="Noon" />
+											</div>
+											<div class="d-flex justify-content-between tw-mt-2">
+												<x-form.checkbox name='evening' label="Evening" />
+												<x-form.checkbox name='night' label="Night" />
+											</div>
+										</td>
+										<td>
+											<x-bss-form.textarea name="note" />
+										</td>
+										<td class="text-center"></td>
+									</tr>
+								</tbody>
+							</table>`;
+				}else if (type=='labor-test'){
+					body = `<div class="row align-items-center mb-1">
+								<div class="col-sm-3">
+									<x-bss-form.input
+										name="date"
+										hasIcon="right"
+										icon="bx bx-calendar"
+										placeholder="Date"
+									/>
+								</div>
+								<div class="col-sm-3">
+									<x-bss-form.select name="labor_service_category" class="labor-service-category">
+										<option value="">Select Category</option>
+										<option value="biochimie">BIOCHIMIE</option>
+										<option value="helmatologie">HELMATOLOGIE</option>
+									</x-bss-form.select>
+								</div>
+								<div class="col-sm-3">
+									<x-form.checkbox name="sample_provided" label="Sample Provided" />
+								</div>
+							</div>
+							<div class="labor-service-container mt-1"></div>`;
+				}
+				$('#treatment-model .modal-title').html(title);
+				$('#treatment-model .modal-body').html(body);
+				if (type=='labor-test') {
+					$('.labor-service-category').select2({
+						dropdownAutoWidth: !0,
+						width: "100%",
+						dropdownParent: $('.labor-service-category').parent()
+					});
+				}else{
+					// Select2 Ajax
+					$('.select2ajax').each((_i, e) => {
+						var $e = $(e);
+						var url = $e.data('url');
+						var placeholder = $e.data('placeholder');
+						var id = $e.attr('id');
+						if ($('#hidden_'+ id).val()=='null') {
+							$e.val('').trigger('change');
+						}
+						if ((url!='' && url!=undefined) && (placeholder!='' || placeholder!=undefined)) {
+							$e.select2({
+								width: "100%",
+								dropdownAutoWidth: !0,
+								dropdownParent: $e.parent(),
+								placeholder: placeholder,
+								allowClear: ((placeholder)? true : false),
+								delay: 500,
+								ajax: { 
+									url: url,
+									type: "post",
+									dataType: 'json',
+									delay: 250,
+									data: function (params) {
+										return {
+											search: params.term
+										};
+									},
+									processResults: function (data) {
+										return {
+											results: $.map(data, function (item) {
+												if (Object.keys(data).length > 0) {
+													var keys = Object.keys(data[0]);
+													var rs_data = {};
+													keys.forEach(function(value, index) {
+														if (index==0) {
+															rs_data['id'] = item[value];
+														}else if(index==1){
+															rs_data['text'] = item[value];
+														}else{
+															rs_data[value] = item[value];
+														}
+													});
+													return rs_data;
+												}
+											})
+										};
+									},
+									cache: true
+								}
+							});
+						}
+					});
+					$(document).on('change', '.select2ajax', function () {
+						var selector = $(this).attr('id');
+						$('#hidden_'+ selector).val((($(this).find("option:selected").text()=='')? 'null' : $(this).find("option:selected").text()));
+					});
+				}
+				$('#treatment-model').modal();
+			});
+
+			// Prescription Request
+			$(document).on('click', '.btn-add-medicine', function () {
+				$('.table-medicine tbody').append(`
+													<tr>
+														<td>
+															<x-bss-form.select2
+																name="medicine"
+																data-url="#"
+																data-placeholder="Select medicine"
+															/>
+														</td>
+														<td>
+															<x-bss-form.input name="qty" class="is_number"/>
+														</td>
+														<td>
+															<x-bss-form.input name="ud" class="is_number"/>
+														</td>
+														<td>
+															<x-bss-form.input name="nod" class="is_number"/>
+														</td>
+														<td></td>
+														<td></td>
+														<td>
+															<x-bss-form.select2
+																name="usage"
+																data-url="#"
+																data-placeholder="Select medicine"
+															/>
+														</td>
+														<td>
+															<div class="d-flex justify-content-between">
+																<x-form.checkbox name='morning' label="Morning" />
+																<x-form.checkbox name='noon' label="Noon" />
+															</div>
+															<div class="d-flex justify-content-between tw-mt-2">
+																<x-form.checkbox name='evening' label="Evening" />
+																<x-form.checkbox name='night' label="Night" />
+															</div>
+														</td>
+														<td>
+															<x-bss-form.textarea name="note" />
+														</td>
+														<td class="text-center">
+															<span class="cursor-pointer text-danger hover:tw-text-red-600 btn-remove-medicine"><i class="bx bx-x"></i></span>
+														</td>
+													</tr>
+												`);
+			});
+			$(document).on('click', '.btn-remove-medicine', function () {
+				$(this).closest('tr').remove();
+			});
+
+			// Labor Service Category Selected
+			$(document).on('change', '.labor-service-category', function () {
+				var service_categories = '',
+					value = $(this).val();
+				if (value=='biochimie') {
+					service_categories = `<div class="row mt-1 service-category">
+											<div class="col-sm-6">
+												<b class="text-uppercase tw-underline">
+													Bacteriologie
+												</b>
+											</div>
+											<div class="col-sm-6 text-right">
+												<div class="d-flex justify-content-end align-items-center">
+													<x-form.checkbox name="all_category_1" class="chb_all" label="All" />
+													<span class="tw-ml-1 tw-underline btn-remove-service-category cursor-pointer text-danger hover:tw-text-red-600"><i class="bx bx-x"></i>Remove</span>
+												</div>
+											</div>
+											<div class="col-sm-12 tw-mt-2">
+												<div class="row">
+													<div class="col-sm-4 tw-mt-1">
+														<x-form.checkbox name="item_1" class="chb_child" label="Item 1" />
+													</div>
+													<div class="col-sm-4 tw-mt-1">
+														<x-form.checkbox name="item_2" class="chb_child" label="Item 2" />
+													</div>
+													<div class="col-sm-4 tw-mt-1">
+														<x-form.checkbox name="item_3" class="chb_child" label="Item 3" />
+													</div>
+													<div class="col-sm-4 tw-mt-1">
+														<x-form.checkbox name="item_4" class="chb_child" label="Item 4" />
+													</div>
+													<div class="col-sm-4 tw-mt-1">
+														<x-form.checkbox name="item_5" class="chb_child" label="Item 5" />
+													</div>
+												</div>
+											</div>
+										</div>`;
+				
+				}else if (value=='helmatologie') {
+					service_categories = `<div class="row mt-1 service-category">
+											<div class="col-sm-6">
+												<b class="text-uppercase tw-underline">
+													HEMATOLOGIE
+												</b>
+											</div>
+											<div class="col-sm-6 text-right">
+												<div class="d-flex justify-content-end align-items-center">
+													<x-form.checkbox name="all_category_1" class="chb_all" label="All" />
+													<span class="tw-ml-1 tw-underline btn-remove-service-category cursor-pointer text-danger hover:tw-text-red-600"><i class="bx bx-x"></i>Remove</span>
+												</div>
+											</div>
+											<div class="col-sm-12 tw-mt-2">
+												<div class="row">
+													<div class="col-sm-4 tw-mt-1">
+														<x-form.checkbox name="item_11" class="chb_child" label="Item 1" />
+													</div>
+													<div class="col-sm-4 tw-mt-1">
+														<x-form.checkbox name="item_22" class="chb_child" label="Item 2" />
+													</div>
+													<div class="col-sm-4 tw-mt-1">
+														<x-form.checkbox name="item_33" class="chb_child" label="Item 3" />
+													</div>
+													<div class="col-sm-4 tw-mt-1">
+														<x-form.checkbox name="item_44" class="chb_child" label="Item 4" />
+													</div>
+													<div class="col-sm-4 tw-mt-1">
+														<x-form.checkbox name="item_55" class="chb_child" label="Item 5" />
+													</div>
+													<div class="col-sm-4 tw-mt-1">
+														<x-form.checkbox name="item_66" class="chb_child" label="Item 6" />
+													</div>
+												</div>
+											</div>
+										</div>`;
+				}
+				$('.labor-service-container').append(service_categories);
+			});
+			$(document).on('click', '.btn-remove-service-category', function () {
+				$(this).closest('.service-category').remove();
+			});
+			$(document).on('change', '.chb_all', function () {
+				if ($(this).is(':checked')) {
+					$(this).closest('.service-category').find('.chb_child').prop('checked', true);
+				} else {
+					$(this).closest('.service-category').find('.chb_child').prop('checked', false);
+				}
+			});
+			$(document).on('change', '.chb_child', function () {
+				if ($(this).is(':checked') && ($(this).closest('.service-category').find('.chb_child:checked').length == $(this).closest('.service-category').find('.chb_child').length)) {
+					$(this).closest('.service-category').find('.chb_all').prop('checked', true);
+				} else {
+					$(this).closest('.service-category').find('.chb_all').prop('checked', false);
+				}
+			});
+		</script>
+	</x-slot>
 
 	<x-card :foot="false">
 		<x-slot name="header">
@@ -10,56 +369,48 @@
 		</x-slot>
 		<table class="table-form">
 			<tr>
-				<td class="text-right">
-					Patient <small class='required'>*</small>
+				<td width="20%" class="text-right">Patient <small class='required'>*</small></td>
+				<td width="30%">
+					<x-bss-form.select2
+						name="patient"
+						data-url="{{ route('patient.getSelect2') }}"
+						data-placeholder="---- None ----"
+						required
+					>
+						@if ($patient)
+							<option value="{{ $patient->id }}" selected>{{ $patient->name_kh }}</option>
+						@endif
+					</x-form.select2>
 				</td>
-				<td class="text-right">
-					<select name="patient" class="form-control" readonly>
-						<option value="{{ $patient->id }}" selected>{{ $patient->name_kh }}</option>
-					</select>
-				</td>
-				<td class="text-right">
-					Payment Type
-				</td>
-				<td class="text-right">
-					<select name="payment_type" class="form-control">
+				<td width="20%" class="text-right">Payment Type</td>
+				<td>
+					<x-bss-form.select name="payment_type">
 						<option value="">Select payment type</option>
 						<option value="Cash">Cash</option>
-					</select>
+					</x-bss-form.select>
 				</td>
 			</tr>
 			<tr>
-				<td class="text-right">
-					Doctor <small class='required'>*</small>
-				</td>
-				<td class="text-right">
-					<select name="doctor" class="form-control">
+				<td class="text-right">Doctor <small class='required'>*</small></td>
+				<td>
+					<x-bss-form.select name="doctor">
 						<option value="1">Krouk Puthea</option>
 						{{-- @foreach ($doctors as $doctor)
 							<option value="{{ $doctor->id }}">{{ $doctor->name }}</option>
 						@endforeach --}}
-					</select>
+					</x-bss-form.select>
 				</td>
-				<td class="text-right">
-					Evaluate at <small class='required'>*</small>
-				</td>
-				<td class="text-right">
-					<div class="position-relative has-icon-right">
-						<input type="text" name="evaluate_at" class="form-control date-time-picker" value="{{ date('Y-m-d H:i:s') }}">
-						<div class="form-control-position">
-							<i class="bx bx-calendar"></i>
-						</div>
-					</div>
+				<td class="text-right">Evaluate at <small class='required'>*</small></td>
+				<td>
+					<x-bss-form.input name='evaluate_at' class="date-time-picker" hasIcon="right" icon="bx bx-calendar" value="{{ date('Y-m-d H:i:s') }}" />
 				</td>
 			</tr>
 		</table>
 	</x-card>
 
-	
-
 	<ul class="nav nav-tabs mt-3 mb-0" role="tablist">
 		<li class="nav-item">
-			<a class="nav-link active" id="vital-sign-tab" data-toggle="tab" href="#vital-sign" aria-controls="vital-sign" role="tab" aria-selected="true">
+			<a class="nav-link" id="vital-sign-tab" data-toggle="tab" href="#vital-sign" aria-controls="vital-sign" role="tab" aria-selected="true">
 				<span class="align-middle">Vital Sign</span>
 			</a>
 		</li>
@@ -79,14 +430,14 @@
 			</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" id="treatment-plan-tab" data-toggle="tab" href="#treatment-plan" aria-controls="treatment-plan" role="tab" aria-selected="false">
+			<a class="nav-link active" id="treatment-plan-tab" data-toggle="tab" href="#treatment-plan" aria-controls="treatment-plan" role="tab" aria-selected="false">
 				<span class="align-middle">Treament Plan</span>
 			</a>
 		</li>
 	</ul>
 	<x-card :foot="false" :head="false">
 		<div class="tab-content">
-			<div class="tab-pane active" id="vital-sign" aria-labelledby="vital-sign-tab" role="tabpanel">
+			<div class="tab-pane" id="vital-sign" aria-labelledby="vital-sign-tab" role="tabpanel">
 				<table class="table-form striped">
 					<tr>
 						<td>Systolic (mmHg)</td>
@@ -198,17 +549,17 @@
 						</td>
 						<td>Chief Complain</td>
 						<td>
-							<input type="text" name="chief_complain" class="form-control tw-border-r-0" />
+							<input type="text" name="chief_complain" class="form-control" />
 						</td>
 					</tr>
 					<tr>
 						<td>History of present illness</td>
 						<td>
-							<input type="text" name="history_of_illness" class="form-control tw-border-r-0" />
+							<input type="text" name="history_of_illness" class="form-control" />
 						</td>
 						<td>Current Medication</td>
 						<td>
-							<input type="text" name="current_medication" class="form-control tw-border-r-0" />
+							<input type="text" name="current_medication" class="form-control" />
 						</td>
 					</tr>
 				</table>
@@ -392,29 +743,23 @@
 						<td rowspan="3">
 							<x-form.checkbox name='drinking' label="Drinking" />
 						</td>
-						<td class="text-right">
-							How long?
-						</td>
+						<td class="text-right">How long?</td>
 						<td>
-							<input type="text" name="drinking_how_long" class="form-control" />
+							<x-bss-form.input name='drinking_how_long' />
 						</td>
 						<td></td>
 					</tr>
 					<tr>
-						<td class="text-right">
-							What kind?
-						</td>
+						<td class="text-right">What kind?</td>
 						<td>
-							<input type="text" name="drinking_what_kind" class="form-control" />
+							<x-bss-form.input name='drinking_what_kind' />
 						</td>
 						<td></td>
 					</tr>
 					<tr>
-						<td class="text-right">
-							How many?
-						</td>
+						<td class="text-right">How many?</td>
 						<td>
-							<input type="text" name="drinking_how_many" class="form-control" />
+							<x-bss-form.input name='drinking_how_many' />
 						</td>
 						<td></td>
 					</tr>
@@ -424,20 +769,16 @@
 						<td rowspan="2">
 							<x-form.checkbox name='operation' label="Operation" />
 						</td>
-						<td class="text-right">
-							At age
-						</td>
+						<td class="text-right">At age</td>
 						<td>
-							<input type="text" name="operation_at_age" class="form-control" />
+							<x-bss-form.input name='operation_at_age' />
 						</td>
 						<td></td>
 					</tr>
 					<tr>
-						<td class="text-right">
-							What kind?
-						</td>
+						<td class="text-right">What kind?</td>
 						<td>
-							<input type="text" name="operation_what_kind" class="form-control" />
+							<x-bss-form.input name='operation_what_kind' />
 						</td>
 						<td></td>
 					</tr>
@@ -447,11 +788,9 @@
 						<td>
 							<x-form.checkbox name='smoking' label="Smoking" />
 						</td>
-						<td class="text-right">
-							How many?
-						</td>
+						<td class="text-right">How many?</td>
 						<td>
-							<input type="text" name="smoking_how_many" class="form-control" />
+							<x-bss-form.input name='smoking_how_many' />
 						</td>
 						<td></td>
 					</tr>
@@ -462,39 +801,33 @@
 							<x-form.checkbox name='other' label="Other" />
 						</td>
 						<td>
-							<textarea type="text" name="other" rows="2" class="form-control" placeholder="If others, please tell more."></textarea>
+							<x-bss-form.textarea name="other" placeholder="If others, please tell more."></x-bss-form.textarea>
 						</td>
 						<td>
 							<x-form.checkbox name='medication' label="Medication" />
 						</td>
 						<td>
-							<textarea type="text" name="other" rows="2" class="form-control" placeholder="Please list the medicals."></textarea>
+							<x-bss-form.textarea name="medication_reaction" placeholder="Please list the medicals."></x-bss-form.textarea>
 						</td>
 					</tr>
 	
 					{{-- Childhood & Development History --}}
 					<tr>
-						<td class="text-right">
-							Childhood & Development History
-						</td>
+						<td class="text-right">Childhood & Development History</td>
 						<td>
-							<textarea type="text" name="childhood_development_history" rows="2" class="form-control"></textarea>
+							<x-bss-form.textarea name="childhood_development_history"></x-bss-form.textarea>
 						</td>
-						<td class="text-right">
-							Mental Illness History
-						</td>
+						<td class="text-right">Mental Illness History</td>
 						<td>
-							<textarea type="text" name="mental_illess_history" rows="2" class="form-control"></textarea>
+							<x-bss-form.textarea name="mental_illess_history"></x-bss-form.textarea>
 						</td>
 					</tr>
 	
 					{{-- Family History --}}
 					<tr>
-						<td class="text-right">
-							Family History
-						</td>
+						<td class="text-right">Family History</td>
 						<td>
-							<textarea type="text" name="childhood_development_history" rows="2" class="form-control"></textarea>
+							<x-bss-form.textarea name="childhood_development_history"></x-bss-form.textarea>
 						</td>
 						<td></td>
 						<td></td>
@@ -505,9 +838,7 @@
 			<div class="tab-pane" id="examination" aria-labelledby="examination-tab" role="tabpanel">
 				<table class="table-form striped">
 					<tr>
-						<th colspan="4" class="tw-bg-gray-100">
-							General Appear
-						</th>
+						<th colspan="4" class="tw-bg-gray-100">General Appear</th>
 					</tr>
 					<tr>
 						<td>
@@ -525,9 +856,7 @@
 					</tr>
 	
 					<tr>
-						<th colspan="4" class="tw-bg-gray-100">
-							Neurological System
-						</th>
+						<th colspan="4" class="tw-bg-gray-100">Neurological System</th>
 					</tr>
 					<tr>
 						<td>
@@ -545,261 +874,187 @@
 					</tr>
 	
 					<tr>
-						<td colspan="4" class="text-center">
-							Mental Status
+						<td colspan="4" class="text-center">Mental Status</td>
+					</tr>
+					<tr>
+						<td class="text-right">Speech</td>
+						<td>
+							<x-bss-form.textarea name="examination_speech"></x-bss-form.textarea>
+						</td>
+						<td class="text-right">Mood and effect</td>
+						<td>
+							<x-bss-form.textarea name="examination_mood_and_effect"></x-bss-form.textarea>
 						</td>
 					</tr>
 					<tr>
-						<td class="text-right">
-							Speech
-						</td>
+						<td class="text-right">Thought</td>
 						<td>
-							<input type="text" name="examination_speech" class="form-control" />
+							<x-bss-form.textarea name="examination_thought"></x-bss-form.textarea>
 						</td>
-						<td class="text-right">
-							Mood and effect
-						</td>
+						<td class="text-right">Perception</td>
 						<td>
-							<input type="text" name="examination_mood_and_effect" class="form-control" />
+							<x-bss-form.textarea name="examination_perception"></x-bss-form.textarea>
 						</td>
 					</tr>
 					<tr>
-						<td class="text-right">
-							Thought
-						</td>
+						<td class="text-right">Insight and Judgment</td>
 						<td>
-							<input type="text" name="examination_thought" class="form-control" />
-						</td>
-						<td class="text-right">
-							Perception
-						</td>
-						<td>
-							<input type="text" name="examination_perception" class="form-control" />
-						</td>
-					</tr>
-					<tr>
-						<td class="text-right">
-							Insight and Judgment
-						</td>
-						<td>
-							<input type="text" name="examination_insight_and_judgment" class="form-control" />
+							<x-bss-form.textarea name="examination_insight_and_judgment"></x-bss-form.textarea>
 						</td>
 						<td colspan="2"></td>
 					</tr>
 	
 					<tr>
-						<th colspan="4" class="tw-bg-gray-100">
-							Score de Glasgow
-						</th>
+						<th colspan="4" class="tw-bg-gray-100">Score de Glasgow</th>
 					</tr>
 					<tr>
-						<td class="text-right">
-							Eyes
-						</td>
+						<td class="text-right">Eyes</td>
 						<td>
-							<input type="text" name="examination_score_de_glasgow_eyes" class="form-control" />
+							<x-bss-form.input name='examination_score_de_glasgow_eyes' />
 						</td>
-						<td class="text-right">
-							Verbal
-						</td>
+						<td class="text-right">Verbal</td>
 						<td>
-							<input type="text" name="examination_score_de_glasgow_verbal" class="form-control" />
+							<x-bss-form.input name='examination_score_de_glasgow_verbal' />
 						</td>
 					</tr>
 					<tr>
-						<td class="text-right">
-							Motion
-						</td>
+						<td class="text-right">Motion</td>
 						<td>
-							<input type="text" name="examination_score_de_glasgow_motion" class="form-control" />
+							<x-bss-form.input name='examination_score_de_glasgow_motion' />
 						</td>
-						<td class="text-right">
-							Percussion
-						</td>
+						<td class="text-right">Percussion</td>
 						<td>
-							<input type="text" name="examination_score_de_glasgow_percussion" class="form-control" />
+							<x-bss-form.input name='examination_score_de_glasgow_percussion' />
 						</td>
 					</tr>
 					<tr>
-						<td class="text-right">
-							Auscultation
-						</td>
+						<td class="text-right">Auscultation</td>
 						<td>
-							<input type="text" name="examination_score_de_glasgow_auscultation" class="form-control" />
+							<x-bss-form.input name='examination_score_de_glasgow_auscultation' />
 						</td>
 						<td colspan="2"></td>
 					</tr>
 	
 					<tr>
-						<th colspan="4" class="tw-bg-gray-100">
-							Cardiovascular System
-						</th>
+						<th colspan="4" class="tw-bg-gray-100">Cardiovascular System</th>
 					</tr>
 					<tr>
-						<td class="text-right">
-							Inspection
-						</td>
+						<td class="text-right">Inspection</td>
 						<td>
-							<input type="text" name="examination_cardiovascular_inspection" class="form-control" />
+							<x-bss-form.input name='examination_cardiovascular_inspection' />
 						</td>
-						<td class="text-right">
-							Palpation
-						</td>
+						<td class="text-right">Palpation</td>
 						<td>
-							<input type="text" name="examination_cardiovascular_palpation" class="form-control" />
+							<x-bss-form.input name='examination_cardiovascular_palpation' />
 						</td>
 					</tr>
 					<tr>
-						<td class="text-right">
-							Percussion
-						</td>
+						<td class="text-right">Percussion</td>
 						<td>
-							<input type="text" name="examination_cardiovascular_percussion" class="form-control" />
+							<x-bss-form.input name='examination_cardiovascular_percussion' />
 						</td>
-						<td class="text-right">
-							Auscultation
-						</td>
+						<td class="text-right">Auscultation</td>
 						<td>
-							<input type="text" name="examination_cardiovascular_auscultation" class="form-control" />
+							<x-bss-form.input name='examination_cardiovascular_auscultation' />
 						</td>
 					</tr>
 					<tr>
-						<td class="text-right">
-							Other
-						</td>
+						<td class="text-right">Other</td>
 						<td>
-							<textarea rows="2" name="examination_cardiovascular_other" class="form-control"></textarea>
+							<x-bss-form.textarea name="examination_cardiovascular_other"></x-bss-form.textarea>
 						</td>
 						<td colspan="2"></td>
 					</tr>
 	
 					<tr>
-						<th colspan="4" class="tw-bg-gray-100">
-							Eyes
-						</th>
+						<th colspan="4" class="tw-bg-gray-100">Eyes</th>
 					</tr>
 					<tr>
-						<td class="text-right">
-							Left
-						</td>
+						<td class="text-right">Left</td>
 						<td>
-							<input type="text" name="examination_eye_left" class="form-control" />
+							<x-bss-form.input name='examination_eye_left' />
 						</td>
-						<td class="text-right">
-							Right
-						</td>
+						<td class="text-right">Right</td>
 						<td>
-							<input type="text" name="examination_eye_right" class="form-control" />
+							<x-bss-form.input name='examination_eye_right' />
 						</td>
 					</tr>
 					<tr>
-						<td class="text-right">
-							Fondus
-						</td>
+						<td class="text-right">Fondus</td>
 						<td>
-							<input type="text" name="examination_eye_fondus" class="form-control" />
+							<x-bss-form.input name='examination_eye_fondus' />
 						</td>
-						<td class="text-right">
-							Other
-						</td>
+						<td class="text-right">Other</td>
 						<td>
-							<textarea rows="2" name="examination_eye_other" class="form-control"></textarea>
+							<x-bss-form.textarea name="examination_eye_other"></x-bss-form.textarea>
 						</td>
 					</tr>
 	
 					<tr>
-						<th colspan="4" class="tw-bg-gray-100">
-							Ears
-						</th>
+						<th colspan="4" class="tw-bg-gray-100">Ears</th>
 					</tr>
 					<tr>
-						<td class="text-right">
-							Left
-						</td>
+						<td class="text-right">Left</td>
 						<td>
-							<input type="text" name="examination_ear_left" class="form-control" />
+							<x-bss-form.input name='examination_ear_left' />
 						</td>
-						<td class="text-right">
-							Right
-						</td>
+						<td class="text-right">Right</td>
 						<td>
-							<input type="text" name="examination_ear_right" class="form-control" />
+							<x-bss-form.input name='examination_ear_right' />
 						</td>
 					</tr>
 					<tr>
-						<td class="text-right">
-							Head
-						</td>
+						<td class="text-right">Head</td>
 						<td>
-							<input type="text" name="examination_ear_head" class="form-control" />
+							<x-bss-form.input name='examination_ear_head' />
 						</td>
-						<td class="text-right">
-							Other
-						</td>
+						<td class="text-right">Other</td>
 						<td>
-							<textarea rows="2" name="examination_ear_other" class="form-control"></textarea>
+							<x-bss-form.textarea name="examination_ear_other"></x-bss-form.textarea>
 						</td>
 					</tr>
 	
 					<tr>
-						<th colspan="4" class="tw-bg-gray-100">
-							Other body parts
-						</th>
+						<th colspan="4" class="tw-bg-gray-100">Other body parts</th>
 					</tr>
 					<tr>
-						<td class="text-right">
-							Nose
-						</td>
+						<td class="text-right">Nose</td>
 						<td>
-							<input type="text" name="examination_nose" class="form-control" />
+							<x-bss-form.input name='examination_nose' />
 						</td>
-						<td class="text-right">
-							pharynxl
-						</td>
+						<td class="text-right">pharynxl</td>
 						<td>
-							<input type="text" name="examination_pharynxl" class="form-control" />
+							<x-bss-form.input name='examination_pharynxl' />
 						</td>
 					</tr>
 					<tr>
-						<td class="text-right">
-							Neck
-						</td>
+						<td class="text-right">Neck</td>
 						<td>
-							<input type="text" name="examination_nech" class="form-control" />
+							<x-bss-form.input name='examination_nech' />
 						</td>
-						<td class="text-right">
-							Lymphadenopathy
-						</td>
+						<td class="text-right">Lymphadenopathy</td>
 						<td>
-							<input type="text" name="examination_lymphadenopathy" class="form-control" />
+							<x-bss-form.input name='examination_lymphadenopathy' />
 						</td>
 					</tr>
 					<tr>
-						<td class="text-right">
-							Geneto-urinary
-						</td>
+						<td class="text-right">Geneto-urinary</td>
 						<td>
-							<input type="text" name="examination_geneto_urinary" class="form-control" />
+							<x-bss-form.input name='examination_geneto_urinary' />
 						</td>
-						<td class="text-right">
-							Extremities
-						</td>
+						<td class="text-right">Extremities</td>
 						<td>
-							<input type="text" name="examination_extremities" class="form-control" />
+							<x-bss-form.input name='examination_extremities' />
 						</td>
 					</tr>
 					<tr>
-						<td class="text-right">
-							Musculosqueletal
-						</td>
+						<td class="text-right">Musculosqueletal</td>
 						<td>
-							<input type="text" name="examination_musculosqueletal" class="form-control" />
+							<x-bss-form.input name='examination_musculosqueletal' />
 						</td>
-						<td class="text-right">
-							Other
-						</td>
+						<td class="text-right">Other</td>
 						<td>
-							<textarea rows="2" name="examination_other_body_part_other" class="form-control"></textarea>
+							<x-bss-form.textarea name="examination_other_body_part_other"></x-bss-form.textarea>
 						</td>
 					</tr>
 				</table>
@@ -807,49 +1062,97 @@
 			<div class="tab-pane" id="evaluation" aria-labelledby="evaluation-tab" role="tabpanel">
 				<table class="table-form striped">
 					<tr>
-						<td class="text-right">
-							Evaluation Summary
-						</td>
+						<td class="text-right">Evaluation Summary</td>
 						<td>
-							<textarea name="evaluation_summary" rows="4" class="form-control"></textarea>
+							<x-bss-form.textarea name="evaluation_summary"></x-bss-form.textarea>
 						</td>
 					</tr>
 					<tr>
-						<td class="text-right">
-							Category
-						</td>
+						<td class="text-right">Category</td>
 						<td>
-							<select name="evaluation_category" class="form-control">
+							<x-bss-form.select name="evaluation_category">
 								<option value="">Select Category</option>
-							</select>
+							</x-bss-form.select>
 						</td>
 					</tr>
 					<tr>
-						<td class="text-right">
-							Indication
-						</td>
+						<td class="text-right">Indication</td>
 						<td>
-							<select name="evaluation_indication" class="form-control">
-								<option value="">Select Category</option>
-							</select>
+							<x-bss-form.select name="evaluation_indication">
+								<option value="">Select Disease</option>
+							</x-bss-form.select>
 						</td>
 					</tr>
 					<tr>
-						<td class="text-right">
-							Information Diagnosis <small class="required">*</small>
-						</td>
+						<td class="text-right">Information Diagnosis <small class="required">*</small></td>
 						<td>
-							<textarea name="evaluation_summary" rows="4" class="form-control"></textarea>
+							<x-bss-form.textarea name="evaluation_information_diagnosis" rows="4"></x-bss-form.textarea>
 						</td>
 					</tr>
 				</table>
 			</div>
-			<div class="tab-pane" id="treatment-plan" aria-labelledby="treatment-plan-tab" role="tabpanel">
+			<div class="tab-pane active" id="treatment-plan" aria-labelledby="treatment-plan-tab" role="tabpanel">
 				<table class="table-form striped">
-
+					<tr>
+						<th colspan="2" class="tw-bg-gray-100 text-center">
+							<i class="bx bx-file"></i> List treament plan
+						</th>
+					</tr>
+					<tr>
+						<td width="30%">
+							<div class="d-flex justify-content-between">
+								<b>Prescription</b>
+								<x-form.button class="btn-treatment-toggle" data-type="prescription" color="light" icon="bx bx-plus" label=""/>
+							</div>
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>
+							<div class="d-flex justify-content-between">
+								<b>Labor-Test</b>
+								<x-form.button class="btn-treatment-toggle" data-type="labor-test" color="light" icon="bx bx-plus" label=""/>
+							</div>
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>
+							<div class="d-flex justify-content-between">
+								<b>Xray</b>
+								<x-form.button class="btn-treatment-toggle" data-type="xray" color="light" icon="bx bx-plus" label=""/>
+							</div>
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>
+							<div class="d-flex justify-content-between">
+								<b>Echography</b>
+								<x-form.button class="btn-treatment-toggle" data-type="echography" color="light" icon="bx bx-plus" label=""/>
+							</div>
+						</td>
+						<td></td>
+					</tr>
+					<tr>
+						<td>
+							<div class="d-flex justify-content-between">
+								<b>ECG</b>
+								<x-form.button class="btn-treatment-toggle" data-type="ecg" color="light" icon="bx bx-plus" label=""/>
+							</div>
+						</td>
+						<td></td>
+					</tr>
 				</table>
 			</div>
 		</div>
 	</x-card>
+
+	<x-modal id="treatment-model" dialogClass="modal-full" data-backdrop="static" data-keyboard="false">
+		<x-slot name="footer">
+			<x-form.button color="danger" data-dismiss="modal" icon="bx bx-x" label="{{ __('button.cancel') }}" />
+			<x-form.button icon="bx bx-save" label="{{ __('button.save') }}" />
+		</x-slot>
+	</x-modal>
 
 </x-app-layout>
