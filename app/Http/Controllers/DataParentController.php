@@ -55,30 +55,6 @@ class DataParentController extends Controller
 		//
 	}
 
-<<<<<<< HEAD
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  \App\Models\DataParent  $dataParent
-	 * @return \Illuminate\Http\Response
-	 */
-	public function edit(DataParent $dataParent)
-	{
-		//
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  \App\Http\Requests\UpdateDataParentRequest  $request
-	 * @param  \App\Models\DataParent  $dataParent
-	 * @return \Illuminate\Http\Response
-	 */
-	public function update(UpdateDataParentRequest $request, DataParent $dataParent)
-	{
-		//
-	}
-=======
     /**
      * Show the form for editing the specified resource.
      *
@@ -108,7 +84,6 @@ class DataParentController extends Controller
             return redirect()->route('setting.data-parent.index')->with('success', 'Data update success');
         }
     }
->>>>>>> e7d2be8d68d6566bf2810ccb1d8ac00845558ab6
 
 	/**
 	 * Remove the specified resource from storage.
