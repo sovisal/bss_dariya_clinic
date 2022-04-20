@@ -16,9 +16,10 @@ class DataParentController extends Controller
      */
     public function index(Request $request)
     {
-        $this->data = [
-			'parent' => $request->parent ?: 'blood_type'
-		];
+        $type = $request->parent ?: session('data_parent_type') ?? 'blood_type';
+        $this->data['parent'] = $type;
+        $this->data['rows'] = DataParent::where('type', $type)->get();
+        session(['data_parent_type' => $type]);
         return view('data_parent.index', $this->data);
     }
 
@@ -62,7 +63,9 @@ class DataParentController extends Controller
      */
     public function edit(DataParent $dataParent)
     {
-        //
+        $data = [];
+        $data['row'] = $dataParent;
+        return view('data_parent.edit', $data);
     }
 
     /**
@@ -72,9 +75,14 @@ class DataParentController extends Controller
      * @param  \App\Models\DataParent  $dataParent
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateDataParentRequest $request, DataParent $dataParent)
+    public function update(Request $request, DataParent $dataParent)
     {
-        //
+        $type = session('data_parent_type') ?? 'other';
+        $request->type = $type;
+        $request->status = 1;
+        if ($dataParent->update($request->all())) {
+            return redirect()->route('setting.data-parent.index')->with('success', 'Data update success');
+        }
     }
 
     /**

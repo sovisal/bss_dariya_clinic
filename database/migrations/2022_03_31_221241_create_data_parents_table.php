@@ -20,6 +20,7 @@ class CreateDataParentsTable extends Migration
             $table->string('type', 50);
             $table->text('description');
             $table->text('other');
+            $table->integer('status');
             $table->timestamps();
         });
     }
