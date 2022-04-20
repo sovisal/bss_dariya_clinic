@@ -9,18 +9,19 @@ use Illuminate\Http\Request;
 
 class DataParentController extends Controller
 {
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return \Illuminate\Http\Response
-	 */
-	public function index(Request $request)
-	{
-		$this->data = [
-			'parent' => $request->parent ?: 'blood_type'
-		];
-		return view('data_parent.index', $this->data);
-	}
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request)
+    {
+        $type = $request->parent ?: session('data_parent_type') ?? 'blood_type';
+        $this->data['parent'] = $type;
+        $this->data['rows'] = DataParent::where('type', $type)->get();
+        session(['data_parent_type' => $type]);
+        return view('data_parent.index', $this->data);
+    }
 
 	/**
 	 * Show the form for creating a new resource.
@@ -54,6 +55,7 @@ class DataParentController extends Controller
 		//
 	}
 
+<<<<<<< HEAD
 	/**
 	 * Show the form for editing the specified resource.
 	 *
@@ -76,6 +78,37 @@ class DataParentController extends Controller
 	{
 		//
 	}
+=======
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\DataParent  $dataParent
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(DataParent $dataParent)
+    {
+        $data = [];
+        $data['row'] = $dataParent;
+        return view('data_parent.edit', $data);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\UpdateDataParentRequest  $request
+     * @param  \App\Models\DataParent  $dataParent
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, DataParent $dataParent)
+    {
+        $type = session('data_parent_type') ?? 'other';
+        $request->type = $type;
+        $request->status = 1;
+        if ($dataParent->update($request->all())) {
+            return redirect()->route('setting.data-parent.index')->with('success', 'Data update success');
+        }
+    }
+>>>>>>> e7d2be8d68d6566bf2810ccb1d8ac00845558ab6
 
 	/**
 	 * Remove the specified resource from storage.

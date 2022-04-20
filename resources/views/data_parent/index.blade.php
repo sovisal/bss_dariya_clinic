@@ -10,15 +10,26 @@
 			<x-slot name="thead">
 				<tr>
 					<th>No</th>
-					<th>Title</th>
+					<th>Title EN</th>
+					<th>Title KH</th>
 					<th>Description</th>
+					<th>Status</th>
+					<th>Action</th>
 				</tr>
 			</x-slot>
-			@foreach([0,1,2,3,4,5,6] as $addr)
+			@php
+				$i = 0;
+			@endphp
+			@foreach($rows as $row)
 				<tr>
-					<td class="text-center">111</td>
-					<td>111</td>
-					<td>222</td>
+					<td class="text-center">{{ ++$i }}</td>
+					<td>{{ $row->title_en }}</td>
+					<td>{{ $row->title_kh }}</td>
+					<td>{{ $row->description }}</td>
+					<td class="text-center">{{ $row->status }}</td>
+					<td class="text-center">
+						<x-form.button color="secondary" class="btn-sm" href="{{ route('setting.data-parent.edit', $row->id) }}" icon="bx bx-edit-alt" />
+					</td>
 				</tr>
 			@endforeach
 		</x-table>
