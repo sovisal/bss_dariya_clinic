@@ -620,3 +620,15 @@ textarea.my-editor + .cke_chrome.cke_focus{
 		font-size: 13px; padding: 3px 10px;
 		color: #454545;
 	}
+
+	body form .form-control, [type='text'], [type='email'], [type='url'], [type='password'], [type='number'], [type='date'], [type='datetime-local'], [type='month'], [type='search'], [type='tel'], [type='time'], [type='week'], [multiple], textarea, select {
+		padding-top: 4px!important;
+		padding-bottom: 4px!important;
+		height: unset;
+		font-size: 12px;
+	}
+	.table-form > thead > tr > th, .table-form > tfoot > tr > th, .table-form > tbody > tr > th, .table-form > tbody > tr > td {
+		padding-top: 4px;
+		padding-bottom: 4px;
+		font-size: 12px;
+	}
