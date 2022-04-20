@@ -45,8 +45,8 @@ class AppLayout extends Component
 			],
 			
 			'prescription' => [
-				'can' => 'ViewAnyParaClinic',
-				'url' => route('para_clinic.index'),
+				'can' => 'ViewAnyPrescription',
+				'url' => route('prescription.index'),
 				'label' => 'Prescription',
 			],
 

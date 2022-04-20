@@ -24,6 +24,7 @@ Route::middleware(['auth'])->group(function () {
 
 
 require __DIR__.'/patient-route.php';
+require __DIR__.'/prescription-route.php';
 require __DIR__.'/para-clinic-route.php';
 require __DIR__.'/user-route.php';
 require __DIR__.'/setting-route.php';
