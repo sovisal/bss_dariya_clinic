@@ -78,8 +78,7 @@ class DataParentController extends Controller
     public function update(Request $request, DataParent $dataParent)
     {
         $type = session('data_parent_type') ?? 'other';
-        $request->type = $type;
-        $request->status = 1;
+        $request['status'] = 1;
         if ($dataParent->update($request->all())) {
             return redirect()->route('setting.data-parent.index')->with('success', 'Data update success');
         }

@@ -1,5 +1,7 @@
 <x-app-layout>
 	<x-card :foot="false"  :head="false">
+		<x-form.button href="{{ route('setting.data-parent.create') }}" label="Create" color="primary" icon="bx bx-plus"/>
+		<br><br>
 		@foreach(['blood_type' => 'Blood Type', 'nationality' => 'Nationality', 'enterprise' => 'Enterprise',
 			'payment_type' => 'Payment Type', 'evalutaion_category' => 'Evalutaion Category', 'indication_disease' => 'Indication/Disease',
 			'comsumption' => 'Comsumption', 'time_usage' => 'Usage', 
