@@ -683,8 +683,7 @@ textarea.my-editor + .cke_chrome.cke_focus{
 	}
 	label,
 	.dataTables_info,
-	.paginate_button a
-	{
+	.paginate_button a{
 		font-size: 12px !important;
 	}
 	.pagination{
