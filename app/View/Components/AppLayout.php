@@ -89,12 +89,6 @@ class AppLayout extends Component
 						'name' => ['edit'],
 						'label' => 'Setting',
 					],
-					'doctor' => [
-						'can' => 'UpdateSetting',
-						'url' => route('setting.doctor.index'),
-						'name' => ['index','create', 'edit', 'ability'],
-						'label' => 'Doctor',
-					],
 					'labor_template' => [
 						'can' => 'UpdateSetting',
 						'url' => route('setting.edit'),
@@ -122,8 +116,20 @@ class AppLayout extends Component
 					'data-parent' => [
 						'can' => 'UpdateSetting',
 						'url' => route('setting.data-parent.index'),
-						'name' => ['index','create', 'edit', 'ability'],
+						'name' => ['index','create', 'edit'],
 						'label' => 'Data',
+					],
+					'doctor' => [
+						'can' => 'ViewAnyDoctor',
+						'url' => route('setting.doctor.index'),
+						'name' => ['index','create', 'edit'],
+						'label' => 'Doctor',
+					],
+					'medicine' => [
+						'can' => 'ViewAnyMedicine',
+						'url' => route('setting.medicine.index'),
+						'name' => ['index','create', 'edit'],
+						'label' => 'Medicine',
 					],
 					'address' => [
 						'can' => 'UpdateSetting', // not yet create abilities

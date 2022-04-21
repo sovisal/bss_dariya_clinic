@@ -8,7 +8,7 @@
 	'type' => 'button',
 ])
 @if ($href=='')
-	<button {{ $attributes->merge(["class" => "btn btn-". $color ." ". (($label=='')? 'btn-icon' : '' ) ]) }} type="{{ $type }}">
+	<button {{ $attributes->merge(["class" => "btn-sm btn btn-". $color ." ". (($label=='')? 'btn-icon' : '' ) ]) }} type="{{ $type }}">
 		@if ($hideLabelOnXS)
 			<div class=" d-block d-sm-none">
 				<i class="{!! $icon !!}"></i>
@@ -29,7 +29,7 @@
 		@endif
 	</button>
 @else
-	<a href="{{ $href }}" {{ $attributes->merge(["class" => "btn btn-". $color ." ". (($label=='')? 'btn-icon' : '' ) ]) }}>
+	<a href="{{ $href }}" {{ $attributes->merge(["class" => "btn-sm btn btn-". $color ." ". (($label=='')? 'btn-icon' : '' ) ]) }}>
 		@if ($hideLabelOnXS)
 			<div class=" d-block d-sm-none">
 				<i class="{!! $icon !!}"></i>

@@ -1,6 +1,6 @@
 <x-app-layout>
 	<x-slot name="header">
-		<x-form.button href="{{ route('patient.create') }}" icon="bx bx-plus" label="Create" />
+		<x-form.button href="{{ route('patient.create') }}" class="btn-sm" icon="bx bx-plus" label="Create" />
 	</x-slot>
 	<x-card :foot="false">
 		<x-table class="table-hover table-bordered table-padding-sm" id="datatables" data-table="patients">

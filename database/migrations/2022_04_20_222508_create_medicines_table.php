@@ -6,26 +6,51 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateMedicinesTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
-    public function up()
-    {
-        Schema::create('medicines', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
-    }
+	/**
+	 * Run the migrations.
+	 *
+	 * @return void
+	 */
+	public function up()
+	{
+		Schema::create('medicines', function (Blueprint $table) {
+			$table->id();
+			$table->string('name')->nullable();
+			$table->string('price')->nullable();
+			$table->string('code')->nullable();
+			$table->text('description')->nullable();
+			$table->unsignedBigInteger('usage_id');
+			$table->unsignedBigInteger('created_by');
+			$table->unsignedBigInteger('updated_by');
+			$table->timestamps();
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
-    {
-        Schema::dropIfExists('medicines');
-    }
+			$table->foreign('usage_id')
+					->references('id')
+					->on('data_parents')
+					->onUpdate('cascade')
+					->onDelete('cascade');
+
+			$table->foreign('created_by')
+					->references('id')
+					->on('users')
+					->onUpdate('cascade')
+					->onDelete('cascade');
+
+			$table->foreign('updated_by')
+					->references('id')
+					->on('users')
+					->onUpdate('cascade')
+					->onDelete('cascade');
+		});
+	}
+
+	/**
+	 * Reverse the migrations.
+	 *
+	 * @return void
+	 */
+	public function down()
+	{
+		Schema::dropIfExists('medicines');
+	}
 }

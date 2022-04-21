@@ -632,3 +632,49 @@ textarea.my-editor + .cke_chrome.cke_focus{
 		padding-bottom: 4px;
 		font-size: 12px;
 	}
+
+	.form-control-position{
+		padding: 0;
+		height: 1.6rem;
+		width: 2rem;
+	}
+	.has-icon-right .form-control {
+		padding-right: 2rem;
+		padding-left: 1.6rem;
+	}
+	.has-icon-left .form-control {
+		padding-right: 1.6rem;
+		padding-left: 2rem;
+	}
+	.has-icon-right .form-control-position i,
+	.has-icon-right .form-control-position i.bx{
+		right	: 0;
+		top: -3px !important;
+	}
+	.has-icon-left .form-control-position i,
+	.has-icon-left .form-control-position i.bx{
+		left: 0;
+		top: -3px !important;
+	}
+	.selection .select2-selection--single{
+		padding: 0;
+		min-height: 28px;
+	}
+	.select2-container--classic .select2-selection--single .select2-selection__arrow, .select2-container--default .select2-selection--single .select2-selection__arrow {
+		min-height: 28px;
+	}
+	.btn-sm i{
+		font-size: 0.8rem;
+	}
+	.btn-sm i.bx{
+		top: 1px;
+	}
+	.table th{
+		padding: 6px;
+	}
+	.table.dataTable thead .sorting:after, .table.dataTable thead .sorting:before, .table.dataTable thead .sorting_asc:after, .table.dataTable thead .sorting_asc:before, .table.dataTable thead .sorting_desc:after, .table.dataTable thead .sorting_desc:before {
+		top: 0;
+	}
+	.table.dataTable thead .sorting:after, .table.dataTable thead .sorting_asc:after, .table.dataTable thead .sorting_desc:after, .table.dataTable thead .sorting_desc_disabled:after {
+		padding-top: 0.6em;
+	}

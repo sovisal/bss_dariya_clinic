@@ -1,12 +1,12 @@
 <x-app-layout>
 	<x-card :foot="false"  :head="false">
-		<x-form.button href="{{ route('setting.data-parent.create') }}" label="Create" color="primary" icon="bx bx-plus"/>
+		<x-form.button href="{{ route('setting.data-parent.create') }}" label="Create" icon="bx bx-plus"/>
 		<br><br>
 		@foreach(['blood_type' => 'Blood Type', 'nationality' => 'Nationality', 'enterprise' => 'Enterprise',
 			'payment_type' => 'Payment Type', 'evalutaion_category' => 'Evalutaion Category', 'indication_disease' => 'Indication/Disease',
 			'comsumption' => 'Comsumption', 'time_usage' => 'Usage', 
 		] as $key => $val)
-			<x-form.button href="?parent={{ $key }}" label="{{ $val }}" class="{{ $parent == $key ? 'active' : '' }} btn-sm" color="{{ $parent == $key ? 'secondary' : 'primary' }}" />
+			<x-form.button href="?parent={{ $key }}" label="{{ $val }}" class="{{ $parent == $key ? 'active' : '' }}" color="{{ $parent == $key ? 'secondary' : 'primary' }}" />
 		@endforeach
 		<x-table class="table-hover table-bordered" id="datatables" data-table="patients">
 			<x-slot name="thead">
