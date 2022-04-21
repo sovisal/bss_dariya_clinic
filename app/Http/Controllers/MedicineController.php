@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Medicine;
+use App\Models\DataParent;
 use Illuminate\Http\Request;
 use App\Http\Requests\MedicineRequest;
 
@@ -17,11 +18,13 @@ class MedicineController extends Controller
 			'medicines' => Medicine::select([
 										'medicines.*',
 										'updatedBy.name AS updated_by_name',
+										'Usage.title_kh AS usage_name_kh',
+										'Usage.title_en AS usage_name_en',
 									])
 									->join('users AS updatedBy', 'updatedBy.id', '=' ,'medicines.updated_by')
-									->orderBy('name_kh', 'asc')->get()
+									->join('data_parents AS Usage', 'Usage.id', '=' ,'medicines.usage_id')
+									->orderBy('name', 'asc')->get(),
 		];
-		$this->data = [];
 		return view('medicine.index', $data);
 	}
 
@@ -31,7 +34,7 @@ class MedicineController extends Controller
 	public function create()
 	{
 		$data = [
-			
+			'usages' => DataParent::usage()->orderBy('title_en', 'asc')->get()
 		];
 		return view('medicine.create', $data);
 	}
@@ -42,13 +45,10 @@ class MedicineController extends Controller
 	public function store(MedicineRequest $request)
 	{
 		$medicine = Medicine::create([
-			'name_kh' => $request->name_kh,
-			'name_en' => $request->name_en,
-			'id_card_no' => $request->id_card_no,
-			'gender' => (($request->gender)? 1 : 0 ),
-			'email' => $request->email,
-			'phone' => $request->phone,
-			'address' => $request->address,
+			'name' => $request->name,
+			'price' => $request->price,
+			'usage_id' => $request->usage_id,
+			'description' => $request->description,
 			'created_by' => auth()->user()->id,
 			'updated_by' => auth()->user()->id,
 		]);
@@ -62,20 +62,13 @@ class MedicineController extends Controller
 	}
 
 	/**
-	 * Display the specified resource.
-	 */
-	public function show(Medicine $medicine)
-	{
-		//
-	}
-
-	/**
 	 * Show the form for editing the specified resource.
 	 */
 	public function edit(Medicine $medicine)
 	{
 		$data = [
-			'medicine' => $medicine
+			'medicine' => $medicine,
+			'usages' => DataParent::usage()->orderBy('title_en', 'asc')->get()
 		];
 		return view('medicine.edit', $data);
 	}
@@ -85,16 +78,11 @@ class MedicineController extends Controller
 	 */
 	public function update(MedicineRequest $request, Medicine $medicine)
 	{
-		// dd($request->gender);
 		$medicine->update([
-			'name_kh' => $request->name_kh,
-			'name_en' => $request->name_en,
-			'id_card_no' => $request->id_card_no,
-			'gender' => (($request->gender)? 1 : 0 ),
-			'email' => $request->email,
-			'phone' => $request->phone,
-			'address' => $request->address,
-			'created_by' => auth()->user()->id,
+			'name' => $request->name,
+			'price' => $request->price,
+			'usage_id' => $request->usage_id,
+			'description' => $request->description,
 			'updated_by' => auth()->user()->id,
 		]);
 		return back()->with('success', __('alert.message.success.crud.update'));
@@ -114,6 +102,6 @@ class MedicineController extends Controller
 	// get Product Select2
 	public function getSelect2()
 	{
-		return Medicine::getSelect2([], ['name_kh', 'asc'], ['id', 'name_kh']);
+		return Medicine::getSelect2([], ['name', 'asc'], ['id', 'name']);
 	}
 }

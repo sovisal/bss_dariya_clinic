@@ -7,9 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class DataParent extends Model
 {
-    use HasFactory;
+	use HasFactory;
 
-    protected $fillable = [
+	protected $fillable = [
 		'title_en', 'title_kh', 'description', 'status', 'type'
 	];
+
+	public function scopeUsage($query){
+		$query->where('type', 'usage')->where('status', 1);
+	}
 }

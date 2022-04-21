@@ -15,9 +15,7 @@
 					<td width="30%">
 						<x-bss-form.input name="name_kh" value="{{ old('name_kh', $doctor->name_kh) }}" required autofocus />
 					</td>
-					<td width="20%" class="text-right">
-						Name in English
-					</td>
+					<td width="20%" class="text-right">Name in English</td>
 					<td width="30%">
 						<x-bss-form.input name="name_en" value="{{ old('name_en', $doctor->name_en) }}" />
 					</td>
@@ -49,7 +47,7 @@
 				<tr>
 					<td class="text-right">Address</td>
 					<td colspan="3">
-						<x-bss-form.input type="text" name="address" value="{{ old('address', $doctor->address) }}" />
+						<x-bss-form.input type="text" name="address">{{ old('address', $doctor->address) }}</x-bss-form.input>
 					</td>
 				</tr>
 			</table>

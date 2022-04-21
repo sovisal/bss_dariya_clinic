@@ -627,6 +627,9 @@ textarea.my-editor + .cke_chrome.cke_focus{
 		height: unset;
 		font-size: 12px;
 	}
+	.select2-search--dropdown .select2-search__field{
+		height: 1.6rem !important;
+	}
 	.table-form > thead > tr > th, .table-form > tfoot > tr > th, .table-form > tbody > tr > th, .table-form > tbody > tr > td {
 		padding-top: 4px;
 		padding-bottom: 4px;
@@ -677,4 +680,17 @@ textarea.my-editor + .cke_chrome.cke_focus{
 	}
 	.table.dataTable thead .sorting:after, .table.dataTable thead .sorting_asc:after, .table.dataTable thead .sorting_desc:after, .table.dataTable thead .sorting_desc_disabled:after {
 		padding-top: 0.6em;
+	}
+	label,
+	.dataTables_info,
+	.paginate_button a
+	{
+		font-size: 12px !important;
+	}
+	.pagination{
+		margin-top: 5px !important;
+	}
+	.pagination .paginate_button a{
+		padding-top: 4px !important;
+		padding-bottom: 4px !important;
 	}

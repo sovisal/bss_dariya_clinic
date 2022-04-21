@@ -20,7 +20,6 @@ class DoctorController extends Controller
 									->join('users AS updatedBy', 'updatedBy.id', '=' ,'doctors.updated_by')
 									->orderBy('name_kh', 'asc')->get()
 		];
-		$this->data = [];
 		return view('doctor.index', $data);
 	}
 
@@ -84,7 +83,6 @@ class DoctorController extends Controller
 	 */
 	public function update(DoctorRequest $request, Doctor $doctor)
 	{
-		// dd($request->gender);
 		$doctor->update([
 			'name_kh' => $request->name_kh,
 			'name_en' => $request->name_en,
@@ -93,7 +91,6 @@ class DoctorController extends Controller
 			'email' => $request->email,
 			'phone' => $request->phone,
 			'address' => $request->address,
-			'created_by' => auth()->user()->id,
 			'updated_by' => auth()->user()->id,
 		]);
 		return back()->with('success', __('alert.message.success.crud.update'));

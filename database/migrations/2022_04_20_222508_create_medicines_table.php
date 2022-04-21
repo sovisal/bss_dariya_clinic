@@ -17,7 +17,6 @@ class CreateMedicinesTable extends Migration
 			$table->id();
 			$table->string('name')->nullable();
 			$table->string('price')->nullable();
-			$table->string('code')->nullable();
 			$table->text('description')->nullable();
 			$table->unsignedBigInteger('usage_id');
 			$table->unsignedBigInteger('created_by');

@@ -14,9 +14,7 @@
 					<td width="30%">
 						<x-bss-form.input name="name_kh" required autofocus />
 					</td>
-					<td width="20%" class="text-right">
-						Name in English
-					</td>
+					<td width="20%" class="text-right">Name in English</td>
 					<td width="30%">
 						<x-bss-form.input name="name_en" />
 					</td>
