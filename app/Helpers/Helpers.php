@@ -157,3 +157,13 @@ function bg_random()
 	$string_bg = $bg[rand(0, 7)] . rand(3, 9) . '00';
 	return $string_bg;
 }
+
+// How to use in view : {{ getParentDataByType('enterprise', 1) }}
+function getParentDataByType (...$param) {
+	return \App\Http\Controllers\DataParentController::getParentDataByType(...$param);
+}
+
+// How to use getParentDataSelection('enterprise')
+function getParentDataSelection(...$param) {
+	return \App\Http\Controllers\DataParentController::getParentDataSelection(...$param);
+}

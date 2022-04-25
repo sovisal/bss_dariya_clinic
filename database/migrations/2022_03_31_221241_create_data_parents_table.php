@@ -15,12 +15,12 @@ class CreateDataParentsTable extends Migration
     {
         Schema::create('data_parents', function (Blueprint $table) {
             $table->id();
-            $table->string('title_en', 255);
-            $table->string('title_kh', 255);
-            $table->string('type', 50);
-            $table->text('description');
-            $table->text('other');
-            $table->integer('status');
+            $table->string('title_en', 255)->nullable();
+            $table->string('title_kh', 255)->nullable();
+            $table->string('type', 50)->nullable();
+            $table->text('description')->nullable();
+            $table->text('other')->nullable();
+            $table->integer('status')->default(1);
             $table->timestamps();
         });
     }

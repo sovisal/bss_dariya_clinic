@@ -18,7 +18,7 @@ class DataParentController extends Controller
     {
         $type = $request->parent ?: session('data_parent_type') ?? 'blood_type';
         $this->data['parent'] = $type;
-        $this->data['rows'] = DataParent::where('type', $type)->get();
+        $this->data['rows'] = DataParent::where('type', $type)->where('status', 1)->get();
         session(['data_parent_type' => $type]);
         return view('data_parent.index', $this->data);
     }
@@ -30,7 +30,7 @@ class DataParentController extends Controller
 	 */
 	public function create()
 	{
-		//
+		return view('data_parent.create');
 	}
 
 	/**
@@ -39,9 +39,20 @@ class DataParentController extends Controller
 	 * @param  \App\Http\Requests\StoreDataParentRequest  $request
 	 * @return \Illuminate\Http\Response
 	 */
-	public function store(StoreDataParentRequest $request)
+	public function store(Request $request)
 	{
-		//
+        $dataParent = new DataParent();
+        $type = session('data_parent_type') ?? 'other';
+
+        if ($dataParent->create([
+            'title_en' => $request->title_en,
+            'title_kh' => $request->title_kh,
+            'description' => $request->description,
+            'type' => $type,
+            'status' => 1
+        ])) {
+            return redirect()->route('setting.data-parent.index')->with('success', 'Data created success');
+        }
 	}
 
 	/**
@@ -90,8 +101,57 @@ class DataParentController extends Controller
 	 * @param  \App\Models\DataParent  $dataParent
 	 * @return \Illuminate\Http\Response
 	 */
-	public function destroy(DataParent $dataParent)
+	public function destroy(Request $request, DataParent $dataParent)
 	{
-		//
+		$dataParent->status = 0;
+        if ($dataParent->update()) {
+            return redirect()->route('setting.data-parent.index')->with('success', 'Data delete success');
+        }
 	}
+
+    /* Function to get value of data-parent (For table display)
+    * Can be used in table display
+    * example :  {{ (\App\Http\Controllers\DataParentController::getParentDataByType('nationality', 1)) }} type + id
+    * this function is store in session for performance purpose
+    */
+    static function getParentDataByType($type, $id) {
+        if (empty($type) || empty($id)) {
+            return '';
+        }
+
+        $backup_type = session('backup_type') ?? '';
+        $backup_rows = session('backup_rows') ?? [];
+        if ($type && $backup_rows && $type == $backup_type && sizeof($backup_rows) > 0) {
+            $rows = $backup_rows;
+        } else {
+            $rows = [];
+            array_map(function ($obj) use (&$rows) {
+                $rows[$obj['id']] = $obj;
+            }, DataParent::where('type', $type)->get()->toArray());
+            session(['backup_type' => $type]);
+            session(['backup_rows' => $rows]);
+        }
+
+        if (sizeof($rows) > 0)  {
+            return array_key_exists($id, $rows) ? ($rows[$id]['title_en'] . ' :: ' . $rows[$id]['title_kh']) : '';
+        }
+        return '';
+    }
+
+    /* Function to get value of data-parent (For dropdown selection)
+    * Can be used in form selection
+    * example :  {{ (\App\Http\Controllers\DataParentController::getParentDataSelection('nationality')) }} type
+    */
+    static function getParentDataSelection($type = '') {
+        if (!$type) {
+            return [];
+        }
+
+        $rows = [];
+        array_map(function ($obj) use (&$rows) {
+            $rows[$obj['id']] = $obj['title_en'] . ' :: ' . $obj['title_kh'];
+        }, DataParent::where('type', $type)->where('status', 1)->get()->toArray());
+
+        return $rows;
+    }
 }

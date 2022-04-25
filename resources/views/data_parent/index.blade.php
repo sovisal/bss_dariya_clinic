@@ -1,6 +1,8 @@
 <x-app-layout>
-	<x-card :foot="false"  :head="false">
+	<x-slot name="header">
 		<x-form.button href="{{ route('setting.data-parent.create') }}" label="Create" icon="bx bx-plus"/>
+	</x-slot>
+	<x-card :foot="false"  :head="false">
 		<br><br>
 		@foreach(['blood_type' => 'Blood Type', 'nationality' => 'Nationality', 'enterprise' => 'Enterprise',
 			'payment_type' => 'Payment Type', 'evalutaion_category' => 'Evalutaion Category', 'indication_disease' => 'Indication/Disease',
@@ -31,9 +33,18 @@
 					<td class="text-center">{{ $row->status }}</td>
 					<td class="text-center">
 						<x-form.button color="secondary" class="btn-sm" href="{{ route('setting.data-parent.edit', $row->id) }}" icon="bx bx-edit-alt" />
+						<x-form.button color="danger" class="confirmDelete btn-sm" data-id="{{ $row->id }}" icon="bx bx-trash" />
+						<form class="sr-only" id="form-delete-{{ $row->id }}" action="{{ route('setting.data-parent.delete', $row->id) }}" method="POST">
+							@csrf
+							@method('DELETE')
+							<button class="sr-only" id="btn-{{ $row->id }}">Delete</button>
+						</form>
 					</td>
 				</tr>
 			@endforeach
 		</x-table>
 	</x-card>
+
+	<x-modal-confirm-delete />
+
 </x-app-layout>
