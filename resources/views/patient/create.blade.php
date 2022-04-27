@@ -157,6 +157,7 @@
 					</td>
 					<td colspan="2"></td>
 				</tr>
+				<?php $_4level_level = get4LevelAdressSelector(); ?>
 				<tr>
 					<td class="text-right">Province</td>
 					<td>

@@ -31,10 +31,7 @@ class PatientController extends Controller
 	 */
 	public function create()
 	{
-		$_4level_address = new \App\Http\Controllers\FourLevelAddressController();
-		$_4level_level = $_4level_address->BSSFullAddress('null', 'selection');
 		$data = [
-			'_4level_level' => $_4level_level,
 			'blood_type' => getParentDataSelection('blood_type'),
 			'nationality' => getParentDataSelection('nationality')
 		];
@@ -46,6 +43,8 @@ class PatientController extends Controller
 	 */
 	public function store(PatientRequest $request)
 	{
+		$address_id = update4LevelAddress($request);
+
 		$patient = Patient::create([
 			'name_kh' => $request->name_kh,
 			'name_en' => $request->name_en,
@@ -68,6 +67,7 @@ class PatientController extends Controller
 			'house_no' => $request->house_no,
 			'street_no' => $request->street_no,
 			'zip_code' => $request->zip_code,
+			'address_id' => $address_id,
 			'registered_at' => $request->registered_at,
 			'created_by' => auth()->user()->id,
 			'updated_by' => auth()->user()->id,
@@ -150,6 +150,11 @@ class PatientController extends Controller
 			'updated_by' => auth()->user()->id,
 		]);
 
+		if ($patient->address_id) {
+			$request->address_id = $patient->address_id;
+			update4LevelAddress($request);
+		}
+
 		if ($request->file('photo')) {
 			$path = public_path().'/images/patients/';
 			File::makeDirectory($path, 0777, true, true);
@@ -167,7 +172,9 @@ class PatientController extends Controller
 	 */
 	public function destroy(Patient $patient)
 	{
+		$address_id = $patient->address_id;
 		if ($patient->delete()) {
+			if ($address_id && $address_id > 0) delete4LevelAddress($address_id);
 			return back()->with('success', __('alert.message.success.crud.delete'));
 		}
 		return back()->with('error', __('alert.message.error.crud.delete'));

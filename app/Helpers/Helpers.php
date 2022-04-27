@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Setting;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 function InternetIsConnected(){
@@ -166,4 +167,23 @@ function getParentDataByType (...$param) {
 // How to use getParentDataSelection('enterprise')
 function getParentDataSelection(...$param) {
 	return \App\Http\Controllers\DataParentController::getParentDataSelection(...$param);
+}
+
+// 4 Level address selector
+function get4LevelAdressSelector ($type = 'create') {
+	$_4level_address = new \App\Http\Controllers\FourLevelAddressController();
+	$_4level_level = $_4level_address->BSSFullAddress('null', 'selection');
+	return $_4level_level;
+}
+
+function update4LevelAddress ($request) {
+	if ($request->address_id) {
+		return app('App\Http\Controllers\AddressLinkableController')->update($request, $request->address_id);
+	} else {
+		return app('App\Http\Controllers\AddressLinkableController')->store($request);
+	}
+}
+
+function delete4LevelAddress($addres_id) {
+	return app('App\Http\Controllers\AddressLinkableController')->destroy($addres_id);
 }
