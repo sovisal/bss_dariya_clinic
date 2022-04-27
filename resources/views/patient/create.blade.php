@@ -61,10 +61,9 @@
 					<td>
 						<x-bss-form.select name="blood_type" data-no_search="true">
 							<option value="">---- None ----</option>
-							<option value="Group A" {{ (old('blood_type')=="Group A") ? 'selected' : '' }}>Group A</option>
-							<option value="Group B" {{ (old('blood_type')=="Group B") ? 'selected' : '' }}>Group B</option>
-							<option value="Group AB" {{ (old('blood_type')=="Group AB") ? 'selected' : '' }}>Group AB</option>
-							<option value="Group O" {{ (old('blood_type')=="Group O") ? 'selected' : '' }}>Group O</option>
+							@foreach ($blood_type as $id => $data)
+								<option value="{{ $id }}" {{ (old('blood_type')==$id) ? 'selected' : '' }}>{{ $data }}</option>
+							@endforeach
 						</x-bss-form.select>
 					</td>
 				</tr>
@@ -113,8 +112,9 @@
 					<td>
 						<x-bss-form.select name="nationality" data-no_search="true">
 							<option value="">---- None ----</option>
-							<option value="Khmer" {{ (old('nationality')=="Khmer") ? 'selected' : '' }}>Khmer (KH)</option>
-							<option value="American" {{ (old('nationality')=="American") ? 'selected' : '' }}>American (US)</option>
+							@foreach ($nationality as $id => $data)
+								<option value="{{ $id }}" {{ (old('nationality')==$id) ? 'selected' : '' }}>{{ $data }}</option>
+							@endforeach
 						</x-bss-form.select>
 					</td>
 					<td class="text-right">Marital Status</td>

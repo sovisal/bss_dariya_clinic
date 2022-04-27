@@ -7,14 +7,14 @@
 			<x-slot name="thead">
 				<tr>
 					<th>Code</th>
-					<th>Name Kh</th>
-					<th>Name En</th>
+					<th>Name KH + Name EN</th>
 					<th>Date of birth</th>
 					<th>Gender</th>
 					<th>Phone</th>
-					<th>Registered at</th>
-					<th>Modify at</th>
-					<th>Modify by</th>
+					<th>Nationality</th>
+					<!-- <th>Registered at</th> -->
+					<!-- <th>Modify at</th> -->
+					<!-- <th>Modify by</th> -->
 					<th width="10%">{!! __('table.action') !!}</th>
 				</tr>
 			</x-slot>
@@ -25,14 +25,14 @@
 							PT-{!! str_pad($patient->id, 6, '0', STR_PAD_LEFT) !!}
 						</a>
 					</td>
-					<td>{!! $patient->name_kh !!}</td>
-					<td>{!! $patient->name_en !!}</td>
-					<td>{!! date('d-M-Y', strtotime($patient->date_of_birth)) !!}</td>
-					<td>{!! $patient->gender !!}</td>
+					<td>{!! $patient->name_kh !!} :: {!! $patient->name_en !!}</td>
+					<td class="text-center">{!! date('d-M-Y', strtotime($patient->date_of_birth)) !!}</td>
+					<td class="text-center">{!! $patient->gender !!}</td>
 					<td>{!! $patient->phone !!}</td>
-					<td>{!! date('d-M-Y H:i', strtotime($patient->registered_at)) !!}</td>
-					<td>{!! date('d-M-Y H:i', strtotime($patient->updated_at)) !!}</td>
-					<td>{!! $patient->updated_by_name !!}</td>
+					<td>{!! getParentDataByType('nationality', $patient->nationality) !!}</td>
+					<!-- <td>{!! date('d-M-Y H:i', strtotime($patient->registered_at)) !!}</td> -->
+					<!-- <td>{!! date('d-M-Y H:i', strtotime($patient->updated_at)) !!}</td> -->
+					<!-- <td>{!! $patient->updated_by_name !!}</td> -->
 					<td class="text-center">
 						@can('UpdatePatient')
 							<x-form.button color="secondary" class="btn-sm" href="{{ route('patient.edit', $patient->id) }}" icon="bx bx-edit-alt" />
