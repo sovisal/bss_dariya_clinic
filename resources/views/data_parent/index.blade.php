@@ -4,7 +4,7 @@
 	</x-slot>
 	<x-card :foot="false"  :head="false">
 		<br><br>
-		@foreach(['blood_type' => 'Blood Type', 'nationality' => 'Nationality', 'enterprise' => 'Enterprise',
+		@foreach(['gender' => 'Gender', 'marital_status' => 'Marital Status', 'blood_type' => 'Blood Type', 'nationality' => 'Nationality', 'enterprise' => 'Enterprise',
 			'payment_type' => 'Payment Type', 'evalutaion_category' => 'Evalutaion Category', 'indication_disease' => 'Indication/Disease',
 			'comsumption' => 'Comsumption', 'time_usage' => 'Usage', 
 		] as $key => $val)

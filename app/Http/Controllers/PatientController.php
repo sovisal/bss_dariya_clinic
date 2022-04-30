@@ -33,7 +33,9 @@ class PatientController extends Controller
 	{
 		$data = [
 			'blood_type' => getParentDataSelection('blood_type'),
-			'nationality' => getParentDataSelection('nationality')
+			'nationality' => getParentDataSelection('nationality'),
+			'gender' => getParentDataSelection('gender'),
+			'marital_status' => getParentDataSelection('marital_status'),
 		];
 		return view('patient.create', $data);
 	}
@@ -90,9 +92,8 @@ class PatientController extends Controller
 	 */
 	public function show(Patient $patient)
 	{
-		
 		// $consultation = Consultation::where('patient_id', $patient->id)->first();
-		$consultation = null;
+		$consultation = 'null';
 		if ($consultation) {
 			$data = [
 				'patient' => $patient,
@@ -114,7 +115,9 @@ class PatientController extends Controller
 			'_4level_level' => $_4level_level,
 			'patient' => $patient,
 			'blood_type' => getParentDataSelection('blood_type'),
-			'nationality' => getParentDataSelection('nationality')
+			'nationality' => getParentDataSelection('nationality'),
+			'gender' => getParentDataSelection('gender'),
+			'marital_status' => getParentDataSelection('marital_status'),
 		];
 		return view('patient.edit', $data);
 	}

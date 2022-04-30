@@ -410,34 +410,34 @@
 
 	<ul class="nav nav-tabs mt-3 mb-0" role="tablist">
 		<li class="nav-item">
-			<a class="nav-link" id="vital-sign-tab" data-toggle="tab" href="#vital-sign" aria-controls="vital-sign" role="tab" aria-selected="true">
+			<a class="nav-link btn-sm active" id="vital-sign-tab" data-toggle="tab" href="#vital-sign" aria-controls="vital-sign" role="tab" aria-selected="true">
 				<span class="align-middle">Vital Sign</span>
 			</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" id="past-medical-record-tab" data-toggle="tab" href="#past-medical-record" aria-controls="past-medical-record" role="tab" aria-selected="false">
+			<a class="nav-link btn-sm" id="past-medical-record-tab" data-toggle="tab" href="#past-medical-record" aria-controls="past-medical-record" role="tab" aria-selected="false">
 				<span class="align-middle">Past medical Record</span>
 			</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" id="examination-tab" data-toggle="tab" href="#examination" aria-controls="examination" role="tab" aria-selected="false">
+			<a class="nav-link btn-sm" id="examination-tab" data-toggle="tab" href="#examination" aria-controls="examination" role="tab" aria-selected="false">
 				<span class="align-middle">Examination</span>
 			</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" id="evaluation-tab" data-toggle="tab" href="#evaluation" aria-controls="evaluation" role="tab" aria-selected="false">
+			<a class="nav-link btn-sm" id="evaluation-tab" data-toggle="tab" href="#evaluation" aria-controls="evaluation" role="tab" aria-selected="false">
 				<span class="align-middle">Evaluation</span>
 			</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link active" id="treatment-plan-tab" data-toggle="tab" href="#treatment-plan" aria-controls="treatment-plan" role="tab" aria-selected="false">
+			<a class="nav-link btn-sm" id="treatment-plan-tab" data-toggle="tab" href="#treatment-plan" aria-controls="treatment-plan" role="tab" aria-selected="false">
 				<span class="align-middle">Treament Plan</span>
 			</a>
 		</li>
 	</ul>
 	<x-card :foot="false" :head="false">
 		<div class="tab-content">
-			<div class="tab-pane" id="vital-sign" aria-labelledby="vital-sign-tab" role="tabpanel">
+			<div class="tab-pane active" id="vital-sign" aria-labelledby="vital-sign-tab" role="tabpanel">
 				<table class="table-form striped">
 					<tr>
 						<td>Systolic (mmHg)</td>
@@ -1091,7 +1091,7 @@
 					</tr>
 				</table>
 			</div>
-			<div class="tab-pane active" id="treatment-plan" aria-labelledby="treatment-plan-tab" role="tabpanel">
+			<div class="tab-pane" id="treatment-plan" aria-labelledby="treatment-plan-tab" role="tabpanel">
 				<table class="table-form striped">
 					<tr>
 						<th colspan="2" class="tw-bg-gray-100 text-center">

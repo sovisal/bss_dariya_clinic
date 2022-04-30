@@ -6,7 +6,7 @@
 	<x-card :head="false" :foot="false">
 		<table class="table-form border-none table-padding-sm">
 			<tr>
-				<td width="200px" rowspan="4" style="vertical-align: top; text-center">
+				<td width="150px" rowspan="4" style="vertical-align: top; padding-left: 1.2rem !important; padding-right: 1.2rem !important;" class="text-center">
 					<img src="{{ (($patient->photo)? asset('images/patients/'. $patient->photo) : asset('images/browse-image.jpg') ) }}" alt="..." class="m-auto">
 				</td>
 				<th width="150px">Patient Code <span class="float-right">:</span></th>
@@ -15,7 +15,7 @@
 				<td>{{ date('d-M-Y H:m', strtotime($patient->registered_at)) }}</td>
 				<td width="150px" class="text-center" rowspan="4" style="vertical-align: top;">
 					<x-form.button href="{{ route('patient.edit', $patient->id) }}" class="btn-block" icon="bx bx-edit-alt" label="Edit" />
-					<x-form.button href="{{ route('patient.edit', $patient->id) }}" class="btn-block" color="secondary" icon="bx bx-printer" label="Print" />
+					{{-- <x-form.button href="{{ route('patient.edit', $patient->id) }}" class="btn-block" color="secondary" icon="bx bx-printer" label="Print" /> --}}
 				</td>
 			</tr>
 			<tr>
@@ -26,7 +26,7 @@
 			</tr>
 			<tr>
 				<th>Gender <span class="float-right">:</span></th>
-				<td>{{ $patient->gender }}</td>
+				<td>{{ $patient->pt_gender->title_en ?? '' }}</td>
 				<th>Phone <span class="float-right">:</span></th>
 				<td>{{ $patient->phone }}</td>
 			</tr>
@@ -78,11 +78,11 @@
 						<th width="200px">ID Card Number <span class="float-right">:</span></th>
 						<td>{{ $patient->id_card_no }}</td>
 						<th width="200px">Nationality <span class="float-right">:</span></th>
-						<td>{{ $patient->nationality }}</td>
+						<td>{{ $patient->pt_nationality->title_en ?? '' }}</td>
 					</tr>
 					<tr>
 						<th>Date of birth <span class="float-right">:</span></th>
-						<td>{{ date('d-M-Y', strtotime($patient->date_of_birth)) }}</td>
+						<td>{{ $patient->date_of_birth ? date('d-M-Y', strtotime($patient->date_of_birth)) : '' }}</td>
 						<th>Position <span class="float-right">:</span></th>
 						<td>{{ $patient->position }}</td>
 					</tr>
@@ -90,7 +90,7 @@
 						<th>Education <span class="float-right">:</span></th>
 						<td>{{ $patient->education }}</td>
 						<th>Marital Status <span class="float-right">:</span></th>
-						<td>{{ $patient->marital_status }}</td>
+						<td>{{ $patient->pt_marital_status->title_en ?? '' }}</td>
 					</tr>
 					<tr>
 						<th>Position <span class="float-right">:</span></th>
@@ -100,7 +100,7 @@
 					</tr>
 					<tr>
 						<th>Blood Type <span class="float-right">:</span></th>
-						<td>{{ $patient->blood_type }}</td>
+						<td>{{ $patient->pt_blood_type->title_en ?? '' }}</td>
 						<td colspan="2"></td>
 					</tr>
 

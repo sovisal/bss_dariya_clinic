@@ -37,8 +37,9 @@
 					<td>
 						<x-bss-form.select name="gender" data-no_search="true">
 							<option value="">---- None ----</option>
-							<option value="Male" {{ (old('gender')=="Male") ? 'selected' : '' }}>Male</option>
-							<option value="Female" {{ (old('gender')=="Female") ? 'selected' : '' }}>Female</option>
+							@foreach ($gender as $id => $data)
+								<option value="{{ $id }}" {{ (old('gender')==$id) ? 'selected' : '' }}>{{ $data }}</option>
+							@endforeach
 						</x-bss-form.select>
 					</td>
 				</tr>
@@ -121,9 +122,9 @@
 					<td>
 						<x-bss-form.select name="marital_status" data-no_search="true">
 							<option value="">---- None ----</option>
-							<option value="Single" {{ (old('marital_status')=="Single") ? 'selected' : '' }}>Single</option>
-							<option value="Married" {{ (old('marital_status')=="Married") ? 'selected' : '' }}>Married</option>
-							<option value="Widow" {{ (old('marital_status')=="Widow") ? 'selected' : '' }}>Widow</option>
+							@foreach ($marital_status as $id => $data)
+								<option value="{{ $id }}" {{ (old('marital_status')==$id) ? 'selected' : '' }}>{{ $data }}</option>
+							@endforeach
 						</x-bss-form.select>
 					</td>
 				</tr>
