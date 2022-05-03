@@ -93,7 +93,7 @@ class PatientController extends Controller
 	public function show(Patient $patient)
 	{
 		// $consultation = Consultation::where('patient_id', $patient->id)->first();
-		$consultation = 'null';
+		$consultation = null;
 		if ($consultation) {
 			$data = [
 				'patient' => $patient,
