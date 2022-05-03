@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Doctor;
 use App\Models\Patient;
 use App\Models\Consultation;
 use Illuminate\Http\Request;
@@ -26,7 +27,9 @@ class ConsultationController extends Controller
 	{
 		$patient = Patient::find(request()->patient) ?? null;
 		$data = [
-			'patient' => $patient
+			'patient' => $patient,
+			'doctors' => Doctor::orderBy('name_kh', 'asc')->get(),
+			'payment_types' => getParentDataSelection('payment_type')
 		];
 		return view('consultation.create', $data);
 	}

@@ -360,6 +360,14 @@
 					$(this).closest('.service-category').find('.chb_all').prop('checked', false);
 				}
 			});
+
+			$('.data_parent').change(function (){
+				if ($(this).is(':checked')) {
+					$('[data-parent="'+ $(this).attr('id') +'"]').removeAttr('disabled');
+				} else {
+					$('[data-parent="'+ $(this).attr('id') +'"]').attr('disabled', 'disabled');
+				}
+			});
 		</script>
 	</x-slot>
 
@@ -371,22 +379,33 @@
 			<tr>
 				<td width="20%" class="text-right">Patient <small class='required'>*</small></td>
 				<td width="30%">
-					<x-bss-form.select2
-						name="patient"
-						data-url="{{ route('patient.getSelect2') }}"
-						data-placeholder="---- None ----"
-						required
-					>
-						@if ($patient)
+					@if ($patient)
+						<x-bss-form.select
+							name="patient"
+							:select2="false"
+							readonly
+							required
+						>
 							<option value="{{ $patient->id }}" selected>{{ $patient->name_kh }}</option>
-						@endif
-					</x-form.select2>
+						</x-form.select2>
+					@else
+						<x-bss-form.select2
+							name="patient"
+							data-url="{{ route('patient.getSelect2') }}"
+							data-placeholder="---- None ----"
+							required
+						>
+						
+						</x-form.select2>
+					@endif
 				</td>
 				<td width="20%" class="text-right">Payment Type</td>
 				<td>
 					<x-bss-form.select name="payment_type">
 						<option value="">Select payment type</option>
-						<option value="Cash">Cash</option>
+						@foreach ($payment_types as $id => $payment_type)
+							<option value="{{ $id }}">{{ $payment_type }}</option>
+						@endforeach
 					</x-bss-form.select>
 				</td>
 			</tr>
@@ -394,10 +413,9 @@
 				<td class="text-right">Doctor <small class='required'>*</small></td>
 				<td>
 					<x-bss-form.select name="doctor">
-						<option value="1">Krouk Puthea</option>
-						{{-- @foreach ($doctors as $doctor)
-							<option value="{{ $doctor->id }}">{{ $doctor->name }}</option>
-						@endforeach --}}
+						@foreach ($doctors as $doctor)
+							<option value="{{ $doctor->id }}">{{ $doctor->name_kh }}</option>
+						@endforeach
 					</x-bss-form.select>
 				</td>
 				<td class="text-right">Evaluate at <small class='required'>*</small></td>
@@ -443,7 +461,7 @@
 						<td>Systolic (mmHg)</td>
 						<td>
 							<div class="input-group">
-								<input type="text" name="systolic" class="form-control tw-border-r-0" />
+								<input type="text" name="vital_sign_systolic" class="form-control tw-border-r-0" />
 								<div class="input-group-prepend">
 									<span class="input-group-text bg-white tw-border-l-0">
 										mmHg
@@ -454,7 +472,7 @@
 						<td>Diastolic (mmHg)</td>
 						<td>
 							<div class="input-group">
-								<input type="text" name="diastolic" class="form-control tw-border-r-0" />
+								<input type="text" name="vital_sign_diastolic" class="form-control tw-border-r-0" />
 								<div class="input-group-prepend">
 									<span class="input-group-text bg-white tw-border-l-0">
 										mmHg
@@ -467,7 +485,7 @@
 						<td>Pulse (/mn)</td>
 						<td>
 							<div class="input-group">
-								<input type="text" name="pulse" class="form-control tw-border-r-0" />
+								<input type="text" name="vital_sign_pulse" class="form-control tw-border-r-0" />
 								<div class="input-group-prepend">
 									<span class="input-group-text bg-white tw-border-l-0">
 										/mn
@@ -478,7 +496,7 @@
 						<td>Breath (/mn)</td>
 						<td>
 							<div class="input-group">
-								<input type="text" name="breath" class="form-control tw-border-r-0" />
+								<input type="text" name="vital_sign_breath" class="form-control tw-border-r-0" />
 								<div class="input-group-prepend">
 									<span class="input-group-text bg-white tw-border-l-0">
 										/mn
@@ -491,7 +509,7 @@
 						<td>Temperature (&deg;C)</td>
 						<td>
 							<div class="input-group">
-								<input type="text" name="temperature" class="form-control tw-border-r-0" />
+								<input type="text" name="vital_sign_temperature" class="form-control tw-border-r-0" />
 								<div class="input-group-prepend">
 									<span class="input-group-text bg-white tw-border-l-0">
 										&deg;C
@@ -502,7 +520,7 @@
 						<td>O2sat (%)</td>
 						<td>
 							<div class="input-group">
-								<input type="text" name="o2sat" class="form-control tw-border-r-0" />
+								<input type="text" name="vital_sign_o2sat" class="form-control tw-border-r-0" />
 								<div class="input-group-prepend">
 									<span class="input-group-text bg-white tw-border-l-0">
 										%
@@ -515,7 +533,7 @@
 						<td>Height (cm)</td>
 						<td>
 							<div class="input-group">
-								<input type="text" name="height" class="form-control tw-border-r-0" />
+								<input type="text" name="vital_sign_height" class="form-control tw-border-r-0" />
 								<div class="input-group-prepend">
 									<span class="input-group-text bg-white tw-border-l-0">
 										cm
@@ -526,7 +544,7 @@
 						<td>Weight (kg)</td>
 						<td>
 							<div class="input-group">
-								<input type="text" name="weight" class="form-control tw-border-r-0" />
+								<input type="text" name="vital_sign_weight" class="form-control tw-border-r-0" />
 								<div class="input-group-prepend">
 									<span class="input-group-text bg-white tw-border-l-0">
 										%
@@ -539,7 +557,7 @@
 						<td>Glucose (mg/dl)</td>
 						<td>
 							<div class="input-group">
-								<input type="text" name="glucose" class="form-control tw-border-r-0" />
+								<input type="text" name="vital_sign_glucose" class="form-control tw-border-r-0" />
 								<div class="input-group-prepend">
 									<span class="input-group-text bg-white tw-border-l-0">
 										mg/dl
@@ -549,112 +567,20 @@
 						</td>
 						<td>Chief Complain</td>
 						<td>
-							<input type="text" name="chief_complain" class="form-control" />
+							<input type="text" name="vital_sign_chief_complain" class="form-control" />
 						</td>
 					</tr>
 					<tr>
 						<td>History of present illness</td>
 						<td>
-							<input type="text" name="history_of_illness" class="form-control" />
+							<input type="text" name="vital_sign_history_of_illness" class="form-control" />
 						</td>
 						<td>Current Medication</td>
 						<td>
-							<input type="text" name="current_medication" class="form-control" />
+							<input type="text" name="vital_sign_current_medication" class="form-control" />
 						</td>
 					</tr>
 				</table>
-				{{-- <div class="row">
-					<div class="col-sm-6">
-						<x-form.input
-							name="systolic"
-							inputGroup="true"
-							append="mmHg"
-							label="Systolic (mmHg)"
-						/>
-					</div>
-					<div class="col-sm-6">
-						<x-form.input
-							name="diastolic"
-							inputGroup="true"
-							append="mmHg"
-							label="Diastolic (mmHg)"
-						/>
-					</div>
-					<div class="col-sm-6">
-						<x-form.input
-							name="pulse"
-							inputGroup="true"
-							append="/mn"
-							label="Pulse (/mn)"
-						/>
-					</div>
-					<div class="col-sm-6">
-						<x-form.input
-							name="breath"
-							inputGroup="true"
-							append="/mn"
-							label="Breath (/mn)"
-						/>
-					</div>
-					<div class="col-sm-6">
-						<x-form.input
-							name="temperature"
-							inputGroup="true"
-							append="&deg;C"
-							label="Temperature (&deg;C)"
-						/>
-					</div>
-					<div class="col-sm-6">
-						<x-form.input
-							name="o2sat"
-							inputGroup="true"
-							append="%"
-							label="O2sat (%)"
-						/>
-					</div>
-					<div class="col-sm-6">
-						<x-form.input
-							name="height"
-							inputGroup="true"
-							append="cm"
-							label="Height (cm)"
-						/>
-					</div>
-					<div class="col-sm-6">
-						<x-form.input
-							name="weight"
-							inputGroup="true"
-							append="kg"
-							label="Weight (kg)"
-						/>
-					</div>
-					<div class="col-sm-6">
-						<x-form.input
-							name="glucose"
-							inputGroup="true"
-							append="mg/dl"
-							label="Glucose (mg/dl)"
-						/>
-					</div>
-					<div class="col-sm-6">
-						<x-form.input
-							name="chief_complain"
-							label="Chief Complain"
-						/>
-					</div>
-					<div class="col-sm-6">
-						<x-form.input
-							name="history_of_illness"
-							label="History of present illness"
-						/>
-					</div>
-					<div class="col-sm-6">
-						<x-form.input
-							name="current_medication"
-							label="Current Medication"
-						/>
-					</div>
-				</div> --}}
 			</div>
 			<div class="tab-pane" id="past-medical-record" aria-labelledby="past-medical-record-tab" role="tabpanel">
 				<table class="table-form striped">
@@ -662,29 +588,43 @@
 					<tr>
 						<td rowspan="3" class="text-right">Vaccination</td>
 						<td>
-							<x-form.checkbox name='bgc_hepb' label="BCG/HepB" />
+							<div class="tw-mb-1">
+								<x-form.checkbox name='pmr_bgc_hepb' label="BCG/HepB" />
+							</div>
 						</td>
 						<td>
-							<x-form.checkbox name='opv_dpt_depb_hib1' label="OPV+DPT+HepB-Hib1" />
+							<div class="tw-mb-1">
+								<x-form.checkbox name='pmr_opv_dpt_depb_hib1' label="OPV+DPT+HepB-Hib1" />
+							</div>
 						</td>
 						<td>
-							<x-form.checkbox name='opv_dpt_depb_hib2' label="OPV+DPT+HepB-Hib2" />
-						</td>
-					</tr>
-					<tr>
-						<td>
-							<x-form.checkbox name='opv_dpt_depb_hib3' label="OPV+DPT+HepB-Hib3" />
-						</td>
-						<td>
-							<x-form.checkbox name='measles_jdtofrech' label="Measles+JDToFrench(juliandaycount)" />
-						</td>
-						<td>
-							<x-form.checkbox name='tetanus' label="Tetanus" />
+							<div class="tw-mb-1">
+								<x-form.checkbox name='pmr_opv_dpt_depb_hib2' label="OPV+DPT+HepB-Hib2" />
+							</div>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<x-form.checkbox name='none' label="None" />
+							<div class="tw-mb-1">
+								<x-form.checkbox name='pmr_opv_dpt_depb_hib3' label="OPV+DPT+HepB-Hib3" />
+							</div>
+						</td>
+						<td>
+							<div class="tw-mb-1">
+								<x-form.checkbox name='pmr_measles_jdtofrech' label="Measles+JDToFrench(juliandaycount)" />
+							</div>
+						</td>
+						<td>
+							<div class="tw-mb-1">
+								<x-form.checkbox name='pmr_tetanus' label="Tetanus" />
+							</div>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div class="tw-mb-1">
+								<x-form.checkbox name='pmr_none' label="None" />
+							</div>
 						</td>
 						<td colspan="2"></td>
 					</tr>
@@ -692,13 +632,19 @@
 					{{-- Over Blood Pressure --}}
 					<tr>
 						<td>
-							<x-form.checkbox name='over_blood_pressure' label="Over blood pressure" />
+							<div class="tw-mb-1">
+								<x-form.checkbox name='pmr_over_blood_pressure' label="Over blood pressure" />
+							</div>
 						</td>
 						<td>
-							<x-form.checkbox name='diabet' label="Diabet" />
+							<div class="tw-mb-1">
+								<x-form.checkbox name='pmr_diabet' label="Diabet" />
+							</div>
 						</td>
 						<td>
-							<x-form.checkbox name='tuberculosis' label="Tuberculosis" />
+							<div class="tw-mb-1">
+								<x-form.checkbox name='pmr_tuberculosis' label="Tuberculosis" />
+							</div>
 						</td>
 						<td></td>
 					</tr>
@@ -706,34 +652,38 @@
 					{{-- Cardio Vascular --}}
 					<tr>
 						<td class="text-right">
-							<x-form.checkbox name='cardio_vascular' label="Cardio Vascular" />
+							<div class="tw-mb-1">
+								<x-form.checkbox name='pmr_cardio_vascular' class="data_parent" label="Cardio Vascular" />
+							</div>
 						</td>
 						<td>
 							<div class="tw-mb-2">
-								<x-form.checkbox name='coronary_disease' label="Coronary Disease" />
+								<x-form.checkbox name='pmr_cardio_vascular_coronary_disease' data-parent="pmr_cardio_vascular" label="Coronary Disease" disabled/>
 							</div>
 							<div class="tw-mb-2">
-								<x-form.checkbox name='myocardio_disease' label="Myocardio Disease" />
+								<x-form.checkbox name='pmr_cardio_vascular_myocardio_disease' data-parent="pmr_cardio_vascular" label="Myocardio Disease" disabled/>
 							</div>
-							<div>
-								<x-form.checkbox name='valvulopathies' label="Valvulopathies" />
+							<div class="tw-mb-1">
+								<x-form.checkbox name='pmr_cardio_vascular_valvulopathies' data-parent="pmr_cardio_vascular" label="Valvulopathies" disabled/>
 							</div>
 						</td>
 						<td class="text-right">
-							<x-form.checkbox name='drugs' label="Drugs" />
+							<div class="tw-mb-1">
+								<x-form.checkbox name='pmr_drugs' class="data_parent" label="Drugs" />
+							</div>
 						</td>
 						<td>
 							<div class="tw-mb-2">
-								<x-form.checkbox name='amphetamin' label="Amphetamin" />
+								<x-form.checkbox name='pmr_drug_amphetamin' data-parent="pmr_drugs" label="Amphetamin" disabled />
 							</div>
 							<div class="tw-mb-2">
-								<x-form.checkbox name='methamphetamine' label="Methamphetamine" />
+								<x-form.checkbox name='pmr_drug_methamphetamine' data-parent="pmr_drugs" label="Methamphetamine" disabled />
 							</div>
 							<div class="tw-mb-2">
-								<x-form.checkbox name='morphin' label="Morphin" />
+								<x-form.checkbox name='pmr_drug_morphin' data-parent="pmr_drugs" label="Morphin" disabled />
 							</div>
-							<div>
-								<x-form.checkbox name='other' label="Other" />
+							<div class="tw-mb-1">
+								<x-form.checkbox name='pmr_drug_other' data-parent="pmr_drugs" label="Other" disabled />
 							</div>
 						</td>
 					</tr>
@@ -741,25 +691,25 @@
 					{{-- Drink --}}
 					<tr>
 						<td rowspan="3">
-							<x-form.checkbox name='drinking' label="Drinking" />
+							<x-form.checkbox name='pmr_drinking' class="data_parent" label="Drinking" />
 						</td>
 						<td class="text-right">How long?</td>
 						<td>
-							<x-bss-form.input name='drinking_how_long' />
+							<x-bss-form.input name='pmr_drinking_how_long' data-parent="pmr_drinking" disabled />
 						</td>
 						<td></td>
 					</tr>
 					<tr>
 						<td class="text-right">What kind?</td>
 						<td>
-							<x-bss-form.input name='drinking_what_kind' />
+							<x-bss-form.input name='pmr_drinking_what_kind' data-parent="pmr_drinking" disabled />
 						</td>
 						<td></td>
 					</tr>
 					<tr>
 						<td class="text-right">How many?</td>
 						<td>
-							<x-bss-form.input name='drinking_how_many' />
+							<x-bss-form.input name="pmr_drinking_how_many" data-parent="pmr_drinking" disabled />
 						</td>
 						<td></td>
 					</tr>
@@ -767,18 +717,18 @@
 					{{-- Operation --}}
 					<tr>
 						<td rowspan="2">
-							<x-form.checkbox name='operation' label="Operation" />
+							<x-form.checkbox name="pmr_operation" class="data_parent" label="Operation" />
 						</td>
 						<td class="text-right">At age</td>
 						<td>
-							<x-bss-form.input name='operation_at_age' />
+							<x-bss-form.input name="pmr_operation_at_age" data-parent="pmr_operation" disabled />
 						</td>
 						<td></td>
 					</tr>
 					<tr>
 						<td class="text-right">What kind?</td>
 						<td>
-							<x-bss-form.input name='operation_what_kind' />
+							<x-bss-form.input name="pmr_operation_what_kind" data-parent="pmr_operation" disabled />
 						</td>
 						<td></td>
 					</tr>
@@ -786,11 +736,13 @@
 					{{-- Smoking --}}
 					<tr>
 						<td>
-							<x-form.checkbox name='smoking' label="Smoking" />
+							<div class="tw-mb-1">
+								<x-form.checkbox name="pmr_smoking" class="data_parent" label="Smoking" />
+							</div>
 						</td>
 						<td class="text-right">How many?</td>
 						<td>
-							<x-bss-form.input name='smoking_how_many' />
+							<x-bss-form.input name="pmr_smoking_how_many" data-parent="pmr_smoking" disabled />
 						</td>
 						<td></td>
 					</tr>
@@ -798,16 +750,16 @@
 					{{-- Other --}}
 					<tr>
 						<td>
-							<x-form.checkbox name='other' label="Other" />
+							<x-form.checkbox name="pmr_other" class="data_parent" label="Other" />
 						</td>
 						<td>
-							<x-bss-form.textarea name="other" placeholder="If others, please tell more."></x-bss-form.textarea>
+							<x-bss-form.textarea name="pmr_other_input" placeholder="If others, please tell more." data-parent="pmr_other" disabled></x-bss-form.textarea>
 						</td>
 						<td>
-							<x-form.checkbox name='medication' label="Medication" />
+							<x-form.checkbox name="pmr_medication" class="data_parent" label="Medication" />
 						</td>
 						<td>
-							<x-bss-form.textarea name="medication_reaction" placeholder="Please list the medicals."></x-bss-form.textarea>
+							<x-bss-form.textarea name="pmr_medication_input" placeholder="Please list the medicals." data-parent="pmr_medication" disabled></x-bss-form.textarea>
 						</td>
 					</tr>
 	
@@ -815,11 +767,11 @@
 					<tr>
 						<td class="text-right">Childhood & Development History</td>
 						<td>
-							<x-bss-form.textarea name="childhood_development_history"></x-bss-form.textarea>
+							<x-bss-form.textarea name="pmr_childhood_development_history"></x-bss-form.textarea>
 						</td>
 						<td class="text-right">Mental Illness History</td>
 						<td>
-							<x-bss-form.textarea name="mental_illess_history"></x-bss-form.textarea>
+							<x-bss-form.textarea name="pmr_mental_illess_history"></x-bss-form.textarea>
 						</td>
 					</tr>
 	
@@ -827,7 +779,7 @@
 					<tr>
 						<td class="text-right">Family History</td>
 						<td>
-							<x-bss-form.textarea name="childhood_development_history"></x-bss-form.textarea>
+							<x-bss-form.textarea name="pmr_childhood_development_history"></x-bss-form.textarea>
 						</td>
 						<td></td>
 						<td></td>
@@ -842,16 +794,24 @@
 					</tr>
 					<tr>
 						<td>
-							<x-form.checkbox name='examination_good' label="Good" />
+							<div class="tw-mb-1">
+								<x-form.checkbox name='examination_good' label="Good" />
+							</div>
 						</td>
 						<td>
-							<x-form.checkbox name='examination_not_good' label="Not Good" />
+							<div class="tw-mb-1">
+								<x-form.checkbox name='examination_not_good' label="Not Good" />
+							</div>
 						</td>
 						<td>
-							<x-form.checkbox name='examination_serious' label="Not Good" />
+							<div class="tw-mb-1">
+								<x-form.checkbox name='examination_serious' label="Not Good" />
+							</div>
 						</td>
 						<td>
-							<x-form.checkbox name='examination_too_serious' label="Not Good" />
+							<div class="tw-mb-1">
+								<x-form.checkbox name='examination_too_serious' label="Not Good" />
+							</div>
 						</td>
 					</tr>
 	
@@ -860,16 +820,24 @@
 					</tr>
 					<tr>
 						<td>
-							<x-form.checkbox name='examination_consciousness' label="Consciousness" />
+							<div class="tw-mb-1">
+								<x-form.checkbox name='examination_consciousness' label="Consciousness" />
+							</div>
 						</td>
 						<td>
-							<x-form.checkbox name='examination_fantasy' label="Fantasy" />
+							<div class="tw-mb-1">
+								<x-form.checkbox name='examination_fantasy' label="Fantasy" />
+							</div>
 						</td>
 						<td>
-							<x-form.checkbox name='examination_unconscious' label="Unconscious" />
+							<div class="tw-mb-1">
+								<x-form.checkbox name='examination_unconscious' label="Unconscious" />
+							</div>
 						</td>
 						<td>
-							<x-form.checkbox name='examination_seizures' label="Seizures" />
+							<div class="tw-mb-1">
+								<x-form.checkbox name='examination_seizures' label="Seizures" />
+							</div>
 						</td>
 					</tr>
 	
