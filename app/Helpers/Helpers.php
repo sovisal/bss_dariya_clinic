@@ -178,8 +178,8 @@ function get4LevelAdressSelector (...$param) {
 }
 
 function get4LevelAdressSelectorByID ($id, ...$param) {
-	$address = Address_linkable::findOrFail($id);
-	if ($address) {
+	if (Address_linkable::where('id', $id)->count() == 1) {
+		$address = Address_linkable::findOrFail($id);
 		$param[0] = $address->village_code ?: $address->commune_code ?: $address->district_code ?: $address->province_code ?: 'xx';
 	}
 	return get4LevelAdressSelector(...$param);
