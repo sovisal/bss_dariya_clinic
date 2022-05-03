@@ -158,13 +158,14 @@
 					</td>
 					<td colspan="2"></td>
 				</tr>
-				<?php $_4level_level = get4LevelAdressSelector(); ?>
+				<?php 
+					$_4level_level = get4LevelAdressSelector('xx', 'option');
+				?>
 				<tr>
 					<td class="text-right">Province</td>
 					<td>
 						<x-bss-form.select name="pt_province_id">
-							<option value="">---- None ----</option>
-							{!! str_replace("</select>","", str_replace("<select __ATTRIBUTES__>","",$_4level_level[0])) !!}
+							{!! $_4level_level[0] !!}
 						</x-bss-form.select>
 					</td>
 					<td class="text-right">District</td>

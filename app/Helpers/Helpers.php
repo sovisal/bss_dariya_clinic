@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Setting;
+use App\Models\Address_linkable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -170,10 +171,18 @@ function getParentDataSelection(...$param) {
 }
 
 // 4 Level address selector
-function get4LevelAdressSelector ($type = 'create') {
+function get4LevelAdressSelector (...$param) {
 	$_4level_address = new \App\Http\Controllers\FourLevelAddressController();
-	$_4level_level = $_4level_address->BSSFullAddress('null', 'selection');
+	$_4level_level = $_4level_address->BSSFullAddress(...$param);
 	return $_4level_level;
+}
+
+function get4LevelAdressSelectorByID ($id, ...$param) {
+	$address = Address_linkable::findOrFail($id);
+	if ($address) {
+		$param[0] = $address->village_code ?: $address->commune_code ?: $address->district_code ?: $address->province_code ?: 'xx';
+	}
+	return get4LevelAdressSelector(...$param);
 }
 
 function update4LevelAddress ($request) {
