@@ -109,10 +109,7 @@ class PatientController extends Controller
 	 */
 	public function edit(Patient $patient)
 	{
-		$_4level_address = new \App\Http\Controllers\FourLevelAddressController();
-		$_4level_level = $_4level_address->BSSFullAddress('null', 'selection');
 		$data = [
-			'_4level_level' => $_4level_level,
 			'patient' => $patient,
 			'blood_type' => getParentDataSelection('blood_type'),
 			'nationality' => getParentDataSelection('nationality'),

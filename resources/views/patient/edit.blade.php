@@ -157,27 +157,34 @@
 					</td>
 					<td colspan="2"></td>
 				</tr>
+				<?php 
+					$_4level_level = get4LevelAdressSelectorByID($patient->address_id, ...['xx', 'option']); ?>
 				<tr>
 					<td class="text-right">Province</td>
 					<td>
 						<x-bss-form.select name="pt_province_id">
-							<option value="">---- None ----</option>
-							{!! str_replace("</select>","", str_replace("<select __ATTRIBUTES__>","",$_4level_level[0])) !!}
+							{!! $_4level_level[0] !!}
 						</x-bss-form.select>
 					</td>
 					<td class="text-right">District</td>
 					<td>
-						<x-bss-form.select name="pt_district_id" />
+						<x-bss-form.select name="pt_district_id">
+							{!! $_4level_level[1] !!}
+						</x-bss-form.select>
 					</td>
 				</tr>
 				<tr>
 					<td class="text-right">Commune</td>
 					<td>
-						<x-bss-form.select name="pt_commune_id" />
+						<x-bss-form.select name="pt_commune_id">
+							{!! $_4level_level[2] !!}
+						</x-bss-form.select>
 					</td>
 					<td class="text-right">Village</td>
 					<td>
-						<x-bss-form.select name="pt_village_id" />
+						<x-bss-form.select name="pt_village_id">
+							{!! $_4level_level[3] !!}
+						</x-bss-form.select>
 					</td>
 				</tr>
 			</table>
