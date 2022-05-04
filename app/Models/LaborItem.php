@@ -10,7 +10,7 @@ class LaborItem extends Model
     use HasFactory;
     protected $fillable = [
 		'name_en', 'name_kh',
-        'min_range', 'max_range', 'unit',
+        'min_range', 'max_range', 'unit', 'type',
         'status', 'index', 'other'
 	];
 }

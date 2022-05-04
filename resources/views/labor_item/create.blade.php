@@ -41,6 +41,17 @@
 					</td>
 				</tr>
 				<tr>
+					<td width="20%" class="text-right">Category <small class='required'>*</small></td>
+					<td>
+						<x-bss-form.select name="type" required>
+							<option>--------------</option>
+							@foreach ($type as $data)
+								<option value="{{ $data->id }}">{{ $data->name_en }}</option>
+							@endforeach
+						</x-bss-form.select>
+					</td>
+				</tr>
+				<tr>
 					<td width="20%" class="text-right">Index</td>
 					<td>
 						<x-bss-form.input name="index" value="9999"/>

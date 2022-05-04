@@ -11,6 +11,7 @@
 					<th class="text-right">Min</th>
 					<th>Max</th>
 					<th>Unit</th>
+					<th>Category</th>
 					<th>Index</th>
 					<th>Status</th>
 					<th>Action</th>
@@ -26,6 +27,7 @@
 					<td class="text-right">{{ $row->min_range }}</td>
 					<td>{{ $row->max_range }}</td>
 					<td class="text-center">{{ $row->unit }}</td>
+					<td>{{ $row->type_en }}</td>
 					<td class="text-center">{{ $row->index }}</td>
 					<td class="text-center">{{ $row->status }}</td>
 					<td class="text-center">

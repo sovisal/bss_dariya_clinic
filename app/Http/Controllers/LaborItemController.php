@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\LaborItem;
+use App\Models\LaborType;
 use App\Http\Requests\StoreLaborItemRequest;
 use App\Http\Requests\UpdateLaborItemRequest;
 use Illuminate\Http\Request;
@@ -16,7 +17,11 @@ class LaborItemController extends Controller
      */
     public function index()
     {
-        $this->data['rows'] = LaborItem::where('status', 1)->orderBy('index', 'asc')->get();
+        $this->data['rows'] = LaborItem::where('labor_items.status', 1)
+                                ->select(['labor_items.*', 'labor_types.name_en as type_en'])
+                                ->leftJoin('labor_types', 'labor_types.id', '=', 'labor_items.type')
+                                ->orderBy('labor_items.index', 'asc')
+                                ->get();
         return view('labor_item.index', $this->data);
     }
 
@@ -27,7 +32,8 @@ class LaborItemController extends Controller
      */
     public function create()
     {
-        return view('labor_item.create');
+        $data['type'] = LaborType::where('status', 1)->orderBy('index', 'asc')->get();
+        return view('labor_item.create', $data);
     }
 
     /**
@@ -45,6 +51,7 @@ class LaborItemController extends Controller
             'min_range' => $request->min_range,
             'max_range' => $request->max_range,
             'unit' => $request->unit,
+            'type' => $request->type,
             'index' => $request->index ?: 999,
             'other' => $request->other,
             'status' => 1,
@@ -72,7 +79,7 @@ class LaborItemController extends Controller
      */
     public function edit(LaborItem $laborItem)
     {
-        $data = [];
+        $data['type'] = LaborType::where('status', 1)->orderBy('index', 'asc')->get();
         $data['row'] = $laborItem;
         return view('labor_item.edit', $data);
     }

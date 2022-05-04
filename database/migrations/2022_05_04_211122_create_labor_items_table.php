@@ -20,6 +20,7 @@ class CreateLaborItemsTable extends Migration
             $table->string('min_range')->nullable();
             $table->string('max_range')->nullable();
             $table->string('unit')->nullable();
+            $table->unsignedBigInteger('type')->default(0);
             $table->integer('status')->default(1);
             $table->integer('index')->default(9999);
             $table->text('other')->nullable();
