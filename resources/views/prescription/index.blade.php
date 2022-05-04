@@ -1,18 +1,19 @@
 <x-app-layout>
-	<x-slot name="header">
-		<x-form.button href="{{ route('prescription.create') }}" icon="bx bx-plus" label="Create" />	
-	</x-slot>
 	<x-card :foot="false"  :head="false">		
 		<x-table class="table-hover table-bordered" id="datatables">
 			<x-slot name="thead">
 				<tr>
 					<th>Code</th>
-					<th>Name</th>
+					<th>Patient</th>
+					<th>Date</th>
+					<th>QTY</th>
+					<th>U/D</th>
+					<th>NoD</th>
+					<th>Total</th>
+					<th>Unit</th>
 					<th>Usage</th>
-					<th>Price</th>
-					<th>Modify at</th>
-					<th>Modify by</th>
-					<th>Action</th>
+					<th>Usage Time</th>
+					<th>Note</th>
 				</tr>
 			</x-slot>
 			@foreach($prescriptions as $prescription)

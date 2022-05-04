@@ -48,6 +48,14 @@ class AppLayout extends Component
 				'can' => 'ViewAnyPrescription',
 				'url' => route('prescription.index'),
 				'label' => 'Prescription',
+				'sub' => [
+					'prescription' => [
+						'can' => 'ViewAnyPrescription',
+						'url' => route('prescription.index'),
+						'name' => ['index', 'create', 'edit', 'show'],
+						'label' => 'Prescription List',
+					],
+				],
 			],
 
 			'para_clinic' => [
@@ -89,10 +97,10 @@ class AppLayout extends Component
 						'name' => ['edit'],
 						'label' => 'Setting',
 					],
-					'labor_template' => [
+					'labor-item' => [
 						'can' => 'UpdateSetting',
-						'url' => route('setting.edit'),
-						'name' => ['edit'],
+						'url' => route('setting.labor-item.index'),
+						'name' => ['index','create', 'edit'],
 						'label' => 'Labor Template',
 					],
 					'echo_template' => [
@@ -117,7 +125,7 @@ class AppLayout extends Component
 						'can' => 'UpdateSetting',
 						'url' => route('setting.data-parent.index'),
 						'name' => ['index','create', 'edit'],
-						'label' => 'Data',
+						'label' => 'Data Selection',
 					],
 					'doctor' => [
 						'can' => 'ViewAnyDoctor',
