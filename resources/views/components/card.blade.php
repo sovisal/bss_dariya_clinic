@@ -34,7 +34,7 @@
 	</div>
 	
 	@if ($foot)
-		<div class="card-footer text-center {{ $footerClass }}">
+		<div class="card-footer text-right {{ $footerClass }}">
 			{!! $footer ?? '' !!}
 		</div>
 	@endif

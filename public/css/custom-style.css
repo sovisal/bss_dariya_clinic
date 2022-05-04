@@ -655,7 +655,7 @@ textarea.my-editor + .cke_chrome.cke_focus{
 	}
 	.has-icon-right .form-control {
 		padding-right: 2rem;
-		padding-left: 1.6rem;
+		/* padding-left: 1.6rem; */
 	}
 	.has-icon-left .form-control {
 		padding-right: 1.6rem;

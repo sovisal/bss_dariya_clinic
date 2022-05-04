@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Doctor;
 use App\Models\Patient;
 use App\Models\Consultation;
 use Illuminate\Http\Request;
@@ -25,8 +26,15 @@ class ConsultationController extends Controller
 	public function create(Consultation $consultation)
 	{
 		$patient = Patient::find(request()->patient) ?? null;
+		if ($patient) {
+			session(['consultation_cancel_route' => 'patient.index']);
+		}else{
+			session(['consultation_cancel_route' => 'patient.consultation.index']);
+		}
 		$data = [
-			'patient' => $patient
+			'patient' => $patient,
+			'doctors' => Doctor::orderBy('name_kh', 'asc')->get(),
+			'payment_types' => getParentDataSelection('payment_type')
 		];
 		return view('consultation.create', $data);
 	}
@@ -36,7 +44,12 @@ class ConsultationController extends Controller
 	 */
 	public function store(Request $request)
 	{
-		dd($request);
+		if ($request->submit_option == 'cancel') {
+			return redirect()->route(session('consultation_cancel_route'));
+		} else {
+			dd($request->all());
+		}
+		
 
 		return redirect()->route('consultation.index')->with('success', __('alert.message.success.crud.create'));
 	}

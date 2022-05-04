@@ -4,10 +4,21 @@
 	</x-slot>
 	<x-card :foot="false"  :head="false">
 		<br><br>
-		@foreach(['gender' => 'Gender', 'marital_status' => 'Marital Status', 'blood_type' => 'Blood Type', 'nationality' => 'Nationality', 'enterprise' => 'Enterprise',
-			'payment_type' => 'Payment Type', 'evalutaion_category' => 'Evalutaion Category', 'indication_disease' => 'Indication/Disease',
-			'comsumption' => 'Comsumption', 'time_usage' => 'Usage', 
-		] as $key => $val)
+		@php
+			$types = [
+						'gender' => 'Gender',
+						'marital_status' => 'Marital Status',
+						'blood_type' => 'Blood Type',
+						'nationality' => 'Nationality',
+						'enterprise' => 'Enterprise',
+						'payment_type' => 'Payment Type',
+						'evalutaion_category' => 'Evalutaion Category',
+						'indication_disease' => 'Indication/Disease',
+						'comsumption' => 'Comsumption',
+						'time_usage' => 'Usage',
+					] ;
+		@endphp
+		@foreach($types as $key => $val)
 			<x-form.button href="?parent={{ $key }}" label="{{ $val }}" class="{{ $parent == $key ? 'active' : '' }}" color="{{ $parent == $key ? 'secondary' : 'primary' }}" />
 		@endforeach
 		<x-table class="table-hover table-bordered" id="datatables" data-table="patients">
