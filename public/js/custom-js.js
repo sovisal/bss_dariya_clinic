@@ -647,8 +647,11 @@ function bss_openPrintWindow(url, name) {
     var sched = setInterval(printAndClose, 2000);
 };
 
+
 // prepare form AJAX submission
 $(document).ready(function () {
+
+
     $(document).on('click', '.submitFormAjx', function (e) {
         e.preventDefault(); // prevent form native submission
         let _form = $(this).parents('form');

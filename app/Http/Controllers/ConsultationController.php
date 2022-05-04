@@ -26,6 +26,11 @@ class ConsultationController extends Controller
 	public function create(Consultation $consultation)
 	{
 		$patient = Patient::find(request()->patient) ?? null;
+		if ($patient) {
+			session(['consultation_cancel_route' => 'patient.index']);
+		}else{
+			session(['consultation_cancel_route' => 'patient.consultation.index']);
+		}
 		$data = [
 			'patient' => $patient,
 			'doctors' => Doctor::orderBy('name_kh', 'asc')->get(),
@@ -39,7 +44,12 @@ class ConsultationController extends Controller
 	 */
 	public function store(Request $request)
 	{
-		dd($request);
+		if ($request->submit_option == 'cancel') {
+			return redirect()->route(session('consultation_cancel_route'));
+		} else {
+			dd($request->all());
+		}
+		
 
 		return redirect()->route('consultation.index')->with('success', __('alert.message.success.crud.create'));
 	}
