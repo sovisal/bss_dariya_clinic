@@ -9,7 +9,7 @@ class EchoType extends Model
 {
     use HasFactory;
     protected $fillable = [
-		'name_en', 'name_kh', 'default_form',
+		'name_en', 'name_kh', 'default_form', 'attribite',
         'status', 'index', 'other'
 	];
 }

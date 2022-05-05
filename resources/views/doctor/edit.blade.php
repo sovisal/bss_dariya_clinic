@@ -47,7 +47,7 @@
 				<tr>
 					<td class="text-right">Address</td>
 					<td colspan="3">
-						<x-bss-form.input type="text" name="address">{{ old('address', $doctor->address) }}</x-bss-form.input>
+						<x-bss-form.input type="text" name="address" value="{{ old('address', $doctor->address) }}">{{ old('address', $doctor->address) }}</x-bss-form.input>
 					</td>
 				</tr>
 			</table>

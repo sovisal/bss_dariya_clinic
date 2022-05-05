@@ -196,3 +196,10 @@ function update4LevelAddress ($request) {
 function delete4LevelAddress($addres_id) {
 	return app('App\Http\Controllers\AddressLinkableController')->destroy($addres_id);
 }
+
+function append_array_to_obj (&$obj, $arr) {
+	foreach ($arr ?: [] as $index => $val) {
+		$obj->{$index} = $obj->{$index} ?: $val ?: '';
+	}
+	return $obj;
+} 

@@ -22,16 +22,11 @@
 						<x-bss-form.input name="name_kh" required/>
 					</td>
 				</tr>
+				@include('echo_type.extra_form.0')
 				<tr>
 					<td width="20%" class="text-right">Index</td>
 					<td>
 						<x-bss-form.input name="index" value="9999"/>
-					</td>
-				</tr>
-                <tr>
-					<td width="20%" class="text-right">Detail</td>
-					<td>
-                        <x-bss-form.textarea name="default_form" rows="20"> </x-bss-form.textarea>
 					</td>
 				</tr>
 			</table>

@@ -40,11 +40,15 @@ class EchoTypeController extends Controller
      */
     public function store(Request $request)
     {
+        // serialize all post into string
+        $serialize = array_except($request->all(), ['_method', '_token']);
+        $request['attribite'] = serialize($serialize);
+
         $dataParent = new EchoType();
         if ($dataParent->create([
             'name_en' => $request->name_en,
             'name_kh' => $request->name_kh,
-            'unit' => $request->unit,
+            'attribite' => $request->attribite,
             'index' => $request->index ?: 999,
             'default_form' => $request->default_form,
             'status' => 1,
@@ -72,6 +76,7 @@ class EchoTypeController extends Controller
      */
     public function edit(EchoType $echoType)
     {
+        append_array_to_obj($echoType, unserialize($echoType->attribite) ?: []);
         $data['row'] = $echoType;
         return view('echo_type.edit', $data);
     }
@@ -86,6 +91,11 @@ class EchoTypeController extends Controller
     public function update(Request $request, EchoType $echoType)
     {
         $request['status'] = 1;
+
+        // serialize all post into string
+        $serialize = array_except($request->all(), ['_method', '_token']);
+        $request['attribite'] = serialize($serialize);
+
         if ($echoType->update($request->all())) {
             return redirect()->route('setting.echo-type.index')->with('success', 'Data update success');
         }

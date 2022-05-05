@@ -22,18 +22,15 @@
 						<x-bss-form.input name="name_kh" :value="old('name_kh', $row->name_kh)" required/>
 					</td>
 				</tr>
+				@if (view()->exists('echo_type.extra_form.' . $row->id))
+					@include('echo_type.extra_form.' . $row->id)
+				@else	
+					@include('echo_type.extra_form.0')
+				@endif
 				<tr>
 					<td width="20%" class="text-right">Index</td>
 					<td>
-						<x-bss-form.input name="index" :value="old('index', $row->index)" value="9999"/>
-					</td>
-				</tr>
-                <tr>
-					<td width="20%" class="text-right">Detail</td>
-					<td>
-                        <x-bss-form.textarea name="default_form">
-							{{ old('other', $row->default_form) }}
-						</x-bss-form.textarea>
+						<x-bss-form.input name="index" :value="old('index', $row->index)"/>
 					</td>
 				</tr>
 			</table>
