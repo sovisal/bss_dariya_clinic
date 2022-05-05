@@ -103,10 +103,10 @@ class AppLayout extends Component
 						'name' => ['index','create', 'edit'],
 						'label' => 'Labor Template',
 					],
-					'echo_template' => [
+					'echo-type' => [
 						'can' => 'UpdateSetting',
-						'url' => route('setting.edit'),
-						'name' => ['edit'],
+						'url' => route('setting.echo-type.index'),
+						'name' => ['index','create', 'edit'],
 						'label' => 'Echo Template',
 					],
 					'ecg_template' => [
