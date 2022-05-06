@@ -1,8 +1,8 @@
 <x-app-layout>
 	<x-slot name="header">
-		<x-form.button href="{{ route('setting.echo-type.index') }}" color="danger" icon="bx bx-left-arrow-alt" label="Back" />
+		<x-form.button href="{{ route('setting.xray-type.index') }}" color="danger" icon="bx bx-left-arrow-alt" label="Back" />
 	</x-slot>
-	<form action="{{ route('setting.echo-type.update', $row) }}" method="POST" autocomplete="off" enctype="multipart/form-data">
+	<form action="{{ route('setting.xray-type.update', $row) }}" method="POST" autocomplete="off" enctype="multipart/form-data">
 		@method('PUT')
 		@csrf
 		<x-card bodyClass="pb-0">			
@@ -22,10 +22,10 @@
 						<x-bss-form.input name="name_kh" :value="old('name_kh', $row->name_kh)" required/>
 					</td>
 				</tr>
-				@if (view()->exists('echo_type.extra_form.' . $row->id))
-					@include('echo_type.extra_form.' . $row->id)
+				@if (view()->exists('xray_type.extra_form.' . $row->id))
+					@include('xray_type.extra_form.' . $row->id)
 				@else	
-					@include('echo_type.extra_form.0')
+					@include('xray_type.extra_form.0')
 				@endif
 				<tr>
 					<td width="20%" class="text-right">Index</td>

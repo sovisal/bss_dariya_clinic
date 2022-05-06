@@ -31,3 +31,4 @@ require __DIR__.'/setting-route.php';
 require __DIR__.'/data-parent-route.php';
 require __DIR__.'/labor-item-route.php';
 require __DIR__.'/echo-type-route.php';
+require __DIR__.'/xray-type-route.php';

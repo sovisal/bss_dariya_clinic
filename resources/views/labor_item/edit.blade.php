@@ -54,7 +54,7 @@
 				<tr>
 					<td width="20%" class="text-right">Index</td>
 					<td>
-						<x-bss-form.input name="index" :value="old('index', $row->index)"/>
+						<x-bss-form.input name="index" :value="old('index', $row->index)" type="number"/>
 					</td>
 				</tr>
                 <tr>

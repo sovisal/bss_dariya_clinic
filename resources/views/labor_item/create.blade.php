@@ -54,7 +54,7 @@
 				<tr>
 					<td width="20%" class="text-right">Index</td>
 					<td>
-						<x-bss-form.input name="index" value="9999"/>
+						<x-bss-form.input name="index" value="9999" type="number"/>
 					</td>
 				</tr>
                 <tr>
