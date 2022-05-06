@@ -109,9 +109,9 @@ class AppLayout extends Component
 						'name' => ['index','create', 'edit'],
 						'label' => 'Echo Template',
 					],
-					'ecg_template' => [
+					'ecg-type' => [
 						'can' => 'UpdateSetting',
-						'url' => route('setting.edit'),
+						'url' => route('setting.ecg-type.index'),
 						'name' => ['index','create', 'edit'],
 						'label' => 'ECG Template',
 					],
