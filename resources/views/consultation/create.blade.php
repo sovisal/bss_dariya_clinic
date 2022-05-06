@@ -444,7 +444,7 @@
 					<td width="30%">
 						@if ($patient)
 							<x-bss-form.select
-								name="patient"
+								name="patient_id"
 								:select2="false"
 								readonly
 								required
@@ -453,7 +453,7 @@
 							</x-form.select2>
 						@else
 							<x-bss-form.select2
-								name="patient"
+								name="patient_id"
 								data-url="{{ route('patient.getSelect2') }}"
 								data-placeholder="---- None ----"
 								required
@@ -475,7 +475,7 @@
 				<tr>
 					<td class="text-right">Doctor <small class='required'>*</small></td>
 					<td>
-						<x-bss-form.select name="doctor">
+						<x-bss-form.select name="doctor_id">
 							@foreach ($doctors as $doctor)
 								<option value="{{ $doctor->id }}">{{ $doctor->name_kh }}</option>
 							@endforeach
@@ -483,7 +483,7 @@
 					</td>
 					<td class="text-right">Evaluate at <small class='required'>*</small></td>
 					<td>
-						<x-bss-form.input name='evaluate_at' class="date-time-picker" hasIcon="right" icon="bx bx-calendar" value="{{ date('Y-m-d H:i:s') }}" />
+						<x-bss-form.input name='evaluated_at' class="date-time-picker" hasIcon="right" icon="bx bx-calendar" value="{{ date('Y-m-d H:i:s') }}" />
 					</td>
 				</tr>
 			</table>

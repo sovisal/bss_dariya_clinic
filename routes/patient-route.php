@@ -20,5 +20,7 @@ Route::middleware(['auth'])->prefix('patient')->name('patient.')->group(function
 		Route::get('/', [ConsultationController::class, 'index'])->name('consultation.index')->middleware('can:ViewAnyConsultation');
 		Route::get('/create', [ConsultationController::class, 'create'])->name('consultation.create')->middleware('can:CreateConsultation');
 		Route::post('/store', [ConsultationController::class, 'store'])->name('consultation.store')->middleware('can:CreateConsultation');
+		Route::get('/{consultation}/edit', [ConsultationController::class, 'edit'])->name('consultation.edit')->middleware('can:CreateConsultation');
+		Route::put('/{consultation}/update', [ConsultationController::class, 'update'])->name('consultation.update')->middleware('can:CreateConsultation');
 	});
 });

@@ -15,12 +15,10 @@ class CreateConsultationsTable extends Migration
 	{
 		Schema::create('consultations', function (Blueprint $table) {
 			$table->id();
-			$table->text('vital_sign');
-			$table->text('past_medical_record');
-			$table->text('examination');
-			$table->text('evaluation');
+			$table->text('json_data');
 			$table->string('payment_type')->nullable();
-			$table->datetime('evaluation_at');
+			$table->datetime('evaluated_at');
+			$table->string('status')->default('save');
 			$table->unsignedBigInteger('patient_id');
 			$table->unsignedBigInteger('doctor_id');
 			$table->unsignedBigInteger('created_by');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Patient;
+use App\Models\Consultation;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use App\Http\Requests\PatientRequest;
@@ -92,16 +93,15 @@ class PatientController extends Controller
 	 */
 	public function show(Patient $patient)
 	{
-		// $consultation = Consultation::where('patient_id', $patient->id)->first();
-		$consultation = null;
+		$consultation = Consultation::where('patient_id', $patient->id)->where('status', 'save')->first();
 		if ($consultation) {
-			$data = [
-				'patient' => $patient,
-			];
-			return view('patient.show', $data);
+			return redirect()->route('patient.consultation.edit', $consultation->id);
 		}
 
-		return redirect()->route('patient.consultation.create', ['patient' => $patient->id]);
+		$data = [
+			'patient' => $patient,
+		];
+		return view('patient.show', $data);
 	}
 
 	/**

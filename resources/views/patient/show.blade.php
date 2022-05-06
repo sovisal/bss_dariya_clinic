@@ -133,7 +133,7 @@
 				</table>
 			</div>
 			<div class="tab-pane active" id="visit" aria-labelledby="visit-tab" role="tabpanel">
-				<x-form.button href="{{ route('patient.consultation.create', $patient->id) }}" icon="bx bx-plus" label="New Follow up" />
+				<x-form.button href="{{ route('patient.consultation.create', ['patient' => $patient->id]) }}" icon="bx bx-plus" label="New Follow up" />
 				
 				<x-table class="mt-1 table-padding-sm">
 					<x-slot name="thead">
