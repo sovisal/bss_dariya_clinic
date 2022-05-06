@@ -1,8 +1,8 @@
 <x-app-layout>
 	<x-slot name="header">
-		<x-form.button href="{{ route('setting.echo-type.index') }}" color="danger" icon="bx bx-left-arrow-alt" label="Back" />
+		<x-form.button href="{{ route('setting.xray-type.index') }}" color="danger" icon="bx bx-left-arrow-alt" label="Back" />
 	</x-slot>
-	<form action="{{ route('setting.echo-type.store') }}" method="POST" autocomplete="off" enctype="multipart/form-data">
+	<form action="{{ route('setting.xray-type.store') }}" method="POST" autocomplete="off" enctype="multipart/form-data">
 		@method('PUT')
 		@csrf
 		<x-card bodyClass="pb-0">			
@@ -22,7 +22,7 @@
 						<x-bss-form.input name="name_kh" required/>
 					</td>
 				</tr>
-				@include('echo_type.extra_form.0')
+				@include('xray_type.extra_form.0')
 				<tr>
 					<td width="20%" class="text-right">Index</td>
 					<td>

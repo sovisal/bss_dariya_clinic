@@ -109,16 +109,16 @@ class AppLayout extends Component
 						'name' => ['index','create', 'edit'],
 						'label' => 'Echo Template',
 					],
-					'ecg_template' => [
+					'ecg-type' => [
 						'can' => 'UpdateSetting',
-						'url' => route('setting.edit'),
-						'name' => ['edit'],
+						'url' => route('setting.ecg-type.index'),
+						'name' => ['index','create', 'edit'],
 						'label' => 'ECG Template',
 					],
-					'xray_template' => [
+					'xray-type' => [
 						'can' => 'UpdateSetting',
-						'url' => route('setting.edit'),
-						'name' => ['edit'],
+						'url' => route('setting.xray-type.index'),
+						'name' => ['index','create', 'edit'],
 						'label' => 'Xray Template',
 					],
 					'data-parent' => [
