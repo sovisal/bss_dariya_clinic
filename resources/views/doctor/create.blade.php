@@ -28,8 +28,9 @@
 					<td>
 						<x-bss-form.select name="gender" data-no_search="true">
 							<option value="">---- None ----</option>
-							<option value="0" {{ (old('gender')=="0") ? 'selected' : '' }}>Male</option>
-							<option value="1" {{ (old('gender')=="1") ? 'selected' : '' }}>Female</option>
+							@foreach ($gender as $id => $data)
+								<option value="{{ $id }}" {{ (old('gender')==$id) ? 'selected' : '' }}>{{ $data }}</option>
+							@endforeach
 						</x-bss-form.select>
 					</td>
 				</tr>

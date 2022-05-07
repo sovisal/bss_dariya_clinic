@@ -18,6 +18,9 @@ class DatabaseSeeder extends Seeder
 			RoleSeeder::class,
 			UserSeeder::class,
 			SettingSeeder::class,
+			DoctorSeeder::class,
+			MedicineSeeder::class,
+			PatientSeeder::class,
 		]);
 		\App\Models\User::factory(10)->create();
 	}

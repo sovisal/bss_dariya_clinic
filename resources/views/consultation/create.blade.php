@@ -457,9 +457,7 @@
 								data-url="{{ route('patient.getSelect2') }}"
 								data-placeholder="---- None ----"
 								required
-							>
-							
-							</x-form.select2>
+							/>
 						@endif
 					</td>
 					<td width="20%" class="text-right">Payment Type</td>
@@ -467,7 +465,7 @@
 						<x-bss-form.select name="payment_type">
 							<option value="">Select payment type</option>
 							@foreach ($payment_types as $id => $payment_type)
-								<option value="{{ $id }}">{{ $payment_type }}</option>
+								<option value="{{ $id }}" {{ ((old('payment_type') == $id)? 'selected' : '') }}>{{ $payment_type }}</option>
 							@endforeach
 						</x-bss-form.select>
 					</td>
@@ -477,7 +475,7 @@
 					<td>
 						<x-bss-form.select name="doctor_id">
 							@foreach ($doctors as $doctor)
-								<option value="{{ $doctor->id }}">{{ $doctor->name_kh }}</option>
+								<option value="{{ $doctor->id }}" {{ ((old('doctor_id') == $id)? 'selected' : '') }}>{{ $doctor->name_kh }}</option>
 							@endforeach
 						</x-bss-form.select>
 					</td>
@@ -866,16 +864,16 @@
 							</td>
 							<td>
 								<div class="tw-mb-1">
-									<x-form.checkbox name='examination_serious' label="Not Good" />
+									<x-form.checkbox name='examination_serious' label="Serious" />
 								</div>
 							</td>
 							<td>
 								<div class="tw-mb-1">
-									<x-form.checkbox name='examination_too_serious' label="Not Good" />
+									<x-form.checkbox name='examination_too_serious' label="Too Serious" />
 								</div>
 							</td>
 						</tr>
-		
+
 						<tr>
 							<th colspan="4" class="tw-bg-gray-100">Neurological System</th>
 						</tr>
@@ -901,7 +899,7 @@
 								</div>
 							</td>
 						</tr>
-		
+
 						<tr>
 							<td colspan="4" class="text-center">Mental Status</td>
 						</tr>
@@ -932,7 +930,7 @@
 							</td>
 							<td colspan="2"></td>
 						</tr>
-		
+
 						<tr>
 							<th colspan="4" class="tw-bg-gray-100">Score de Glasgow</th>
 						</tr>
@@ -963,7 +961,7 @@
 							</td>
 							<td colspan="2"></td>
 						</tr>
-		
+
 						<tr>
 							<th colspan="4" class="tw-bg-gray-100">Cardiovascular System</th>
 						</tr>
@@ -994,7 +992,7 @@
 							</td>
 							<td colspan="2"></td>
 						</tr>
-		
+
 						<tr>
 							<th colspan="4" class="tw-bg-gray-100">Eyes</th>
 						</tr>
@@ -1101,6 +1099,9 @@
 							<td>
 								<x-bss-form.select name="evaluation_category">
 									<option value="">Select Category</option>
+									@foreach ($evaluation_categories as $id => $evaluation_category)
+										<option value="{{ $id }}" {{ ((old('evaluation_category') == $id)? 'selected' : '') }}>{{ $evaluation_category }}</option>
+									@endforeach
 								</x-bss-form.select>
 							</td>
 						</tr>

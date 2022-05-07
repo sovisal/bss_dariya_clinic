@@ -23,7 +23,7 @@
 					</td>
 					<td>{{ $doctor->name_kh }}</td>
 					<td>{{ $doctor->name_en }}</td>
-					<td>{{ (($doctor->gender)? 'Female' : 'Male') }}</td>
+					<td>{!! getParentDataByType('gender', $doctor->gender) !!}</td>
 					<td>{{ $doctor->phone }}</td>
 					<td>{!! date('d-M-Y H:i', strtotime($doctor->updated_at)) !!}</td>
 					<td>{!! $doctor->updated_by_name !!}</td>

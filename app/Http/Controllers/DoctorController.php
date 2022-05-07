@@ -29,7 +29,7 @@ class DoctorController extends Controller
 	public function create()
 	{
 		$data = [
-			
+			'gender' => getParentDataSelection('gender'),
 		];
 		return view('doctor.create', $data);
 	}
@@ -43,7 +43,7 @@ class DoctorController extends Controller
 			'name_kh' => $request->name_kh,
 			'name_en' => $request->name_en,
 			'id_card_no' => $request->id_card_no,
-			'gender' => (($request->gender)? 1 : 0 ),
+			'gender' => $request->gender,
 			'email' => $request->email,
 			'phone' => $request->phone,
 			'address' => $request->address,
@@ -73,7 +73,8 @@ class DoctorController extends Controller
 	public function edit(Doctor $doctor)
 	{
 		$data = [
-			'doctor' => $doctor
+			'doctor' => $doctor,
+			'gender' => getParentDataSelection('gender'),
 		];
 		return view('doctor.edit', $data);
 	}
@@ -87,7 +88,7 @@ class DoctorController extends Controller
 			'name_kh' => $request->name_kh,
 			'name_en' => $request->name_en,
 			'id_card_no' => $request->id_card_no,
-			'gender' => (($request->gender)? 1 : 0 ),
+			'gender' => $request->gender,
 			'email' => $request->email,
 			'phone' => $request->phone,
 			'address' => $request->address,

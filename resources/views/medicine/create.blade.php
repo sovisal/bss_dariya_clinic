@@ -26,8 +26,8 @@
 					<td>
 						<x-bss-form.select name="usage_id" required>
 							<option value="">---- None ----</option>
-							@foreach ($usages as $usage)
-								<option value="{{ $usage->id }}" {{ (old('usage_id')==$usage->id) ? 'selected' : '' }}>{{ $usage->title_kh }} :: {{ $usage->title_en }}</option>
+							@foreach ($usages as $id => $usage)
+								<option value="{{ $id }}" {{ (old('usage_id')==$id) ? 'selected' : '' }}>{{ $usage }}</option>
 							@endforeach
 						</x-bss-form.select>
 					</td>

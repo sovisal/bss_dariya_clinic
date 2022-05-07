@@ -34,7 +34,7 @@ class MedicineController extends Controller
 	public function create()
 	{
 		$data = [
-			'usages' => DataParent::usage()->orderBy('title_en', 'asc')->get()
+			'usages' => getParentDataSelection('comsumption')
 		];
 		return view('medicine.create', $data);
 	}
@@ -68,7 +68,7 @@ class MedicineController extends Controller
 	{
 		$data = [
 			'medicine' => $medicine,
-			'usages' => DataParent::usage()->orderBy('title_en', 'asc')->get()
+			'usages' => getParentDataSelection('comsumption')
 		];
 		return view('medicine.edit', $data);
 	}

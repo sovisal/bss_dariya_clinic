@@ -35,7 +35,8 @@ class ConsultationController extends Controller
 		$data = [
 			'patient' => $patient,
 			'doctors' => Doctor::orderBy('name_kh', 'asc')->get(),
-			'payment_types' => getParentDataSelection('payment_type')
+			'payment_types' => getParentDataSelection('payment_type'),
+			'evaluation_categories' => getParentDataSelection('evalutaion_category'),
 		];
 		return view('consultation.create', $data);
 	}
@@ -46,10 +47,10 @@ class ConsultationController extends Controller
 	public function store(ConsultationRequest $request)
 	{
 		if ($request->submit_option == 'cancel') {
-			return redirect()->route(session('consultation_cancel_route'));
+			return redirect()->route('patient.index');
 		} else {
 			$json_data = serialize($request->all());
-			$consultation = Consultation::create([
+			Consultation::create([
 				'patient_id' => $request->patient_id,
 				'doctor_id' => $request->doctor_id,
 				'payment_type' => $request->payment_type,
@@ -68,17 +69,11 @@ class ConsultationController extends Controller
 	 */
 	public function edit(Consultation $consultation)
 	{
-		$patient = Patient::find(request()->patient) ?? null;
-		if ($patient) {
-			session(['consultation_cancel_route' => 'patient.index']);
-		}else{
-			session(['consultation_cancel_route' => 'patient.consultation.index']);
-		}
 		$data = [
-			'consultation' => $consultation,
-			'json_data' => unserialize($consultation->json_data),
+			'consultation' => append_array_to_obj($consultation, unserialize($consultation->json_data) ?: []),
 			'doctors' => Doctor::orderBy('name_kh', 'asc')->get(),
-			'payment_types' => getParentDataSelection('payment_type')
+			'payment_types' => getParentDataSelection('payment_type'),
+			'evaluation_categories' => getParentDataSelection('evalutaion_category'),
 		];
 		return view('consultation.edit', $data);
 	}
@@ -89,7 +84,6 @@ class ConsultationController extends Controller
 	public function update(Request $request, Consultation $consultation)
 	{
 		dd($request->all());
-		
 	}
 
 	/**

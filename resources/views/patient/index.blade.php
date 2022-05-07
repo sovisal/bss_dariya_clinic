@@ -26,7 +26,7 @@
 						</a>
 					</td>
 					<td>{!! $patient->name_kh !!} :: {!! $patient->name_en !!}</td>
-					<td class="text-center">{!! date('d-M-Y', strtotime($patient->date_of_birth)) !!}</td>
+					<td class="text-center">{!! (($patient->date_of_birth)? date('d-M-Y', strtotime($patient->date_of_birth)) : '') !!}</td>
 					<td class="text-center">{!! $patient->gender !!}</td>
 					<td>{!! $patient->phone !!}</td>
 					<td>{!! getParentDataByType('nationality', $patient->nationality) !!}</td>

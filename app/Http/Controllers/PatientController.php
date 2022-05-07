@@ -78,6 +78,19 @@ class PatientController extends Controller
 			'updated_by' => auth()->user()->id,
 		]);
 
+		if ($patient) {
+			Consultation::create([
+				'patient_id' => $patient->id,
+				'doctor_id' => 1,
+				'payment_type' => '',
+				'evaluated_at' => now(),
+				'json_data' => '',
+				'status' => 'save',
+				'created_by' => auth()->user()->id,
+				'updated_by' => auth()->user()->id,
+			]);
+		}
+
 		if ($request->file('photo')) {
 			$path = public_path().'/images/patients/';
 			File::makeDirectory($path, 0777, true, true);
@@ -99,9 +112,9 @@ class PatientController extends Controller
 		$save_consultation = $consultation->where('status', 'save')->first();
 		$exist_consultation = $consultation->first();
 		if ($save_consultation) {
-			return redirect()->route('patient.consultation.edit', $consultation->id);
+			return redirect()->route('patient.consultation.edit', $save_consultation->id);
 		}else if(!$exist_consultation){
-			return redirect()->route('patient.consultation.create', $patient->id);
+			return redirect()->route('patient.consultation.create', ['patient' => $patient->id]);
 		}
 
 		$data = [

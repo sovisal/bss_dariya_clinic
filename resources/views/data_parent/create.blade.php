@@ -5,7 +5,7 @@
 	<form action="{{ route('setting.data-parent.store') }}" method="POST" autocomplete="off" enctype="multipart/form-data">
 		@method('PUT')
 		@csrf
-		<x-card bodyClass="pb-0">			
+		<x-card bodyClass="pb-0">
 			<table class="table-form striped">
 				<tr>
 					<th colspan="4" class="text-left tw-bg-gray-100">Create New Information</th>
