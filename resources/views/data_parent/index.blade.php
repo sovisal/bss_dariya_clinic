@@ -15,7 +15,7 @@
 						'evalutaion_category' => 'Evalutaion Category',
 						'indication_disease' => 'Indication/Disease',
 						'comsumption' => 'Comsumption',
-						'time_usage' => 'Usage',
+						'time_usage' => 'Usage Time',
 					] ;
 		@endphp
 		@foreach($types as $key => $val)
