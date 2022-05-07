@@ -442,25 +442,14 @@
 				<tr>
 					<td width="20%" class="text-right">Patient <small class='required'>*</small></td>
 					<td width="30%">
-						@if ($patient)
-							<x-bss-form.select
-								name="patient_id"
-								:select2="false"
-								readonly
-								required
-							>
-								<option value="{{ $patient->id }}" selected>{{ $patient->name_kh }}</option>
-							</x-form.select2>
-						@else
-							<x-bss-form.select2
-								name="patient_id"
-								data-url="{{ route('patient.getSelect2') }}"
-								data-placeholder="---- None ----"
-								required
-							>
-							
-							</x-form.select2>
-						@endif
+						<x-bss-form.select
+							name="patient_id"
+							:select2="false"
+							readonly
+							required
+						>
+							<option value="{{ $consultation->patient_id }}" selected>{{ $consultation->patient->name_kh }}</option>
+						</x-form.select2>
 					</td>
 					<td width="20%" class="text-right">Payment Type</td>
 					<td>

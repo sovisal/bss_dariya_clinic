@@ -77,7 +77,6 @@ class ConsultationController extends Controller
 		$data = [
 			'consultation' => $consultation,
 			'json_data' => unserialize($consultation->json_data),
-			'patient' => $patient,
 			'doctors' => Doctor::orderBy('name_kh', 'asc')->get(),
 			'payment_types' => getParentDataSelection('payment_type')
 		];
