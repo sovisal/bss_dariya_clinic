@@ -76,7 +76,7 @@ class FourLevelAddressController extends Controller
 			$html_elements .= '</select>';
 			return $html_elements;
 		} else if ($return_type == 'option') {
-			$html_elements = '<option value="">------------------</option>';
+			$html_elements = '<option value="">---- None ----</option>';
 			foreach ($address as $addr) {
 				$html_elements .= '<option ' . (($selected && $selected == $addr['_code']) ? 'selected' : '') . ' value="' . $addr['_code'] . '">' . $addr['_name_kh'] . ' :: ' . $addr['_name_en'] . '</option>';
 			}

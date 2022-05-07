@@ -22,6 +22,19 @@
 						<x-bss-form.input name="title_kh" required/>
 					</td>
 				</tr>
+				@if ($module_conf['is_child'] ?? false)
+					<tr>
+						<td class="text-right">{{ $parent_module_conf['label'] }}</td>
+						<td>
+							<x-bss-form.select name="parent_id" data-no_search="true" required>
+								<option value="">---- None ----</option>
+								@foreach ($parent_list ?? [] as $id => $data)
+									<option value="{{ $id }}" {{ (old('parent_id')==$id) ? 'selected' : '' }}>{{ $data }}</option>
+								@endforeach
+							</x-bss-form.select>
+						</td>
+					</tr>
+				@endif
                 <tr>
 					<td width="20%" class="text-right">Description</td>
 					<td>
