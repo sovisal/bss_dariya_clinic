@@ -32,6 +32,8 @@ class PatientController extends Controller
 	 */
 	public function create()
 	{
+		// Example for 2 level data patent, Desease and Desease Category
+		// dd(getParentDataSelection('indication_disease', ['status' => 1, 'parent_id' => '10027']));
 		$data = [
 			'blood_type' => getParentDataSelection('blood_type'),
 			'nationality' => getParentDataSelection('nationality'),

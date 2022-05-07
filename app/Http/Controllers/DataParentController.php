@@ -165,7 +165,7 @@ class DataParentController extends Controller
     * Can be used in form selection
     * example :  {{ (\App\Http\Controllers\DataParentController::getParentDataSelection('nationality')) }} type
     */
-    static function getParentDataSelection($type = '') {
+    static function getParentDataSelection($type = '', $where_clause = []) {
         if (!$type) {
             return [];
         }
@@ -177,7 +177,7 @@ class DataParentController extends Controller
             } else {
                 $rows[$obj['id']] = $obj['title_en'] ?: $obj['title_kh'];
             }
-        }, DataParent::where('type', $type)->where('status', 1)->orderBy('title_en', 'ASC')->get()->toArray());
+        }, DataParent::where('type', $type)->where($where_clause ?: ['status'=> 1])->orderBy('title_en', 'ASC')->get()->toArray());
 
         return $rows;
     }
