@@ -93,9 +93,13 @@ class PatientController extends Controller
 	 */
 	public function show(Patient $patient)
 	{
-		$consultation = Consultation::where('patient_id', $patient->id)->where('status', 'save')->first();
-		if ($consultation) {
+		$consultation = Consultation::where('patient_id', $patient->id)->get();
+		$save_consultation = $consultation->where('status', 'save')->first();
+		$exist_consultation = $consultation->first();
+		if ($save_consultation) {
 			return redirect()->route('patient.consultation.edit', $consultation->id);
+		}else if(!$exist_consultation){
+			return redirect()->route('patient.consultation.create', $patient->id);
 		}
 
 		$data = [
