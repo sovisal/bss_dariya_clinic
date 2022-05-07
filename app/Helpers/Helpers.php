@@ -202,4 +202,56 @@ function append_array_to_obj (&$obj, $arr) {
 		$obj->{$index} = $obj->{$index} ?: $val ?: '';
 	}
 	return $obj;
-} 
+}
+
+function data_parent_selection_conf() {
+	return  [
+		'gender' => [
+			'label' => 'Gender',
+		],
+		'marital_status' => [
+			'label' => 'Marital Status',
+		],
+		'blood_type' => [
+			'label' => 'Blood Type',
+		],
+		'nationality' => [
+			'label' => 'Nationality',
+		],
+		'enterprise' => [
+			'label' => 'Enterprise',
+		],
+		'payment_type' => [
+			'label' => 'Payment Type',
+		],
+		'evalutaion_category' => [
+			'label' => 'Indication Category',
+		],
+		'indication_disease' => [
+			'label' => 'Indication',
+			'is_child' => true,
+			'child_of' => 'evalutaion_category'
+		],
+		'comsumption' => [
+			'label' => 'Comsumption',
+		],
+		'time_usage' => [
+			'label' => 'Usage Time',
+		],
+	];
+}
+
+function apply_markdown_character($txt = '') {
+	$result = [];
+	if (!empty($txt)) {
+		$result = $txt = str_split($txt);
+		foreach ($txt as $key => $val) {
+			if ($val == '^') {
+				$result[$key] = '';
+				$result[$key+1] = '<sup>' . $result[$key+1] . '</sup>';
+			}
+		}
+	}
+
+	return implode($result);
+}

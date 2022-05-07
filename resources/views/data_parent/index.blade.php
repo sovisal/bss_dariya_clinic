@@ -3,23 +3,8 @@
 		<x-form.button href="{{ route('setting.data-parent.create') }}" label="Create" icon="bx bx-plus"/>
 	</x-slot>
 	<x-card :foot="false"  :head="false">
-		<br><br>
-		@php
-			$types = [
-						'gender' => 'Gender',
-						'marital_status' => 'Marital Status',
-						'blood_type' => 'Blood Type',
-						'nationality' => 'Nationality',
-						'enterprise' => 'Enterprise',
-						'payment_type' => 'Payment Type',
-						'evalutaion_category' => 'Evalutaion Category',
-						'indication_disease' => 'Indication/Disease',
-						'comsumption' => 'Comsumption',
-						'time_usage' => 'Usage',
-					] ;
-		@endphp
-		@foreach($types as $key => $val)
-			<x-form.button href="?parent={{ $key }}" label="{{ $val }}" class="{{ $parent == $key ? 'active' : '' }}" color="{{ $parent == $key ? 'secondary' : 'primary' }}" />
+		@foreach(data_parent_selection_conf() as $key => $val)
+			<x-form.button href="?parent={{ $key }}" label="{{ $val['label'] }}" class="{{ $type == $key ? 'active' : '' }}" color="{{ $type == $key ? 'secondary' : 'primary' }}" />
 		@endforeach
 		<x-table class="table-hover table-bordered" id="datatables" data-table="patients">
 			<x-slot name="thead">
@@ -27,6 +12,9 @@
 					<th>No</th>
 					<th>Title EN</th>
 					<th>Title KH</th>
+					@if ($module_conf['is_child'] ?? false)
+						<th>{{ $parent_module_conf['label'] }}</th>
+					@endif
 					<th>Description</th>
 					<th>Status</th>
 					<th>Action</th>
@@ -40,6 +28,9 @@
 					<td class="text-center">{{ ++$i }}</td>
 					<td>{{ $row->title_en }}</td>
 					<td>{{ $row->title_kh }}</td>
+					@if ($module_conf['is_child'] ?? false)
+						<td>{{ $row->parent_id == 0 ? 'N/A' : $parent_list[$row->parent_id] }}</td>
+					@endif
 					<td>{{ $row->description }}</td>
 					<td class="text-center">{{ $row->status }}</td>
 					<td class="text-center">
