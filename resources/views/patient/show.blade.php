@@ -42,27 +42,27 @@
 	
 	<ul class="nav nav-tabs mt-3 mb-0" role="tablist">
 		<li class="nav-item">
-			<a class="nav-link" id="detail-tab" data-toggle="tab" href="#detail" aria-controls="detail" role="tab" aria-selected="true">
+			<a class="nav-link btn-sm" id="detail-tab" data-toggle="tab" href="#detail" aria-controls="detail" role="tab" aria-selected="true">
 				<span class="align-middle">Detail</span>
 			</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link active" id="visit-tab" data-toggle="tab" href="#visit" aria-controls="visit" role="tab" aria-selected="false">
+			<a class="nav-link btn-sm active" id="visit-tab" data-toggle="tab" href="#visit" aria-controls="visit" role="tab" aria-selected="false">
 				<span class="align-middle">Visit</span>
 			</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" id="prescription-tab" data-toggle="tab" href="#prescription" aria-controls="prescription" role="tab" aria-selected="false">
+			<a class="nav-link btn-sm" id="prescription-tab" data-toggle="tab" href="#prescription" aria-controls="prescription" role="tab" aria-selected="false">
 				<span class="align-middle">Prescription</span>
 			</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" id="paraclinic-tab" data-toggle="tab" href="#paraclinic" aria-controls="paraclinic" role="tab" aria-selected="false">
+			<a class="nav-link btn-sm" id="paraclinic-tab" data-toggle="tab" href="#paraclinic" aria-controls="paraclinic" role="tab" aria-selected="false">
 				<span class="align-middle">Paraclinics</span>
 			</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link" id="invoice-tab" data-toggle="tab" href="#invoice" aria-controls="invoice" role="tab" aria-selected="false">
+			<a class="nav-link btn-sm" id="invoice-tab" data-toggle="tab" href="#invoice" aria-controls="invoice" role="tab" aria-selected="false">
 				<span class="align-middle">Invoices</span>
 			</a>
 		</li>
