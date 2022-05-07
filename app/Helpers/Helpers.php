@@ -240,3 +240,18 @@ function data_parent_selection_conf() {
 		],
 	];
 }
+
+function apply_markdown_character($txt = '') {
+	$result = [];
+	if (!empty($txt)) {
+		$result = $txt = str_split($txt);
+		foreach ($txt as $key => $val) {
+			if ($val == '^') {
+				$result[$key] = '';
+				$result[$key+1] = '<sup>' . $result[$key+1] . '</sup>';
+			}
+		}
+	}
+
+	return implode($result);
+}

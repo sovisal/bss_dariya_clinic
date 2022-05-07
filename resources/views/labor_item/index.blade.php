@@ -26,7 +26,7 @@
 					<td>{{ $row->name_en }}</td>
 					<td class="text-right">{{ $row->min_range }}</td>
 					<td>{{ $row->max_range }}</td>
-					<td class="text-center">{!! $row->unit !!}</td>
+					<td class="text-center">{!! apply_markdown_character($row->unit) !!}</td>
 					<td>{{ $row->type_en }}</td>
 					<td class="text-center">{{ $row->index }}</td>
 					<td class="text-center">{{ $row->status }}</td>
