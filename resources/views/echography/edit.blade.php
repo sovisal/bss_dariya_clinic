@@ -1,4 +1,5 @@
 <x-app-layout>
+	<script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
 	<x-slot name="js">
 		<script>
 			$(document).ready(function () {
@@ -22,7 +23,7 @@
 		<x-card bodyClass="pb-0">			
 			<table class="table-form striped">
 				<tr>
-					<th colspan="4" class="text-left tw-bg-gray-100">Echo COde #dasd123</th>
+					<th colspan="4" class="text-left tw-bg-gray-100">Echo Code #dasd123</th>
 				</tr>
 				@include('echography.form_input')
 			</table>

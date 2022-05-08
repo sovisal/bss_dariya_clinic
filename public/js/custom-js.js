@@ -330,6 +330,17 @@ $(document).ready(function(){
 				]
 			}); 
 		});
+		$('.my-simple-editor').each(function (e) {
+			var height = $(this).data('height');
+			CKEDITOR.replace(this.id, {
+				height: ((height!='' || height!=undefined)? height : '250'),
+				// skin: 'office2013',
+				toolbar: [
+					{ name: 'basicstyles', items: [ 'Bold', 'Italic', 'Underline', 'Strike' ] },
+					{ name: 'paragraph', items: [ 'NumberedList', 'BulletedList', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'] },
+				]
+			}); 
+		});
 	// End Initial Text Editor Ckeditor
 
 	// Start Initial Datetimepicker

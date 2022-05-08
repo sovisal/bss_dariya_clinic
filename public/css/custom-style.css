@@ -42,12 +42,12 @@ td{
 }
 body *{
 	font-family: 'Rubik', 'Khmer OS Battambang';
-	-webkit-touch-callout: none; /* iOS Safari */
-	-webkit-user-select: none; /* Safari */
-	-khtml-user-select: none; /* Konqueror HTML */
-	-moz-user-select: none; /* Old versions of Firefox */
-	-ms-user-select: none; /* Internet Explorer/Edge */
-	user-select: none;
+	/* -webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none; */
 }
 img{ max-width: 100%; }
 small.required{
@@ -160,15 +160,6 @@ body.dark-layout .alert span ul li{
 }
 .toast-warning {
 	background-color: #fdac41;
-}
-textarea.my-editor + .cke_chrome{
-	border: 1px solid #dfe3e7;
-	box-shadow: none;
-	transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-}
-textarea.my-editor + .cke_chrome.cke_focus{
-	border: 1px solid #2b579a;
-	box-shadow: 0 3px 8px 0 rgb(0 0 0 / 10%);
 }
 .select2-container--default .select2-search--dropdown .select2-search__field:focus{
 	border: 1px solid #fff;
@@ -707,4 +698,16 @@ textarea.my-editor + .cke_chrome.cke_focus{
 	.pagination .paginate_button a{
 		padding-top: 4px !important;
 		padding-bottom: 4px !important;
+	}
+	
+	textarea.my-simple-editor + .cke_chrome,
+	textarea.my-editor + .cke_chrome{
+		border: 1px solid #dfe3e7;
+		box-shadow: none !important;
+		transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+	}
+	textarea.my-simple-editor + .cke_chrome.cke_focus,
+	textarea.my-editor + .cke_chrome.cke_focus{
+		border: 1px solid #2b579a;
+		box-shadow: 0 3px 8px 0 rgb(0 0 0 / 10%);
 	}

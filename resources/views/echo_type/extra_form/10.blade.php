@@ -1,42 +1,18 @@
 <tr>
-    <td class="text-right">- The kidneys</td>
-    <td>
-        <x-bss-form.input name="aaaa" :value="old('aaaa', !empty($row) && $row->aaaa ? $row->aaaa : '')"/>
-    </td>
+	<td width="30%" class="text-right">Right cevic</td>
+	<td>
+		<x-bss-form.textarea name="right_cevic" class="my-simple-editor" :value="old('right_cevic', !empty($row) && $row->right_cevic ? $row->right_cevic : '')"><p>Right cevic normal</p></x-bss-form.textarea>
+	</td>
 </tr>
 <tr>
-    <td class="text-right">- Bladder</td>
-    <td>
-        <x-bss-form.input name="bbbbb" :value="old('bbbbb', !empty($row) && $row->bbbbb ? $row->bbbbb : '')"/>
-    </td>
+	<td width="30%" class="text-right">Left cevic</td>
+	<td>
+		<x-bss-form.textarea name="left_cevic" class="my-simple-editor" :value="old('left_cevic', !empty($row) && $row->left_cevic ? $row->left_cevic : '')"><p>left cevic normal</p></x-bss-form.textarea>
+	</td>
 </tr>
 <tr>
-    <td class="text-right">- Uterus</td>
-    <td>
-        <x-bss-form.input name="ccccc" :value="old('ccccc', !empty($row) && $row->ccccc ? $row->ccccc : '')"/>
-    </td>
-</tr>
-<tr>
-    <td class="text-right">- Endometrium</td>
-    <td>
-        <x-bss-form.input name="dddd" :value="old('dddd', !empty($row) && $row->dddd ? $row->dddd : '')"/>
-    </td>
-</tr>
-<tr>
-    <td class="text-right">- Ovaries</td>
-    <td>
-        <x-bss-form.input name="eeeee" :value="old('eeeee', !empty($row) && $row->eeeee ? $row->eeeee : '')"/>
-    </td>
-</tr>
-<tr>
-    <td class="text-right">*</td>
-    <td>
-        <x-bss-form.input name="fffff" :value="old('fffff', !empty($row) && $row->fffff ? $row->fffff : '')"/>
-    </td>
-</tr>
-<tr>
-    <td class="text-right">IMPRESSION</td>
-    <td>
-        <x-bss-form.input name="gggg" :value="old('gggg', !empty($row) && $row->gggg ? $row->gggg : '')"/>
-    </td>
+	<td class="text-right">Conclusion</td>
+	<td>
+		<x-bss-form.input name="conclusion" :value="old('conclusion', !empty($row) && $row->conclusion ? $row->conclusion : '')"/>
+	</td>
 </tr>

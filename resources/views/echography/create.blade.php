@@ -19,7 +19,7 @@
 	<form action="{{ route('para_clinic.echography.store') }}" method="POST" autocomplete="off" enctype="multipart/form-data">
 		@method('PUT')
 		@csrf
-		<x-card bodyClass="pb-0">			
+		<x-card bodyClass="pb-0">
 		<table class="table-form striped">
 				<tr>
 					<th colspan="4" class="text-left tw-bg-gray-100">Echo COde #dasd123</th>
@@ -33,7 +33,7 @@
 				</tr>
 				@if (view()->exists('echo_type.extra_form.' . 999))
 					@include('echo_type.extra_form.' . $row->id)
-				@else	
+				@else
 					<tr>
 						<th colspan="4" class="text-center">
 							No result
