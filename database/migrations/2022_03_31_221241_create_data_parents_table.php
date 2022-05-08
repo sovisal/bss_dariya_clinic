@@ -31,12 +31,36 @@ class CreateDataParentsTable extends Migration
                 'title_en' => 'Male',
                 'title_kh' => 'Male',
                 'type' => 'gender',
+                'id' => 1
             ],
             [
                 'title_en' => 'Female',
                 'title_kh' => 'Female',
                 'type' => 'gender',
+                'id' => 2
+            ]
+        ]);
+        DB::table('data_parents')->insert([
+            [
+                'title_en' => 'Cambodian',
+                'title_kh' => 'Cambodian',
+                'type' => 'nationality',
+                'id' => 3
             ],
+            [
+                'title_en' => 'English',
+                'title_kh' => 'English',
+                'type' => 'nationality',
+                'id' => 4
+            ],
+            [
+                'title_en' => 'Other',
+                'title_kh' => 'Other',
+                'type' => 'nationality',
+                'id' => 5
+            ],
+        ]);
+        DB::table('data_parents')->insert([
             [
                 'title_en' => 'Other',
                 'title_kh' => 'Other',
@@ -68,22 +92,6 @@ class CreateDataParentsTable extends Migration
                 'title_en' => 'B',
                 'title_kh' => 'B',
                 'type' => 'blood_type',
-            ],
-
-            [
-                'title_en' => 'Cambodian',
-                'title_kh' => 'Cambodian',
-                'type' => 'nationality',
-            ],
-            [
-                'title_en' => 'English',
-                'title_kh' => 'English',
-                'type' => 'nationality',
-            ],
-            [
-                'title_en' => 'Other',
-                'title_kh' => 'Other',
-                'type' => 'nationality',
             ],
 
             [
