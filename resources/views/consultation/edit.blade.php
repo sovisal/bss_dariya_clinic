@@ -361,12 +361,22 @@
 				}
 			});
 
-			$('.data_parent').change(function (){
-				if ($(this).is(':checked')) {
-					$('[data-parent="'+ $(this).attr('id') +'"]').removeAttr('disabled');
-				} else {
-					$('[data-parent="'+ $(this).attr('id') +'"]').attr('disabled', 'disabled');
-				}
+			$(document).ready(function () {
+				$(".data_parent").each(function () {
+					if ($(this).is(':checked')) {
+						$('[data-parent="'+ $(this).attr('id') +'"]').removeAttr('disabled');
+					} else {
+						$('[data-parent="'+ $(this).attr('id') +'"]').attr('disabled', 'disabled');
+					}
+				});
+				$('.data_parent').change(function (){
+					if ($(this).is(':checked')) {
+						$('[data-parent="'+ $(this).attr('id') +'"]').removeAttr('disabled');
+					} else {
+						$('[data-parent="'+ $(this).attr('id') +'"]').attr('disabled', 'disabled');
+					}
+				});
+
 			});
 
 			const swalWithBootstrapBtns = Swal.mixin({
@@ -418,11 +428,11 @@
 	</x-slot>
 	<form id="consultation-form" action="{{ route('patient.consultation.update', $consultation->id) }}" method="post">
 		@csrf
-		<input type="hidden" name="method" value="put" />
+		<input type="hidden" name="_method" value="PUT" />
 		<input type="hidden" name="submit_option" value="cancel" />
 		<x-card :actionShow="false" headerClass="" footerClass="" bodyClass="">
 			<x-slot name="header">
-				<h4>New Consultation</h4>
+				<h4>Edit Consultation</h4>
 			</x-slot>
 			<x-slot name="action">
 				<div>
@@ -805,7 +815,7 @@
 								<x-bss-form.textarea name="pmr_other_input" placeholder="If others, please tell more." data-parent="pmr_other">{{ $consultation->pmr_other_input }}</x-bss-form.textarea>
 							</td>
 							<td>
-								<x-form.checkbox name="pmr_medication" class="data_parent" label="Medication" value="{{ $consultation->pmr_medication }}"/>
+								<x-form.checkbox name="pmr_medication" class="data_parent" label="Medication" checked="{{ $consultation->pmr_medication }}"/>
 							</td>
 							<td>
 								<x-bss-form.textarea name="pmr_medication_input" placeholder="Please list the medicals." data-parent="pmr_medication">{{ $consultation->pmr_medication_input }}</x-bss-form.textarea>

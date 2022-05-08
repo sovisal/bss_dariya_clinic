@@ -83,7 +83,20 @@ class ConsultationController extends Controller
 	 */
 	public function update(Request $request, Consultation $consultation)
 	{
-		dd($request->all());
+		if ($request->submit_option == 'cancel') {
+			return redirect()->route('patient.index');
+		} else {
+			$json_data = serialize($request->all());
+			$consultation->update([
+				'doctor_id' => $request->doctor_id,
+				'payment_type' => $request->payment_type,
+				'evaluated_at' => $request->evaluated_at,
+				'json_data' => $json_data,
+				'status' => $request->submit_option,
+				'updated_by' => auth()->user()->id,
+			]);
+		}
+		return redirect()->route('patient.show', $request->patient_id)->with('success', __('alert.message.success.crud.update'));
 	}
 
 	/**
