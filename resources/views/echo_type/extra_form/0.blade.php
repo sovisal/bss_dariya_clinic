@@ -1,8 +1,60 @@
 <tr>
-    <td width="20%" class="text-right">Detail</td>
+    <td width="30%" class="text-right">Liver</td>
     <td>
-        <x-bss-form.textarea name="default_form">
-            {{ old('other', !empty($row) && $row->default_form ? $row->default_form : '') }}
-        </x-bss-form.textarea>
+        <x-bss-form.input name="gg" :value="old('gg', !empty($row) && $row->default_form ? $row->default_form : '')"/>
+    </td>
+</tr>
+<tr>
+    <td class="text-right">- The thickness of the gallbladder wall</td>
+    <td>
+        <x-bss-form.input name="gg" :value="old('gg', !empty($row) && $row->default_form ? $row->default_form : '')"/>
+    </td>
+</tr>
+<tr>
+    <td class="text-right">- Pancreas and spleen</td>
+    <td>
+        <x-bss-form.input name="gg" :value="old('gg', !empty($row) && $row->default_form ? $row->default_form : '')"/>
+    </td>
+</tr>
+<tr>
+    <td class="text-right">- The kidneys</td>
+    <td>
+        <x-bss-form.input name="gg" :value="old('gg', !empty($row) && $row->default_form ? $row->default_form : '')"/>
+    </td>
+</tr>
+<tr>
+    <td class="text-right">- Bladder</td>
+    <td>
+        <x-bss-form.input name="gg" :value="old('gg', !empty($row) && $row->default_form ? $row->default_form : '')"/>
+    </td>
+</tr>
+<tr>
+    <td class="text-right">- Uterus</td>
+    <td>
+        <x-bss-form.input name="gg" :value="old('gg', !empty($row) && $row->default_form ? $row->default_form : '')"/>
+    </td>
+</tr>
+<tr>
+    <td class="text-right">- Endometrium</td>
+    <td>
+        <x-bss-form.input name="gg" :value="old('gg', !empty($row) && $row->default_form ? $row->default_form : '')"/>
+    </td>
+</tr>
+<tr>
+    <td class="text-right">- Ovaries</td>
+    <td>
+        <x-bss-form.input name="gg" :value="old('gg', !empty($row) && $row->default_form ? $row->default_form : '')"/>
+    </td>
+</tr>
+<tr>
+    <td class="text-right">*</td>
+    <td>
+        <x-bss-form.input name="gg" :value="old('gg', !empty($row) && $row->default_form ? $row->default_form : '')"/>
+    </td>
+</tr>
+<tr>
+    <td class="text-right">IMPRESSION</td>
+    <td>
+        <x-bss-form.input name="gg" :value="old('gg', !empty($row) && $row->default_form ? $row->default_form : '')"/>
     </td>
 </tr>

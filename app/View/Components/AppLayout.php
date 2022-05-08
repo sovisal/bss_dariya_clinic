@@ -60,7 +60,7 @@ class AppLayout extends Component
 
 			'para_clinic' => [
 				'can' => 'ViewAnyParaClinic',
-				'url' => route('para_clinic.index'),
+				'url' => route('para_clinic.echography.index'),
 				'label' => 'Para Clinic',
 				
 				'sub' => [
@@ -70,17 +70,23 @@ class AppLayout extends Component
 						'name' => ['index', 'create', 'edit', 'show'],
 						'label' => 'Labor',
 					],
+					'x_ray' => [
+						'can' => 'ViewAnyX-Ray',
+						'url' => route('para_clinic.x_ray.index'),
+						'name' => ['index', 'create', 'edit', 'show'],
+						'label' => 'X-Ray',
+					],
 					'echography' => [
 						'can' => 'ViewAnyEchography',
 						'url' => route('para_clinic.echography.index'),
 						'name' => ['index', 'create', 'edit', 'show'],
 						'label' => 'Echography',
 					],
-					'x_ray' => [
+					'ecg' => [
 						'can' => 'ViewAnyX-Ray',
 						'url' => route('para_clinic.x_ray.index'),
 						'name' => ['index', 'create', 'edit', 'show'],
-						'label' => 'X-Ray',
+						'label' => 'ECG',
 					],
 				],
 			],

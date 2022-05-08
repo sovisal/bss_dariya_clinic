@@ -255,3 +255,17 @@ function apply_markdown_character($txt = '') {
 
 	return implode($result);
 }
+
+function render_readable_date ($date) {
+	if ($date ?? false) {
+		return date('d-M-Y', strtotime($date));
+	}
+}
+
+function render_currency ($amn, $digit = 2, $currency = 'USD', $id_suffix_display = false) {
+	$amn = $amn ?? 0;
+	if ($id_suffix_display) {
+		return number_format($amn, $digit) . ' ' . $currency;
+	}
+	return $currency . ' ' . number_format($amn, $digit);
+}
