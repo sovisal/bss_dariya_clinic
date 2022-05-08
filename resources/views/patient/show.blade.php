@@ -133,7 +133,7 @@
 				</table>
 			</div>
 			<div class="tab-pane active" id="visit" aria-labelledby="visit-tab" role="tabpanel">
-				<x-form.button href="{{ route('patient.consultation.create', ['patient' => $patient->id]) }}" icon="bx bx-plus" label="New Follow up" />
+				{{-- <x-form.button href="{{ route('patient.consultation.create', ['patient' => $patient->id]) }}" icon="bx bx-plus" label="New Follow up" /> --}}
 				
 				<x-table class="mt-1 table-padding-sm">
 					<x-slot name="thead">
@@ -147,7 +147,7 @@
 						<th>Modify at</th>
 						<th width="8%">Action</th>
 					</x-slot>
-					{{-- @foreach ($consultations as $consultation)
+					@foreach ($patient->consultations as $consultation)
 						<tr>
 							<td class="text-center">MED-{{ str_pad($consultation->id, 6, '0', STR_PAD_LEFT) }}</td>
 							<td>{{ $consultation->doctor_name }}</td>
@@ -156,19 +156,17 @@
 							<td>{{ $consultation->diagnosis }}</td>
 							<td>{{ $consultation->type }}</td>
 							<td class="text-center">
-								@if ($consultation->status == 'success')
-									<span class="badge badge-success">Completed</span>
-								@else
-									<span class="badge badge-primary">In Progress</span>
-								@endif
+								<span class="badge badge-{{ (($consultation->status=='complete')? 'success' : 'primary') }}">{{ $consultation->status }}</span>
 							</td>
-							<td>{{ date('', strtotime($consultation->updated_at)) }}</td>
+							<td>{{ date('d-M-Y H:i', strtotime($consultation->updated_at)) }}</td>
 							<td>
 								<x-form.button icon="bx bx-printer" />
-								<x-form.button href="#" color="secondary" icon="bx bx-edit-alt" />
+								@can('UpdatePatient')
+									<x-form.button color="secondary" href="{{ route('patient.consultation.edit', $consultation->id) }}" icon="bx bx-edit-alt" />
+								@endcan
 							</td>
 						</tr>
-					@endforeach --}}
+					@endforeach
 				</x-table>
 			</div>
 			<div class="tab-pane" id="prescription" aria-labelledby="prescription-tab" role="tabpanel">
