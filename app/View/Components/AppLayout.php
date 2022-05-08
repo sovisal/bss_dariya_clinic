@@ -70,9 +70,9 @@ class AppLayout extends Component
 						'name' => ['index', 'create', 'edit', 'show'],
 						'label' => 'Labor',
 					],
-					'x_ray' => [
+					'xray' => [
 						'can' => 'ViewAnyX-Ray',
-						'url' => route('para_clinic.x_ray.index'),
+						'url' => route('para_clinic.xray.index'),
 						'name' => ['index', 'create', 'edit', 'show'],
 						'label' => 'X-Ray',
 					],

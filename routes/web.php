@@ -34,3 +34,4 @@ require __DIR__.'/echo-type-route.php';
 require __DIR__.'/xray-type-route.php';
 require __DIR__.'/ecg-type-route.php';
 require __DIR__.'/echography-route.php';
+require __DIR__.'/xray-route.php';
