@@ -61,20 +61,16 @@ class EchographyController extends Controller
 
         $dataParent = new Echography();
         if ($dataParent->create([
-            'name_en' => $request->name_en,
-            'name_kh' => $request->name_kh,
-            'name_kh' => $request->name_kh,
-            'name_kh' => $request->name_kh,
-            'name_kh' => $request->name_kh,
-            'name_kh' => $request->name_kh,
-            'name_kh' => $request->name_kh,
-            'name_kh' => $request->name_kh,
-            'name_kh' => $request->name_kh,
-            'name_kh' => $request->name_kh,
-            'name_kh' => $request->name_kh,
+            // 'code' => $request->code,
+            'type' => $request->type,
+            'patient_id' => $request->patient_id,
+            'doctor_id' => $request->doctor_id,
+            'requested_by' => $request->requested_by,
+            'payment_type' => $request->payment_type,
+            'payment_status' => 0,
+            'requested_at' => $request->requested_at,
+            'amount' => $request->amount ?: 0,
             'attribite' => $request->attribite,
-            'index' => $request->index ?: 999,
-            'default_form' => $request->default_form,
             'status' => 1,
         ])) {
             return redirect()->route('para_clinic.echography.index')->with('success', 'Data created success');
@@ -100,7 +96,7 @@ class EchographyController extends Controller
      */
     public function edit(Echography $echography)
     {
-        append_array_to_obj($echography, unserialize($echography->attribite) ?: []);
+        append_array_to_obj($echography, unserialize($echography->attribute) ?: []);
         if ($echography ?? false) {
             $data['row'] = $echography;
             $data['type'] = EchoType::where('status', 1)->orderBy('index', 'asc')->get();
@@ -125,7 +121,7 @@ class EchographyController extends Controller
 
         // serialize all post into string
         $serialize = array_except($request->all(), ['_method', '_token']);
-        $request['attribite'] = serialize($serialize);
+        $request['attribute'] = serialize($serialize);
 
         if ($echography->update($request->all())) {
             return redirect()->route('para_clinic.echography.index')->with('success', 'Data update success');

@@ -1,6 +1,6 @@
 <x-app-layout>
 	<x-slot name="header">
-		<x-form.button href="{{ route('para_clinic.echography.create') }}" label="Create" icon="bx bx-plus"/>
+		<!-- <x-form.button href="{{ route('para_clinic.echography.create') }}" label="Create" icon="bx bx-plus"/> -->
 	</x-slot>
 	<x-card :foot="false"  :head="false">
 		<x-table class="table-hover table-bordered" id="datatables" data-table="patients">
@@ -29,8 +29,9 @@
 					<td class="text-right">{{ render_currency($row->amount) }}</td>
 					<td>{{ $row->type_en }}</td>
 					<td class="text-center">{{ $row->status }}</td>
-					<td class="text-center">{{ $row->status }}</td>
+					<td class="text-center">{{ $row->payment_status }}</td>
 					<td class="text-center">
+						<x-form.button color="info" class="btn-sm" href="{{ route('para_clinic.echography.edit', $row->id) }}" icon="bx bx-printer" />
 						<x-form.button color="secondary" class="btn-sm" href="{{ route('para_clinic.echography.edit', $row->id) }}" icon="bx bx-edit-alt" />
 						<x-form.button color="danger" class="confirmDelete btn-sm" data-id="{{ $row->id }}" icon="bx bx-trash" />
 						<form class="sr-only" id="form-delete-{{ $row->id }}" action="{{ route('para_clinic.echography.delete', $row->id) }}" method="POST">

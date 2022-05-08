@@ -1,4 +1,18 @@
 <x-app-layout>
+	<x-slot name="js">
+		<script>
+			$(document).ready(function () {
+				$('[name="type"]').change(function () {
+					$_this = $(this);
+					$_option_selected = $(this).find('option:selected');
+					$_amount = $_option_selected.data('price');
+					
+					$('#amount_label').html($_amount);
+					$('[name="amount"]').val($_amount);
+				});
+			});
+		</script>
+	</x-slot>
 	<x-slot name="header">
 		<x-form.button href="{{ route('para_clinic.echography.index') }}" color="danger" icon="bx bx-left-arrow-alt" label="Back" />
 	</x-slot>

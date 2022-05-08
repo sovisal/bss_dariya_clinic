@@ -1,4 +1,18 @@
 <x-app-layout>
+	<x-slot name="js">
+		<script>
+			$(document).ready(function () {
+				$('[name="type"]').change(function () {
+					$_this = $(this);
+					$_option_selected = $(this).find('option:selected');
+					$_amount = $_option_selected.data('price');
+					
+					$('#amount_label').html($_amount);
+					$('[name="amount"]').val($_amount);
+				});
+			});
+		</script>
+	</x-slot>
 	<x-slot name="header">
 		<x-form.button href="{{ route('para_clinic.echography.index') }}" color="danger" icon="bx bx-left-arrow-alt" label="Back" />
 	</x-slot>
@@ -17,8 +31,8 @@
 				<tr>
 					<th colspan="4" class="text-left tw-bg-gray-100">Result</th>
 				</tr>
-				@if (view()->exists('echo_type.extra_form.' . $row->id))
-					@include('echo_type.extra_form.' . $row->id)
+				@if (view()->exists('echo_type.extra_form.' . $row->type))
+					@include('echo_type.extra_form.' . $row->type)
 				@else	
 					@include('echo_type.extra_form.0')
 				@endif
