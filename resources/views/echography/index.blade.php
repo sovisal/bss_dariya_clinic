@@ -1,6 +1,6 @@
 <x-app-layout>
 	<x-slot name="header">
-		<!-- <x-form.button href="{{ route('para_clinic.echography.create') }}" label="Create" icon="bx bx-plus"/> -->
+		<x-form.button href="{{ route('para_clinic.echography.create') }}" label="Create" icon="bx bx-plus"/>
 	</x-slot>
 	<x-card :foot="false"  :head="false">
 		<x-table class="table-hover table-bordered" id="datatables" data-table="patients">
