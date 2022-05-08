@@ -22,6 +22,12 @@
 						<x-bss-form.input name="name_kh" :value="old('name_kh', $row->name_kh)" required/>
 					</td>
 				</tr>
+				<tr>
+					<td width="20%" class="text-right">Price <small class='required'>*</small></td>
+					<td>
+						<x-bss-form.input name="price" :value="old('price', $row->price ?: 0)" type="number" required/>
+					</td>
+				</tr>
 				@if (view()->exists('xray_type.extra_form.' . $row->id))
 					@include('xray_type.extra_form.' . $row->id)
 				@else	

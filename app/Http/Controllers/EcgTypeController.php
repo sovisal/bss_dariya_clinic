@@ -48,6 +48,7 @@ class EcgTypeController extends Controller
         if ($dataParent->create([
             'name_en' => $request->name_en,
             'name_kh' => $request->name_kh,
+            'price' => $request->price ?: 0,
             'attribite' => $request->attribite,
             'index' => $request->index ?: 999,
             'default_form' => $request->default_form,

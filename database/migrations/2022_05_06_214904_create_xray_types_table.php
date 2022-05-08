@@ -17,6 +17,7 @@ class CreateXrayTypesTable extends Migration
             $table->id();
             $table->string('name_en')->nullable();
             $table->string('name_kh')->nullable();
+            $table->string('price', 10)->default(0);
             $table->integer('index')->default(99999);
             $table->text('attribite')->nullable();
             $table->text('default_form')->nullable();

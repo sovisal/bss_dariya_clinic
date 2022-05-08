@@ -8,6 +8,7 @@
 				<tr>
 					<th>No</th>
 					<th>Name EN</th>
+					<th>Price</th>
 					<th>Index</th>
 					<th>Status</th>
 					<th>Action</th>
@@ -20,6 +21,7 @@
 				<tr>
 					<td class="text-center">{{ ++$i }}</td>
 					<td>{{ $row->name_en }}</td>
+					<td class="text-right">{{ render_currency($row->price) }}</td>
 					<td class="text-center">{{ $row->index }}</td>
 					<td class="text-center">{{ $row->status }}</td>
 					<td class="text-center">
