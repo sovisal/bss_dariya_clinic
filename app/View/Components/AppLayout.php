@@ -84,7 +84,7 @@ class AppLayout extends Component
 					],
 					'ecg' => [
 						'can' => 'ViewAnyX-Ray',
-						'url' => route('para_clinic.x_ray.index'),
+						'url' => route('para_clinic.ecg.index'),
 						'name' => ['index', 'create', 'edit', 'show'],
 						'label' => 'ECG',
 					],
