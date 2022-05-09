@@ -1,7 +1,7 @@
 <tr>
 	<td width="30%" class="text-right">Liver</td>
 	<td>
-		<x-bss-form.textarea name="liver" class="my-simple-editor">{{ old('liver', !empty($row) && $row->liver ? $row->liver : '<p>normal of size, homogeneous, echo structure no focal lesion is seen. No dilatation of the intra hepatic bile duct is seen, the common bile duct is normal in diameter</p><p>The diameter of the aorta is normal and no aneurysms are seen.</p>') }}</x-bss-form.textarea>
+		<x-bss-form.textarea name="liver" class="my-simple-editor">{{ old('liver', !empty($row) && $row->liver ? $row->liver : '<p>normal of size , homogeneous, echo structure no focal lesion is seen. No dilatation of the intra hepatic bile duct is seen, the common bile duct is normal in diameter</p><p>The diameter of the aorta is normal and no aneurysms are seen.</p>') }}</x-bss-form.textarea>
 	</td>
 </tr>
 <tr>
@@ -31,7 +31,7 @@
 <tr>
 	<td class="text-right">- Prostate</td>
 	<td>
-		<x-bss-form.input name="prostate" :value="old('prostate', !empty($row) && $row->prostate ? $row->prostate : 'Normal thickness of the gallbladder wall is normal. The size of the bile ducts between')"/>
+		<x-bss-form.input name="prostate" :value="old('prostate', !empty($row) && $row->prostate ? $row->prostate : 'Normal of size, homogeneous structure, no lesion is seen')"/>
 	</td>
 </tr>
 <tr>
@@ -41,20 +41,8 @@
 	</td>
 </tr>
 <tr>
-	<td class="text-right">- The right iliac fosse (RIF)</td>
-	<td>
-		<x-bss-form.input name="right_iliac_fosse" :value="old('right_iliac_fosse', !empty($row) && $row->right_iliac_fosse ? $row->right_iliac_fosse : 'inflammation appendix structure hypoechogenouse,')"/>
-	</td>
-</tr>
-<tr>
-	<td class="text-right">*</td>
-	<td>
-		<x-bss-form.input name="star2" :value="old('star2', !empty($row) && $row->star2 ? $row->star2 : 'Transverse ultrasound image of the right lower quadrant of the abdomen, ultrasound image rivealing the thick-walled inflamed appendix a small periappendiceal fluid collection')"/>
-	</td>
-</tr>
-<tr>
 	<td class="text-right">IMPRESSION</td>
 	<td>
-		<x-bss-form.input name="impression" :value="old('impression', !empty($row) && $row->impression ? $row->impression : 'ACUTE APPENDICITIS ')"/>
+		<x-bss-form.input name="impression" :value="old('impression', !empty($row) && $row->impression ? $row->impression : 'CHRONIC CYSTITIS')"/>
 	</td>
 </tr>

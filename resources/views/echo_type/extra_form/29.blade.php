@@ -19,19 +19,19 @@
 <tr>
 	<td class="text-right">- The kidneys</td>
 	<td>
-		<x-bss-form.input name="kidneys" :value="old('kidneys', !empty($row) && $row->kidneys ? $row->kidneys : 'appear as sharply outlined bean-shaped organs. No kidney stones are seen. No blockage to the system draining the kidneys is present.')"/>
+		<x-bss-form.input name="kidneys" :value="old('kidneys', !empty($row) && $row->kidneys ? $row->kidneys : 'are normal')"/>
 	</td>
 </tr>
 <tr>
 	<td class="text-right">- Bladder</td>
 	<td>
-		<x-bss-form.input name="bladder" :value="old('bladder', !empty($row) && $row->bladder ? $row->bladder : 'moderately full of urine with thin wall. No intra vesicle lesion or calculi are presence')"/>
+		<x-bss-form.input name="bladder" :value="old('bladder', !empty($row) && $row->bladder ? $row->bladder : 'moderately full of urine with thin wall. No intra vesicle lesion or calculi are presence.')"/>
 	</td>
 </tr>
 <tr>
 	<td class="text-right">- Prostate</td>
 	<td>
-		<x-bss-form.input name="prostate" :value="old('prostate', !empty($row) && $row->prostate ? $row->prostate : 'Normal thickness of the gallbladder wall is normal. The size of the bile ducts between')"/>
+		<x-bss-form.input name="prostate" :value="old('prostate', !empty($row) && $row->prostate ? $row->prostate : 'Normal of size, homogeneous structure, no lesion is seen')"/>
 	</td>
 </tr>
 <tr>
@@ -41,20 +41,14 @@
 	</td>
 </tr>
 <tr>
-	<td class="text-right">- The right iliac fosse (RIF)</td>
-	<td>
-		<x-bss-form.input name="right_iliac_fosse" :value="old('right_iliac_fosse', !empty($row) && $row->right_iliac_fosse ? $row->right_iliac_fosse : 'inflammation appendix structure hypoechogenouse,')"/>
-	</td>
-</tr>
-<tr>
 	<td class="text-right">*</td>
 	<td>
-		<x-bss-form.input name="star2" :value="old('star2', !empty($row) && $row->star2 ? $row->star2 : 'Transverse ultrasound image of the right lower quadrant of the abdomen, ultrasound image rivealing the thick-walled inflamed appendix a small periappendiceal fluid collection')"/>
+		<x-bss-form.input name="star2" :value="old('star2', !empty($row) && $row->star2 ? $row->star2 : 'Presence heterogene  masse On RIF on psoas muscle diameter ~75.4mm x 85mm')"/>
 	</td>
 </tr>
 <tr>
 	<td class="text-right">IMPRESSION</td>
 	<td>
-		<x-bss-form.input name="impression" :value="old('impression', !empty($row) && $row->impression ? $row->impression : 'ACUTE APPENDICITIS ')"/>
+		<x-bss-form.input name="impression" :value="old('impression', !empty($row) && $row->impression ? $row->impression : 'RIGHT PSOAS  abscess')"/>
 	</td>
 </tr>

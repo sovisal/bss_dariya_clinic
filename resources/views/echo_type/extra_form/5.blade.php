@@ -1,7 +1,7 @@
 <tr>
 	<td width="30%" class="text-right">Liver</td>
 	<td>
-		<x-bss-form.textarea name="liver" class="my-simple-editor" :value="old('liver', !empty($row) && $row->liver ? $row->liver : '')"><p>normal of size, homogeneous, echo structure no focal lesion is seen. No dilatation of the intra hepatic bile duct is seen, the common bile duct is normal in diameter</p><p>The diameter of the aorta is normal and no aneurysms are seen.</p></x-bss-form.textarea>
+		<x-bss-form.textarea name="liver" class="my-simple-editor">{{ old('liver', !empty($row) && $row->liver ? $row->liver : '<p>normal of size, homogeneous, echo structure no focal lesion is seen. No dilatation of the intra hepatic bile duct is seen, the common bile duct is normal in diameter</p><p>The diameter of the aorta is normal and no aneurysms are seen.</p>') }}</x-bss-form.textarea>
 	</td>
 </tr>
 <tr>
@@ -41,7 +41,7 @@
 	</td>
 </tr>
 <tr>
-	<td class="text-right">IMPRESSION</td>
+	<td width="30%" class="text-right">IMPRESSION</td>
 	<td>
 		<x-bss-form.input name="impression" :value="old('impression', !empty($row) && $row->impression ? $row->impression : 'No abnormality detected of the whole abdominal ultrasound')"/>
 	</td>

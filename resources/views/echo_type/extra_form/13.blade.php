@@ -1,7 +1,7 @@
 <tr>
 	<td width="30%" class="text-right">Liver</td>
 	<td>
-		<x-bss-form.textarea name="liver" class="my-simple-editor">{{ old('liver', !empty($row) && $row->liver ? $row->liver : '<p>normal of size, homogeneous, echo structure has a big nodular </p><p>diameter~60,6mm x 63,9mm in right lobe .</p><p>No dilatation of the intra hepatic bile duct is seen, the common bile duct is normal in diameter</p><p>The diameter of the aorta is normal and no aneurysms are seen.</p>') }}</x-bss-form.textarea>
+		<x-bss-form.input name="liver" :value="old('liver', !empty($row) && $row->liver ? $row->liver : 'normal of size , homogeneous, echo structure no focal lesion is seen. No dilatation of the intra hepatic bile duct is seen, the common bile duct is normal in diameterThe diameter of the aorta is normal and no aneurysms are seen.')"/>
 	</td>
 </tr>
 <tr>
@@ -31,7 +31,7 @@
 <tr>
 	<td class="text-right">- Uterus</td>
 	<td>
-		<x-bss-form.input name="uterus" :value="old('uterus', !empty($row) && $row->uterus ? $row->uterus : 'Anteverted, DAP= 38mm, L= 60mm, homogeneous structure')"/>
+		<x-bss-form.input name="uterus" :value="old('uterus', !empty($row) && $row->uterus ? $row->uterus : 'Anteverted, Normal')"/>
 	</td>
 </tr>
 <tr>
@@ -53,20 +53,8 @@
 	</td>
 </tr>
 <tr>
-	<td class="text-right">- Colon</td>
-	<td>
-		<x-bss-form.input name="colon" :value="old('colon', !empty($row) && $row->colon ? $row->colon : 'Wall thick ness and diameter 4,5mm with inter wall surface is irregular')"/>
-	</td>
-</tr>
-<tr>
-	<td class="text-right">*</td>
-	<td>
-		<x-bss-form.input name="star2" :value="old('star2', !empty($row) && $row->star2 ? $row->star2 : 'She has a few mesenteric adenopathy and size is verity.')"/>
-	</td>
-</tr>
-<tr>
 	<td class="text-right">IMPRESSION</td>
 	<td>
-		<x-bss-form.textarea name="impression" class="my-simple-editor">{{ old('impression', !empty($row) && $row->impression ? $row->impression : '<p>- CHC</p><p>- COLON TUMOUR</p><p>- ABDOMINO - ADENOPATHY</p>') }}</x-bss-form.textarea>
+		<x-bss-form.input name="impression" :value="old('impression', !empty($row) && $row->impression ? $row->impression : 'Echo abdomino pelvice normal')"/>
 	</td>
 </tr>
