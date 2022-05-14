@@ -59,8 +59,8 @@ class EchographyController extends Controller
 		$serialize = array_except($request->all(), ['_method', '_token']);
 		$request['attribite'] = serialize($serialize);
 
-		$dataParent = new Echography();
-		if ($dataParent->create([
+		$echography = new Echography();
+		if ($echography->create([
 			// 'code' => $request->code,
 			'type' => $request->type,
 			'patient_id' => $request->patient_id,
@@ -73,7 +73,7 @@ class EchographyController extends Controller
 			'attribite' => $request->attribite,
 			'status' => 1,
 		])) {
-			return redirect()->route('para_clinic.echography.index')->with('success', 'Data created success');
+			return redirect()->route('para_clinic.echography.edit', $echography->id)->with('success', 'Data created success');
 		}
 	}
 
@@ -122,9 +122,10 @@ class EchographyController extends Controller
 		// serialize all post into string
 		$serialize = array_except($request->all(), ['_method', '_token']);
 		$request['attribute'] = serialize($serialize);
+		$request['amount'] = $request->amount ?: 0;
 
 		if ($echography->update($request->all())) {
-			return redirect()->route('para_clinic.echography.index')->with('success', 'Data update success');
+			return redirect()->route('para_clinic.echography.edit', $echography->id)->with('success', 'Data update success');
 		}
 	}
 
