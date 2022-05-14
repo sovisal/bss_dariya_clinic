@@ -38,8 +38,11 @@
 		<!-- Scripts: Start -->
 		<script src="{{ asset('js/app.js') }}"></script>
 		<script src="{{ asset('js/unison.js') }}"></script>
-		{{-- <script src="{{ asset('js/app-menu.min.js') }}"></script> --}}
-		{{-- <script src="{{ asset('js/app.min.js') }}"></script> --}}
+		<script src="{{ asset('js/datatable/dataTables.buttons.min.js') }}"></script>
+		<script src="{{ asset('js/datatable/buttons.bootstrap4.min.js') }}"></script>
+		<script src="{{ asset('js/datatable/buttons.html5.min.js') }}"></script>
+		<script src="{{ asset('js/datatable/buttons.print.min.js') }}"></script>
+		<script src="{{ asset('js/datatable/jszip.min.js') }}"></script>
 		<script src="{{ asset('js/custom-js.js') }}" defer></script>
 		{!! $js ?? '' !!}
 	</body>

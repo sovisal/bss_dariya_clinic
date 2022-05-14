@@ -45,7 +45,7 @@
 	<td>
 		<div class="row">
 			<div class="col-sm-4">
-				<x-bss-form.input name="heart_rate" :value="old('heart_rate', !empty($row) && $row->heart_rate ? $row->heart_rate : '')"/>
+				<x-bss-form.input name="heart_rate" class="is_number" :value="old('heart_rate', !empty($row) && $row->heart_rate ? $row->heart_rate : '')"/>
 			</div>
 			<div class="col-sm-4 pl-0">
 				<x-bss-form.select name="heart_rate_unit">
@@ -69,10 +69,10 @@
 <tr>
 	<td width="30%" class="text-right">កញ្ចឹងក</td>
 	<td>
-		<x-bss-form.select name="neck">
-			<option value="ធម្មតា" {{ ((old('neck', $row->neck) == 'ធម្មតា')? 'selected' : '') }}>ធម្មតា</option>
-			<option value="មិនធម្មតា" {{ ((old('neck', $row->neck) == 'មិនធម្មតា')? 'selected' : '') }}>មិនធម្មតា</option>
-			<option value="-" {{ ((old('neck', $row->neck) == '-')? 'selected' : '') }}>-</option>
+		<x-bss-form.select name="baby_neck">
+			<option value="ធម្មតា" {{ ((old('baby_neck', $row->baby_neck) == 'ធម្មតា')? 'selected' : '') }}>ធម្មតា</option>
+			<option value="មិនធម្មតា" {{ ((old('baby_neck', $row->baby_neck) == 'មិនធម្មតា')? 'selected' : '') }}>មិនធម្មតា</option>
+			<option value="-" {{ ((old('baby_neck', $row->baby_neck) == '-')? 'selected' : '') }}>-</option>
 		</x-bss-form.select>
 	</td>
 </tr>
@@ -99,10 +99,10 @@
 <tr>
 	<td width="30%" class="text-right">ប្លោកនោម</td>
 	<td>
-		<x-bss-form.select name="bladder">
-			<option value="ធម្មតា" {{ ((old('bladder', $row->bladder) == 'ធម្មតា')? 'selected' : '') }}>ធម្មតា</option>
-			<option value="មិនធម្មតា" {{ ((old('bladder', $row->bladder) == 'មិនធម្មតា')? 'selected' : '') }}>មិនធម្មតា</option>
-			<option value="-" {{ ((old('bladder', $row->bladder) == '-')? 'selected' : '') }}>-</option>
+		<x-bss-form.select name="baby_bladder">
+			<option value="ធម្មតា" {{ ((old('baby_bladder', $row->baby_bladder) == 'ធម្មតា')? 'selected' : '') }}>ធម្មតា</option>
+			<option value="មិនធម្មតា" {{ ((old('baby_bladder', $row->baby_bladder) == 'មិនធម្មតា')? 'selected' : '') }}>មិនធម្មតា</option>
+			<option value="-" {{ ((old('baby_bladder', $row->baby_bladder) == '-')? 'selected' : '') }}>-</option>
 		</x-bss-form.select>
 	</td>
 </tr>
@@ -131,7 +131,7 @@
 	<td>
 		<div class="row">
 			<div class="col-sm-4">
-				<x-bss-form.input name="head_width" :value="old('head_width', !empty($row) && $row->head_width ? $row->head_width : '')"/>
+				<x-bss-form.input name="head_width" class="is_number" :value="old('head_width', !empty($row) && $row->head_width ? $row->head_width : '')"/>
 			</div>
 			<div class="col-sm-4 pl-0">
 				<x-bss-form.select name="head_width_unit">
@@ -147,7 +147,7 @@
 	<td>
 		<div class="row">
 			<div class="col-sm-4">
-				<x-bss-form.input name="head_circumference" :value="old('head_circumference', !empty($row) && $row->head_circumference ? $row->head_circumference : '')"/>
+				<x-bss-form.input name="head_circumference" class="is_number" :value="old('head_circumference', !empty($row) && $row->head_circumference ? $row->head_circumference : '')"/>
 			</div>
 			<div class="col-sm-4 pl-0">
 				<x-bss-form.select name="head_circumference_unit">
@@ -163,7 +163,7 @@
 	<td>
 		<div class="row">
 			<div class="col-sm-4">
-				<x-bss-form.input name="abdominal_circumference" :value="old('abdominal_circumference', !empty($row) && $row->abdominal_circumference ? $row->abdominal_circumference : '')"/>
+				<x-bss-form.input name="abdominal_circumference" class="is_number" :value="old('abdominal_circumference', !empty($row) && $row->abdominal_circumference ? $row->abdominal_circumference : '')"/>
 			</div>
 			<div class="col-sm-4 pl-0">
 				<x-bss-form.select name="abdominal_circumference_unit">
@@ -179,7 +179,7 @@
 	<td>
 		<div class="row">
 			<div class="col-sm-4">
-				<x-bss-form.input name="thigh_length" :value="old('thigh_length', !empty($row) && $row->thigh_length ? $row->thigh_length : '')"/>
+				<x-bss-form.input name="thigh_length" class="is_number" :value="old('thigh_length', !empty($row) && $row->thigh_length ? $row->thigh_length : '')"/>
 			</div>
 			<div class="col-sm-4 pl-0">
 				<x-bss-form.select name="thigh_length_unit">
@@ -219,7 +219,7 @@
 	<td>
 		<div class="row">
 			<div class="col-sm-4">
-				<x-bss-form.input name="pregnancy_age1" :value="old('pregnancy_age1', !empty($row) && $row->pregnancy_age1 ? $row->pregnancy_age1 : '')"/>
+				<x-bss-form.input name="pregnancy_age1" class="is_number" :value="old('pregnancy_age1', !empty($row) && $row->pregnancy_age1 ? $row->pregnancy_age1 : '')"/>
 			</div>
 			<div class="col-sm-4 pl-0">
 				<x-bss-form.select name="pregnancy_age1_unit">
@@ -235,7 +235,7 @@
 	<td>
 		<div class="row">
 			<div class="col-sm-4">
-				<x-bss-form.input name="pregnancy_age2" :value="old('pregnancy_age2', !empty($row) && $row->pregnancy_age2 ? $row->pregnancy_age2 : '')"/>
+				<x-bss-form.input name="pregnancy_age2" class="is_number" :value="old('pregnancy_age2', !empty($row) && $row->pregnancy_age2 ? $row->pregnancy_age2 : '')"/>
 			</div>
 			<div class="col-sm-4 pl-0">
 				<x-bss-form.select name="pregnancy_age2_unit">
@@ -251,7 +251,7 @@
 	<td>
 		<div class="row">
 			<div class="col-sm-4">
-				<x-bss-form.input name="baby_weight" :value="old('baby_weight', !empty($row) && $row->baby_weight ? $row->baby_weight : '')"/>
+				<x-bss-form.input name="baby_weight" class="is_number" :value="old('baby_weight', !empty($row) && $row->baby_weight ? $row->baby_weight : '')"/>
 			</div>
 			<div class="col-sm-4 pl-0">
 				<x-bss-form.select name="baby_weight_unit">
@@ -267,7 +267,7 @@
 	<td>
 		<div class="row">
 			<div class="col-sm-4">
-				<x-bss-form.input name="over_under" :value="old('over_under', !empty($row) && $row->over_under ? $row->over_under : '')"/>
+				<x-bss-form.input name="over_under" class="is_number" :value="old('over_under', !empty($row) && $row->over_under ? $row->over_under : '')"/>
 			</div>
 			<div class="col-sm-4 pl-0">
 				<x-bss-form.select name="over_under_unit">
@@ -289,7 +289,7 @@
 	<td>
 		<div class="row">
 			<div class="col-sm-4">
-				<x-bss-form.input name="before_after" :value="old('before_after', !empty($row) && $row->before_after ? $row->before_after : '')"/>
+				<x-bss-form.input name="before_after" class="is_number" :value="old('before_after', !empty($row) && $row->before_after ? $row->before_after : '')"/>
 			</div>
 			<div class="col-sm-4 pl-0">
 				<x-bss-form.select name="before_after_unit">

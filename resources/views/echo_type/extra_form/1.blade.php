@@ -9,7 +9,7 @@
 	<td>
 		<div class="row">
 			<div class="col-sm-4">
-				<x-bss-form.input name="crl" :value="old('crl', !empty($row) && $row->crl ? $row->crl : '')"/>
+				<x-bss-form.input name="crl" class="is_number" :value="old('crl', !empty($row) && $row->crl ? $row->crl : '')"/>
 			</div>
 			<div class="col-sm-4 pl-0">
 				<x-bss-form.select name="crl_unit">
@@ -25,7 +25,7 @@
 	<td>
 		<div class="row">
 			<div class="col-sm-4">
-				<x-bss-form.input name="gs" :value="old('gs', !empty($row) && $row->gs ? $row->gs : '')"/>
+				<x-bss-form.input name="gs" class="is_number" :value="old('gs', !empty($row) && $row->gs ? $row->gs : '')"/>
 			</div>
 			<div class="col-sm-4 pl-0">
 				<x-bss-form.select name="gs_unit">
@@ -71,7 +71,7 @@
 	<td>
 		<div class="row">
 			<div class="col-sm-4">
-				<x-bss-form.input name="pregnancy_age1" :value="old('pregnancy_age1', !empty($row) && $row->pregnancy_age1 ? $row->pregnancy_age1 : '')"/>
+				<x-bss-form.input name="pregnancy_age1" class="is_number" :value="old('pregnancy_age1', !empty($row) && $row->pregnancy_age1 ? $row->pregnancy_age1 : '')"/>
 			</div>
 			<div class="col-sm-4 pl-0">
 				<x-bss-form.select name="pregnancy_age1_unit">
@@ -87,7 +87,7 @@
 	<td>
 		<div class="row">
 			<div class="col-sm-4">
-				<x-bss-form.input name="pregnancy_age2" :value="old('pregnancy_age2', !empty($row) && $row->pregnancy_age2 ? $row->pregnancy_age2 : '')"/>
+				<x-bss-form.input name="pregnancy_age2" class="is_number" :value="old('pregnancy_age2', !empty($row) && $row->pregnancy_age2 ? $row->pregnancy_age2 : '')"/>
 			</div>
 			<div class="col-sm-4 pl-0">
 				<x-bss-form.select name="pregnancy_age2_unit">
@@ -115,7 +115,7 @@
 	<td>
 		<div class="row">
 			<div class="col-sm-4">
-				<x-bss-form.input name="before_after" :value="old('before_after', !empty($row) && $row->before_after ? $row->before_after : '')"/>
+				<x-bss-form.input name="before_after" class="is_number" :value="old('before_after', !empty($row) && $row->before_after ? $row->before_after : '')"/>
 			</div>
 			<div class="col-sm-4 pl-0">
 				<x-bss-form.select name="before_after_unit">

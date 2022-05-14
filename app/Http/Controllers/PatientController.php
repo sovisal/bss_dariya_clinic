@@ -92,7 +92,7 @@ class PatientController extends Controller
 		}
 
 		if ($request->file('photo')) {
-			$path = public_path().'/images/patients/';
+			$path = public_path('/images/patients/');
 			File::makeDirectory($path, 0777, true, true);
 			$photo = $request->file('photo');
 			$photo_name = time() .'_'. $patient->id .'.png';
@@ -175,7 +175,7 @@ class PatientController extends Controller
 		}
 
 		if ($request->file('photo')) {
-			$path = public_path().'/images/patients/';
+			$path = public_path('/images/patients/');
 			File::makeDirectory($path, 0777, true, true);
 			$photo = $request->file('photo');
 			$patient_photo = (($patient->photo!='')? $patient->photo : time() .'_'. $patient->id .'.png');
@@ -192,7 +192,13 @@ class PatientController extends Controller
 	public function destroy(Patient $patient)
 	{
 		$address_id = $patient->address_id;
+		$patient_photo = $patient->photo;
 		if ($patient->delete()) {
+			$old_path =public_path('/images/patients/'. $patient_photo);
+			if(File::exists($old_path)) {
+				File::delete($old_path);
+			}
+
 			if ($address_id && $address_id > 0) delete4LevelAddress($address_id);
 			return back()->with('success', __('alert.message.success.crud.delete'));
 		}

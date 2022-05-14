@@ -231,7 +231,15 @@ $(document).ready(function(){
 			"columnDefs": [{
 				"targets": 'no-sort',
 				"orderable": false,
-			}]
+			}],
+			dom:  "<'row'<'col-sm-8'<'d-flex'<l><'ml-1'B>>><'col-sm-4'f>>" +
+					"<'row'<'col-sm-12'tr>>" +
+					"<'row'<'col-sm-5'i><'col-sm-7'p>>",
+			buttons: [
+				{ extend: 'csv', text: '<i class="la la-file-csv"></i> CSV', className: 'btn-sm'},
+				{ extend: 'excel', text: '<i class="la la-file-excel"></i> Excel', className: 'btn-sm'},
+				{ extend: 'print', text: '<i class="bx bx-printer"></i> Print', className: 'btn-sm'}
+			],
 		});
 	// End Initial Datatables
 
