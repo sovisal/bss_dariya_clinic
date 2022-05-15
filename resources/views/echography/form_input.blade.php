@@ -3,7 +3,7 @@
 	<td>
 		<x-bss-form.select name="type" :disabled="$is_edit" required>
 			@if (!$is_edit)
-				<option>Please choose</option>
+				<option value="">Please choose</option>
 			@endif
 			@foreach ($type as $data)
 				<option value="{{ $data->id }}" data-price="{{ $data->price }}" {{ ($row->type ?? false) == $data->id ? 'selected' : '' }} >{{ $data->name_en }}</option>
@@ -24,7 +24,7 @@
 	<td>
 		<x-bss-form.select name="patient_id" required :disabled="$is_edit">
 			@if (!$is_edit)
-				<option>Please choose patient</option>
+				<option value="">Please choose patient</option>
 			@endif
 			@foreach ($patient as $data)
 				<option value="{{ $data->id }}" {{ ($row->patient_id ?? false) == $data->id ? 'selected' : '' }} >{{ $data->name_en }}</option>
@@ -41,7 +41,7 @@
 	<td>
 		<x-bss-form.select name="requested_by" required :disabled="$is_edit">
 			@if (!$is_edit)
-				<option>Please choose</option>
+				<option value="">Please choose</option>
 			@endif
 			@foreach ($doctor as $data)
 				<option value="{{ $data->id }}" {{ ($row->requested_by ?? false) == $data->id ? 'selected' : '' }} >{{ $data->name_en }}</option>
@@ -52,7 +52,7 @@
 	<td>
 		<x-bss-form.select name="doctor_id" required :disabled="$is_edit">
 			@if (!$is_edit)
-				<option>Please choose</option>
+				<option value="">Please choose</option>
 			@endif
 			@foreach ($doctor as $data)
 				<option value="{{ $data->id }}" {{ ($row->doctor_id ?? false) == $data->id ? 'selected' : '' }} >{{ $data->name_en }}</option>

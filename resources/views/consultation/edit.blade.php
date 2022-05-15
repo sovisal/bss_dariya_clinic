@@ -428,7 +428,7 @@
 	</x-slot>
 	<form id="consultation-form" action="{{ route('patient.consultation.update', $consultation->id) }}" method="post">
 		@csrf
-		<input type="hidden" name="_method" value="PUT" />
+		@method('PUT')
 		<input type="hidden" name="submit_option" value="cancel" />
 		<x-card :actionShow="false" headerClass="" footerClass="" bodyClass="">
 			<x-slot name="header">

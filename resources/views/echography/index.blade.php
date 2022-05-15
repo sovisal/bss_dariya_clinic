@@ -59,11 +59,7 @@
 					<td class="text-right">{{ render_currency($row->amount) }}</td>
 					<td>{{ $row->type_en }}</td>
 					<td class="text-center">
-						@if ($row->status)
-							<span class="badge badge-primary">Completed</span>
-						@else
-							<span class="badge badge-light">Progress</span>
-						@endif
+						<span class="badge badge-{{ (($row->status=='Complete')? 'primary' : 'light') }}">{{ $row->status }}</span>
 					</td>
 					<td class="text-center">
 						@if ($row->payment_status)
@@ -73,17 +69,17 @@
 						@endif
 					</td>
 					<td class="text-right">
-						<x-form.button color="info" class="btn-sm" onclick="getDetail({{ $row->id }})" icon="bx bx-list-ul" />
-						<x-form.button color="warning" class="btn-sm"  icon="bx bx-image" />
-						{{-- @if (!$row->status) --}}
+						@if ($row->status=='Progress')
 							<x-form.button color="secondary" class="btn-sm" href="{{ route('para_clinic.echography.edit', $row->id) }}" icon="bx bx-edit-alt" />
-							<x-form.button color="danger" class="confirmDelete btn-sm" data-id="{{ $row->id }}" icon="bx bx-trash" />
+							{{-- <x-form.button color="danger" class="confirmDelete btn-sm" data-id="{{ $row->id }}" icon="bx bx-trash" />
 							<form class="sr-only" id="form-delete-{{ $row->id }}" action="{{ route('para_clinic.echography.delete', $row->id) }}" method="POST">
 								@csrf
 								@method('DELETE')
 								<button class="sr-only" id="btn-{{ $row->id }}">Delete</button>
-							</form>
-						{{-- @endif --}}
+							</form> --}}
+						@endif
+						<x-form.button color="info" class="btn-sm" onclick="getDetail({{ $row->id }})" icon="bx bx-list-ul" />
+						<x-form.button color="warning" class="btn-sm"  icon="bx bx-image" />
 					</td>
 				</tr>
 			@endforeach
