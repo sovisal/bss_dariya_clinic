@@ -10,16 +10,6 @@ use App\Http\Controllers\EGCController;
 Route::middleware(['auth'])->prefix('para-clinic')->name('para_clinic.')->group(function () {
 	Route::get('/', [ParaClinicController::class, 'index'])->name('index')->middleware('can:ViewAnyParaclinic');
 
-	Route::prefix('labor')->name('labor.')->group(function () {
-		Route::get('/', [LaborController::class, 'index'])->name('index')->middleware('can:ViewAnyLabor');
-		Route::get('/create', [LaborController::class, 'create'])->name('create')->middleware('can:CreateLabor');
-		Route::post('/store', [LaborController::class, 'store'])->name('store')->middleware('can:CreateLabor');
-		Route::get('/{labor}/edit', [LaborController::class, 'edit'])->name('edit')->middleware('can:UpdateLabor');
-		Route::put('/{labor}/update', [LaborController::class, 'update'])->name('update')->middleware('can:UpdateLabor');
-		Route::delete('/{labor}/delete', [LaborController::class, 'destroy'])->name('delete')->middleware('can:DeleteLabor');
-		Route::get('/{labor}/show', [LaborController::class, 'show'])->name('show')->middleware('can:ViewAnyLabor');
-	});
-
 	Route::prefix('x-ray')->name('x_ray.')->group(function () {
 		Route::get('/', [XRayController::class, 'index'])->name('index')->middleware('can:ViewAnyXRay');
 		Route::get('/create', [XRayController::class, 'create'])->name('create')->middleware('can:CreateXRay');
