@@ -2,6 +2,18 @@
 	<x-slot name="header">
 		<x-form.button href="{{ route('para_clinic.echography.create') }}" label="Create" icon="bx bx-plus"/>
 	</x-slot>
+	<x-slot name="css">
+		<style>
+			#image-slider{
+				width: 600px;
+				margin: 10px auto;
+				overflow: hidden;
+			}
+			#image-slider .carousel-inner{
+				border-radius: 0;
+			}
+		</style>
+	</x-slot>
 	<x-slot name="js">
 		<script>
 
@@ -31,6 +43,29 @@
 						alert(rs.message);
 					}
 				});
+			}
+
+			function getImage(img_1, img_2){
+				var inner_slider;
+				$('#image-modal .modal-body .no-photo').remove();
+				if (img_1 != '' || img_2 != '') {
+					$('#image-modal #image-slider').removeClass('sr-only');
+					if (img_1 != '') {
+						inner_slider = `<div class="carousel-item active">
+											<img src="/images/echographies/${ img_1 }" class="d-block w-100" alt="...">
+										</div>`;
+					}
+					if (img_2 != '') {
+						inner_slider += `<div class="carousel-item ${ ((img_1 == '')? 'active' : '') }">
+											<img src="/images/echographies/${ img_2 }" class="d-block w-100" alt="...">
+										</div>`;
+					}
+					$('#image-modal #image-slider .carousel-inner').html(inner_slider);
+				}else{
+					$('#image-modal #image-slider').addClass('sr-only');
+					$('#image-modal .modal-body').append('<div class="no-photo text-center py-1">No photo</div>');
+				}
+				$('#image-modal').modal();
 			}
 
 		</script>
@@ -79,7 +114,8 @@
 							</form> --}}
 						@endif
 						<x-form.button color="info" class="btn-sm" onclick="getDetail({{ $row->id }})" icon="bx bx-list-ul" />
-						<x-form.button color="warning" class="btn-sm"  icon="bx bx-image" />
+						<x-form.button color="warning" class="btn-sm" onclick="getImage('{{ $row->image_1 }}', '{{ $row->image_2 }}')" icon="bx bx-image" />
+						<x-form.button color="dark" class="btn-sm" onclick="getPrintPreview({{ $row->id }})" icon="bx bx-printer" />
 					</td>
 				</tr>
 			@endforeach
@@ -135,6 +171,13 @@
 			</thead>
 			<tbody></tbody>
 		</table>
+	</x-modal>
+
+	<x-modal :foot="false" id="image-modal" dialogClass="modal-lg">
+		<x-slot name="header">
+			View Echography Photo
+		</x-slot>
+		<x-slider id="image-slider" :autoplay="false" :data="['images/echographies/1652535596_1.png', 'images/echographies/1652535597_1.png']" />
 	</x-modal>
 
 	<x-modal-confirm-delete />

@@ -12,5 +12,7 @@ Route::middleware(['auth'])->name('para_clinic.')->group(function () {
 		Route::put('/{echography}/update', [EchographyController::class, 'update'])->name('echography.update');
 		Route::delete('/{echography}/delete', [EchographyController::class, 'destroy'])->name('echography.delete');
 		Route::post('/getDetail', [EchographyController::class, 'getDetail'])->name('echography.getDetail');
+		// Route::post('/getImage', [EchographyController::class, 'getImage'])->name('echography.getImage');
+		Route::post('/getPrintPreview', [EchographyController::class, 'getPrintPreview'])->name('echography.getPrintPreview');
 	});
 });

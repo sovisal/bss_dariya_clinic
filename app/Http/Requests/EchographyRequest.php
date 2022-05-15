@@ -30,8 +30,8 @@ class EchographyRequest extends FormRequest
 			// 'payment_type' => 'required|numeric',
 			// 'requested_by' => 'required|numeric',
 			// 'requested_at' => 'required|date',
-			'img_1' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
-			'img_2' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+			// 'img_1' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
+			// 'img_2' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg|max:2048',
 		];
 	}
 }

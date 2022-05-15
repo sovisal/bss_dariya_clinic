@@ -188,6 +188,44 @@ class EchographyController extends Controller
 		}
 	}
 
+	// /**
+	//  * Display the specified Image.
+	//  */
+	// public function getImage(Request $request)
+	// {
+	// 	$echography = Echography::find($request->id);
+	// 	if ($echography) {
+	// 		return response()->json([
+	// 			'success' => true,
+	// 			'echography' => $echography,
+	// 		]);
+	// 	}else{
+	// 		return response()->json([
+	// 			'success' => false,
+	// 			'message' => 'Echography not found!',
+	// 		], 404);
+	// 	}
+	// }
+
+	/**
+	 * Display the specified Image.
+	 */
+	public function getPrintPreview(Request $request)
+	{
+		$echography = Echography::find($request->id);
+		if ($echography) {
+			return response()->json([
+				'success' => true,
+				'echography' => $echography,
+			]);
+		}else{
+			return response()->json([
+				'success' => false,
+				'message' => 'Echography not found!',
+			], 404);
+		}
+	}
+
 	/**
 	 * Show the form for editing the specified resource.
 	 *
