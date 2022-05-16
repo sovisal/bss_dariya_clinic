@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Laboratory;
+use App\Models\LaborDetail;
 use App\Models\Doctor;
 use App\Models\Patient;
 use App\Http\Requests\StoreLaboratoryRequest;
@@ -63,9 +64,9 @@ class LaboratoryController extends Controller
             'patient_id' => $request->patient_id,
             'gender' => $request->gender,
             'age' => $request->age ?: 0,
-            'requested_by' => $request->requested_by,
+            'requested_by' => $request->requested_by ?: 0,
             'requested_at' => $request->requested_at ?: date('Y-m-d H:i:s'),
-            'doctor_id' => $request->doctor_id,
+            'doctor_id' => $request->doctor_id ?: 0,
             'analysis_at' => $request->analysis_at ?: null,
             'amount' => $request->amount ?: 0,
             'payment_type' => $request->payment_type,
@@ -106,6 +107,7 @@ class LaboratoryController extends Controller
 		}
         $data['gender'] = getParentDataSelection('gender');
 		$data['payment_type'] = getParentDataSelection('payment_type');
+		$data['item_detail'] = LaborDetail::all();
 		$data['is_edit'] = true;
 		return view('labor.edit', $data);
     }
