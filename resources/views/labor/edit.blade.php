@@ -14,9 +14,9 @@
 		</script>
 	</x-slot>
 	<x-slot name="header">
-		<x-form.button href="{{ route('para_clinic.xray.index') }}" color="danger" icon="bx bx-left-arrow-alt" label="Back" />
+		<x-form.button href="{{ route('para_clinic.labor.index') }}" color="danger" icon="bx bx-left-arrow-alt" label="Back" />
 	</x-slot>
-	<form action="{{ route('para_clinic.xray.update', $row) }}" method="POST" autocomplete="off" enctype="multipart/form-data">
+	<form action="{{ route('para_clinic.labor.update', $row) }}" method="POST" autocomplete="off" enctype="multipart/form-data">
 		@method('PUT')
 		@csrf
 		<x-card bodyClass="pb-0">			

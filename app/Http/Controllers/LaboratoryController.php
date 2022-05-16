@@ -7,6 +7,7 @@ use App\Models\Doctor;
 use App\Models\Patient;
 use App\Http\Requests\StoreLaboratoryRequest;
 use App\Http\Requests\UpdateLaboratoryRequest;
+use Illuminate\Http\Request;
 
 class LaboratoryController extends Controller
 {
@@ -36,10 +37,10 @@ class LaboratoryController extends Controller
      */
     public function create()
     {
-        // $data['type'] = EchoType::where('status', 1)->orderBy('index', 'asc')->get();
 		$data['patient'] = Patient::orderBy('name_en', 'asc')->get();
 		$data['doctor'] = Doctor::orderBy('name_en', 'asc')->get();
 		$data['payment_type'] = getParentDataSelection('payment_type');
+        $data['gender'] = getParentDataSelection('gender');
 		$data['is_edit'] = false;
 		return view('labor.create', $data);
     }
@@ -50,9 +51,33 @@ class LaboratoryController extends Controller
      * @param  \App\Http\Requests\StoreLaboratoryRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreLaboratoryRequest $request)
+    public function store(Request $request)
     {
-        //
+        // serialize all post into string
+        $serialize = array_except($request->all(), ['_method', '_token']);
+        $request['attribite'] = serialize($serialize);
+
+        $laboratory = new Laboratory();
+        if ($labor = $laboratory->create([
+            // 'code' => $request->code,
+            'patient_id' => $request->patient_id,
+            'gender' => $request->gender,
+            'age' => $request->age ?: 0,
+            'requested_by' => $request->requested_by,
+            'requested_at' => $request->requested_at ?: date('Y-m-d H:i:s'),
+            'doctor_id' => $request->doctor_id,
+            'analysis_at' => $request->analysis_at ?: null,
+            'amount' => $request->amount ?: 0,
+            'payment_type' => $request->payment_type,
+            'payment_status' => $request->payment_status ?: 0,
+            'result' => $request->result,
+            'sample' => $request->sample,
+            'diagnosis' => $request->diagnosis,
+            'attribite' => $request->attribite,
+            'status' => 1,
+        ])) {
+            return redirect()->route('para_clinic.labor.edit', $labor->id)->with('success', 'Data created success');
+        }
     }
 
     /**
@@ -72,9 +97,17 @@ class LaboratoryController extends Controller
      * @param  \App\Models\Laboratory  $laboratory
      * @return \Illuminate\Http\Response
      */
-    public function edit(Laboratory $laboratory)
+    public function edit(Laboratory $labor)
     {
-        //
+		if ($labor ?? false) {
+			$data['row'] = $labor;
+			$data['patient'] = Patient::orderBy('name_en', 'asc')->get();
+			$data['doctor'] = Doctor::orderBy('name_en', 'asc')->get();
+		}
+        $data['gender'] = getParentDataSelection('gender');
+		$data['payment_type'] = getParentDataSelection('payment_type');
+		$data['is_edit'] = true;
+		return view('labor.edit', $data);
     }
 
     /**
@@ -84,9 +117,16 @@ class LaboratoryController extends Controller
      * @param  \App\Models\Laboratory  $laboratory
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateLaboratoryRequest $request, Laboratory $laboratory)
+    public function update(Request $request, Laboratory $labor)
     {
-        //
+        // serialize all post into string
+        $serialize = array_except($request->all(), ['_method', '_token']);
+        $request['attribute'] = serialize($serialize);
+        $request['amount'] = $request->amount ?? 0;
+
+        if ($labor->update($request->all())) {
+            return redirect()->route('para_clinic.labor.index')->with('success', 'Data update success');
+        }
     }
 
     /**
@@ -95,8 +135,11 @@ class LaboratoryController extends Controller
      * @param  \App\Models\Laboratory  $laboratory
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Laboratory $laboratory)
+    public function destroy(Laboratory $labor)
     {
-        //
+        $labor->status = 0;
+		if ($labor->update()) {
+			return redirect()->route('para_clinic.labor.index')->with('success', 'Data delete success');
+		}
     }
 }
