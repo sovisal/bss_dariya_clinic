@@ -1,10 +1,11 @@
 <?php
 
-namespace App\Repositories\Component;
+namespace App\Helpers;
 
-use App\Http\Controllers\Controller;
 use App\Models\Patient;
+use App\Models\Setting;
 use App\Models\FourLevelAddress;
+use App\Http\Controllers\Controller;
 
 class GlobalComponent extends Controller
 {
@@ -21,7 +22,7 @@ class GlobalComponent extends Controller
 	protected $unique_clinic_name;
 
 	public function __construct() {
-		$setting_obj =  auth()->user()->setting();
+		$setting_obj =  Setting::first();
 		
 		$this->unique_clinic_name = trim(strtoupper(auth()->user()->roles->first()->name));
 		foreach (['logo', 'clinic_name_kh', 'clinic_name_en', 'description', 'address', 'phone', 'sign_name_kh', 'sign_name_en', 'echo_description', 'echo_address'] as $obj_member) {
@@ -36,7 +37,7 @@ class GlobalComponent extends Controller
 		$title_module = ($module == 'invoice' ? 'វិក្កយបត្រ' : ($module == 'prescription' ? 'វេជ្ជបញ្ជា' : ($module == 'labor' ? 'ប័ណ្ណវិភាគវេជ្ជសាស្រ្ត' : '_______________')));
 		$number = ($module == 'invoice' ? 'inv_number' : ($module == 'prescription' ? 'code' : ($module == 'labor' ? 'labor_number' : 'number')));
 		// Top Header
-		if ($module == 'echo') {
+		if ($module == 'echography') {
 			if ($object->echo_default_description->slug == 'letter-form-the-hospital') {
 				$html_header .= '
 					<div class="KHOSMoulLight text-center" style=="font-size: 16px;">ព្រះរាជាណាចក្រកម្ពុជា</div>
