@@ -1,0 +1,53 @@
+table { page-break-inside:auto!important; }
+tr { page-break-inside:avoid!important; page-break-after:auto!important; }
+table thead { display: table-row-group!important; }
+table tfoot { display: table-row-group!important; }
+.print-preview-a4{
+	width: 21cm;
+	height: 29.7cm;
+	margin: 0 auto;
+	background: #fff;
+	border: 1px solid #ededed;
+	padding: 0.5cm;
+	position: relative;
+}
+.print-preview-a4 *:not(h1,h2,h3,h4,h5,h6){
+	font-size: 13px;
+}
+.print-preview-a4 header{
+	
+}
+.print-preview-a4 header .table-info{
+	margin: 5px 0;
+	border-top: 3px solid #1560BD;
+	border-bottom: 3px solid #1560BD;
+}
+.print-preview-a4 footer{
+	border-top: 1px solid #000;
+	position: absolute;
+	width: calc(100% - 1cm);
+	bottom: 0;
+	padding: 3px 0;
+	text-align: center;
+}
+
+@media print {
+	@page {
+		size: 21cm 29.7cm;
+		margin: 0;
+	}
+	.print-preview-a4{
+		width: 21cm;
+		height: 29.7cm;
+		display: block;
+		margin: 0 !important;
+		box-shadow: none;
+		border: none;
+	}
+	.print-preview-a4 *{
+		color: blue !important;
+		-webkit-print-color-adjust: exact !important;
+		-moz-print-color-adjust: exact !important;
+		-o-print-color-adjust: exact !important;
+	}
+}

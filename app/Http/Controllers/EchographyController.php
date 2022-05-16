@@ -10,8 +10,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
 use App\Http\Requests\EchographyRequest;
-use App\Http\Requests\StoreEchographyRequest;
-use App\Http\Requests\UpdateEchographyRequest;
 
 class EchographyController extends Controller
 {
@@ -82,17 +80,6 @@ class EchographyController extends Controller
 				return redirect()->route('para_clinic.echography.edit', $echo->id)->with('success', 'Data created success');
 			}
 		}
-	}
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  \App\Models\Echography  $echography
-	 * @return \Illuminate\Http\Response
-	 */
-	public function show(Echography $echography)
-	{
-		//
 	}
 
 	/**
@@ -188,42 +175,26 @@ class EchographyController extends Controller
 		}
 	}
 
-	// /**
-	//  * Display the specified Image.
-	//  */
-	// public function getImage(Request $request)
-	// {
-	// 	$echography = Echography::find($request->id);
-	// 	if ($echography) {
-	// 		return response()->json([
-	// 			'success' => true,
-	// 			'echography' => $echography,
-	// 		]);
-	// 	}else{
-	// 		return response()->json([
-	// 			'success' => false,
-	// 			'message' => 'Echography not found!',
-	// 		], 404);
-	// 	}
-	// }
-
 	/**
 	 * Display the specified Image.
 	 */
-	public function getPrintPreview(Request $request)
+	public function print($id)
 	{
-		$echography = Echography::find($request->id);
-		if ($echography) {
-			return response()->json([
-				'success' => true,
-				'echography' => $echography,
-			]);
-		}else{
-			return response()->json([
-				'success' => false,
-				'message' => 'Echography not found!',
-			], 404);
-		}
+		$echography = Echography::select([
+			'echographies.*',
+			'patients.name_kh as patient_kh',
+			'patients.age as patient_age',
+			'data_parents.title_en as patient_gender',
+			'doctors.name_kh as doctor_kh',
+			'echo_types.name_kh as type_kh'
+		])
+		->leftJoin('patients', 'patients.id', '=', 'echographies.patient_id')
+		->leftJoin('data_parents', 'data_parents.id', '=', 'patients.gender')
+		->leftJoin('doctors', 'doctors.id', '=', 'echographies.doctor_id')
+		->leftJoin('echo_types', 'echo_types.id', '=', 'echographies.type')
+		->find($id);
+		$data['echography'] = $echography;
+		return view('echography.print', $data);
 	}
 
 	/**
