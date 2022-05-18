@@ -12,7 +12,7 @@
     </td>
     <td width="15%" class="text-right">Payment type <small class='required'>*</small></td>
     <td>
-        <x-bss-form.select name="payment_type" required>
+        <x-bss-form.select name="payment_type" data-no_search="true" required>
             @foreach ($payment_type as $id => $data)
                 <option value="{{ $id }}" {{ ($row->payment_type ?? false) == $id ? 'selected' : '' }} >{{ $data }}</option>
             @endforeach

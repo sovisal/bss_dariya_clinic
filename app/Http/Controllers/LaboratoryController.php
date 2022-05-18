@@ -23,7 +23,7 @@ class LaboratoryController extends Controller
 			'laboratories.*', 'patients.name_en as patient_en',
             'requester.name_en as requester_en',
 		])
-		->where('laboratories.status', 1)
+		->where('laboratories.status', '>=' , 1)
 		->leftJoin('patients', 'patients.id', '=', 'laboratories.patient_id')
 		->leftJoin('doctors as requester', 'requester.id', '=', 'laboratories.requested_by')
 		->orderBy('laboratories.id', 'desc')
@@ -77,6 +77,14 @@ class LaboratoryController extends Controller
             'attribite' => $request->attribite,
             'status' => 1,
         ])) {
+            $detail = new LaborDetail;
+            // Test Data
+            $detail->create([
+                'labor_id' => $labor->id,
+                'labor_item_id' => 1,
+                'value' => 0,
+            ]);
+
             return redirect()->route('para_clinic.labor.edit', $labor->id)->with('success', 'Data created success');
         }
     }

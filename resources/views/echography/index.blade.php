@@ -93,9 +93,7 @@
 					<td class="text-center">{{ render_readable_date($row->requested_at) }}</td>
 					<td class="text-right">{{ render_currency($row->amount) }}</td>
 					<td>{{ $row->type_en }}</td>
-					<td class="text-center">
-						<span class="badge badge-{{ (($row->status=='Complete')? 'primary' : 'light') }}">{{ $row->status }}</span>
-					</td>
+					<td class="text-center">{!! render_record_status($row->status) !!}</td>
 					<td class="text-center">
 						@if ($row->payment_status)
 							<span class="badge badge-success">Paid</span>

@@ -24,7 +24,7 @@ class EchographyController extends Controller
 			'echographies.*', 'patients.name_en as patient_en', 'doctors.name_en as doctor_en',
 			'echo_types.name_en as type_en'
 		])
-		// ->where('echographies.status', 1)
+		->where('echographies.status', '>=' , 1) //1-Draft, 2-Completed, Helper function render_record_status()
 		->leftJoin('patients', 'patients.id', '=', 'echographies.patient_id')
 		->leftJoin('doctors', 'doctors.id', '=', 'echographies.doctor_id')
 		->leftJoin('echo_types', 'echo_types.id', '=', 'echographies.type')

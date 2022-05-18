@@ -269,3 +269,21 @@ function render_currency ($amn, $digit = 2, $currency = 'USD', $id_suffix_displa
 	}
 	return $currency . ' ' . number_format($amn, $digit);
 }
+
+function render_record_status ($st_num = 0) {
+	$label = '';
+	switch ($st_num) {
+		case 0:
+			$label = '<span class="badge badge-light">Disabled</span>';
+			break;
+		case 1:
+			$label = '<span class="badge badge-light">Draft</span>';
+			break;
+		case 2:
+			$label = '<span class="badge badge-success">Completed</span>';
+			break;
+		default :
+			$label = '<span class="badge badge-light">' . $st_num . '</span>';
+	}
+	return $label;
+}

@@ -19,7 +19,7 @@ class XrayController extends Controller
      */
     public function index()
     {
-        $this->data['rows'] = Xray::where('xrays.status', 1)
+        $this->data['rows'] = Xray::where('xrays.status', '>=' , 1)
         ->select([
             'xrays.*', 'patients.name_en as patient_en', 'doctors.name_en as doctor_en',
             'xray_types.name_en as type_en'

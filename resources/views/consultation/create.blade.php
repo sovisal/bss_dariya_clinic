@@ -462,7 +462,7 @@
 					</td>
 					<td width="20%" class="text-right">Payment Type</td>
 					<td>
-						<x-bss-form.select name="payment_type">
+						<x-bss-form.select name="payment_type" data-no_search="true">
 							<option value="">Select payment type</option>
 							@foreach ($payment_types as $id => $payment_type)
 								<option value="{{ $id }}" {{ ((old('payment_type') == $id)? 'selected' : '') }}>{{ $payment_type }}</option>

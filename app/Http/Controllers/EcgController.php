@@ -19,7 +19,7 @@ class EcgController extends Controller
      */
     public function index()
     {
-        $this->data['rows'] = Ecg::where('ecgs.status', 1)
+        $this->data['rows'] = Ecg::where('ecgs.status', '>=' , 1)
         ->select([
             'ecgs.*', 'patients.name_en as patient_en', 'doctors.name_en as doctor_en',
             'ecg_types.name_en as type_en'
