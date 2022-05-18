@@ -13,4 +13,9 @@ class LaborItem extends Model
         'min_range', 'max_range', 'unit', 'type',
         'status', 'index', 'other'
 	];
+
+  public function category()
+  {
+      return $this->belongsTo(LaborType::class, 'type')->first();
+  }
 }

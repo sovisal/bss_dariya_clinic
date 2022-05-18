@@ -27,55 +27,7 @@
 				@include('labor.form_input')
 			</table>
 			<br>
-			<table class="table-form striped">
-				<tr>
-					<th colspan="4" class="text-left tw-bg-gray-100">Result</th>
-				</tr>
-			</table>
-			<table class="table-form striped table table-border">
-				<tr class="text-center">
-					<td>N<sup>o</sup<</td>
-					<td>Category</td>
-					<td>Test Name</td>
-					<td width="150px">Val</td>
-					<td>Min</td>
-					<td>Max</td>
-					<td>Unit</td>
-				</tr>
-				<tr>
-					<td>N<sup>o</sup<</td>
-					<td>Category</td>
-					<td>Test Name</td>
-					<td>
-						<x-bss-form.input name='sample' value="0" />
-					</td>
-					<td>Min</td>
-					<td>Max</td>
-					<td>Unit</td>
-				</tr>
-				<tr>
-					<td>N<sup>o</sup<</td>
-					<td>Category</td>
-					<td>Test Name</td>
-					<td>
-						<x-bss-form.input name='sample' value="0" />
-					</td>
-					<td>Min</td>
-					<td>Max</td>
-					<td>Unit</td>
-				</tr>
-				<tr>
-					<td>N<sup>o</sup<</td>
-					<td>Category</td>
-					<td>Test Name</td>
-					<td>
-						<x-bss-form.input name='sample' value="0" />
-					</td>
-					<td>Min</td>
-					<td>Max</td>
-					<td>Unit</td>
-				</tr>
-			</table>
+			@include('labor.form_result')
 			<x-slot name="footer">
 				<x-form.button type="submit" icon="bx bx-save" label="Save" />
 			</x-slot>

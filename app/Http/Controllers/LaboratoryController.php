@@ -107,7 +107,7 @@ class LaboratoryController extends Controller
 		}
         $data['gender'] = getParentDataSelection('gender');
 		$data['payment_type'] = getParentDataSelection('payment_type');
-		$data['item_detail'] = LaborDetail::all();
+		$data['labor_detail'] = $labor->detail()->get();
 		$data['is_edit'] = true;
 		return view('labor.edit', $data);
     }
@@ -127,6 +127,20 @@ class LaboratoryController extends Controller
         $request['amount'] = $request->amount ?? 0;
 
         if ($labor->update($request->all())) {
+            // Do update the labor detail
+            $detail_ids = $request->test_id ?: [];
+            $detail_values = $request->test_value ?: [];
+
+            if (sizeof($detail_ids) > 0) {
+                foreach ($detail_ids as $index => $id) {
+                    LaborDetail::find($id)->update(['value' => $detail_values[$index] ?: 0]);
+                }
+
+                // Clean old data
+                $detailToDelete = LaborDetail::where('labor_id', $labor->id)->whereNotIn('id', $detail_ids);
+                $detailToDelete->delete();
+            }
+
             return redirect()->route('para_clinic.labor.index')->with('success', 'Data update success');
         }
     }

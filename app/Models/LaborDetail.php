@@ -9,4 +9,9 @@ class LaborDetail extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+
+    public function item()
+    {
+        return $this->belongsTo(LaborItem::class, 'labor_item_id')->first();
+    }
 }

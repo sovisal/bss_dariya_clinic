@@ -9,4 +9,9 @@ class Laboratory extends Model
 {
     use HasFactory;
     protected $guarded = ['id'];
+
+    public function detail()
+	{
+		return $this->hasMany(LaborDetail::class, 'labor_id');
+	}
 }
