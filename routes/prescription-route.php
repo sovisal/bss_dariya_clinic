@@ -6,7 +6,7 @@ use App\Http\Controllers\PrescriptionController;
 Route::prefix('prescription')->name('prescription.')->group(function () {
 	Route::get('/', [PrescriptionController::class, 'index'])->name('index');
 	Route::get('/create', [PrescriptionController::class, 'create'])->name('create')->middleware('can:CreatePrescription');
-	Route::post('/store', [PrescriptionController::class, 'store'])->name('store')->middleware('can:CreatePrescription');
+	Route::put('/store', [PrescriptionController::class, 'store'])->name('store')->middleware('can:CreatePrescription');
 	Route::get('/{prescription}/edit', [PrescriptionController::class, 'edit'])->name('edit')->middleware('can:UpdatePrescription');
 	Route::put('/{prescription}/update', [PrescriptionController::class, 'update'])->name('update')->middleware('can:UpdatePrescription');
 	Route::delete('/{prescription}/delete', [PrescriptionController::class, 'destroy'])->name('delete')->middleware('can:DeletePrescription');

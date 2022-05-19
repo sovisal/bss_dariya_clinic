@@ -4,7 +4,9 @@
 	</x-slot>
 	<x-card :foot="false"  :head="false">
 		@foreach(data_parent_selection_conf() as $key => $val)
-			<x-form.button href="?parent={{ $key }}" label="{{ $val['label'] }}" class="{{ $type == $key ? 'active' : '' }}" color="{{ $type == $key ? 'secondary' : 'primary' }}" />
+			@if (empty($val['is_invisible']) || $val['is_invisible'] == false) 
+				<x-form.button href="?parent={{ $key }}" label="{{ $val['label'] }}" class="{{ $type == $key ? 'active' : '' }}" color="{{ $type == $key ? 'secondary' : 'primary' }}" />
+			@endif
 		@endforeach
 		<x-table class="table-hover table-bordered" id="datatables" data-table="patients">
 			<x-slot name="thead">

@@ -15,6 +15,16 @@ class CreatePrescriptionDetailsTable extends Migration
     {
         Schema::create('prescription_details', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('prescription_id')->default(0);
+            $table->unsignedBigInteger('medicine_id')->default(0);
+            $table->string('qty', 10)->default(0);
+            $table->string('upd', 10)->default(0);
+            $table->string('nod', 10)->default(0);
+            $table->string('total', 10)->default(0);
+            $table->string('unit', 10)->default(0);
+            $table->string('usage_times')->default('');
+            $table->unsignedBigInteger('usage_id')->default(0);
+            $table->text('other')->nullable();
             $table->timestamps();
         });
     }
