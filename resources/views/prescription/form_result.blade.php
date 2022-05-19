@@ -21,11 +21,11 @@
         @php
             static $i = 1;
         @endphp
-        <input type="hidden" name="test_id[]" value="{{ $row->id }}"/>
         <tr>
+            <input type="hidden" name="test_id[]" value="{{ $row->id }}"/>
             <td class="text-center">{{ $i++ }}</td>
             <td>
-                <x-bss-form.select name="medicine_id" required :disabled="!$is_edit">
+                <x-bss-form.select name="medicine_id[]" required :disabled="$is_edit">
                     @if (!$is_edit)
                         <option>Please choose</option>
                     @endif
@@ -35,22 +35,22 @@
                 </x-bss-form.select>
             </td>
             <td>
-                <x-bss-form.input type="number" name='test_value[]' value="{{ $row->qty ?: 0 }}" class="text-center"/>
+                <x-bss-form.input type="number" name='qty[]' value="{{ $row->qty ?: 0 }}" class="text-center"/>
             </td>
             <td>
-                <x-bss-form.input type="number" name='test_value[]' value="{{ $row->upd ?: 0 }}" class="text-center"/>
+                <x-bss-form.input type="number" name='upd[]' value="{{ $row->upd ?: 0 }}" class="text-center"/>
             </td>
             <td>
-                <x-bss-form.input type="number" name='test_value[]' value="{{ $row->nod ?: 0 }}" class="text-center"/>
+                <x-bss-form.input type="number" name='nod[]' value="{{ $row->nod ?: 0 }}" class="text-center"/>
             </td>
             <td>
-                <x-bss-form.input type="number" name='test_value[]' value="{{ $row->total ?: 0 }}" class="text-center" :disabled="true"/>
+                <x-bss-form.input type="number" name='total[]' value="{{ $row->total ?: 0 }}" class="text-center" :disabled="true"/>
             </td>
             <td>
-                <x-bss-form.input type="number" name='test_value[]' value="{{ $row->unit ?: 0 }}" class="text-center"/>
+                <x-bss-form.input type="text" name='unit[]' value="{{ $row->unit ?: 0 }}" class="text-center"/>
             </td>
             <td>
-                <x-bss-form.select name="usage_id" required data-no_search="true">
+                <x-bss-form.select name="usage_id[]" required data-no_search="true">
                     @if (!$is_edit)
                         <option>Please choose</option>
                     @endif
@@ -62,13 +62,14 @@
             <td>
                 @foreach ($time_usage as $id => $data)
                     <label style="display: inline;">
-                        <input type="checkbox" {{ in_array($id, explode(',', $row->usage_times ?? [])) ? 'checked' : '' }}>
+                        <!-- row_id + time_usage_id -->
+                        <input name="time_usage_{{ $row->id }}_{{ $id }}[]" type="checkbox" {{ in_array($id, explode(',', $row->usage_times ?? [])) ? 'checked' : '' }}>
                         {{ $data }}
                     </label><br>
                 @endforeach
             </td>
             <td>
-                <x-bss-form.textarea name="diagnosis" rows="3">
+                <x-bss-form.textarea name="other[]" rows="3">
                     {{ $row->other }}
                 </x-bss-form.textarea>
             </td>

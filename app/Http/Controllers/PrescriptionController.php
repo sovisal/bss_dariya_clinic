@@ -104,18 +104,47 @@ class PrescriptionController extends Controller
 
         if ($prescription->update($request->all())) {
             // Do update the labor detail
-            // $detail_ids = $request->test_id ?: [];
-            // $detail_values = $request->test_value ?: [];
+            $detail_ids = $request->test_id ?: [];
+			$detail_values = [];
 
-            // if (sizeof($detail_ids) > 0) {
-            //     foreach ($detail_ids as $index => $id) {
-            //         LaborDetail::find($id)->update(['value' => $detail_values[$index] ?: 0]);
-            //     }
+			// #1, Bind values from post
+			foreach ($detail_ids as $index => $id) {
+				$detail_values[$id] = [
+					'id'			=> $id,
+					'medicine_id' 	=> $request->medicine_id[$index] ?: 0,
+					'qty' 			=> $request->qty[$index] ?: 0,
+					'upd' 			=> $request->upd[$index] ?: 0,
+					'nod' 			=> $request->nod[$index] ?: 0,
+					'total' 		=> $request->total[$index] ?: 0,
+					'unit' 			=> $request->unit[$index] ?: '',
+					'usage_id' 		=> $request->usage_id[$index] ?: 0,
+					'usage_times' 	=> [],
+					'other' 		=> $request->other[$index] ?: '',
+				];
+			}
 
-            //     // Clean old data
-            //     $detailToDelete = LaborDetail::where('labor_id', $labor->id)->whereNotIn('id', $detail_ids);
-            //     $detailToDelete->delete();
-            // }
+			// #2, Bind time usage values from checkbox
+			$time_usage = getParentDataSelection('time_usage');
+			$detail_values = array_map(function ($val) use ($time_usage, $request) {
+				foreach ($time_usage as $tm_id => $tm_name) {
+					if (isset($request->{'time_usage_' .$val['id']. '_' . $tm_id})) {
+						$val['usage_times'][] = $tm_id;
+					}
+				}
+				$val['usage_times'] = implode(',', $val['usage_times'] ?: []);
+				return $val;
+			}, $detail_values);
+
+			// #3, Insert into database
+			foreach ($detail_values as $id => $val) {
+				PrescriptionDetail::find($id)->update($val);
+			}
+
+			// #4, Clean old data when clicked on icon trast/delete
+            if (sizeof($detail_ids) > 0) {
+                $detailToDelete = PrescriptionDetail::where('prescription_id', $prescription->id)->whereNotIn('id', $detail_ids);
+                $detailToDelete->delete();
+            }
 
             return redirect()->route('prescription.index')->with('success', 'Data update success');
         }
