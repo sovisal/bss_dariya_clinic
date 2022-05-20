@@ -55,12 +55,8 @@ class EcgController extends Controller
      */
     public function store(Request $request)
     {
-        // serialize all post into string
-        $serialize = array_except($request->all(), ['_method', '_token']);
-        $request['attribite'] = serialize($serialize);
-
-        $dataParent = new Ecg();
-        if ($dataParent->create([
+        $ecg = new Ecg();
+        if ($record = $ecg->create([
             // 'code' => $request->code,
             'type' => $request->type,
             'patient_id' => $request->patient_id,
@@ -70,10 +66,10 @@ class EcgController extends Controller
             'payment_status' => 0,
             'requested_at' => $request->requested_at,
             'amount' => $request->amount ?: 0,
-            'attribite' => $request->attribite,
+            'attribute' => $request->type > 0 ? EcgType::find($request->type)->first()->attribite : null,
             'status' => 1,
         ])) {
-            return redirect()->route('para_clinic.ecg.index')->with('success', 'Data created success');
+            return redirect()->route('para_clinic.ecg.edit', $record->id)->with('success', 'Data created success');
         }
     }
 
@@ -117,8 +113,6 @@ class EcgController extends Controller
      */
     public function update(Request $request, Ecg $ecg)
     {
-        $request['status'] = 1;
-
         // serialize all post into string
         $serialize = array_except($request->all(), ['_method', '_token']);
         $request['attribute'] = serialize($serialize);

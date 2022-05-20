@@ -28,17 +28,25 @@
 					<td class="text-center">{{ render_readable_date($row->requested_at) }}</td>
 					<td class="text-right">{{ render_currency($row->amount) }}</td>
 					<td>{{ $row->type_en }}</td>
-					<td class="text-center">{{ $row->status }}</td>
-					<td class="text-center">{{ $row->payment_status }}</td>
+					<td class="text-center">{!! render_record_status($row->status) !!}</td>
+					<td class="text-center">
+						@if ($row->payment_status)
+							<span class="badge badge-success">Paid</span>
+						@else
+							<span class="badge badge-light">Unpaid</span>
+						@endif
+					</td>
 					<td class="text-center">
 						<x-form.button color="info" class="btn-sm" href="{{ route('para_clinic.ecg.edit', $row->id) }}" icon="bx bx-printer" />
-						<x-form.button color="secondary" class="btn-sm" href="{{ route('para_clinic.ecg.edit', $row->id) }}" icon="bx bx-edit-alt" />
-						<x-form.button color="danger" class="confirmDelete btn-sm" data-id="{{ $row->id }}" icon="bx bx-trash" />
-						<form class="sr-only" id="form-delete-{{ $row->id }}" action="{{ route('para_clinic.ecg.delete', $row->id) }}" method="POST">
-							@csrf
-							@method('DELETE')
-							<button class="sr-only" id="btn-{{ $row->id }}">Delete</button>
-						</form>
+						@if ($row->status == 1)
+							<x-form.button color="secondary" class="btn-sm" href="{{ route('para_clinic.ecg.edit', $row->id) }}" icon="bx bx-edit-alt" />
+							<x-form.button color="danger" class="confirmDelete btn-sm" data-id="{{ $row->id }}" icon="bx bx-trash" />
+							<form class="sr-only" id="form-delete-{{ $row->id }}" action="{{ route('para_clinic.ecg.delete', $row->id) }}" method="POST">
+								@csrf
+								@method('DELETE')
+								<button class="sr-only" id="btn-{{ $row->id }}">Delete</button>
+							</form>
+						@endif
 					</td>
 				</tr>
 			@endforeach
