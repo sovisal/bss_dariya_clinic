@@ -4,7 +4,19 @@
 	</x-slot>
 	<form action="{{ route('patient.store') }}" method="POST" autocomplete="off" enctype="multipart/form-data">
 		@csrf
-		<x-card bodyClass="pb-0">
+		<x-card bodyClass="pb-0" :actionShow="false">
+			<x-slot name="action">
+				<div>
+					<x-form.button type="submit" class="btn-submit" value="Progress" icon="bx bx-save" label="Save" />
+					<!-- <x-form.button type="reset" class="btn-submit" value="Cancel" color="danger" icon="bx bx-x" label="Cancel" /> -->
+				</div>
+			</x-slot>
+			<x-slot name="footer">
+				<div>
+					<x-form.button type="submit" class="btn-submit" value="Progress" icon="bx bx-save" label="Save" />
+					<!-- <x-form.button type="reset" class="btn-submit" value="Cancel" color="danger" icon="bx bx-x" label="Cancel" /> -->
+				</div>
+			</x-slot>
 			<table class="table-form striped">
 				<tr>
 					<th colspan="4" class="text-left tw-bg-gray-100">Patient Information</th>
@@ -184,10 +196,6 @@
 					</td>
 				</tr>
 			</table>
-
-			<x-slot name="footer">
-				<x-form.button type="submit" icon="bx bx-save" label="Save" />
-			</x-slot>
 		</x-card>
 	</form>
 

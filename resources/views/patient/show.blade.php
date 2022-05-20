@@ -26,7 +26,7 @@
 			</tr>
 			<tr>
 				<th>Gender <span class="float-right">:</span></th>
-				<td>{{ $patient->pt_gender->title_en ?? '' }}</td>
+				<td>{{ getParentDataByType('gender', $patient->gender) }}</td>
 				<th>Phone <span class="float-right">:</span></th>
 				<td>{{ $patient->phone }}</td>
 			</tr>
@@ -42,12 +42,12 @@
 	
 	<ul class="nav nav-tabs mt-3 mb-0" role="tablist">
 		<li class="nav-item">
-			<a class="nav-link btn-sm" id="detail-tab" data-toggle="tab" href="#detail" aria-controls="detail" role="tab" aria-selected="true">
+			<a class="nav-link btn-sm active" id="detail-tab" data-toggle="tab" href="#detail" aria-controls="detail" role="tab" aria-selected="true">
 				<span class="align-middle">Detail</span>
 			</a>
 		</li>
 		<li class="nav-item">
-			<a class="nav-link btn-sm active" id="visit-tab" data-toggle="tab" href="#visit" aria-controls="visit" role="tab" aria-selected="false">
+			<a class="nav-link btn-sm" id="visit-tab" data-toggle="tab" href="#visit" aria-controls="visit" role="tab" aria-selected="false">
 				<span class="align-middle">Visit</span>
 			</a>
 		</li>
@@ -69,7 +69,7 @@
 	</ul>
 	<x-card :foot="false" :head="false">
 		<div class="tab-content">
-			<div class="tab-pane" id="detail" aria-labelledby="detail-tab" role="tabpanel">
+			<div class="tab-pane active" id="detail" aria-labelledby="detail-tab" role="tabpanel">
 				<table class="table-form">
 					<tr>
 						<th colspan="4" class="text-center tw-bg-gray-100">Patient Information</th>
@@ -78,7 +78,7 @@
 						<th width="200px">ID Card Number <span class="float-right">:</span></th>
 						<td>{{ $patient->id_card_no }}</td>
 						<th width="200px">Nationality <span class="float-right">:</span></th>
-						<td>{{ $patient->pt_nationality->title_en ?? '' }}</td>
+						<td>{{ getParentDataByType('nationality', $patient->nationality) }}</td>
 					</tr>
 					<tr>
 						<th>Date of birth <span class="float-right">:</span></th>
@@ -90,7 +90,7 @@
 						<th>Education <span class="float-right">:</span></th>
 						<td>{{ $patient->education }}</td>
 						<th>Marital Status <span class="float-right">:</span></th>
-						<td>{{ $patient->pt_marital_status->title_en ?? '' }}</td>
+						<td>{{ getParentDataByType('marital_status', $patient->marital_status) }}</td>
 					</tr>
 					<tr>
 						<th>Position <span class="float-right">:</span></th>
@@ -100,7 +100,7 @@
 					</tr>
 					<tr>
 						<th>Blood Type <span class="float-right">:</span></th>
-						<td>{{ $patient->pt_blood_type->title_en ?? '' }}</td>
+						<td>{{ getParentDataByType('blood_type', $patient->blood_type) }}</td>
 						<td colspan="2"></td>
 					</tr>
 
@@ -115,15 +115,15 @@
 					</tr>
 					<tr>
 						<th>Villsage <span class="float-right">:</span></th>
-						<td>{{ $patient->village }}</td>
+						<td>{{ $patient->address()->village_en }}</td>
 						<th>Commune <span class="float-right">:</span></th>
-						<td>{{ $patient->commune }}</td>
+						<td>{{ $patient->address()->commune_en }}</td>
 					</tr>
 					<tr>
 						<th>District <span class="float-right">:</span></th>
-						<td>{{ $patient->district }}</td>
+						<td>{{ $patient->address()->district_en }}</td>
 						<th>Province <span class="float-right">:</span></th>
-						<td>{{ $patient->province }}</td>
+						<td>{{ $patient->address()->province_en }}</td>
 					</tr>
 					<tr>
 						<th>Zip Code <span class="float-right">:</span></th>
@@ -132,7 +132,7 @@
 					</tr>
 				</table>
 			</div>
-			<div class="tab-pane active" id="visit" aria-labelledby="visit-tab" role="tabpanel">
+			<div class="tab-pane" id="visit" aria-labelledby="visit-tab" role="tabpanel">
 				{{-- <x-form.button href="{{ route('patient.consultation.create', ['patient' => $patient->id]) }}" icon="bx bx-plus" label="New Follow up" /> --}}
 				
 				<x-table class="mt-1 table-padding-sm">

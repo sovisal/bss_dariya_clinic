@@ -14,4 +14,8 @@ class Patient extends BaseModel
 	{
 		return $this->hasMany(Consultation::class, 'patient_id');
 	}
+	public function address()
+	{
+		return $this->belongsTo(Address_linkable::class, 'address_id')->first();
+	}
 }

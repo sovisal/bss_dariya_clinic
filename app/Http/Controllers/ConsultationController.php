@@ -96,7 +96,7 @@ class ConsultationController extends Controller
 				'updated_by' => auth()->user()->id,
 			]);
 		}
-		return redirect()->route('patient.show', $request->patient_id)->with('success', __('alert.message.success.crud.update'));
+		return redirect()->route('patient.index')->with('success', __('alert.message.success.crud.update'));
 	}
 
 	/**

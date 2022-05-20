@@ -85,7 +85,7 @@ class PatientController extends Controller
 				'payment_type' => '',
 				'evaluated_at' => now(),
 				'json_data' => '',
-				'status' => 'save',
+				'status' => '1',
 				'created_by' => auth()->user()->id,
 				'updated_by' => auth()->user()->id,
 			]);
@@ -111,11 +111,11 @@ class PatientController extends Controller
 		$consultation = Consultation::where('patient_id', $patient->id)->get();
 		$save_consultation = $consultation->where('status', 'save')->first();
 		$exist_consultation = $consultation->first();
-		if ($save_consultation) {
-			return redirect()->route('patient.consultation.edit', $save_consultation->id);
-		}else if(!$exist_consultation){
-			return redirect()->route('patient.consultation.create', ['patient' => $patient->id]);
-		}
+		// if ($save_consultation) {
+		// 	return redirect()->route('patient.consultation.edit', $save_consultation->id);
+		// }else if(!$exist_consultation){
+		// 	return redirect()->route('patient.consultation.create', ['patient' => $patient->id]);
+		// }
 
 		$data = [
 			'patient' => $patient,
@@ -183,7 +183,7 @@ class PatientController extends Controller
 			$patient->update(['photo'=>$patient_photo]);
 		}
 
-		return redirect()->route('patient.edit', $patient->id)->with('success', __('alert.message.success.crud.update'));
+		return redirect()->route('patient.index')->with('success', __('alert.message.success.crud.update'));
 	}
 
 	/**

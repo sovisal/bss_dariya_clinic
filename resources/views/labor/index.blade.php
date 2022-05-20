@@ -46,6 +46,9 @@
 								@method('DELETE')
 								<button class="sr-only" id="btn-{{ $row->id }}">Delete</button>
 							</form>
+						@else
+							<x-form.button color="secondary" class="btn-sm" icon="bx bx-edit-alt" disabled/>
+							<x-form.button color="danger" class="btn-sm" icon="bx bx-trash" disabled/>
 						@endif
 					</td>
 				</tr>
