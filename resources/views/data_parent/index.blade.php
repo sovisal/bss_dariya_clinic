@@ -8,6 +8,7 @@
 				<x-form.button href="?parent={{ $key }}" label="{{ $val['label'] }}" class="{{ $type == $key ? 'active' : '' }}" color="{{ $type == $key ? 'secondary' : 'primary' }}" />
 			@endif
 		@endforeach
+		<hr>
 		<x-table class="table-hover table-bordered" id="datatables" data-table="patients">
 			<x-slot name="thead">
 				<tr>

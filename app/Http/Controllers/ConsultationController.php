@@ -75,6 +75,15 @@ class ConsultationController extends Controller
 			'payment_types' => getParentDataSelection('payment_type'),
 			'evaluation_categories' => getParentDataSelection('evalutaion_category'),
 		];
+		$data['indication_diseases'] = $data['consultation']->evaluation_category ? 
+			getParentDataSelection('indication_disease', ['status' => 1, 'parent_id' => $data['consultation']->evaluation_category]) :
+			getParentDataSelection('indication_disease');
+		
+		$data['list_prescription']	= ['a' => 1, 'b' => 2];
+		$data['list_labor'] 		= ['aa' => 1, 'bb' => 2];
+		$data['list_xray'] 			= ['aaa' => 1, 'bbb' => 2];
+		$data['list_echo'] 			= ['aaaa' => 1, 'bbbb' => 2];
+		$data['list_ecg'] 			= ['aaaaaa' => 1, 'bbbbbb' => 2];
 		return view('consultation.edit', $data);
 	}
 
