@@ -102,7 +102,7 @@
 						@endif
 					</td>
 					<td class="text-right">
-						@if ($row->status=='Progress')
+						@if ($row->status=='1')
 							<x-form.button color="secondary" class="btn-sm" href="{{ route('para_clinic.echography.edit', $row->id) }}" icon="bx bx-edit-alt" />
 							{{-- <x-form.button color="danger" class="confirmDelete btn-sm" data-id="{{ $row->id }}" icon="bx bx-trash" />
 							<form class="sr-only" id="form-delete-{{ $row->id }}" action="{{ route('para_clinic.echography.delete', $row->id) }}" method="POST">
@@ -113,7 +113,7 @@
 						@endif
 						<x-form.button color="info" class="btn-sm" onclick="getDetail({{ $row->id }})" icon="bx bx-list-ul" />
 						<x-form.button color="warning" class="btn-sm" onclick="getImage('{{ $row->image_1 }}', '{{ $row->image_2 }}')" icon="bx bx-image" />
-						<x-form.button color="dark" class="btn-sm" onclick="getPrintPreview({{ $row->id }})" icon="bx bx-printer" />
+						<x-form.button color="dark" class="btn-sm" onclick="printPopup('{{ route('para_clinic.echography.print', $row->id) }}')" icon="bx bx-printer" />
 					</td>
 				</tr>
 			@endforeach
@@ -175,7 +175,7 @@
 		<x-slot name="header">
 			View Echography Photo
 		</x-slot>
-		<x-slider id="image-slider" :autoplay="false" :data="['images/echographies/1652535596_1.png', 'images/echographies/1652535597_1.png']" />
+		<x-slider id="image-slider" :autoplay="false" />
 	</x-modal>
 
 	<x-modal-confirm-delete />

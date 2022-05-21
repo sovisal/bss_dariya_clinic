@@ -102,17 +102,24 @@ function breadCrumb()
 	return $li;
 }
 
-
 function round_up ( $value, $precision ) { 
 	$pow = pow ( 10, $precision ); 
 	return ( ceil ( $pow * $value ) + ceil ( $pow * $value - ceil ( $pow * $value ) ) ) / $pow; 
 }
 
-
 function is_decimal( $val ){
 	return is_numeric( $val ) && floor( $val ) != $val;
 }
 
+function filter_unit_attr($attributes){
+	$filtered_attributes = [];
+	foreach($attributes as $key => $value){
+		if (substr($key, strpos($key, "_unit") + 1) != 'unit') {
+			$filtered_attributes[$key] = $value . ((array_key_exists($key.'_unit', $attributes))? ' '. $attributes[$key.'_unit'] : '');
+		}
+	}
+	return $filtered_attributes;
+}
 
 function zipFile( $zip_file = 'file-zip.zip', $path, $destination_path, $sub_folder = true ){
 	if ($zip_file!='file-zip.zip') {

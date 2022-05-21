@@ -26,7 +26,7 @@ class CreateEchographiesTable extends Migration
             $table->string('image_1')->nullable();
             $table->string('image_2')->nullable();
             $table->string('amount', 10)->default(0);
-            $table->string('status')->default('Progress');
+            $table->integer('status')->default(1);
             $table->text('attribute')->nullable();
             $table->text('other')->nullable();
             $table->timestamps();

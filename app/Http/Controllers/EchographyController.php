@@ -56,29 +56,25 @@ class EchographyController extends Controller
 	 */
 	public function store(EchographyRequest $request)
 	{
-		if ($request->status == 'Cancel') {
-			return redirect()->route('para_clinic.echography.index');
-		} else {
-			// serialize all post into string
-			$serialize = array_except($request->all(), ['_method', '_token']);
-			$request['attribite'] = serialize($serialize);
+		// serialize all post into string
+		$serialize = array_except($request->all(), ['_method', '_token', 'img_1', 'img_2']);
+		$request['attribite'] = serialize($serialize);
 
-			$echography = new Echography();
-			if ($echo = $echography->create([
-				// 'code' => $request->code,
-				'type' => $request->type,
-				'patient_id' => $request->patient_id,
-				'doctor_id' => $request->doctor_id,
-				'requested_by' => $request->requested_by,
-				'payment_type' => $request->payment_type,
-				'payment_status' => 0,
-				'requested_at' => $request->requested_at,
-				'amount' => $request->amount ?: 0,
-				'attribite' => $request->attribite,
-				'status' => 1,
-			])) {
-				return redirect()->route('para_clinic.echography.edit', $echo->id)->with('success', 'Data created success');
-			}
+		$echography = new Echography();
+		if ($echo = $echography->create([
+			// 'code' => $request->code,
+			'type' => $request->type,
+			'patient_id' => $request->patient_id,
+			'doctor_id' => $request->doctor_id,
+			'requested_by' => $request->requested_by,
+			'payment_type' => $request->payment_type,
+			'payment_status' => 0,
+			'requested_at' => $request->requested_at,
+			'amount' => $request->amount ?: 0,
+			'attribite' => $request->attribite,
+			'status' => 1,
+		])) {
+			return redirect()->route('para_clinic.echography.edit', $echo->id)->with('success', 'Data created success');
 		}
 	}
 
@@ -105,60 +101,11 @@ class EchographyController extends Controller
 			$status_html = (($echography->status)? '<span class="badge badge-primary">Completed</span>' : '<span class="badge badge-light">Progress</span>');
 			$status_html .= (($echography->payment_status)? '<span class="badge badge-success tw-ml-1">Paid</span>' : '<span class="badge badge-light tw-ml-1">Unpaid</span>');
 			$tbody = '';
-			$except_fields = [
-				'code',
-				'patient_id',
-				'doctor_id',
-				'type',
-				'payment_type',
-				'payment_status',
-				'requested_by',
-				'requested_at',
-				'image_1',
-				'image_2',
-				'amount',
-				'status',
-				'other',
-				'crl_unit',
-				'gs_unit',
-				'pregnancy_age1_unit',
-				'pregnancy_age2_unit',
-				'before_after_unit',
-				'heart_rate_unit',
-				'head_to_butt_length_unit',
-				'head_width_unit',
-				'thigh_length_unit',
-				'pregnancy_age1_unit',
-				'pregnancy_age2_unit',
-				'before_after_unit',
-				'heart_rate_unit',
-				'head_width_unit',
-				'head_circumference_unit',
-				'abdominal_circumference_unit',
-				'thigh_length_unit',
-				'pregnancy_age1_unit',
-				'pregnancy_age2_unit',
-				'baby_weight_unit',
-				'over_under_unit',
-				'before_after_unit',
-				'heart_rate_unit',
-				'head_width_unit',
-				'head_circumference_unit',
-				'abdominal_circumference_unit',
-				'thigh_length_unit',
-				'pregnancy_age1_unit',
-				'pregnancy_age2_unit',
-				'baby_weight_unit',
-				'over_under_unit',
-				'before_after_unit',
-			];
-			$all_attributes = unserialize($echography->attribute) ?: [];
-			$attributes = array_except($all_attributes, $except_fields);
+			$attributes = array_except(filter_unit_attr(unserialize($echography->attribute) ?: []), ['status', 'amount']);
 			foreach ($attributes as $label => $attr) {
-				$unit = (( $attr!='' && array_key_exists($label . '_unit', $all_attributes))? '<span class="tw-ml-1">'. $all_attributes[$label . '_unit'] .'</span>' : '');
 				$tbody .= '<tr>
 								<td width="30%" class="text-right tw-bg-gray-100">'. __('form.echography.'. $label) .'</td>
-								<td>'. $attr . $unit .'</td>
+								<td>'. $attr .'</td>
 							</tr>';
 			}
 			return response()->json([
@@ -193,6 +140,7 @@ class EchographyController extends Controller
 		->leftJoin('doctors', 'doctors.id', '=', 'echographies.doctor_id')
 		->leftJoin('echo_types', 'echo_types.id', '=', 'echographies.type')
 		->find($id);
+		$echography->attribute = array_except(filter_unit_attr(unserialize($echography->attribute) ?: []), ['status', 'amount']);
 		$data['echography'] = $echography;
 		return view('echography.print', $data);
 	}
@@ -222,32 +170,27 @@ class EchographyController extends Controller
 	 */
 	public function update(EchographyRequest $request, Echography $echography)
 	{
-		if ($request->status == 'Cancel') {
-			return redirect()->route('para_clinic.echography.index');
-		} else {
-			// serialize all post into string
-			$serialize = array_except($request->all(), ['_method', '_token', 'img_1', 'img_2']);
-			$request['attribute'] = serialize($serialize);
-			$request['amount'] = $request->amount ?? 0;
-			
-			$path = public_path('/images/echographies/');
-			File::makeDirectory($path, 0777, true, true);
-			if ($request->file('img_1')) {
-				$img_1 = $request->file('img_1');
-				$img_1_name = (($echography->image_1!='')? $echography->image_1 : time() .'_'. $echography->id .'.png');
-				Image::make($img_1->getRealPath())->save($path . $img_1_name);
-				$request['image_1'] = $img_1_name;
-			}
-			if ($request->file('img_2')) {
-				$img_2 = $request->file('img_2');
-				$img_2_name = (($echography->image_2!='')? $echography->image_2 : time() .'_'. $echography->id .'.png');
-				Image::make($img_2->getRealPath())->save($path . $img_2_name);
-				$request['image_2'] = $img_2_name;
-			}
-
-			if ($echography->update($request->all())) {
-				return redirect()->route('para_clinic.echography.index')->with('success', 'Data update success');
-			}
+		// serialize all post into string
+		$serialize = array_except($request->all(), ['_method', '_token', 'img_1', 'img_2']);
+		$request['attribute'] = serialize($serialize);
+		$request['amount'] = $request->amount ?? 0;
+		
+		$path = public_path('/images/echographies/');
+		File::makeDirectory($path, 0777, true, true);
+		if ($request->file('img_1')) {
+			$img_1 = $request->file('img_1');
+			$img_1_name = (($echography->image_1!='')? $echography->image_1 : time() .'_image_1_'. $echography->id .'.png');
+			Image::make($img_1->getRealPath())->save($path . $img_1_name);
+			$request['image_1'] = $img_1_name;
+		}
+		if ($request->file('img_2')) {
+			$img_2 = $request->file('img_2');
+			$img_2_name = (($echography->image_2!='')? $echography->image_2 : time() .'_image_2_'. $echography->id .'.png');
+			Image::make($img_2->getRealPath())->save($path . $img_2_name);
+			$request['image_2'] = $img_2_name;
+		}
+		if ($echography->update($request->all())) {
+			return redirect()->route('para_clinic.echography.index')->with('success', 'Data update success');
 		}
 	}
 

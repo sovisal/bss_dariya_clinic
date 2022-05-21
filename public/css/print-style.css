@@ -1,7 +1,38 @@
+@font-face {
+	font-family: 'Khmer OS Siemreap';
+	src: url('../../fonts/kh/KhmerOSsiemreap.ttf');
+}
+@font-face {
+	font-family: 'Khmer OS Moul Light';
+	src: url('../../fonts/kh/KhmerOSmuollight.ttf');
+}
+@font-face {
+	font-family: 'Poppins';
+	src: url('../../fonts/en/poppins/Poppins-Regular.ttf');
+}
+@font-face {
+	font-family: 'Open Sans';
+	src: url('../../fonts/en/Roboto-Regular.ttf');
+}
 table { page-break-inside:auto!important; }
 tr { page-break-inside:avoid!important; page-break-after:auto!important; }
 table thead { display: table-row-group!important; }
 table tfoot { display: table-row-group!important; }
+.KHMOULLIGHT{
+	font-family: 'Khmer OS Moul Light', 'Open Sans' !important;
+}
+.d-flex{
+	display: flex !important;
+}
+.justify-content-end{
+	justify-content: flex-end !important;
+}
+.flex-fill{
+	flex: 1 1 auto !important;
+}
+.text-bold{
+	font-weight: bold;
+}
 .print-preview-a4{
 	width: 21cm;
 	height: 29.7cm;
@@ -13,22 +44,48 @@ table tfoot { display: table-row-group!important; }
 }
 .print-preview-a4 *:not(h1,h2,h3,h4,h5,h6){
 	font-size: 13px;
+	font-family: 'Khmer OS Siemreap', 'Open Sans' !important;
 }
-.print-preview-a4 header{
-	
+.print-preview-a4 .text-red{
+	color: red !important;
+}
+.text-blue{
+	color: #1560BD !important;
+}
+.print-preview-a4 h2{
+	font-size: 18px;
 }
 .print-preview-a4 header .table-info{
 	margin: 5px 0;
-	border-top: 3px solid #1560BD;
-	border-bottom: 3px solid #1560BD;
+	border-top: 2px solid #1560BD;
+	border-bottom: 2px solid #1560BD;
+}
+.print-preview-a4 .echography-body{
+	margin-top: 5px;
+}
+.print-preview-a4 .echography-body *{
+	line-height: 1.5;
+}
+.print-preview-a4 .echography-body .title{
+	font-weight: bold;
+	margin: 10px 0;
+}
+.print-preview-a4 .signature{
+	margin-top: 10px;
+	float: right;
+	width: 3.5cm;
+	line-height: 1.5;
+	font-weight: bold;
 }
 .print-preview-a4 footer{
 	border-top: 1px solid #000;
 	position: absolute;
 	width: calc(100% - 1cm);
 	bottom: 0;
-	padding: 3px 0;
+	padding: 5px 0;
 	text-align: center;
+	line-height: 1.6;
+	font-weight: bold;
 }
 
 @media print {
@@ -44,8 +101,14 @@ table tfoot { display: table-row-group!important; }
 		box-shadow: none;
 		border: none;
 	}
-	.print-preview-a4 *{
-		color: blue !important;
+	.text-red{
+		color: red !important;
+		-webkit-print-color-adjust: exact !important;
+		-moz-print-color-adjust: exact !important;
+		-o-print-color-adjust: exact !important;
+	}
+	.text-blue{
+		color: #1560BD !important;
 		-webkit-print-color-adjust: exact !important;
 		-moz-print-color-adjust: exact !important;
 		-o-print-color-adjust: exact !important;
