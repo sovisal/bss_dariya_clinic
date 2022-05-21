@@ -36,6 +36,7 @@
 							$('#detail-modal .amount').html(rs.echography.amount + ' USD');
 							$('#detail-modal .detail-status').html(rs.status_html);
 							$('#detail-modal .table-detail-result tbody').html(rs.tbody);
+							$('#detail-modal .btn-print').attr('onclick', `printPopup('${rs.print_url}')`);
 							$('#detail-modal').modal();
 						}
 					},
@@ -104,12 +105,12 @@
 					<td class="text-right">
 						@if ($row->status=='1')
 							<x-form.button color="secondary" class="btn-sm" href="{{ route('para_clinic.echography.edit', $row->id) }}" icon="bx bx-edit-alt" />
-							{{-- <x-form.button color="danger" class="confirmDelete btn-sm" data-id="{{ $row->id }}" icon="bx bx-trash" />
+							<x-form.button color="danger" class="confirmDelete btn-sm" data-id="{{ $row->id }}" icon="bx bx-trash" />
 							<form class="sr-only" id="form-delete-{{ $row->id }}" action="{{ route('para_clinic.echography.delete', $row->id) }}" method="POST">
 								@csrf
 								@method('DELETE')
 								<button class="sr-only" id="btn-{{ $row->id }}">Delete</button>
-							</form> --}}
+							</form>
 						@endif
 						<x-form.button color="info" class="btn-sm" onclick="getDetail({{ $row->id }})" icon="bx bx-list-ul" />
 						<x-form.button color="warning" class="btn-sm" onclick="getImage('{{ $row->image_1 }}', '{{ $row->image_2 }}')" icon="bx bx-image" />
