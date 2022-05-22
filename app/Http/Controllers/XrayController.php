@@ -69,7 +69,7 @@ class XrayController extends Controller
             'requested_by' => $request->requested_by ?? 0,
             'payment_type' => $request->payment_type ?? 0,
             'payment_status' => 0,
-            'requested_at' => $request->requested_at,
+            'requested_at' => $request->requested_at ?: date('Y-m-d H:i:s'),
             'amount' => $request->amount ?: ($xray_type ? $xray_type->price : 0),
             'attribute' => $xray_type ? $xray_type->attribite : null,
             'status' => 1,

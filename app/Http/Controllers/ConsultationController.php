@@ -8,6 +8,7 @@ use App\Models\EchoType;
 use App\Models\XrayType;
 use App\Models\Consultation;
 use App\Models\EcgType;
+use App\Models\Medicine;
 use Illuminate\Http\Request;
 use App\Http\Requests\ConsultationRequest;
 
@@ -88,6 +89,10 @@ class ConsultationController extends Controller
 		$data['ecg_type'] = EcgType::where('status', 1)->orderBy('index', 'asc')->get();
 		$data['xray_type'] = XrayType::where('status', 1)->orderBy('index', 'asc')->get();
 		$data['echo_type'] = EchoType::where('status', 1)->orderBy('index', 'asc')->get();
+
+		$data['medicine'] = Medicine::orderBy('name', 'asc')->get();
+		$data['usages'] = getParentDataSelection('comsumption');
+		$data['time_usage'] = getParentDataSelection('time_usage');
 		return view('consultation.edit', $data);
 	}
 

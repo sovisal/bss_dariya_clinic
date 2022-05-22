@@ -67,7 +67,7 @@ class EcgController extends Controller
             'requested_by' => $request->requested_by ?? 0,
             'payment_type' => $request->payment_type ?? 0,
             'payment_status' => 0,
-            'requested_at' => $request->requested_at,
+            'requested_at' => $request->requested_at ?: date('Y-m-d H:i:s'),
             'amount' => $request->amount ?: ($ecg_type ? $ecg_type->price : 0),
             'attribute' => $ecg_type ? $ecg_type->attribite : null,
             'status' => 1,

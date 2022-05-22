@@ -47,31 +47,24 @@ class PrescriptionController extends Controller
 	 */
 	public function store(Request $request)
 	{
-		// serialize all post into string
-		$serialize = array_except($request->all(), ['_method', '_token']);
-		$request['attribite'] = serialize($serialize);
-
 		$prescription = new Prescription();
 		if ($pre = $prescription->create([
-			// 'code' => $request->code,
+			'code' => generate_code('PRE'),
 			'patient_id' => $request->patient_id,
 			'requested_by' => $request->requested_by ?: 0,
 			'requested_at' => $request->requested_at ?: date('Y-m-d H:i:s'),
 			'doctor_id' => $request->doctor_id ?: 0,
 			'analysis_at' => $request->analysis_at ?: null,
 			'diagnosis' => $request->diagnosis,
-			'attribite' => $request->attribite,
+			// 'attribite' => $request->attribite,
 			'status' => 1,
 		])) {
-			$detail = new PrescriptionDetail;
-			// Test Data
-			$detail->create([
-				'prescription_id' => $pre->id,
-				'medicine_id' => 1,
-				'qty' => 0,
-			]);
-
-			return redirect()->route('prescription.edit', $pre->id)->with('success', 'Data created success');
+			$this->refresh_prescriotion_detail($request, $pre->id, true);
+			if ($request->is_treament_plan) {
+                return redirect()->route('patient.consultation.edit', $request->consultation_id)->with('success', 'Data created success');
+            } else {
+				return redirect()->route('prescription.edit', $pre->id)->with('success', 'Data created success');
+			}
 		}
 	}
 
@@ -118,49 +111,7 @@ class PrescriptionController extends Controller
         $request['attribute'] = serialize($serialize);
 
         if ($prescription->update($request->all())) {
-            // Do update the labor detail
-            $detail_ids = $request->test_id ?: [];
-			$detail_values = [];
-
-			// #1, Bind values from post
-			foreach ($detail_ids as $index => $id) {
-				$detail_values[$id] = [
-					'id'			=> $id,
-					'medicine_id' 	=> $request->medicine_id[$index] ?: 0,
-					'qty' 			=> $request->qty[$index] ?: 0,
-					'upd' 			=> $request->upd[$index] ?: 0,
-					'nod' 			=> $request->nod[$index] ?: 0,
-					'total' 		=> $request->total[$index] ?: 0,
-					'unit' 			=> $request->unit[$index] ?: '',
-					'usage_id' 		=> $request->usage_id[$index] ?: 0,
-					'usage_times' 	=> [],
-					'other' 		=> $request->other[$index] ?: '',
-				];
-			}
-
-			// #2, Bind time usage values from checkbox
-			$time_usage = getParentDataSelection('time_usage');
-			$detail_values = array_map(function ($val) use ($time_usage, $request) {
-				foreach ($time_usage as $tm_id => $tm_name) {
-					if (isset($request->{'time_usage_' .$val['id']. '_' . $tm_id})) {
-						$val['usage_times'][] = $tm_id;
-					}
-				}
-				$val['usage_times'] = implode(',', $val['usage_times'] ?: []);
-				return $val;
-			}, $detail_values);
-
-			// #3, Insert into database
-			foreach ($detail_values as $id => $val) {
-				PrescriptionDetail::find($id)->update($val);
-			}
-
-			// #4, Clean old data when clicked on icon trast/delete
-            if (sizeof($detail_ids) > 0) {
-                $detailToDelete = PrescriptionDetail::where('prescription_id', $prescription->id)->whereNotIn('id', $detail_ids);
-                $detailToDelete->delete();
-            }
-
+            $this->refresh_prescriotion_detail($request, $prescription->id);
             return redirect()->route('prescription.index')->with('success', 'Data update success');
         }
 	}
@@ -173,6 +124,61 @@ class PrescriptionController extends Controller
 		$prescription->status = 0;
 		if ($prescription->update()) {
 			return redirect()->route('prescription.index')->with('success', 'Data delete success');
+		}
+	}
+
+	public function refresh_prescriotion_detail($request, $id_prescription = 0, $is_new = false) {
+		// Do update the labor detail
+		$detail_ids = $request->test_id ?: [];
+		$detail_values = [];
+
+		// #1, Bind values from post
+		foreach ($detail_ids as $index => $id) {
+			$detail_values[$is_new ? $index : $id] = [
+				'id'			=> $id,
+				'medicine_id' 	=> $request->medicine_id[$index] ?: 0,
+				'qty' 			=> $request->qty[$index] ?: 0,
+				'upd' 			=> $request->upd[$index] ?: 0,
+				'nod' 			=> $request->nod[$index] ?: 0,
+				'total' 		=> $request->total[$index] ?: 0,
+				'unit' 			=> $request->unit[$index] ?: '',
+				'usage_id' 		=> $request->usage_id[$index] ?: 0,
+				'usage_times' 	=> [],
+				'other' 		=> $request->other[$index] ?: '',
+			];
+		}
+
+		// #2, Bind time usage values from checkbox
+		$time_usage = getParentDataSelection('time_usage');
+		$detail_values = array_map(function ($val) use ($time_usage, $request) {
+			foreach ($time_usage as $tm_id => $tm_name) {
+				if (isset($request->{'time_usage_' .$val['id']. '_' . $tm_id})) {
+					$val['usage_times'][] = $tm_id;
+				}
+			}
+			$val['usage_times'] = implode(',', $val['usage_times'] ?: []);
+			return $val;
+		}, $detail_values);
+
+		if ($is_new == false) {
+			// #3, Update recoed database
+			foreach ($detail_values as $id => $val) {
+				PrescriptionDetail::find($id)->update($val);
+			}
+	
+			// #4, Clean old data when clicked on icon trast/delete
+			if (sizeof($detail_ids) > 0) {
+				$detailToDelete = PrescriptionDetail::where('prescription_id', $id_prescription)->whereNotIn('id', $detail_ids);
+				$detailToDelete->delete();
+			}
+		} else {
+			// #5, Insert new data
+			foreach ($detail_values as $id => $val) {
+				unset($val['id']);
+				$val['prescription_id'] = $id_prescription;
+				$detail = new PrescriptionDetail;
+				$detail->create($val);
+			}
 		}
 	}
 }

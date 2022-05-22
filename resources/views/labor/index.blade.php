@@ -7,6 +7,7 @@
 			<x-slot name="thead">
 				<tr>
 					<th>No</th>
+					<th>Code</th>
 					<th>Patient</th>
 					<th>Requested By</th>
 					<th>Requested Date</th>
@@ -23,6 +24,7 @@
 			@foreach($rows as $row)
 				<tr>
 					<td class="text-center">{{ ++$i }}</td>
+					<td>{{ $row->code }}</td>
 					<td>{{ $row->patient_en }}</td>
 					<td>{{ $row->requester_en }}</td>
 					<td class="text-center">{{ render_readable_date($row->requested_at) }}</td>

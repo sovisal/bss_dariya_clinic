@@ -8,7 +8,7 @@
         <td width="30%">
             <div class="d-flex justify-content-between">
                 <b>Prescription</b>
-                <x-form.button class="btn-treatment-toggle" data-type="prescription" color="secondary" icon="bx bx-plus" label=""/>
+                <x-form.button data-toggle="modal" data-target="#treatment_modal_prescriotion" color="secondary" icon="bx bx-plus" label=""/>
             </div>
         </td>
         <td>

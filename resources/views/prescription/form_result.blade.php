@@ -50,7 +50,7 @@
                 <x-bss-form.input type="text" name='unit[]' value="{{ $row->unit ?: 0 }}" class="text-center"/>
             </td>
             <td>
-                <x-bss-form.select name="usage_id[]" required data-no_search="true">
+                <x-bss-form.select name="usage_id[]" required data-no_search="true" :select2="false">
                     @if (!$is_edit)
                         <option>Please choose</option>
                     @endif

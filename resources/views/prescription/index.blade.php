@@ -22,7 +22,7 @@
 			@foreach($rows as $row)
 				<tr>
 					<td class="text-center">{{ ++$i }}</td>
-					<td class="text-center">001</td>
+					<td>{{ $row->code }}</td>
 					<td>{{ $row->patient_en }}</td>
 					<td>{{ $row->doctor_en }}</td>
 					<td class="text-center">{{ render_readable_date($row->requested_at) }}</td>

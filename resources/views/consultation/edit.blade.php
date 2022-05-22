@@ -39,81 +39,6 @@
 				type = $(this).data('type'),
 				title = 'Create new '+ type.toUpperCase();
 				if (type=='prescription') {
-					title = 'Create new Prescription';
-					body = `<table class="table-form table-padding-sm table-striped table-medicine">
-								<thead>
-									<tr>
-										<th colspan="10" class="tw-bg-gray-100">
-											<div class="d-flex justify-content-between align-items-center">
-												<x-bss-form.input
-													name="date"
-													hasIcon="right"
-													icon="bx bx-calendar"
-													placeholder="Date"
-												/>
-												<div>
-													<x-form.button class="btn-add-medicine" icon="bx bx-plus" label="Add Medicine" />
-												</div>
-											</div>
-										</th>
-									</tr>
-									<tr>
-										<th width="15%">Medicine <small class="required">*</small></th>
-										<th width="9%">Qty <small class="required">*</small></th>
-										<th width="9%">U/D <small class="required">*</small></th>
-										<th width="9%">NoD <small class="required">*</small></th>
-										<th width="5%">Total</th>
-										<th width="5%">Unit</th>
-										<th width="15%">Usage</th>
-										<th width="12%">Usage Time</th>
-										<th>Note</th>
-										<th width="8%">Action</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td>
-											<x-bss-form.select2
-												name="medicine"
-												data-url="#"
-												data-placeholder="Select medicine"
-											/>
-										</td>
-										<td>
-											<x-bss-form.input name="qty" class="is_number"/>
-										</td>
-										<td>
-											<x-bss-form.input name="ud" class="is_number"/>
-										</td>
-										<td>
-											<x-bss-form.input name="nod" class="is_number"/>
-										</td>
-										<td></td>
-										<td></td>
-										<td>
-											<x-bss-form.select2
-												name="usage"
-												data-url="#"
-												data-placeholder="Select medicine"
-											/>
-										</td>
-										<td>
-											<div class="d-flex justify-content-between">
-												<x-form.checkbox name='morning' label="Morning" />
-												<x-form.checkbox name='noon' label="Noon" />
-											</div>
-											<div class="d-flex justify-content-between tw-mt-2">
-												<x-form.checkbox name='evening' label="Evening" />
-												<x-form.checkbox name='night' label="Night" />
-											</div>
-										</td>
-										<td>
-											<x-bss-form.textarea name="note" />
-										</td>
-										<td class="text-center"></td>
-									</tr>
-								</tbody>
-							</table>`;
 				}else if (type=='labor-test'){
 					body = `<div class="row align-items-center mb-1">
 								<div class="col-sm-3">
@@ -186,55 +111,9 @@
 			});
 
 			// Prescription Request
+			$('.table-medicine').append($('#sample_prescription').html());
 			$(document).on('click', '.btn-add-medicine', function () {
-				$('.table-medicine tbody').append(`
-													<tr>
-														<td>
-															<x-bss-form.select2
-																name="medicine"
-																data-url="#"
-																data-placeholder="Select medicine"
-															/>
-														</td>
-														<td>
-															<x-bss-form.input name="qty" class="is_number"/>
-														</td>
-														<td>
-															<x-bss-form.input name="ud" class="is_number"/>
-														</td>
-														<td>
-															<x-bss-form.input name="nod" class="is_number"/>
-														</td>
-														<td></td>
-														<td></td>
-														<td>
-															<x-bss-form.select2
-																name="usage"
-																data-url="#"
-																data-placeholder="Select medicine"
-															/>
-														</td>
-														<td>
-															<div class="d-flex justify-content-between">
-																<x-form.checkbox name='morning' label="Morning" />
-																<x-form.checkbox name='noon' label="Noon" />
-															</div>
-															<div class="d-flex justify-content-between tw-mt-2">
-																<x-form.checkbox name='evening' label="Evening" />
-																<x-form.checkbox name='night' label="Night" />
-															</div>
-														</td>
-														<td>
-															<x-bss-form.textarea name="note" />
-														</td>
-														<td class="text-center">
-															<span class="cursor-pointer text-danger hover:tw-text-red-600 btn-remove-medicine"><i class="bx bx-x"></i></span>
-														</td>
-													</tr>
-												`);
-			});
-			$(document).on('click', '.btn-remove-medicine', function () {
-				$(this).closest('tr').remove();
+				$('.table-medicine').append($('#sample_prescription').html());
 			});
 
 			// Labor Service Category Selected
@@ -1127,8 +1006,9 @@
 			<x-form.button icon="bx bx-save" label="{{ __('button.save') }}" />
 		</x-slot>
 	</x-modal>
+	@include('consultation.sub_form.echo')
 	@include('consultation.sub_form.ecg')
 	@include('consultation.sub_form.xray')
-	@include('consultation.sub_form.echo')
+	@include('consultation.sub_form.prescription')
 
 </x-app-layout>

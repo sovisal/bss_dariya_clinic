@@ -60,7 +60,7 @@ class LaboratoryController extends Controller
 
         $laboratory = new Laboratory();
         if ($labor = $laboratory->create([
-            // 'code' => $request->code,
+            'code' => generate_code('L'),
             'patient_id' => $request->patient_id,
             'gender' => $request->gender,
             'age' => $request->age ?: 0,
