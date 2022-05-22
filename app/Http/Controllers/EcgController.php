@@ -79,6 +79,24 @@ class EcgController extends Controller
             }
         }
     }
+	
+	/**
+	 * Display the specified resource.
+	 */
+	public function getDetail(Request $request)
+	{
+		$ecg = Ecg::where('ecgs.id', $request->id)
+		->select([
+			'ecgs.*',
+			'patients.name_en as patient_kh',
+			'doctors.name_en as doctor_en',
+			'ecg_types.name_en as type_en'
+		])
+		->leftJoin('patients', 'patients.id', '=', 'ecgs.patient_id')
+		->leftJoin('data_parents', 'data_parents.id', '=', 'patients.gender')
+		->leftJoin('doctors', 'doctors.id', '=', 'ecgs.doctor_id')
+		->leftJoin('ecg_types', 'ecg_types.id', '=', 'ecgs.type')
+		->first();
 
 		if ($ecg) {
 			$status_html = (($ecg->status==2)? '<span class="badge badge-primary">Completed</span>' : '<span class="badge badge-light">Progress</span>');
