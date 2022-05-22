@@ -52,7 +52,7 @@
 						<x-bss-form.select name="gender" data-no_search="true">
 							<option value="">---- None ----</option>
 							@foreach ($gender as $id => $data)
-								<option value="{{ $id }}" {{ (old('nationality', $patient->gender) == $id) ? 'selected' : '' }}>{{ $data }}</option>
+								<option value="{{ $id }}" {{ (old('gender', $patient->gender) == $id) ? 'selected' : '' }}>{{ $data }}</option>
 							@endforeach
 						</x-bss-form.select>
 					</td>

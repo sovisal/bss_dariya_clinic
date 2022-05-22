@@ -1,5 +1,6 @@
 <x-app-layout>
 	<x-slot name="js">
+		<script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
 		<script>
 			$(document).ready(function () {
 				$('[name="type"]').change(function () {
