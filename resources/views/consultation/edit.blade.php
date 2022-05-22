@@ -20,11 +20,7 @@
 									<td width="20%" class="text-right"><small class="required">*</small> Choose Type</td>
 									<td>
 										<div class="d-flex">
-											<x-bss-form.select2
-												name="template"
-												data-url="#"
-												data-placeholder="Select template x-ray"
-											/>
+											<x-bss-form.select name="template" />
 											<x-form.button color="light" class="btn-add-new-template tw-ml-2" icon="bx bx-plus" label="" />
 										</div>
 									</td>
@@ -32,11 +28,7 @@
 								<tr>
 									<td class="text-right">Analysed by</td>
 									<td>
-										<x-bss-form.select2
-											name="analysed_by"
-											data-url="#"
-											data-placeholder="Select template x-ray"
-										/>
+										<x-bss-form.select name="analysed_by" />
 									</td>
 									<td class="text-right">Selected Type</td>
 									<td>
@@ -44,8 +36,8 @@
 									</td>
 								</tr>
 							</table>`,
-					type = $(this).data('type'),
-					title = 'Create new '+ type.toUpperCase();
+				type = $(this).data('type'),
+				title = 'Create new '+ type.toUpperCase();
 				if (type=='prescription') {
 					title = 'Create new Prescription';
 					body = `<table class="table-form table-padding-sm table-striped table-medicine">
@@ -154,63 +146,42 @@
 						dropdownParent: $('.labor-service-category').parent()
 					});
 				}else{
-					// Select2 Ajax
-					$('.select2ajax').each((_i, e) => {
-						var $e = $(e);
-						var url = $e.data('url');
-						var placeholder = $e.data('placeholder');
-						var id = $e.attr('id');
-						if ($('#hidden_'+ id).val()=='null') {
-							$e.val('').trigger('change');
-						}
-						if ((url!='' && url!=undefined) && (placeholder!='' || placeholder!=undefined)) {
-							$e.select2({
-								width: "100%",
+					$.ajax({
+						type: "post",
+						url: "{{ route('patient.consultation.getTemplate') }}",
+						data: { 'type': type },
+						success: function (rs) {
+							$('#analysed_by').html(rs.analysed_by);
+							$('#template').html(rs.template);
+							$('#analysed_by').select2({
 								dropdownAutoWidth: !0,
-								dropdownParent: $e.parent(),
-								placeholder: placeholder,
-								allowClear: ((placeholder)? true : false),
-								delay: 500,
-								ajax: { 
-									url: url,
-									type: "post",
-									dataType: 'json',
-									delay: 250,
-									data: function (params) {
-										return {
-											search: params.term
-										};
-									},
-									processResults: function (data) {
-										return {
-											results: $.map(data, function (item) {
-												if (Object.keys(data).length > 0) {
-													var keys = Object.keys(data[0]);
-													var rs_data = {};
-													keys.forEach(function(value, index) {
-														if (index==0) {
-															rs_data['id'] = item[value];
-														}else if(index==1){
-															rs_data['text'] = item[value];
-														}else{
-															rs_data[value] = item[value];
-														}
-													});
-													return rs_data;
-												}
-											})
-										};
-									},
-									cache: true
-								}
+								width: "100%",
+								dropdownParent: $('#analysed_by').parent()
+							});
+							$('#template').select2({
+								dropdownAutoWidth: !0,
+								width: "100%",
+								dropdownParent: $('#template').parent()
 							});
 						}
 					});
-					$(document).on('change', '.select2ajax', function () {
-						var selector = $(this).attr('id');
-						$('#hidden_'+ selector).val((($(this).find("option:selected").text()=='')? 'null' : $(this).find("option:selected").text()));
-					});
 				}
+				
+				$('#date').datetimepicker({
+					icons: {
+							time: "bx bx-time",
+							date: "bx bx-calendar",
+							up: 'bx bx-chevron-up',
+							down: 'bx bx-chevron-down',
+							previous: 'bx bx-chevron-left',
+							next: 'bx bx-chevron-right',
+							today: 'bx bx-screenshot',
+							clear: 'bx bx-trash',
+							close: 'bx bx-x'
+						},
+					format: "YYYY-MM-DD HH:mm:ss",
+					showTodayButton: true,
+				});
 				$('#treatment-model').modal();
 			});
 

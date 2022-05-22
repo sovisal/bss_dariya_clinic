@@ -28,7 +28,7 @@
 				@endphp
 				<tr>
 					<td class="text-center">
-						<a href="{{ route('patient.consultation.edit', $patient) }}">
+						<a href="{{ route('patient.consultation.edit', $consultant) }}">
 							PT-{!! str_pad($patient->id, 6, '0', STR_PAD_LEFT) !!}
 						</a>
 					</td>

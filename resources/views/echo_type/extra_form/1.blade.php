@@ -13,7 +13,7 @@
 			</div>
 			<div class="col-sm-4 pl-0">
 				<x-bss-form.select name="crl_unit">
-					<option value="mm" {{ ((old('crl_unit', $row->crl_unit) == 'mm')? 'selected' : '') }}>mm</option>
+					<option value="mm" {{ ((old('crl_unit', $row->crl_unit) == 'មម')? 'selected' : '') }}>មម</option>
 					<option value="-" {{ ((old('crl_unit', $row->crl_unit) == '-')? 'selected' : '') }}>-</option>
 				</x-bss-form.select>
 			</div>
@@ -29,7 +29,7 @@
 			</div>
 			<div class="col-sm-4 pl-0">
 				<x-bss-form.select name="gs_unit">
-					<option value="mm" {{ ((old('gs_unit', $row->gs_unit) == 'mm')? 'selected' : '') }}>mm</option>
+					<option value="mm" {{ ((old('gs_unit', $row->gs_unit) == 'មម')? 'selected' : '') }}>មម</option>
 					<option value="-" {{ ((old('gs_unit', $row->gs_unit) == '-')? 'selected' : '') }}>-</option>
 				</x-bss-form.select>
 			</div>
@@ -75,7 +75,7 @@
 			</div>
 			<div class="col-sm-4 pl-0">
 				<x-bss-form.select name="pregnancy_age1_unit">
-					<option value="week" {{ ((old('pregnancy_age1_unit', $row->pregnancy_age1_unit) == 'week')? 'selected' : '') }}>សប្ដាហ៍</option>
+					<option value="week" {{ ((old('pregnancy_age1_unit', $row->pregnancy_age1_unit) == 'សប្ដាហ៍')? 'selected' : '') }}>សប្ដាហ៍</option>
 					<option value="-" {{ ((old('pregnancy_age1_unit', $row->pregnancy_age1_unit) == '-')? 'selected' : '') }}>-</option>
 				</x-bss-form.select>
 			</div>
@@ -91,7 +91,7 @@
 			</div>
 			<div class="col-sm-4 pl-0">
 				<x-bss-form.select name="pregnancy_age2_unit">
-					<option value="day" {{ ((old('pregnancy_age2_unit', $row->pregnancy_age2_unit) == 'day')? 'selected' : '') }}>ថ្ងៃ</option>
+					<option value="day" {{ ((old('pregnancy_age2_unit', $row->pregnancy_age2_unit) == 'ថ្ងៃ')? 'selected' : '') }}>ថ្ងៃ</option>
 					<option value="-" {{ ((old('pregnancy_age2_unit', $row->pregnancy_age2_unit) == '-')? 'selected' : '') }}>-</option>
 				</x-bss-form.select>
 			</div>
@@ -119,7 +119,7 @@
 			</div>
 			<div class="col-sm-4 pl-0">
 				<x-bss-form.select name="before_after_unit">
-					<option value="day" {{ ((old('before_after_unit', $row->before_after_unit) == 'day')? 'selected' : '') }}>ថ្ងៃ</option>
+					<option value="day" {{ ((old('before_after_unit', $row->before_after_unit) == 'ថ្ងៃ')? 'selected' : '') }}>ថ្ងៃ</option>
 					<option value="-" {{ ((old('before_after_unit', $row->before_after_unit) == '-')? 'selected' : '') }}>-</option>
 				</x-bss-form.select>
 			</div>
