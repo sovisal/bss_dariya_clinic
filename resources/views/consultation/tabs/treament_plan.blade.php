@@ -12,7 +12,12 @@
             </div>
         </td>
         <td>
-            {{ implode(',', $list_prescription ?? []) }}
+            @php 
+                $label = array_map(function ($val) {
+                    return '<a href="' . route('prescription.show', $val['id']) . '">' . ($val['code'] ?: 'N/A') . '</a>';
+                }, $list_prescription);
+            @endphp
+            {!! implode($label, ',  ') !!}
         </td>
     </tr>
     <tr>
@@ -23,7 +28,12 @@
             </div>
         </td>
         <td>
-            {{ implode(',', $list_prescription ?? []) }}
+            @php 
+                $label = array_map(function ($val) {
+                    return '<a href="' . route('prescription.show', $val['id']) . '">' . ($val['code'] ?: 'N/A') . '</a>';
+                }, $list_labor);
+            @endphp
+            {!! implode($label, ',  ') !!}
         </td>
     </tr>
     <tr>
@@ -34,7 +44,12 @@
             </div>
         </td>
         <td>
-            {{ implode(',', $list_prescription ?? []) }}
+            @php 
+                $label = array_map(function ($val) {
+                    return '<a href="' . route('prescription.show', $val['id']) . '">' . ($val['code'] ?: 'N/A') . '</a>';
+                }, $list_xray);
+            @endphp
+            {!! implode($label, ',  ') !!}
         </td>
     </tr>
     <tr>
@@ -45,7 +60,12 @@
             </div>
         </td>
         <td>
-            {{ implode(',', $list_prescription ?? []) }}
+            @php 
+                $label = array_map(function ($val) {
+                    return '<a href="' . route('prescription.show', $val['id']) . '">' . ($val['code'] ?: 'N/A') . '</a>';
+                }, $list_echo);
+            @endphp
+            {!! implode($label, ',  ') !!}
         </td>
     </tr>
     <tr>
@@ -56,7 +76,12 @@
             </div>
         </td>
         <td>
-            {{ implode(',', $list_prescription ?? []) }}
+            @php 
+                $label = array_map(function ($val) {
+                    return '<a href="' . route('prescription.show', $val['id']) . '">' . ($val['code'] ?: 'N/A') . '</a>';
+                }, $list_ecg);
+            @endphp
+            {!! implode($label, ',  ') !!}
         </td>
     </tr>
 </table>

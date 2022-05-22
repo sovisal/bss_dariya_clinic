@@ -93,6 +93,21 @@ class PrescriptionController extends Controller
 		return view('prescription.edit', $data);
 	}
 
+	public function show(Prescription $prescription)
+	{
+		if ($prescription ?? false) {
+			$data['row'] = $prescription;
+			$data['patient'] = Patient::orderBy('name_en', 'asc')->get();
+			$data['doctor'] = Doctor::orderBy('name_en', 'asc')->get();
+			$data['medicine'] = Medicine::orderBy('name', 'asc')->get();
+			$data['usages'] = getParentDataSelection('comsumption');
+			$data['time_usage'] = getParentDataSelection('time_usage');
+		}
+		$data['prescription_detail'] = $prescription->detail()->get();
+		$data['is_edit'] = true;
+		return view('prescription.edit', $data);
+	}
+
 	/**
 	 * Update the specified resource in storage.
 	 */

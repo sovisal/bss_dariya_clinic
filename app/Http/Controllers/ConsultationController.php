@@ -75,15 +75,19 @@ class ConsultationController extends Controller
 			'payment_types' => getParentDataSelection('payment_type'),
 			'evaluation_categories' => getParentDataSelection('evalutaion_category'),
 		];
+
+		// For Indication tab
 		$data['indication_diseases'] = $data['consultation']->evaluation_category ? 
 			getParentDataSelection('indication_disease', ['status' => 1, 'parent_id' => $data['consultation']->evaluation_category]) :
 			getParentDataSelection('indication_disease');
-		
-		$data['list_prescription']	= ['a' => 1, 'b' => 2];
-		$data['list_labor'] 		= ['aa' => 1, 'bb' => 2];
-		$data['list_xray'] 			= ['aaa' => 1, 'bbb' => 2];
-		$data['list_echo'] 			= ['aaaa' => 1, 'bbbb' => 2];
-		$data['list_ecg'] 			= ['aaaaaa' => 1, 'bbbbbb' => 2];
+
+		// For Treatment plan tab
+		$patient = Patient::find($consultation->patient_id);
+		$data['list_prescription']	= $patient->prescriptions() ? $patient->prescriptions()->where('status', '>=', 1)->select('id', 'code')->get()->toArray() : [];
+		$data['list_labor'] 		= $patient->labors() 		? $patient->labors()->where('status', '>=', 1)->select('id', 'code')->get()->toArray() : [];
+		$data['list_xray'] 			= $patient->xrays() 		? $patient->xrays()->where('status', '>=', 1)->select('id', 'code')->get()->toArray() : [];
+		$data['list_echo'] 			= $patient->echos() 		? $patient->echos()->where('status', '>=', 1)->select('id', 'code')->get()->toArray() : [];
+		$data['list_ecg'] 			= $patient->ecgs() 			? $patient->ecgs()->where('status', '>=', 1)->select('id', 'code')->get()->toArray() : [];
 		return view('consultation.edit', $data);
 	}
 
