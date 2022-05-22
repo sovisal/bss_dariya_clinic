@@ -57,7 +57,7 @@ class EcgController extends Controller
     {
         $ecg = new Ecg();
         if ($request->type) {
-            $ecg_type = EcgType::find($request->type)->first();
+            $ecg_type = EcgType::where('id', $request->type)->first();
         }
         if ($record = $ecg->create([
             'code' => generate_code('ECG'),

@@ -57,7 +57,7 @@ class XrayController extends Controller
     {
         $xray = new Xray();
         if ($request->type) {
-            $xray_type = XrayType::find($request->type)->first();
+            $xray_type = XrayType::where('id', $request->type)->first();
         }
         if ($record = $xray->create([
             'code' => generate_code('X'),

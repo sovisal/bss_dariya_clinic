@@ -58,7 +58,7 @@ class EchographyController extends Controller
 	{
 		$echography = new Echography();
 		if ($request->type) {
-            $echo_type = EchoType::where('id', 5)->first();
+            $echo_type = EchoType::where('id', $request->type)->first();
         }
 		if ($echo = $echography->create([
 			'code' => generate_code('ECHO'),
