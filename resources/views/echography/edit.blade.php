@@ -76,14 +76,14 @@
 				<div>
 					<x-form.button class="btn-submit" value="2" color="success" icon="bx bx-check" label="Complete" />
 					<x-form.button class="btn-submit" value="1" icon="bx bx-save" label="Save" />
-					<x-form.button class="btn-submit" value="Cancel" color="danger" icon="bx bx-x" label="Cancel" />
+					<!-- <x-form.button class="btn-submit" value="Cancel" color="danger" icon="bx bx-x" label="Cancel" /> -->
 				</div>
 			</x-slot>
 			<x-slot name="footer">
 				<div>
 					<x-form.button class="btn-submit" value="2" color="success" icon="bx bx-check" label="Complete" />
 					<x-form.button class="btn-submit" value="1" icon="bx bx-save" label="Save" />
-					<x-form.button class="btn-submit" value="Cancel" color="danger" icon="bx bx-x" label="Cancel" />
+					<!-- <x-form.button class="btn-submit" value="Cancel" color="danger" icon="bx bx-x" label="Cancel" /> -->
 				</div>
 			</x-slot>
 

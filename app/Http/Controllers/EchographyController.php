@@ -56,10 +56,6 @@ class EchographyController extends Controller
 	 */
 	public function store(EchographyRequest $request)
 	{
-		// serialize all post into string
-		$serialize = array_except($request->all(), ['_method', '_token', 'img_1', 'img_2']);
-		$request['attribite'] = serialize($serialize);
-
 		$echography = new Echography();
 		if ($echo = $echography->create([
 			// 'code' => $request->code,
@@ -71,7 +67,7 @@ class EchographyController extends Controller
 			'payment_status' => 0,
 			'requested_at' => $request->requested_at,
 			'amount' => $request->amount ?: 0,
-			'attribite' => $request->attribite,
+			'attribute' => $request->type > 0 ? EchoType::find($request->type)->first()->attribite : null,
 			'status' => 1,
 		])) {
 			return redirect()->route('para_clinic.echography.edit', $echo->id)->with('success', 'Data created success');

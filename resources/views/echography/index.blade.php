@@ -95,14 +95,11 @@
 					<td class="text-right">{{ render_currency($row->amount) }}</td>
 					<td>{{ $row->type_en }}</td>
 					<td class="text-center">{!! render_record_status($row->status) !!}</td>
-					<td class="text-center">
-						@if ($row->payment_status)
-							<span class="badge badge-success">Paid</span>
-						@else
-							<span class="badge badge-light">Unpaid</span>
-						@endif
-					</td>
+					<td class="text-center">{!! render_payment_status($row->payment_status) !!}</td>
 					<td class="text-right">
+						<x-form.button color="info" class="btn-sm" onclick="getDetail({{ $row->id }})" icon="bx bx-list-ul" />
+						<x-form.button color="warning" class="btn-sm" onclick="getImage('{{ $row->image_1 }}', '{{ $row->image_2 }}')" icon="bx bx-image" />
+						<x-form.button color="dark" class="btn-sm" onclick="printPopup('{{ route('para_clinic.echography.print', $row->id) }}')" icon="bx bx-printer" />
 						@if ($row->status=='1')
 							<x-form.button color="secondary" class="btn-sm" href="{{ route('para_clinic.echography.edit', $row->id) }}" icon="bx bx-edit-alt" />
 							<x-form.button color="danger" class="confirmDelete btn-sm" data-id="{{ $row->id }}" icon="bx bx-trash" />
@@ -111,10 +108,10 @@
 								@method('DELETE')
 								<button class="sr-only" id="btn-{{ $row->id }}">Delete</button>
 							</form>
+						@else
+							<x-form.button color="secondary" class="btn-sm" icon="bx bx-edit-alt" disabled/>
+							<x-form.button color="danger" class="btn-sm" icon="bx bx-trash" disabled/>
 						@endif
-						<x-form.button color="info" class="btn-sm" onclick="getDetail({{ $row->id }})" icon="bx bx-list-ul" />
-						<x-form.button color="warning" class="btn-sm" onclick="getImage('{{ $row->image_1 }}', '{{ $row->image_2 }}')" icon="bx bx-image" />
-						<x-form.button color="dark" class="btn-sm" onclick="printPopup('{{ route('para_clinic.echography.print', $row->id) }}')" icon="bx bx-printer" />
 					</td>
 				</tr>
 			@endforeach

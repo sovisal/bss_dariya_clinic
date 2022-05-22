@@ -29,13 +29,7 @@
 					<td class="text-center">{{ render_readable_date($row->analysis_at) }}</td>
 					<td class="text-right">{{ render_currency($row->amount) }}</td>
 					<td class="text-center">{!! render_record_status($row->status) !!}</td>
-					<td class="text-center">
-						@if ($row->payment_status)
-							<span class="badge badge-success">Paid</span>
-						@else
-							<span class="badge badge-light">Unpaid</span>
-						@endif
-					</td>
+					<td class="text-center">{!! render_payment_status($row->payment_status) !!}</td>
 					<td class="text-center">
 						<x-form.button color="info" class="btn-sm" href="{{ route('para_clinic.labor.edit', $row->id) }}" icon="bx bx-printer" />
 						@if ($row->status == 1)

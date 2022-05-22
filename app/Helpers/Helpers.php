@@ -296,3 +296,16 @@ function render_record_status ($st_num = 0) {
 	}
 	return $label;
 }
+
+function render_payment_status ($st_num = 0) {
+	$label = '';
+	switch ($st_num) {
+		case 0:
+			$label = '<span class="badge badge-light">Unpaid</span>';
+			break;
+		case 1:
+			$label = '<span class="badge badge-success">Paid</span>';
+			break;
+	}
+	return $label;
+}
