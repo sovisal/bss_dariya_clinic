@@ -36,7 +36,8 @@ class AppLayout extends Component
 					],
 					'consultation' => [
 						'can' => 'ViewAnyConsultation',
-						'url' => route('patient.consultation.index'),
+						// 'url' => route('patient.consultation.index'),
+						'url' => route('patient.index'),
 						'name' => ['index', 'create', 'edit', 'show'],
 						'label' => 'Consulting',
 					],

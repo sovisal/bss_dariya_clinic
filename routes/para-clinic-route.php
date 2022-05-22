@@ -8,7 +8,7 @@ use App\Http\Controllers\EGCController;
 
 
 Route::middleware(['auth'])->prefix('para-clinic')->name('para_clinic.')->group(function () {
-	Route::get('/', [ParaClinicController::class, 'index'])->name('index')->middleware('can:ViewAnyParaclinic');
+	// Route::get('/', [ParaClinicController::class, 'index'])->name('index')->middleware('can:ViewAnyParaclinic');
 
 	Route::prefix('x-ray')->name('x_ray.')->group(function () {
 		Route::get('/', [XRayController::class, 'index'])->name('index')->middleware('can:ViewAnyXRay');
@@ -30,13 +30,13 @@ Route::middleware(['auth'])->prefix('para-clinic')->name('para_clinic.')->group(
 		Route::get('/{echography}/show', [EchographyController::class, 'show'])->name('show')->middleware('can:ViewAnyEchography');
 	});
 
-	Route::prefix('egc')->name('egc.')->group(function () {
-		Route::get('/', [EGCController::class, 'index'])->name('index')->middleware('can:ViewAnyEGC');
-		Route::get('/create', [EGCController::class, 'create'])->name('create')->middleware('can:CreateEGC');
-		Route::post('/store', [EGCController::class, 'store'])->name('store')->middleware('can:CreateEGC');
-		Route::get('/{egc}/edit', [EGCController::class, 'edit'])->name('edit')->middleware('can:UpdateEGC');
-		Route::put('/{egc}/update', [EGCController::class, 'update'])->name('update')->middleware('can:UpdateEGC');
-		Route::delete('/{egc}/delete', [EGCController::class, 'destroy'])->name('delete')->middleware('can:DeleteEGC');
-		Route::get('/{egc}/show', [EGCController::class, 'show'])->name('show')->middleware('can:ViewAnyEGC');
-	});
+	// Route::prefix('egc')->name('egc.')->group(function () {
+	// 	Route::get('/', [EGCController::class, 'index'])->name('index')->middleware('can:ViewAnyEGC');
+	// 	Route::get('/create', [EGCController::class, 'create'])->name('create')->middleware('can:CreateEGC');
+	// 	Route::post('/store', [EGCController::class, 'store'])->name('store')->middleware('can:CreateEGC');
+	// 	Route::get('/{egc}/edit', [EGCController::class, 'edit'])->name('edit')->middleware('can:UpdateEGC');
+	// 	Route::put('/{egc}/update', [EGCController::class, 'update'])->name('update')->middleware('can:UpdateEGC');
+	// 	Route::delete('/{egc}/delete', [EGCController::class, 'destroy'])->name('delete')->middleware('can:DeleteEGC');
+	// 	Route::get('/{egc}/show', [EGCController::class, 'show'])->name('show')->middleware('can:ViewAnyEGC');
+	// });
 });

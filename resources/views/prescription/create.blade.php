@@ -16,13 +16,13 @@
 			<x-slot name="action">
 				<div>
 					<x-form.button type="submit" class="btn-submit" value="Progress" icon="bx bx-save" label="Save" />
-					<x-form.button type="reset" class="btn-submit" value="Cancel" color="danger" icon="bx bx-x" label="Cancel" />
+					<!-- <x-form.button type="reset" class="btn-submit" value="Cancel" color="danger" icon="bx bx-x" label="Cancel" /> -->
 				</div>
 			</x-slot>
 			<x-slot name="footer">
 				<div>
 					<x-form.button type="submit" class="btn-submit" value="Progress" icon="bx bx-save" label="Save" />
-					<x-form.button type="reset" class="btn-submit" value="Cancel" color="danger" icon="bx bx-x" label="Cancel" />
+					<!-- <x-form.button type="reset" class="btn-submit" value="Cancel" color="danger" icon="bx bx-x" label="Cancel" /> -->
 				</div>
 			</x-slot>		
 			<table class="table-form striped">

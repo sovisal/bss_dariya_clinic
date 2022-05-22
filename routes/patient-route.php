@@ -22,6 +22,12 @@ Route::middleware(['auth'])->prefix('patient')->name('patient.')->group(function
 		Route::post('/store', [ConsultationController::class, 'store'])->name('consultation.store')->middleware('can:CreateConsultation');
 		Route::get('/{consultation}/edit', [ConsultationController::class, 'edit'])->name('consultation.edit')->middleware('can:CreateConsultation');
 		Route::put('/{consultation}/update', [ConsultationController::class, 'update'])->name('consultation.update')->middleware('can:CreateConsultation');
+<<<<<<< HEAD
 		Route::post('/getTemplate', [ConsultationController::class, 'getTemplate'])->name('consultation.getTemplate');
+=======
+		Route::get('/get_indication/{category_id}', function ($category_id) {
+			return json_encode(getParentDataSelection('indication_disease', ['status' => 1, 'parent_id' => $category_id]));
+		})->name('consultation.get_indication');
+>>>>>>> 882a5bfd6d16adcf7adc1ec7065bd4ff9dc14c3c
 	});
 });
