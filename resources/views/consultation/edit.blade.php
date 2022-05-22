@@ -401,6 +401,33 @@
 				return rs;
 			}
 
+			$(document).on('change', '#evaluation_category', function () {
+				$('#evaluation_indication').html('');
+				$id_category = $(this).val();
+
+				$.ajax({
+					url: "/patient/consultation/get_indication/" + $id_category,
+					type: 'get',
+					success: function(rs){
+						let obj = JSON.parse(rs);
+						for (i in obj) {
+							let newOption = new Option(name = obj[i], i, true, true);
+                    		$('#evaluation_indication').append(newOption);
+						}
+					},
+					error: function (rs) {
+						// pageLoading('hide');
+						Swal.fire({
+							icon: 'error',
+							title: 'Oops...',
+							text: 'Something went wrong!',
+							confirmButtonText: 'Confirm',
+							timer: 1500
+						});
+					}
+				});
+			});
+
 			$('.btn-submit').click(function (){
 				var value = $(this).val();
 				$('[name="submit_option"]').val(value);
@@ -1087,42 +1114,7 @@
 					</table>
 				</div>
 				<div class="tab-pane" id="evaluation" aria-labelledby="evaluation-tab" role="tabpanel">
-					<table class="table-form striped">
-						<tr>
-							<td class="text-right">Evaluation Summary</td>
-							<td>
-								<x-bss-form.textarea name="evaluation_summary">{{ $consultation->evaluation_summary }}</x-bss-form.textarea>
-							</td>
-						</tr>
-						<tr>
-							<td class="text-right">Category</td>
-							<td>
-								<x-bss-form.select name="evaluation_category">
-									<option value="">Select Category</option>
-									@foreach ($evaluation_categories as $id => $evaluation_category)
-										<option value="{{ $id }}" {{ ((old('evaluation_category', $consultation->evaluation_category) == $id)? 'selected' : '') }}>{{ $evaluation_category }}</option>
-									@endforeach
-								</x-bss-form.select>
-							</td>
-						</tr>
-						<tr>
-							<td class="text-right">Indication</td>
-							<td>
-								<x-bss-form.select name="evaluation_indication">
-									<option value="">Select Disease</option>
-									@foreach ($indication_diseases as $id => $data)
-										<option value="{{ $id }}" {{ ((old('evaluation_category', $consultation->evaluation_indication) == $id)? 'selected' : '') }}>{{ $data }}</option>
-									@endforeach
-								</x-bss-form.select>
-							</td>
-						</tr>
-						<tr>
-							<td class="text-right">Information Diagnosis <small class="required">*</small></td>
-							<td>
-								<x-bss-form.textarea name="evaluation_information_diagnosis" rows="4" required>{{ $consultation->evaluation_information_diagnosis }}</x-bss-form.textarea>
-							</td>
-						</tr>
-					</table>
+					@include('consultation.tabs.evaluation')
 				</div>
 				<div class="tab-pane" id="treatment-plan" aria-labelledby="treatment-plan-tab" role="tabpanel">
 					@include('consultation.tabs.treament_plan')
