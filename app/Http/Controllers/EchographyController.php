@@ -50,9 +50,6 @@ class EchographyController extends Controller
 
 	/**
 	 * Store a newly created resource in storage.
-	 *
-	 * @param  \App\Http\Requests\StoreEchographyRequest  $request
-	 * @return \Illuminate\Http\Response
 	 */
 	public function store(EchographyRequest $request)
 	{
@@ -76,9 +73,6 @@ class EchographyController extends Controller
 
 	/**
 	 * Display the specified resource.
-	 *
-	 * @param  \App\Models\Echography  $echography
-	 * @return \Illuminate\Http\Response
 	 */
 	public function getDetail(Request $request)
 	{
@@ -94,8 +88,8 @@ class EchographyController extends Controller
 		->leftJoin('echo_types', 'echo_types.id', '=', 'echographies.type')
 		->first();
 		if ($echography) {
-			$status_html = (($echography->status)? '<span class="badge badge-primary">Completed</span>' : '<span class="badge badge-light">Progress</span>');
-			$status_html .= (($echography->payment_status)? '<span class="badge badge-success tw-ml-1">Paid</span>' : '<span class="badge badge-light tw-ml-1">Unpaid</span>');
+			$status_html = (($echography->status==2)? '<span class="badge badge-primary">Completed</span>' : '<span class="badge badge-light">Progress</span>');
+			$status_html .= (($echography->payment_status==2)? '<span class="badge badge-success tw-ml-1">Paid</span>' : '<span class="badge badge-light tw-ml-1">Unpaid</span>');
 			$tbody = '';
 			$attributes = array_except(filter_unit_attr(unserialize($echography->attribute) ?: []), ['status', 'amount']);
 			foreach ($attributes as $label => $attr) {
@@ -144,9 +138,6 @@ class EchographyController extends Controller
 
 	/**
 	 * Show the form for editing the specified resource.
-	 *
-	 * @param  \App\Models\Echography  $echography
-	 * @return \Illuminate\Http\Response
 	 */
 	public function edit(Echography $echography)
 	{
@@ -207,9 +198,6 @@ class EchographyController extends Controller
 
 	/**
 	 * Remove the specified resource from storage.
-	 *
-	 * @param  \App\Models\Echography  $echography
-	 * @return \Illuminate\Http\Response
 	 */
 	public function destroy(Echography $echography)
 	{

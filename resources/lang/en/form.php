@@ -109,6 +109,12 @@ return [
 		'thyroid_gland' => 'THYROID GLAND',
 		'tumefaction' => 'Tumefaction',
 	],
+	'xray' => [
+		'result' => 'Result',
+	],
+	'ecg' => [
+		'result' => 'Result',
+	],
 
 	'ability' => [
 		'crud' => 'Crud',
