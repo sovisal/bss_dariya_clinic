@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Patient;
+use App\Models\Consultation;
 use Illuminate\Database\Seeder;
 
 class PatientSeeder extends Seeder
@@ -32,6 +33,29 @@ class PatientSeeder extends Seeder
 				'date_of_birth' => '1995-01-01',
 				'gender' => 2,
 				'nationality' => 4,
+				'created_by' => 1,
+				'updated_by' => 1,
+			],
+		]);
+
+		Consultation::insert([
+			[
+				'patient_id' => 1,
+				'doctor_id' => 1,
+				'payment_type' => '',
+				'evaluated_at' => now(),
+				'attribute' => '',
+				'status' => '1',
+				'created_by' => 1,
+				'updated_by' => 1,
+			],
+			[
+				'patient_id' => 2,
+				'doctor_id' => 1,
+				'payment_type' => '',
+				'evaluated_at' => now(),
+				'attribute' => '',
+				'status' => '1',
 				'created_by' => 1,
 				'updated_by' => 1,
 			],

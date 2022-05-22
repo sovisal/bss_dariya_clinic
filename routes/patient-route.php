@@ -22,5 +22,6 @@ Route::middleware(['auth'])->prefix('patient')->name('patient.')->group(function
 		Route::post('/store', [ConsultationController::class, 'store'])->name('consultation.store')->middleware('can:CreateConsultation');
 		Route::get('/{consultation}/edit', [ConsultationController::class, 'edit'])->name('consultation.edit')->middleware('can:CreateConsultation');
 		Route::put('/{consultation}/update', [ConsultationController::class, 'update'])->name('consultation.update')->middleware('can:CreateConsultation');
+		Route::post('/getTemplate', [ConsultationController::class, 'getTemplate'])->name('consultation.getTemplate');
 	});
 });

@@ -15,7 +15,7 @@ class CreateConsultationsTable extends Migration
 	{
 		Schema::create('consultations', function (Blueprint $table) {
 			$table->id();
-			$table->text('json_data');
+			$table->text('attribute');
 			$table->string('payment_type')->nullable();
 			$table->datetime('evaluated_at');
 			$table->string('status')->default('save');
