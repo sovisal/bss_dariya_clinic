@@ -27,6 +27,7 @@ class PrescriptionController extends Controller
 							->where('prescriptions.status', '>=', 1)
 							->leftJoin('patients', 'patients.id', '=', 'prescriptions.patient_id')
 							->leftJoin('doctors', 'doctors.id', '=', 'prescriptions.doctor_id')
+							->orderBy('id', 'DESC')
 							->get();
 		return view('prescription.index', $this->data);
 	}
@@ -150,15 +151,18 @@ class PrescriptionController extends Controller
 
 		// #2, Bind time usage values from checkbox
 		$time_usage = getParentDataSelection('time_usage');
-		$detail_values = array_map(function ($val) use ($time_usage, $request) {
+		foreach ($detail_values as $id => $val) {
+			$tmp_usage_time = [];
 			foreach ($time_usage as $tm_id => $tm_name) {
-				if (isset($request->{'time_usage_' .$val['id']. '_' . $tm_id})) {
-					$val['usage_times'][] = $tm_id;
+				if (
+					isset($request->{'time_usage_' .$val['id']. '_' . $tm_id}) || // For edit
+					isset($request->{'time_usage_' . $tm_id}[$id]) && $request->{'time_usage_' . $tm_id}[$id] != "OFF" // For create
+				) {
+					$tmp_usage_time[] = $tm_id;
 				}
 			}
-			$val['usage_times'] = implode(',', $val['usage_times'] ?: []);
-			return $val;
-		}, $detail_values);
+			$detail_values[$id]['usage_times'] = implode(',', $tmp_usage_time ?: []);
+		}
 
 		if ($is_new == false) {
 			// #3, Update recoed database

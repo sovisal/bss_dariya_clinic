@@ -1,4 +1,9 @@
 <x-app-layout>
+	<x-slot name="js">
+		<script>
+			localStorage.setItem("treament_plan_tab", '');
+		</script>
+	</x-slot>
 	<x-slot name="header">
 		<x-form.button href="{{ route('patient.create') }}" class="btn-sm" icon="bx bx-plus" label="Create" />
 	</x-slot>

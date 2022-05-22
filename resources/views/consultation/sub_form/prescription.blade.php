@@ -1,4 +1,4 @@
-<form action="{{ route('prescription.store') }}" method="POST" autocomplete="off" enctype="multipart/form-data">
+<form action="{{ route('prescription.store') }}" method="POST" id="form_prescription" autocomplete="off" enctype="multipart/form-data">
     @method('PUT')
     @csrf
     <input type="hidden" name="is_treament_plan" value="1">
@@ -36,7 +36,7 @@
         </table>
         <x-slot name="footer">
             <x-form.button color="danger" data-dismiss="modal" icon="bx bx-x" label="{{ __('button.cancel') }}" />
-            <x-form.button type="submit" icon="bx bx-save" label="{{ __('button.save') }}" />
+            <x-form.button type="button" class="prescription_submit" icon="bx bx-save" label="{{ __('button.save') }}" />
         </x-slot>
     </x-modal>
 </form>

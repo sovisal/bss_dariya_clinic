@@ -304,6 +304,15 @@
 			}
 			refresh_treament_plan_label("{{ $consultation->patient_id }}");
 
+			$('.prescription_submit').click(function (){
+				$('[name^="time_usage_"]').each(function (i, e) {
+					if (!$(e).prop('checked')) {
+						$(e).val('OFF').prop('checked', true);
+					}
+				});
+				$('#form_prescription').submit();
+			});
+
 			$('.btn-submit').click(function (){
 				var value = $(this).val();
 				$('[name="submit_option"]').val(value);
@@ -325,6 +334,19 @@
 					if (formValidate('#consultation-form')) {
 						$('#consultation-form').submit();
 					}
+				}
+			});
+
+			// Remember tab of treament plan
+			$(document).ready(function () {
+				$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+					var target = $(e.target).attr("href");
+					localStorage.setItem("treament_plan_tab", target);
+				});
+
+				var target = localStorage.getItem("treament_plan_tab");
+				if (target) {
+					$('[href="' + target + '"]').tab('show');
 				}
 			});
 		</script>
