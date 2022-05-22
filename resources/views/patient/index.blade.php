@@ -40,7 +40,7 @@
 					<!-- <td>{!! date('d-M-Y H:i', strtotime($patient->registered_at)) !!}</td> -->
 					<!-- <td>{!! date('d-M-Y H:i', strtotime($patient->updated_at)) !!}</td> -->
 					<!-- <td>{!! $patient->updated_by_name !!}</td> -->
-					<td>{!! render_record_status($status) !!}</td>
+					<td class="text-center">{!! render_record_status($status) !!}</td>
 					<td class="text-center">
 						<x-form.button color="primary" class="btn-sm" href="{{ route('patient.show', $patient->id) }}" icon="bx bx-detail" />
 						@if ($status == 1)

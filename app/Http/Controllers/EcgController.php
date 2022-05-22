@@ -56,20 +56,27 @@ class EcgController extends Controller
     public function store(Request $request)
     {
         $ecg = new Ecg();
+        if ($request->type) {
+            $ecg_type = EcgType::find($request->type)->first();
+        }
         if ($record = $ecg->create([
-            // 'code' => $request->code,
+            'code' => generate_code('ECG'),
             'type' => $request->type,
             'patient_id' => $request->patient_id,
             'doctor_id' => $request->doctor_id,
-            'requested_by' => $request->requested_by,
-            'payment_type' => $request->payment_type,
+            'requested_by' => $request->requested_by ?? 0,
+            'payment_type' => $request->payment_type ?? 0,
             'payment_status' => 0,
             'requested_at' => $request->requested_at,
-            'amount' => $request->amount ?: 0,
-            'attribute' => $request->type > 0 ? EcgType::find($request->type)->first()->attribite : null,
+            'amount' => $request->amount ?: ($ecg_type ? $ecg_type->price : 0),
+            'attribute' => $ecg_type ? $ecg_type->attribite : null,
             'status' => 1,
         ])) {
-            return redirect()->route('para_clinic.ecg.edit', $record->id)->with('success', 'Data created success');
+            if ($request->is_treament_plan) {
+                return redirect()->route('patient.consultation.edit', $request->consultation_id)->with('success', 'Data created success');
+            } else {
+                return redirect()->route('para_clinic.ecg.edit', $record->id)->with('success', 'Data created success');
+            }
         }
     }
 

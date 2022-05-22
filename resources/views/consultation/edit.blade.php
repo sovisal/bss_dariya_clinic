@@ -399,6 +399,32 @@
 				});
 			});
 
+			function refresh_treament_plan_label (patient_id) {
+				$.ajax({
+					url: "/patient/consultation/treament_plan_label/" + patient_id,
+					type: 'get',
+					success: function(rs){
+						let obj = JSON.parse(rs);
+						$('#link_prescription').html(obj['list_prescription']);
+						$('#link_labor').html(obj['list_labor']);
+						$('#link_xray').html(obj['list_xray']);
+						$('#link_echo').html(obj['list_echo']);
+						$('#link_ecg').html(obj['list_ecg']);
+					},
+					error: function (rs) {
+						// pageLoading('hide');
+						Swal.fire({
+							icon: 'error',
+							title: 'Oops...',
+							text: 'Something went wrong!',
+							confirmButtonText: 'Confirm',
+							timer: 1500
+						});
+					}
+				});
+			}
+			refresh_treament_plan_label("{{ $consultation->patient_id }}");
+
 			$('.btn-submit').click(function (){
 				var value = $(this).val();
 				$('[name="submit_option"]').val(value);
@@ -1101,5 +1127,8 @@
 			<x-form.button icon="bx bx-save" label="{{ __('button.save') }}" />
 		</x-slot>
 	</x-modal>
+	@include('consultation.sub_form.ecg')
+	@include('consultation.sub_form.xray')
+	@include('consultation.sub_form.echo')
 
 </x-app-layout>

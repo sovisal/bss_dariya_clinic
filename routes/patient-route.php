@@ -26,5 +26,6 @@ Route::middleware(['auth'])->prefix('patient')->name('patient.')->group(function
 		Route::get('/get_indication/{category_id}', function ($category_id) {
 			return json_encode(getParentDataSelection('indication_disease', ['status' => 1, 'parent_id' => $category_id]));
 		})->name('consultation.get_indication');
+		Route::get('/treament_plan_label/{patient_id}', [ConsultationController::class, 'getTreamentPlanLinkLabel']);
 	});
 });

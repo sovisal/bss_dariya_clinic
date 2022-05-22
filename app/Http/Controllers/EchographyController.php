@@ -57,20 +57,27 @@ class EchographyController extends Controller
 	public function store(EchographyRequest $request)
 	{
 		$echography = new Echography();
+		if ($request->type) {
+            $echo_type = EchoType::where('id', 5)->first();
+        }
 		if ($echo = $echography->create([
-			// 'code' => $request->code,
+			'code' => generate_code('ECHO'),
 			'type' => $request->type,
 			'patient_id' => $request->patient_id,
 			'doctor_id' => $request->doctor_id,
-			'requested_by' => $request->requested_by,
-			'payment_type' => $request->payment_type,
+			'requested_by' => $request->requested_by ?? 0,
+			'payment_type' => $request->payment_type ?? 0,
 			'payment_status' => 0,
 			'requested_at' => $request->requested_at,
-			'amount' => $request->amount ?: 0,
-			'attribute' => $request->type > 0 ? EchoType::find($request->type)->first()->attribite : null,
+            'amount' => $request->amount ?: ($echo_type ? $echo_type->price : 0),
+            'attribute' => $echo_type ? $echo_type->attribite : null,
 			'status' => 1,
 		])) {
-			return redirect()->route('para_clinic.echography.edit', $echo->id)->with('success', 'Data created success');
+			if ($request->is_treament_plan) {
+                return redirect()->route('patient.consultation.edit', $request->consultation_id)->with('success', 'Data created success');
+            } else {
+				return redirect()->route('para_clinic.echography.edit', $echo->id)->with('success', 'Data created success');
+			}
 		}
 	}
 

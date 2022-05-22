@@ -67,6 +67,9 @@
 			});
 		</script>
 	</x-slot>
+	<x-slot name="header">
+		<x-form.button href="{{ route('para_clinic.echography.index') }}" color="danger" icon="bx bx-left-arrow-alt" label="Back" />
+	</x-slot>
 	<form action="{{ route('para_clinic.echography.update', $row) }}" id="echography-form" method="POST" autocomplete="off" enctype="multipart/form-data">
 		@csrf
 		@method('PUT')

@@ -8,6 +8,7 @@
 	'contentClass' => '',
 	'bodyClass' => '',
 	'footerClass' => '',
+	'header' => '',
 ])
 <div {{ $attributes->merge(['class'=>"modal fade text-left"]) }} id="{{ $id }}" tabindex="-1" role="dialog" aria-labelledby="Label{{ $id }}" aria-hidden="true">
 	<div class="modal-dialog {{ $dialogClass }}" style="{{ ($width!='')? 'max-width: '. $width : '' }}">

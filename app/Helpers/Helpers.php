@@ -309,3 +309,8 @@ function render_payment_status ($st_num = 0) {
 	}
 	return $label;
 }
+
+
+function generate_code ($type, $number = null) {
+	return $type . ($number ? str_pad($number, 6, '0', STR_PAD_LEFT) : date('ymd'));
+}

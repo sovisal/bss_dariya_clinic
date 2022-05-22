@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Doctor;
 use App\Models\Patient;
 use App\Models\EchoType;
+use App\Models\XrayType;
 use App\Models\Consultation;
+use App\Models\EcgType;
 use Illuminate\Http\Request;
 use App\Http\Requests\ConsultationRequest;
 
@@ -72,7 +74,7 @@ class ConsultationController extends Controller
 	{
 		$data = [
 			'consultation' => append_array_to_obj($consultation, unserialize($consultation->attribute) ?: []),
-			'doctors' => Doctor::orderBy('name_kh', 'asc')->get(),
+			'doctors' => Doctor::orderBy('name_en', 'asc')->get(),
 			'payment_types' => getParentDataSelection('payment_type'),
 			'evaluation_categories' => getParentDataSelection('evalutaion_category'),
 		];
@@ -82,13 +84,10 @@ class ConsultationController extends Controller
 			getParentDataSelection('indication_disease', ['status' => 1, 'parent_id' => $data['consultation']->evaluation_category]) :
 			getParentDataSelection('indication_disease');
 
-		// For Treatment plan tab
-		$patient = Patient::find($consultation->patient_id);
-		$data['list_prescription']	= $patient->prescriptions() ? $patient->prescriptions()->where('status', '>=', 1)->select('id', 'code')->get()->toArray() : [];
-		$data['list_labor'] 		= $patient->labors() 		? $patient->labors()->where('status', '>=', 1)->select('id', 'code')->get()->toArray() : [];
-		$data['list_xray'] 			= $patient->xrays() 		? $patient->xrays()->where('status', '>=', 1)->select('id', 'code')->get()->toArray() : [];
-		$data['list_echo'] 			= $patient->echos() 		? $patient->echos()->where('status', '>=', 1)->select('id', 'code')->get()->toArray() : [];
-		$data['list_ecg'] 			= $patient->ecgs() 			? $patient->ecgs()->where('status', '>=', 1)->select('id', 'code')->get()->toArray() : [];
+		// For Treament plan tab
+		$data['ecg_type'] = EcgType::where('status', 1)->orderBy('index', 'asc')->get();
+		$data['xray_type'] = XrayType::where('status', 1)->orderBy('index', 'asc')->get();
+		$data['echo_type'] = EchoType::where('status', 1)->orderBy('index', 'asc')->get();
 		return view('consultation.edit', $data);
 	}
 
@@ -144,6 +143,44 @@ class ConsultationController extends Controller
 			return back()->with('success', __('alert.message.success.crud.delete'));
 		}
 		return back()->with('error', __('alert.message.error.crud.delete'));
+	}
+
+	public function getTreamentPlanLinkLabel($patient_id = 2)
+	{
+		// For Treatment plan tab
+		$patient = Patient::find($patient_id);
+		$data['list_prescription']	= $patient->prescriptions() ? $patient->prescriptions()->where('status', '>=', 1)->select('id', 'code')->get()->toArray() : [];
+		$data['list_labor'] 		= $patient->labors() 		? $patient->labors()->where('status', '>=', 1)->select('id', 'code')->get()->toArray() : [];
+		$data['list_xray'] 			= $patient->xrays() 		? $patient->xrays()->where('status', '>=', 1)->select('id', 'code')->get()->toArray() : [];
+		$data['list_echo'] 			= $patient->echos() 		? $patient->echos()->where('status', '>=', 1)->select('id', 'code')->get()->toArray() : [];
+		$data['list_ecg'] 			= $patient->ecgs() 			? $patient->ecgs()->where('status', '>=', 1)->select('id', 'code')->get()->toArray() : [];
+
+		$label = array_map(function ($val) {
+			return '<a href="' . route('prescription.show', $val['id']) . '">' . ($val['code'] ?: 'N/A') . '</a>';
+		}, $data['list_prescription']);
+		$data['list_prescription'] = implode($label, ',  ');
+
+		$label = array_map(function ($val) {
+			return '<a href="' . route('para_clinic.labor.show', $val['id']) . '">' . ($val['code'] ?: 'N/A') . '</a>';
+		}, $data['list_labor']);
+		$data['list_labor'] = implode($label, ',  ');
+
+		$label = array_map(function ($val) {
+			return '<a href="' . route('para_clinic.xray.show', $val['id']) . '">' . ($val['code'] ?: 'N/A') . '</a>';
+		}, $data['list_xray']);
+        $data['list_xray'] = implode($label, ',  ');
+
+		$label = array_map(function ($val) {
+			return '<a href="' . route('para_clinic.echography.show', $val['id']) . '">' . ($val['code'] ?: 'N/A') . '</a>';
+		}, $data['list_echo']);
+		$data['list_echo'] = implode($label, ',  ');
+
+		$label = array_map(function ($val) {
+			return '<a href="' . route('para_clinic.ecg.show', $val['id']) . '">' . ($val['code'] ?: 'N/A') . '</a>';
+		}, $data['list_ecg']);
+        $data['list_ecg'] = implode($label, ',  ');
+
+		return json_encode($data);
 	}
 
 }

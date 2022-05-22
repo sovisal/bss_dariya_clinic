@@ -12,12 +12,7 @@
             </div>
         </td>
         <td>
-            @php 
-                $label = array_map(function ($val) {
-                    return '<a href="' . route('prescription.show', $val['id']) . '">' . ($val['code'] ?: 'N/A') . '</a>';
-                }, $list_prescription);
-            @endphp
-            {!! implode($label, ',  ') !!}
+            <span id="link_prescription"></span>
         </td>
     </tr>
     <tr>
@@ -28,60 +23,40 @@
             </div>
         </td>
         <td>
-            @php 
-                $label = array_map(function ($val) {
-                    return '<a href="' . route('para_clinic.labor.show', $val['id']) . '">' . ($val['code'] ?: 'N/A') . '</a>';
-                }, $list_labor);
-            @endphp
-            {!! implode($label, ',  ') !!}
+            <span id="link_labor"></span>
         </td>
     </tr>
     <tr>
         <td>
             <div class="d-flex justify-content-between">
                 <b>Xray</b>
-                <x-form.button class="btn-treatment-toggle" data-type="xray" color="secondary" icon="bx bx-plus" label=""/>
+                <x-form.button data-toggle="modal" data-target="#treatment_modal_xray" color="secondary" icon="bx bx-plus" label=""/>
             </div>
         </td>
         <td>
-            @php 
-                $label = array_map(function ($val) {
-                    return '<a href="' . route('para_clinic.xray.show', $val['id']) . '">' . ($val['code'] ?: 'N/A') . '</a>';
-                }, $list_xray);
-            @endphp
-            {!! implode($label, ',  ') !!}
+            <span id="link_xray"></span>
         </td>
     </tr>
     <tr>
         <td>
             <div class="d-flex justify-content-between">
                 <b>Echography</b>
-                <x-form.button class="btn-treatment-toggle" data-type="echography" color="secondary" icon="bx bx-plus" label=""/>
+                <x-form.button data-toggle="modal" data-target="#treatment_modal_echo" color="secondary" icon="bx bx-plus" label=""/>
             </div>
         </td>
         <td>
-            @php 
-                $label = array_map(function ($val) {
-                    return '<a href="' . route('para_clinic.echography.show', $val['id']) . '">' . ($val['code'] ?: 'N/A') . '</a>';
-                }, $list_echo);
-            @endphp
-            {!! implode($label, ',  ') !!}
+            <span id="link_echo"></span>
         </td>
     </tr>
     <tr>
         <td>
             <div class="d-flex justify-content-between">
                 <b>ECG</b>
-                <x-form.button class="btn-treatment-toggle" data-type="ecg" color="secondary" icon="bx bx-plus" label=""/>
+                <x-form.button data-toggle="modal" data-target="#treatment_modal_ecg" color="secondary" icon="bx bx-plus" label=""/>
             </div>
         </td>
         <td>
-            @php 
-                $label = array_map(function ($val) {
-                    return '<a href="' . route('para_clinic.ecg.show', $val['id']) . '">' . ($val['code'] ?: 'N/A') . '</a>';
-                }, $list_ecg);
-            @endphp
-            {!! implode($label, ',  ') !!}
+            <span id="link_ecg"></span>
         </td>
     </tr>
 </table>
