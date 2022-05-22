@@ -10,6 +10,7 @@ Route::middleware(['auth'])->name('para_clinic.')->group(function () {
 		Route::put('/store', [EchographyController::class, 'store'])->name('echography.store');
 		Route::get('/{echography}/print', [EchographyController::class, 'print'])->name('echography.print');
 		Route::get('/{echography}/edit', [EchographyController::class, 'edit'])->name('echography.edit');
+		Route::get('/{echography}/show', [EchographyController::class, 'show'])->name('echography.show');
 		Route::put('/{echography}/update', [EchographyController::class, 'update'])->name('echography.update');
 		Route::delete('/{echography}/delete', [EchographyController::class, 'destroy'])->name('echography.delete');
 		Route::post('/getDetail', [EchographyController::class, 'getDetail'])->name('echography.getDetail');

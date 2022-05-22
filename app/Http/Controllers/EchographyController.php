@@ -162,6 +162,20 @@ class EchographyController extends Controller
 		return view('echography.edit', $data);
 	}
 
+	public function show(Echography $echography)
+	{
+		append_array_to_obj($echography, unserialize($echography->attribute) ?: []);
+		if ($echography ?? false) {
+			$data['row'] = $echography;
+			$data['type'] = EchoType::where('status', 1)->orderBy('index', 'asc')->get();
+			$data['patient'] = Patient::orderBy('name_en', 'asc')->get();
+			$data['doctor'] = Doctor::orderBy('name_en', 'asc')->get();
+		} 
+		$data['payment_type'] = getParentDataSelection('payment_type');
+		$data['is_edit'] = true;
+		return view('echography.edit', $data);
+	}
+
 	/**
 	 * Update the specified resource in storage.
 	 */

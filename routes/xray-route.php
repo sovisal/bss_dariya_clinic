@@ -9,6 +9,7 @@ Route::middleware(['auth'])->name('para_clinic.')->group(function () {
 		Route::get('/create', [XrayController::class, 'create'])->name('xray.create');
 		Route::put('/store', [XrayController::class, 'store'])->name('xray.store');
 		Route::get('/{xray}/edit', [XrayController::class, 'edit'])->name('xray.edit');
+		Route::get('/{xray}/show', [XrayController::class, 'show'])->name('xray.show');
 		Route::put('/{xray}/update', [XrayController::class, 'update'])->name('xray.update');
 		Route::delete('/{xray}/delete', [XrayController::class, 'destroy'])->name('xray.delete');
 	});

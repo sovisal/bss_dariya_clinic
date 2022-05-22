@@ -30,7 +30,7 @@
         <td>
             @php 
                 $label = array_map(function ($val) {
-                    return '<a href="' . route('prescription.show', $val['id']) . '">' . ($val['code'] ?: 'N/A') . '</a>';
+                    return '<a href="' . route('para_clinic.labor.show', $val['id']) . '">' . ($val['code'] ?: 'N/A') . '</a>';
                 }, $list_labor);
             @endphp
             {!! implode($label, ',  ') !!}
@@ -46,7 +46,7 @@
         <td>
             @php 
                 $label = array_map(function ($val) {
-                    return '<a href="' . route('prescription.show', $val['id']) . '">' . ($val['code'] ?: 'N/A') . '</a>';
+                    return '<a href="' . route('para_clinic.xray.show', $val['id']) . '">' . ($val['code'] ?: 'N/A') . '</a>';
                 }, $list_xray);
             @endphp
             {!! implode($label, ',  ') !!}
@@ -62,7 +62,7 @@
         <td>
             @php 
                 $label = array_map(function ($val) {
-                    return '<a href="' . route('prescription.show', $val['id']) . '">' . ($val['code'] ?: 'N/A') . '</a>';
+                    return '<a href="' . route('para_clinic.echography.show', $val['id']) . '">' . ($val['code'] ?: 'N/A') . '</a>';
                 }, $list_echo);
             @endphp
             {!! implode($label, ',  ') !!}
@@ -78,7 +78,7 @@
         <td>
             @php 
                 $label = array_map(function ($val) {
-                    return '<a href="' . route('prescription.show', $val['id']) . '">' . ($val['code'] ?: 'N/A') . '</a>';
+                    return '<a href="' . route('para_clinic.ecg.show', $val['id']) . '">' . ($val['code'] ?: 'N/A') . '</a>';
                 }, $list_ecg);
             @endphp
             {!! implode($label, ',  ') !!}
