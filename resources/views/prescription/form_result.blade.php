@@ -44,10 +44,10 @@
                 <x-bss-form.input type="number" name='nod[]' value="{{ $row->nod ?: 0 }}" class="text-center"/>
             </td>
             <td>
-                <x-bss-form.input type="number" name='total[]' value="{{ $row->total ?: 0 }}" class="text-center" :disabled="true"/>
+                <x-bss-form.input type="number" name='total[]' value="{{ $row->total ?: 0 }}" class="text-center" readonly/>
             </td>
             <td>
-                <x-bss-form.input type="text" name='unit[]' value="{{ $row->unit ?: 0 }}" class="text-center"/>
+                <x-bss-form.input type="text" name='unit[]' value="{{ $row->unit ?: '' }}" class="text-center"/>
             </td>
             <td>
                 <x-bss-form.select name="usage_id[]" required data-no_search="true" :select2="false">

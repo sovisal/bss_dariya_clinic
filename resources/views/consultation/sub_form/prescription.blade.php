@@ -62,7 +62,7 @@
                 <x-bss-form.input type="number" name='nod[]' value="0" class="text-center"/>
             </td>
             <td>
-                <x-bss-form.input type="number" name='total[]' value="0" class="text-center" :disabled="true"/>
+                <x-bss-form.input type="number" name='total[]' value="0" class="text-center" readonly/>
             </td>
             <td>
                 <x-bss-form.input type="text" name='unit[]' value="" class="text-center"/>
