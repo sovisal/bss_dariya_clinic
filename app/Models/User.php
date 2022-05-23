@@ -30,6 +30,7 @@ class User extends Authenticatable
 		'image',
 		'is_suspended',
 		'password',
+		'doctor',
 	];
 
 	/**
@@ -146,4 +147,7 @@ class User extends Authenticatable
 		return $user_has_abilities->merge($role_has_abilities);
 	}
 
+	public function doctor() {
+		return $this->belongsTo(Doctor::class, 'doctor')->first();
+	}
 }

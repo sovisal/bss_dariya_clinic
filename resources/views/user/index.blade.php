@@ -4,7 +4,7 @@
 	</x-slot>
 
 	<x-card :foot="false">
-		<x-table id="datatables" class="table-hover" data-table="users">
+		<x-table id="datatables" class="table-hover table-bordered" data-table="users">
 			<x-slot name="thead">
 				<tr>
 					<th width="6%" class="no-sort">
@@ -14,6 +14,7 @@
 					<th>{!! __('table.username') !!}</th>
 					<th>{!! __('table.role') !!}</th>
 					<th>{!! __('table.position') !!}</th>
+					<th>Doctor</th>
 					<th>{!! __('table.status') !!}</th>
 					<th width="10%">{!! __('table.action') !!}</th>
 				</tr>
@@ -23,21 +24,11 @@
 					<td class="text-center">
 						{{ ++$key }}
 					</td>
-					<td>
-						@if ($user->image)
-							<div class="avatar mr-1 avatar-lg">
-								<img src="{{ asset('images/users/'. $user->image ) }}"  alt="...">
-							</div>
-						@else
-							<div class="avatar mr-1 tw-bg-{{ $user->color }}">
-								<span class="avatar-content">{{ substr($user->name, 0, 1) }}</span>
-							</div>
-						@endif
-						{!! $user->name !!}
-					</td>
+					<td>{!! $user->name !!}</td>
 					<td>{!! $user->username !!}</td>
 					<td class="text-center">{!! $user->hasRoles->first()->name ?? '-' !!}</td>
 					<td class="text-center">{!! $user->position !!}</td>
+					<td>{!! $user->doctor() ? $user->doctor()->name_en : '' !!}</td>
 					<td class="text-center">
 						{!! $user->is_suspended ? '<span class="badge badge-light-danger">'. __('table.suspended') .'</span>' : '<span class="badge badge-light-success">'. __('table.active') .'</span>' !!}
 					</td>

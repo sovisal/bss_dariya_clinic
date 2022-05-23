@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use App\Models\AbilityModule;
 use App\Http\Requests\UserRequest;
+use App\Models\Doctor;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -22,7 +23,7 @@ class UserController extends Controller
 	public function index()
 	{
 		$data = [
-			'users' => User::where('isWebDev', false)->with('hasRoles')->orderBy('name', 'asc')->get()
+			'users' => User::where('isWebDev', false)->with('hasRoles')->orderBy('name', 'asc')->get(),
 		];
 		return view('user.index', $data);
 	}
@@ -50,7 +51,8 @@ class UserController extends Controller
 					'checked' => false,
 					'label' => __('form.female')
 				],
-			]
+			],
+			'doctor' => Doctor::orderBy('name_en', 'asc')->get(),
 		];
 		return view('user.create', $data);
 	}
@@ -69,6 +71,7 @@ class UserController extends Controller
 			'position' => $request->position,
 			'address' => $request->address,
 			'bio' => $request->bio,
+			'doctor' => $request->doctor_id ?: 0,
 			'color' => bg_random()
 		]);
 		$url = route('user.index');
@@ -98,7 +101,8 @@ class UserController extends Controller
 					'value' => '1',
 					'label' => __('form.female')
 				],
-			]
+			],
+			'doctor' => Doctor::orderBy('name_en', 'asc')->get(),
 		];
 		return view('user.edit', $data);
 	}
@@ -115,7 +119,8 @@ class UserController extends Controller
 			'position' => $request->position,
 			'is_suspended' => ($request->is_suspended == 'on' ? true : false),
 			'address' => $request->address,
-			'bio' => $request->bio
+			'bio' => $request->bio,
+			'doctor' => $request->doctor_id ?: 0
 		]);
 		return back()->with('success', __('alert.message.success.crud.update'));
 	}

@@ -84,6 +84,15 @@
 						label="{!! __('form.user.bio') !!}"
 					/>
 				</div>
+				<div class="col-md-6">
+					Doctor
+					<x-bss-form.select name="doctor_id">
+						<option value="">Please choose</option>
+						@foreach ($doctor as $data)
+							<option value="{{ $data->id }}">{{ $data->name_en }}</option>
+						@endforeach
+					</x-bss-form.select>
+				</div>
 			</div>
 
 			<x-slot name="footer">

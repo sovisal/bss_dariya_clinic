@@ -75,6 +75,15 @@
 						{{ old('bio', $user->bio) }}
 					</x-form.textarea>
 				</div>
+				<div class="col-md-6">
+					Doctor
+					<x-bss-form.select name="doctor_id">
+						<option value="">Please choose</option>
+						@foreach ($doctor as $data)
+							<option value="{{ $data->id }}" {{ $data->id == old('doctor_id', $user->doctor) ? 'selected' : '' }}>{{ $data->name_en }}</option>
+						@endforeach
+					</x-bss-form.select>
+				</div>
 			</div>
 
 			<x-slot name="footer">

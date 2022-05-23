@@ -61,7 +61,7 @@ class LaboratoryController extends Controller
                 'patient_id' => $request->patient_id,
                 'gender' => $request->gender,
                 'age' => $request->age ?: 0,
-                'requested_by' => $request->requested_by ?: 0,
+                'requested_by' => $request->requested_by ?: auth()->user()->doctor ?? 0,
                 'requested_at' => $request->requested_at ?: date('Y-m-d H:i:s'),
                 'doctor_id' => $request->doctor_id ?: 0,
                 'analysis_at' => $request->analysis_at ?: null,

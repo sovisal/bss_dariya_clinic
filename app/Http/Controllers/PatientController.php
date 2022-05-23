@@ -84,7 +84,7 @@ class PatientController extends Controller
 				'doctor_id' => 1,
 				'payment_type' => '',
 				'evaluated_at' => now(),
-				'json_data' => '',
+				'attribute' => '',
 				'status' => '1',
 				'created_by' => auth()->user()->id,
 				'updated_by' => auth()->user()->id,

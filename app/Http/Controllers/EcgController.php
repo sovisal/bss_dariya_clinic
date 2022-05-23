@@ -64,7 +64,7 @@ class EcgController extends Controller
             'type' => $request->type,
             'patient_id' => $request->patient_id,
             'doctor_id' => $request->doctor_id,
-            'requested_by' => $request->requested_by ?? 0,
+            'requested_by' => $request->requested_by ?: auth()->user()->doctor ?? 0,
             'payment_type' => $request->payment_type ?? 0,
             'payment_status' => 0,
             'requested_at' => $request->requested_at ?: date('Y-m-d H:i:s'),

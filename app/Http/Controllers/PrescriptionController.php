@@ -52,7 +52,7 @@ class PrescriptionController extends Controller
 		if ($pre = $prescription->create([
 			'code' => generate_code('PRE'),
 			'patient_id' => $request->patient_id,
-			'requested_by' => $request->requested_by ?: 0,
+			'requested_by' => $request->requested_by ?: auth()->user()->doctor ?? 0,
 			'requested_at' => $request->requested_at ?: date('Y-m-d H:i:s'),
 			'doctor_id' => $request->doctor_id ?: 0,
 			'analysis_at' => $request->analysis_at ?: null,
