@@ -85,9 +85,11 @@ small.required{
 .table-bordered td, .table-bordered th {
     border: 1px solid #dfe3e7 !important;
 }
+.table tbody td,
 .table-padding-sm tbody th,
 .table-padding-sm tbody td{
-	padding: 5px 5px !important;
+	padding: 4px 2px 4px 3px!important;
+	font-size: 8px; font-weight: thin!important;
 }
 .table tbody td{
 	vertical-align: middle;
@@ -536,7 +538,7 @@ body.dark-layout .alert span ul li{
 	.sidebar-menu{
 		border-radius: 0.22rem;
 		background: #fff;
-		min-width: 200px;
+		min-width: 150px;
 		margin-right: 35px;
 	}
 	.sidebar-menu > li{
@@ -726,4 +728,12 @@ body.dark-layout .alert span ul li{
 	textarea.my-editor + .cke_chrome.cke_focus{
 		border: 1px solid #2b579a;
 		box-shadow: 0 3px 8px 0 rgb(0 0 0 / 10%);
+	}
+
+	table.dataTable > thead > tr > th:not(.sorting_disabled),
+	table.dataTable > thead > tr > td:not(.sorting_disabled) {
+		padding-right: 10px;
+	}
+	.table thead th {
+		font-size: 11px;
 	}

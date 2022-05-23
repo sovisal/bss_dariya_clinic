@@ -19,7 +19,7 @@
         <td>
             <div class="d-flex justify-content-between">
                 <b>Labor-Test</b>
-                <x-form.button class="btn-treatment-toggle" data-type="labor-test" color="secondary" icon="bx bx-plus" label=""/>
+                <x-form.button data-toggle="modal" data-target="#treatment_modal_labor" color="secondary" icon="bx bx-plus" label=""/>
             </div>
         </td>
         <td>

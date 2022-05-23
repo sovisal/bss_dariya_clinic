@@ -17,8 +17,8 @@
 					<th>Gender</th>
 					<th>Phone</th>
 					<th>Nationality</th>
+					<th>Registered at</th>
 					<th>Status</th>
-					<!-- <th>Registered at</th> -->
 					<!-- <th>Modify at</th> -->
 					<!-- <th>Modify by</th> -->
 					<th width="10%">{!! __('table.action') !!}</th>
@@ -42,7 +42,7 @@
 					<td class="text-center">{!! getParentDataByType('gender', $patient->gender) !!}</td>
 					<td>{!! $patient->phone !!}</td>
 					<td>{!! getParentDataByType('nationality', $patient->nationality) !!}</td>
-					<!-- <td>{!! date('d-M-Y H:i', strtotime($patient->registered_at)) !!}</td> -->
+					<td class="text-center">{!! date('d-M-Y H:i', strtotime($patient->registered_at)) !!}</td>
 					<!-- <td>{!! date('d-M-Y H:i', strtotime($patient->updated_at)) !!}</td> -->
 					<!-- <td>{!! $patient->updated_by_name !!}</td> -->
 					<td class="text-center">{!! render_record_status($status) !!}</td>

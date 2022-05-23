@@ -54,38 +54,45 @@ class LaboratoryController extends Controller
      */
     public function store(Request $request)
     {
-        // serialize all post into string
-        $serialize = array_except($request->all(), ['_method', '_token']);
-        $request['attribite'] = serialize($serialize);
-
-        $laboratory = new Laboratory();
-        if ($labor = $laboratory->create([
-            'code' => generate_code('L'),
-            'patient_id' => $request->patient_id,
-            'gender' => $request->gender,
-            'age' => $request->age ?: 0,
-            'requested_by' => $request->requested_by ?: 0,
-            'requested_at' => $request->requested_at ?: date('Y-m-d H:i:s'),
-            'doctor_id' => $request->doctor_id ?: 0,
-            'analysis_at' => $request->analysis_at ?: null,
-            'amount' => $request->amount ?: 0,
-            'payment_type' => $request->payment_type,
-            'payment_status' => $request->payment_status ?: 0,
-            'result' => $request->result,
-            'sample' => $request->sample,
-            'diagnosis' => $request->diagnosis,
-            'attribite' => $request->attribite,
-            'status' => 1,
-        ])) {
-            $detail = new LaborDetail;
-            // Test Data
-            $detail->create([
-                'labor_id' => $labor->id,
-                'labor_item_id' => 1,
-                'value' => 0,
-            ]);
-
-            return redirect()->route('para_clinic.labor.edit', $labor->id)->with('success', 'Data created success');
+        if (sizeof($request->labor_item_id ?? []) > 0) {
+            $laboratory = new Laboratory();
+            if ($labor = $laboratory->create([
+                'code' => generate_code('L'),
+                'patient_id' => $request->patient_id,
+                'gender' => $request->gender,
+                'age' => $request->age ?: 0,
+                'requested_by' => $request->requested_by ?: 0,
+                'requested_at' => $request->requested_at ?: date('Y-m-d H:i:s'),
+                'doctor_id' => $request->doctor_id ?: 0,
+                'analysis_at' => $request->analysis_at ?: null,
+                'amount' => $request->amount ?: 0,
+                'payment_type' => $request->payment_type ?: 0,
+                'payment_status' => $request->payment_status ?: 0,
+                'result' => $request->result,
+                'sample' => $request->sample,
+                'diagnosis' => $request->diagnosis,
+                'status' => 1,
+            ])) {
+                foreach ($request->labor_item_id as $labor_item_id) {
+                    $detail = new LaborDetail;
+                    $detail->create([
+                        'labor_id' => $labor->id,
+                        'labor_item_id' => $labor_item_id,
+                        'value' => 0,
+                    ]);
+                }
+                if ($request->is_treament_plan) {
+                    return redirect()->route('patient.consultation.edit', $request->consultation_id)->with('success', 'Data created success');
+                } else {
+                    return redirect()->route('para_clinic.labor.edit', $labor->id)->with('success', 'Data created success');
+                }
+            }
+        } else {
+            if ($request->is_treament_plan) {
+                return redirect()->route('patient.consultation.edit', $request->consultation_id)->with('error', 'No Test has been selected');
+            } else {
+                return redirect()->route('para_clinic.labor.edit', $labor->id)->with('error', 'No Test has been selected');
+            }
         }
     }
 

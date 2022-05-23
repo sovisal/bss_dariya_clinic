@@ -5,111 +5,6 @@
 	</x-slot>
 	<x-slot name="js">
 		<script>
-			$('.btn-treatment-toggle').click(function(){
-				var body = `<table class="table-form table-padding-sm striped">
-								<tr>
-									<td width="20%" class="text-right">Requested Date</td>
-									<td>
-										<x-bss-form.input
-											name="date"
-											hasIcon="right"
-											icon="bx bx-calendar"
-											placeholder="Date"
-										/>
-									</td>
-									<td width="20%" class="text-right"><small class="required">*</small> Choose Type</td>
-									<td>
-										<div class="d-flex">
-											<x-bss-form.select name="template" />
-											<x-form.button color="light" class="btn-add-new-template tw-ml-2" icon="bx bx-plus" label="" />
-										</div>
-									</td>
-								</tr>
-								<tr>
-									<td class="text-right">Analysed by</td>
-									<td>
-										<x-bss-form.select name="analysed_by" />
-									</td>
-									<td class="text-right">Selected Type</td>
-									<td>
-										<i class="cursor-pointer">No imagery type selected!</i>
-									</td>
-								</tr>
-							</table>`,
-				type = $(this).data('type'),
-				title = 'Create new '+ type.toUpperCase();
-				if (type=='prescription') {
-				}else if (type=='labor-test'){
-					body = `<div class="row align-items-center mb-1">
-								<div class="col-sm-3">
-									<x-bss-form.input
-										name="date"
-										hasIcon="right"
-										icon="bx bx-calendar"
-										placeholder="Date"
-									/>
-								</div>
-								<div class="col-sm-3">
-									<x-bss-form.select name="labor_service_category" class="labor-service-category">
-										<option value="">Select Category</option>
-										<option value="biochimie">BIOCHIMIE</option>
-										<option value="helmatologie">HELMATOLOGIE</option>
-									</x-bss-form.select>
-								</div>
-								<div class="col-sm-3">
-									<x-form.checkbox name="sample_provided" label="Sample Provided" />
-								</div>
-							</div>
-							<div class="labor-service-container mt-1"></div>`;
-				}
-				$('#treatment-model .modal-title').html(title);
-				$('#treatment-model .modal-body').html(body);
-				if (type=='labor-test') {
-					$('.labor-service-category').select2({
-						dropdownAutoWidth: !0,
-						width: "100%",
-						dropdownParent: $('.labor-service-category').parent()
-					});
-				}else{
-					$.ajax({
-						type: "post",
-						url: "{{ route('patient.consultation.getTemplate') }}",
-						data: { 'type': type },
-						success: function (rs) {
-							$('#analysed_by').html(rs.analysed_by);
-							$('#template').html(rs.template);
-							$('#analysed_by').select2({
-								dropdownAutoWidth: !0,
-								width: "100%",
-								dropdownParent: $('#analysed_by').parent()
-							});
-							$('#template').select2({
-								dropdownAutoWidth: !0,
-								width: "100%",
-								dropdownParent: $('#template').parent()
-							});
-						}
-					});
-				}
-				
-				$('#date').datetimepicker({
-					icons: {
-							time: "bx bx-time",
-							date: "bx bx-calendar",
-							up: 'bx bx-chevron-up',
-							down: 'bx bx-chevron-down',
-							previous: 'bx bx-chevron-left',
-							next: 'bx bx-chevron-right',
-							today: 'bx bx-screenshot',
-							clear: 'bx bx-trash',
-							close: 'bx bx-x'
-						},
-					format: "YYYY-MM-DD HH:mm:ss",
-					showTodayButton: true,
-				});
-				$('#treatment-model').modal();
-			});
-
 			// Prescription Request
 			$('.table-medicine').append($('#sample_prescription').html());
 			$(document).on('click', '.btn-add-medicine', function () {
@@ -124,99 +19,19 @@
 				$this_row.find('[name="total[]"]').val(bss_number($total));
 			});
 
-			// Labor Service Category Selected
-			$(document).on('change', '.labor-service-category', function () {
-				var service_categories = '',
-					value = $(this).val();
-				if (value=='biochimie') {
-					service_categories = `<div class="row mt-1 service-category">
-											<div class="col-sm-6">
-												<b class="text-uppercase tw-underline">
-													Bacteriologie
-												</b>
-											</div>
-											<div class="col-sm-6 text-right">
-												<div class="d-flex justify-content-end align-items-center">
-													<x-form.checkbox name="all_category_1" class="chb_all" label="All" />
-													<span class="tw-ml-1 tw-underline btn-remove-service-category cursor-pointer text-danger hover:tw-text-red-600"><i class="bx bx-x"></i>Remove</span>
-												</div>
-											</div>
-											<div class="col-sm-12 tw-mt-2">
-												<div class="row">
-													<div class="col-sm-4 tw-mt-1">
-														<x-form.checkbox name="item_1" class="chb_child" label="Item 1" />
-													</div>
-													<div class="col-sm-4 tw-mt-1">
-														<x-form.checkbox name="item_2" class="chb_child" label="Item 2" />
-													</div>
-													<div class="col-sm-4 tw-mt-1">
-														<x-form.checkbox name="item_3" class="chb_child" label="Item 3" />
-													</div>
-													<div class="col-sm-4 tw-mt-1">
-														<x-form.checkbox name="item_4" class="chb_child" label="Item 4" />
-													</div>
-													<div class="col-sm-4 tw-mt-1">
-														<x-form.checkbox name="item_5" class="chb_child" label="Item 5" />
-													</div>
-												</div>
-											</div>
-										</div>`;
-				
-				}else if (value=='helmatologie') {
-					service_categories = `<div class="row mt-1 service-category">
-											<div class="col-sm-6">
-												<b class="text-uppercase tw-underline">
-													HEMATOLOGIE
-												</b>
-											</div>
-											<div class="col-sm-6 text-right">
-												<div class="d-flex justify-content-end align-items-center">
-													<x-form.checkbox name="all_category_1" class="chb_all" label="All" />
-													<span class="tw-ml-1 tw-underline btn-remove-service-category cursor-pointer text-danger hover:tw-text-red-600"><i class="bx bx-x"></i>Remove</span>
-												</div>
-											</div>
-											<div class="col-sm-12 tw-mt-2">
-												<div class="row">
-													<div class="col-sm-4 tw-mt-1">
-														<x-form.checkbox name="item_11" class="chb_child" label="Item 1" />
-													</div>
-													<div class="col-sm-4 tw-mt-1">
-														<x-form.checkbox name="item_22" class="chb_child" label="Item 2" />
-													</div>
-													<div class="col-sm-4 tw-mt-1">
-														<x-form.checkbox name="item_33" class="chb_child" label="Item 3" />
-													</div>
-													<div class="col-sm-4 tw-mt-1">
-														<x-form.checkbox name="item_44" class="chb_child" label="Item 4" />
-													</div>
-													<div class="col-sm-4 tw-mt-1">
-														<x-form.checkbox name="item_55" class="chb_child" label="Item 5" />
-													</div>
-													<div class="col-sm-4 tw-mt-1">
-														<x-form.checkbox name="item_66" class="chb_child" label="Item 6" />
-													</div>
-												</div>
-											</div>
-										</div>`;
-				}
-				$('.labor-service-container').append(service_categories);
+			// Labor
+			$('.labor_row').hide();
+			$(document).on('change', '.btnCheckRow', function () {
+				$this_row = $(this).parents('div.labor_row');
+				$this_row.find('input[type="checkbox"]').prop('checked', $(this).prop('checked'));
 			});
-			$(document).on('click', '.btn-remove-service-category', function () {
-				$(this).closest('.service-category').remove();
+			$(document).on('change', '#btnShowRow', function () {
+				$('.labor_row_' + $(this).val()).show();
 			});
-			$(document).on('change', '.chb_all', function () {
-				if ($(this).is(':checked')) {
-					$(this).closest('.service-category').find('.chb_child').prop('checked', true);
-				} else {
-					$(this).closest('.service-category').find('.chb_child').prop('checked', false);
-				}
-			});
-			$(document).on('change', '.chb_child', function () {
-				if ($(this).is(':checked') && ($(this).closest('.service-category').find('.chb_child:checked').length == $(this).closest('.service-category').find('.chb_child').length)) {
-					$(this).closest('.service-category').find('.chb_all').prop('checked', true);
-				} else {
-					$(this).closest('.service-category').find('.chb_all').prop('checked', false);
-				}
+			$(document).on('click', '.btnHideRow', function () {
+				$this_row = $(this).parents('div.labor_row');
+				$this_row.find('input[type="checkbox"]').prop('checked', false);
+				$this_row.hide();
 			});
 
 			$(document).ready(function () {
@@ -1027,18 +842,11 @@
 				</div>
 			</div>
 		</x-card>
-	
 	</form>
 
-	<x-modal id="treatment-model" dialogClass="modal-full" data-backdrop="static" data-keyboard="false">
-		<x-slot name="footer">
-			<x-form.button color="danger" data-dismiss="modal" icon="bx bx-x" label="{{ __('button.cancel') }}" />
-			<x-form.button icon="bx bx-save" label="{{ __('button.save') }}" />
-		</x-slot>
-	</x-modal>
 	@include('consultation.sub_form.echo')
 	@include('consultation.sub_form.ecg')
 	@include('consultation.sub_form.xray')
 	@include('consultation.sub_form.prescription')
-
+	@include('consultation.sub_form.labor')
 </x-app-layout>
