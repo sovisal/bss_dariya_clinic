@@ -26,13 +26,8 @@
             <tr>
                 <td class="text-right"><small class="required">*</small> Analysed by</td>
                 <td>
-<<<<<<< HEAD
                     <x-bss-form.select name="doctor_id" required id="echo_doctor_id">
                         <option value="">Please choose</option>
-=======
-                    <x-bss-form.select name="doctor_id" required>
-                        <!-- <option value="">Please choose</option> -->
->>>>>>> c2396803d3d63f05719e89cca43ca8d85d51f1d4
                         @foreach ($doctors as $data)
                             <option value="{{ $data->id }}">{{ $data->name_en }}</option>
                         @endforeach
