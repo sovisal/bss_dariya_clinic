@@ -215,11 +215,10 @@ function data_parent_selection_conf() {
 	return  [
 		'gender' => [
 			'label' => 'Gender',
-			'is_invisible' => true,
+			'is_invisible' => false,
 		],
 		'marital_status' => [
 			'label' => 'Marital Status',
-			'is_invisible' => true,
 		],
 		'blood_type' => [
 			'label' => 'Blood Type',
