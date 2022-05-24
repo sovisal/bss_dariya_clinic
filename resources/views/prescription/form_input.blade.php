@@ -27,9 +27,9 @@
 			@endforeach
 		</x-bss-form.select>
 	</td>
-	<td class="text-right">Analysis by</td>
+	<td class="text-right">Analysis by <small class='required'>*</small></td>
 	<td>
-		<x-bss-form.select name="doctor_id" :disabled="$is_edit && $row->doctor_id">
+		<x-bss-form.select name="doctor_id" required :disabled="$is_edit && $row->doctor_id">
 			@if (!$is_edit)
 				<option value="">Please choose</option>
 			@endif

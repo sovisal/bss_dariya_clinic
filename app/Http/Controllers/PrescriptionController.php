@@ -62,8 +62,8 @@ class PrescriptionController extends Controller
 		])) {
 			$this->refresh_prescriotion_detail($request, $pre->id, true);
 			if ($request->is_treament_plan) {
-                return redirect()->route('patient.consultation.edit', $request->consultation_id)->with('success', 'Data created success');
-            } else {
+				return redirect()->route('patient.consultation.edit', $request->consultation_id)->with('success', 'Data created success');
+			} else {
 				return redirect()->route('prescription.edit', $pre->id)->with('success', 'Data created success');
 			}
 		}
@@ -108,13 +108,13 @@ class PrescriptionController extends Controller
 	public function update(Request $request, Prescription $prescription)
 	{
 		// serialize all post into string
-        $serialize = array_except($request->all(), ['_method', '_token']);
-        $request['attribute'] = serialize($serialize);
+		$serialize = array_except($request->all(), ['_method', '_token']);
+		$request['attribute'] = serialize($serialize);
 
-        if ($prescription->update($request->all())) {
-            $this->refresh_prescriotion_detail($request, $prescription->id);
-            return redirect()->route('prescription.index')->with('success', 'Data update success');
-        }
+		if ($prescription->update($request->all())) {
+			$this->refresh_prescriotion_detail($request, $prescription->id);
+			return redirect()->route('prescription.index')->with('success', 'Data update success');
+		}
 	}
 
 	/**
