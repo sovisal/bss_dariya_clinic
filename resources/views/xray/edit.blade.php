@@ -39,7 +39,7 @@
 			</x-slot>		
 			<table class="table-form striped">
 				<tr>
-					<th colspan="4" class="text-left tw-bg-gray-100">X-Ray Code #dasd123</th>
+					<th colspan="4" class="text-left tw-bg-gray-100">X-Ray Code #{{ $row->code }}</th>
 				</tr>
 				@include('xray.form_input')
 			</table>

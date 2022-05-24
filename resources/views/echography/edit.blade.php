@@ -71,7 +71,7 @@
 
 			<table class="table-form striped">
 				<tr>
-					<th colspan="4" class="text-left tw-bg-gray-100">Echo Code #dasd123</th>
+					<th colspan="4" class="text-left tw-bg-gray-100">Echo Code #{{ $row->code }}</th>
 				</tr>
 				@include('echography.form_input')
 			</table>
