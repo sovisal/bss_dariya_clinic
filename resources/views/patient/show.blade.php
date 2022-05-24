@@ -46,7 +46,7 @@
 				<span class="align-middle">Detail</span>
 			</a>
 		</li>
-		<li class="nav-item">
+		<!-- <li class="nav-item">
 			<a class="nav-link btn-sm" id="visit-tab" data-toggle="tab" href="#visit" aria-controls="visit" role="tab" aria-selected="false">
 				<span class="align-middle">Visit</span>
 			</a>
@@ -65,7 +65,7 @@
 			<a class="nav-link btn-sm" id="invoice-tab" data-toggle="tab" href="#invoice" aria-controls="invoice" role="tab" aria-selected="false">
 				<span class="align-middle">Invoices</span>
 			</a>
-		</li>
+		</li> -->
 	</ul>
 	<x-card :foot="false" :head="false">
 		<div class="tab-content">
@@ -115,15 +115,15 @@
 					</tr>
 					<tr>
 						<th>Villsage <span class="float-right">:</span></th>
-						<td>{{ $patient->address()->village_en }}</td>
+						<td>{{ $patient->address() ? $patient->address()->village_en : '' }}</td>
 						<th>Commune <span class="float-right">:</span></th>
-						<td>{{ $patient->address()->commune_en }}</td>
+						<td>{{ $patient->address() ? $patient->address()->commune_en : '' }}</td>
 					</tr>
 					<tr>
 						<th>District <span class="float-right">:</span></th>
-						<td>{{ $patient->address()->district_en }}</td>
+						<td>{{ $patient->address() ? $patient->address()->district_en : '' }}</td>
 						<th>Province <span class="float-right">:</span></th>
-						<td>{{ $patient->address()->province_en }}</td>
+						<td>{{ $patient->address() ? $patient->address()->province_en : '' }}</td>
 					</tr>
 					<tr>
 						<th>Zip Code <span class="float-right">:</span></th>
