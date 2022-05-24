@@ -61,7 +61,7 @@ class AppLayout extends Component
 
 			'para_clinic' => [
 				'can' => 'ViewAnyParaClinic',
-				'url' => route('para_clinic.echography.index'),
+				'url' => route('para_clinic.labor.index'),
 				'label' => 'Para Clinic',
 				
 				'sub' => [

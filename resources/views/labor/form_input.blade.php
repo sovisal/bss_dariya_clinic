@@ -22,11 +22,11 @@
 <tr>
     <td class="text-right">Age <small class='required'>*</small></td>
     <td>
-        <x-bss-form.input name='age' value="{{ $row->age ?? '' }}" required :disabled="$is_edit"/>
+        <x-bss-form.input name='age' value="{{ $row->age ?? '' }}" required :disabled="$row->age && $is_edit"/>
     </td>
     <td width="15%" class="text-right">Gender <small class='required'>*</small></td>
     <td>
-        <x-bss-form.select name="gender" data-no_search="true" required :disabled="$is_edit">
+        <x-bss-form.select name="gender" data-no_search="true" required :disabled="$row->gender && $is_edit">
             <option value="">---- None ----</option>
             @foreach ($gender as $id => $data)
                 <option value="{{ $id }}" {{ ($row->gender ?? false) == $id ? 'selected' : '' }}>{{ $data }}</option>
@@ -37,7 +37,7 @@
 <tr>
     <td class="text-right">Requested by <small class='required'>*</small></td>
     <td>
-        <x-bss-form.select name="requested_by" required :disabled="$is_edit">
+        <x-bss-form.select name="requested_by" required :disabled="$row->requested_by && $is_edit">
             @if (!$is_edit)
                 <option>Please choose</option>
             @endif
@@ -48,7 +48,7 @@
     </td>
     <td class="text-right">Analysis by</td>
     <td>
-        <x-bss-form.select name="doctor_id" :disabled="$is_edit">
+        <x-bss-form.select name="doctor_id" :disabled="$row->doctor_id && $is_edit">
             @if (!$is_edit)
                 <option>Please choose</option>
             @endif
