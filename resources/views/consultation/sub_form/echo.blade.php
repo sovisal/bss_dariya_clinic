@@ -15,7 +15,7 @@
                 <td>
                     <div class="d-flex">
                         <x-bss-form.select name="type" required>
-                            <!-- <option>Please choose</option> -->
+                            <!-- <option value="">Please choose</option> -->
                             @foreach ($echo_type as $data)
                                 <option value="{{ $data->id }}" data-price="{{ $data->price }}">{{ $data->name_en }}</option>
                             @endforeach
@@ -27,7 +27,7 @@
                 <td class="text-right"><small class="required">*</small> Analysed by</td>
                 <td>
                     <x-bss-form.select name="doctor_id" required>
-                        <!-- <option>Please choose</option> -->
+                        <!-- <option value="">Please choose</option> -->
                         @foreach ($doctors as $data)
                             <option value="{{ $data->id }}">{{ $data->name_en }}</option>
                         @endforeach

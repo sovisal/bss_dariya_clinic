@@ -111,7 +111,7 @@ class EcgController extends Controller
 			}
 			return response()->json([
 				'success' => true,
-				'ecg' => $ecg,
+				'row' => $ecg,
 				'status_html' => $status_html,
 				'print_url' => route('para_clinic.ecg.print', $ecg->id),
 				'tbody' => ((empty($attributes))? '<tr><th colspan="4" class="text-center">No result</th></tr>' : $tbody),

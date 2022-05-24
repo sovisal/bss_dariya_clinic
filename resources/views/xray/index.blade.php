@@ -4,34 +4,34 @@
 	</x-slot> --}}
 	<x-slot name="js">
 		<script>
-			function getDetail(id){
-				$.ajax({
-					type: "POST",
-					url: "{{ route('para_clinic.xray.getDetail') }}",
-					data: {
-						'id': id
-					},
-					success: function(rs){
-						if (rs.success) {
-							$('#detail-modal .type').html(rs.xray.type_en);
-							$('#detail-modal .code').html(rs.xray.code);
-							$('#detail-modal .name').html(rs.xray.patient_en);
-							$('#detail-modal .requested_date').html(moment(rs.xray.requested_date).format('DD/MM/YYYY HH:mm'));
-							$('#detail-modal .reqeusted_by').html(rs.xray.reqeusted_name);
-							$('#detail-modal .physician').html(rs.xray.doctor_en);
-							$('#detail-modal .payment_type').html(rs.xray.payment_type);
-							$('#detail-modal .amount').html(rs.xray.amount + ' USD');
-							$('#detail-modal .detail-status').html(rs.status_html);
-							$('#detail-modal .table-detail-result tbody').html(rs.tbody);
-							$('#detail-modal .btn-print').attr('onclick', `printPopup('${rs.print_url}')`);
-							$('#detail-modal').modal();
-						}
-					},
-					error: function (rs){
-						alert(rs.message);
-					}
-				});
-			}
+			// function getDetail(id){
+			// 	$.ajax({
+			// 		type: "POST",
+			// 		url: "{{ route('para_clinic.xray.getDetail') }}",
+			// 		data: {
+			// 			'id': id
+			// 		},
+			// 		success: function(rs){
+			// 			if (rs.success) {
+			// 				$('#detail-modal .type').html(rs.xray.type_en);
+			// 				$('#detail-modal .code').html(rs.xray.code);
+			// 				$('#detail-modal .name').html(rs.xray.patient_en);
+			// 				$('#detail-modal .requested_date').html(moment(rs.xray.requested_date).format('DD/MM/YYYY HH:mm'));
+			// 				$('#detail-modal .reqeusted_by').html(rs.xray.reqeusted_name);
+			// 				$('#detail-modal .physician').html(rs.xray.doctor_en);
+			// 				$('#detail-modal .payment_type').html(rs.xray.payment_type);
+			// 				$('#detail-modal .amount').html(rs.xray.amount + ' USD');
+			// 				$('#detail-modal .detail-status').html(rs.status_html);
+			// 				$('#detail-modal .table-detail-result tbody').html(rs.tbody);
+			// 				$('#detail-modal .btn-print').attr('onclick', `printPopup('${rs.print_url}')`);
+			// 				$('#detail-modal').modal();
+			// 			}
+			// 		},
+			// 		error: function (rs){
+			// 			alert(rs.message);
+			// 		}
+			// 	});
+			// }
 		</script>
 	</x-slot>
 	<x-card :foot="false"  :head="false">
@@ -65,7 +65,7 @@
 					<td class="text-center">{!! render_record_status($row->status) !!}</td>
 					<td class="text-center">{!! render_payment_status($row->payment_status) !!}</td>
 					<td class="text-right">
-						<x-form.button color="info" class="btn-sm" onclick="getDetail({{ $row->id }})" icon="bx bx-detail" />
+						<x-form.button color="info" class="btn-sm" onclick="getDetail({{ $row->id }}, '{{ route('para_clinic.xray.getDetail') }}')" icon="bx bx-detail" />
 						<x-form.button color="dark" class="btn-sm" onclick="printPopup('{{ route('para_clinic.xray.print', $row->id) }}')" icon="bx bx-printer" />
 						@if ($row->status == 1)
 							<x-form.button color="secondary" class="btn-sm" href="{{ route('para_clinic.xray.edit', $row->id) }}" icon="bx bx-edit-alt" />

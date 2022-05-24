@@ -103,6 +103,7 @@ class ConsultationController extends Controller
 	 */
 	public function update(Request $request, Consultation $consultation)
 	{
+		dd($request->all());
 		if ($request->submit_option == 'cancel') {
 			return redirect()->route('patient.index');
 		} else {
@@ -173,17 +174,17 @@ class ConsultationController extends Controller
 		$data['list_labor'] = implode($label, ',  ');
 
 		$label = array_map(function ($val) {
-			return '<a href="' . route('para_clinic.xray.show', $val['id']) . '">' . ($val['code'] ?: 'N/A') . '</a>';
+			return '<span class="text-primary cursor-pointer hover:tw-text-blue-700 tw-duration-500" onclick="getDetail(\''. $val['id'] .'\',\'' . route('para_clinic.xray.getDetail') . '\', \'X-Ray Detail\')">' . ($val['code'] ?: 'N/A') . '</a>';
 		}, $data['list_xray']);
         $data['list_xray'] = implode($label, ',  ');
 
 		$label = array_map(function ($val) {
-			return '<a href="' . route('para_clinic.echography.show', $val['id']) . '">' . ($val['code'] ?: 'N/A') . '</a>';
+			return '<span class="text-primary cursor-pointer hover:tw-text-blue-700 tw-duration-500" onclick="getDetail(\''. $val['id'] .'\',\'' . route('para_clinic.echography.getDetail') . '\', \'Echography Detail\')">' . ($val['code'] ?: 'N/A') . '</span>';
 		}, $data['list_echo']);
 		$data['list_echo'] = implode($label, ',  ');
 
 		$label = array_map(function ($val) {
-			return '<a href="' . route('para_clinic.ecg.show', $val['id']) . '">' . ($val['code'] ?: 'N/A') . '</a>';
+			return '<span class="text-primary cursor-pointer hover:tw-text-blue-700 tw-duration-500" onclick="getDetail(\''. $val['id'] .'\',\'' . route('para_clinic.ecg.getDetail') . '\', \'ECG Detail\')">' . ($val['code'] ?: 'N/A') . '</span>';
 		}, $data['list_ecg']);
         $data['list_ecg'] = implode($label, ',  ');
 
