@@ -59,7 +59,7 @@ class LaboratoryController extends Controller
             if ($labor = $laboratory->create([
                 'code' => generate_code('L'),
                 'patient_id' => $request->patient_id,
-                'gender' => $request->gender,
+                'gender' => $request->gender ?: 0,
                 'age' => $request->age ?: 0,
                 'requested_by' => $request->requested_by ?: auth()->user()->doctor ?? 0,
                 'requested_at' => $request->requested_at ?: date('Y-m-d H:i:s'),
