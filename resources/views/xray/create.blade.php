@@ -19,22 +19,21 @@
 	<form action="{{ route('para_clinic.xray.store') }}" method="POST" autocomplete="off" enctype="multipart/form-data">
 		@method('PUT')
 		@csrf
+		<input type="hidden" name="status" value="1" />
 		<x-card bodyClass="pb-0" :actionShow="false">
 			<x-slot name="action">
 				<div>
-					<x-form.button type="submit" class="btn-submit" value="Progress" icon="bx bx-save" label="Save" />
-					<!-- <x-form.button type="reset" class="btn-submit" value="Cancel" color="danger" icon="bx bx-x" label="Cancel" /> -->
+					<x-form.button type="submit" class="btn-submit" value="1" icon="bx bx-save" label="Save" />
 				</div>
 			</x-slot>
 			<x-slot name="footer">
 				<div>
-					<x-form.button type="submit" class="btn-submit" value="Progress" icon="bx bx-save" label="Save" />
-					<!-- <x-form.button type="reset" class="btn-submit" value="Cancel" color="danger" icon="bx bx-x" label="Cancel" /> -->
+					<x-form.button type="submit" class="btn-submit" value="1" icon="bx bx-save" label="Save" />
 				</div>
 			</x-slot>				
 			<table class="table-form striped">
 				<tr>
-					<th colspan="4" class="text-left tw-bg-gray-100">Echo COde #dasd123</th>
+					<th colspan="4" class="text-left tw-bg-gray-100">X-Ray Code #dasd123</th>
 				</tr>
 				@include('xray.form_input')
 			</table>

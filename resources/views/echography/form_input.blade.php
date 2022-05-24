@@ -1,7 +1,7 @@
 <tr>
 	<td width="15%" class="text-right">Form <small class='required'>*</small></td>
 	<td>
-		<x-bss-form.select name="type" :disabled="$is_edit" required>
+		<x-bss-form.select name="type" :disabled="$is_edit && $row->type" required>
 			@if (!$is_edit)
 				<option value="">Please choose</option>
 			@endif
@@ -12,7 +12,7 @@
 	</td>
 	<td width="15%" class="text-right">Payment type <small class='required'>*</small></td>
 	<td>
-		<x-bss-form.select name="payment_type" data-no_search="true" required :disabled="$is_edit">
+		<x-bss-form.select name="payment_type" data-no_search="true" required :disabled="$is_edit && $row->payment_type">
 			@foreach ($payment_type as $id => $data)
 				<option value="{{ $id }}" {{ ($row->payment_type ?? false) == $id ? 'selected' : '' }} >{{ $data }}</option>
 			@endforeach
@@ -22,7 +22,7 @@
 <tr>
 	<td class="text-right">Patient name <small class='required'>*</small></td>
 	<td>
-		<x-bss-form.select name="patient_id" required :disabled="$is_edit">
+		<x-bss-form.select name="patient_id" required :disabled="$is_edit && $row->patient_id">
 			@if (!$is_edit)
 				<option value="">Please choose patient</option>
 			@endif
@@ -33,13 +33,13 @@
 	</td>
 	<td class="text-right">Requested date <small class='required'>*</small></td>
 	<td>
-		<x-bss-form.input name='requested_at' class="date-time-picker" hasIcon="right" icon="bx bx-calendar" value="{{ $row->requested_at ?? date('Y-m-d H:i:s') }}" :disabled="$is_edit" />
+		<x-bss-form.input name='requested_at' class="date-time-picker" hasIcon="right" icon="bx bx-calendar" value="{{ $row->requested_at ?? date('Y-m-d H:i:s') }}" :disabled="$is_edit && $row->requested_at" />
 	</td>
 </tr>
 <tr>
 	<td class="text-right">Requested by <small class='required'>*</small></td>
 	<td>
-		<x-bss-form.select name="requested_by" required :disabled="$is_edit">
+		<x-bss-form.select name="requested_by" required :disabled="$is_edit && $row->requested_by">
 			@if (!$is_edit)
 				<option value="">Please choose</option>
 			@endif
@@ -50,7 +50,7 @@
 	</td>
 	<td class="text-right">Physician <small class='required'>*</small></td>
 	<td>
-		<x-bss-form.select name="doctor_id" required :disabled="$is_edit">
+		<x-bss-form.select name="doctor_id" required :disabled="$is_edit && $row->doctor_id">
 			@if (!$is_edit)
 				<option value="">Please choose</option>
 			@endif

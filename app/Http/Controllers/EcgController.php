@@ -47,38 +47,38 @@ class EcgController extends Controller
 		return view('ecg.create', $data);
 	}
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreEcgRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $ecg = new Ecg();
-        if ($request->type) {
-            $ecg_type = EcgType::where('id', $request->type)->first();
-        }
-        if ($record = $ecg->create([
-            'code' => generate_code('ECG'),
-            'type' => $request->type,
-            'patient_id' => $request->patient_id,
-            'doctor_id' => $request->doctor_id,
-            'requested_by' => $request->requested_by ?: auth()->user()->doctor ?? 0,
-            'payment_type' => $request->payment_type ?? 0,
-            'payment_status' => 0,
-            'requested_at' => $request->requested_at ?: date('Y-m-d H:i:s'),
-            'amount' => $request->amount ?: ($ecg_type ? $ecg_type->price : 0),
-            'attribute' => $ecg_type ? $ecg_type->attribite : null,
-            'status' => 1,
-        ])) {
-            if ($request->is_treament_plan) {
-                return redirect()->route('patient.consultation.edit', $request->consultation_id)->with('success', 'Data created success');
-            } else {
-                return redirect()->route('para_clinic.ecg.edit', $record->id)->with('success', 'Data created success');
-            }
-        }
-    }
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @param  \App\Http\Requests\StoreEcgRequest  $request
+	 * @return \Illuminate\Http\Response
+	 */
+	public function store(Request $request)
+	{
+		$ecg = new Ecg();
+		if ($request->type) {
+			$ecg_type = EcgType::where('id', $request->type)->first();
+		}
+		if ($record = $ecg->create([
+			'code' => generate_code('ECG'),
+			'type' => $request->type,
+			'patient_id' => $request->patient_id,
+			'doctor_id' => $request->doctor_id,
+			'requested_by' => $request->requested_by ?: auth()->user()->doctor ?? 0,
+			'payment_type' => $request->payment_type ?? 0,
+			'payment_status' => 0,
+			'requested_at' => $request->requested_at ?: date('Y-m-d H:i:s'),
+			'amount' => $request->amount ?: ($ecg_type ? $ecg_type->price : 0),
+			'attribute' => $ecg_type ? $ecg_type->attribite : null,
+			'status' => 1,
+		])) {
+			if ($request->is_treament_plan) {
+				return redirect()->route('patient.consultation.edit', $request->consultation_id)->with('success', 'Data created success');
+			} else {
+				return redirect()->route('para_clinic.ecg.edit', $record->id)->with('success', 'Data created success');
+			}
+		}
+	}
 	
 	/**
 	 * Display the specified resource.

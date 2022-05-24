@@ -15,6 +15,28 @@ const swalWithBootstrapButtons = Swal.mixin({
 });
 
 
+function formValidate(target = 'form') {
+	var rs = true;
+	$(target +" input,"+ target +" textarea,"+ target +" checkbox,"+ target +" radio,"+ target +" select").each(function () {
+		var attr = $(this).attr('required');
+		if ((typeof attr !== "undefined" && attr !== false) && $(this).val() == '') {
+			swalWithBootstrapBtns.fire({
+				title: "Invalid input!",
+				text: "Input all required fields.",
+				icon: 'warning',
+				confirmButtonText: "Okay",
+			}).then((result) => {
+				if (result.isConfirmed) {
+					
+				}
+			})
+			rs = false;
+		}
+	});
+	return rs;
+}
+
+
 // Start Input Number only
 function isNum(value) {
 	return /^-?\d*[.]?\d*$/.test(value);

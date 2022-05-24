@@ -1,7 +1,7 @@
 <x-app-layout>
-	<x-slot name="header">
+	{{-- <x-slot name="header">
 		<x-form.button href="{{ route('para_clinic.echography.create') }}" label="Create" icon="bx bx-plus"/>
-	</x-slot>
+	</x-slot> --}}
 	<x-slot name="css">
 		<style>
 			#image-slider{

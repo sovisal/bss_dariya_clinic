@@ -12,6 +12,9 @@
 					$('[name="amount"]').val($_amount);
 				});
 			});
+			$('.btn-submit').click( function (){
+				$('[name="status"]').val($(this).val());
+			});
 		</script>
 	</x-slot>
 	<x-slot name="header">
@@ -24,21 +27,19 @@
 		<x-card bodyClass="pb-0" :actionShow="false">	
 			<x-slot name="action">
 				<div>
-					<x-form.button type="button" class="btn-submit" value="Complete" color="success" icon="bx bx-check" label="Complete" onclick="$(this).parents('form').find('[name=status]').val(2); document.forms[0].submit();"/>
-					<x-form.button type="submit" class="btn-submit" value="Progress" icon="bx bx-save" label="Save" />
-					<!-- <x-form.button type="reset" class="btn-submit" value="Cancel" color="danger" icon="bx bx-x" label="Cancel" /> -->
+					<x-form.button type="submit" class="btn-submit" value="2" color="success" icon="bx bx-check" label="Complete"/>
+					<x-form.button type="submit" class="btn-submit" value="1" icon="bx bx-save" label="Save" />
 				</div>
 			</x-slot>
 			<x-slot name="footer">
 				<div>
-					<x-form.button type="button" class="btn-submit" value="Complete" color="success" icon="bx bx-check" label="Complete" onclick="$(this).parents('form').find('[name=status]').val(2); document.forms[0].submit();"/>
-					<x-form.button type="submit" class="btn-submit" value="Progress" icon="bx bx-save" label="Save" />
-					<!-- <x-form.button type="reset" class="btn-submit" value="Cancel" color="danger" icon="bx bx-x" label="Cancel" /> -->
+					<x-form.button type="submit" class="btn-submit" value="2" color="success" icon="bx bx-check" label="Complete"/>
+					<x-form.button type="submit" class="btn-submit" value="1" icon="bx bx-save" label="Save" />
 				</div>
 			</x-slot>		
 			<table class="table-form striped">
 				<tr>
-					<th colspan="4" class="text-left tw-bg-gray-100">Echo COde #dasd123</th>
+					<th colspan="4" class="text-left tw-bg-gray-100">X-Ray Code #dasd123</th>
 				</tr>
 				@include('xray.form_input')
 			</table>

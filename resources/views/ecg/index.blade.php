@@ -1,7 +1,7 @@
 <x-app-layout>
-	<x-slot name="header">
+	{{-- <x-slot name="header">
 		<x-form.button href="{{ route('para_clinic.ecg.create') }}" label="Create" icon="bx bx-plus"/>
-	</x-slot>
+	</x-slot> --}}
 	<x-slot name="js">
 		<script>
 			function getDetail(id){

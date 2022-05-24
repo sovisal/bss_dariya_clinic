@@ -5,7 +5,7 @@
 
 	<section class="print-preview-a4">
 		<header>
-			<x-para-clinic.print-header :row="$echography" title="លទ្ធផលពិនិត្យ អេកូ" preCode="ECH" />
+			<x-para-clinic.print-header :row="$echography" title="លទ្ធផលពិនិត្យ អេកូ" />
 		</header>
 		<section class="echography-body">
 			@if ($echography->type < 5)

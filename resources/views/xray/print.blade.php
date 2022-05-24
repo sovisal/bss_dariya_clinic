@@ -4,7 +4,7 @@
 	</x-slot>
 
 	<section class="print-preview-a4">
-		<x-para-clinic.print-header :row="$xray" title="លទ្ធផលពិនិត្យ X-Ray" preCode="XRY" />
+		<x-para-clinic.print-header :row="$xray" title="លទ្ធផលពិនិត្យ X-Ray" />
 
 		<section class="xray-body">
 			<h3 class="text-center text-red title">{{ $xray->type_kh }}</h3>

@@ -16,8 +16,6 @@ class XrayController extends Controller
 {
 	/**
 	 * Display a listing of the resource.
-	 *
-	 * @return \Illuminate\Http\Response
 	 */
 	public function index()
 	{
@@ -36,8 +34,6 @@ class XrayController extends Controller
 
 	/**
 	 * Show the form for creating a new resource.
-	 *
-	 * @return \Illuminate\Http\Response
 	 */
 	public function create()
 	{
@@ -49,38 +45,35 @@ class XrayController extends Controller
 		return view('xray.create', $data);
 	}
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreXrayRequest  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        $xray = new Xray();
-        if ($request->type) {
-            $xray_type = XrayType::where('id', $request->type)->first();
-        }
-        if ($record = $xray->create([
-            'code' => generate_code('X'),
-            'type' => $request->type,
-            'patient_id' => $request->patient_id,
-            'doctor_id' => $request->doctor_id,
-            'requested_by' => $request->requested_by ?: auth()->user()->doctor ?? 0,
-            'payment_type' => $request->payment_type ?? 0,
-            'payment_status' => 0,
-            'requested_at' => $request->requested_at ?: date('Y-m-d H:i:s'),
-            'amount' => $request->amount ?: ($xray_type ? $xray_type->price : 0),
-            'attribute' => $xray_type ? $xray_type->attribite : null,
-            'status' => 1,
-        ])) {
-            if ($request->is_treament_plan) {
-                return redirect()->route('patient.consultation.edit', $request->consultation_id)->with('success', 'Data created success');
-            } else {
-                return redirect()->route('para_clinic.xray.edit', $record->id)->with('success', 'Data created success');
-            }
-        }
-    }
+	/**
+	 * Store a newly created resource in storage.
+	 */
+	public function store(Request $request)
+	{
+		$xray = new Xray();
+		if ($request->type) {
+			$xray_type = XrayType::where('id', $request->type)->first();
+		}
+		if ($record = $xray->create([
+			'code' => generate_code('X'),
+			'type' => $request->type,
+			'patient_id' => $request->patient_id,
+			'doctor_id' => $request->doctor_id,
+			'requested_by' => $request->requested_by ?: auth()->user()->doctor ?? 0,
+			'payment_type' => $request->payment_type ?? 0,
+			'payment_status' => 0,
+			'requested_at' => $request->requested_at ?: date('Y-m-d H:i:s'),
+			'amount' => $request->amount ?: ($xray_type ? $xray_type->price : 0),
+			'attribute' => $xray_type ? $xray_type->attribite : null,
+			'status' => 1,
+		])) {
+			if ($request->is_treament_plan) {
+				return redirect()->route('patient.consultation.edit', $request->consultation_id)->with('success', 'Data created success');
+			} else {
+				return redirect()->route('para_clinic.xray.edit', $record->id)->with('success', 'Data created success');
+			}
+		}
+	}
 
 	/**
 	 * Display the specified resource.
