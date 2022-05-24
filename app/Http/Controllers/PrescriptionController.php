@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 use App\Models\PrescriptionDetail;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Requests\PrescriptionRequest;
-use App\Repositories\Component\GlobalComponent;
 
 class PrescriptionController extends Controller
 {
@@ -66,6 +65,39 @@ class PrescriptionController extends Controller
 			} else {
 				return redirect()->route('prescription.edit', $pre->id)->with('success', 'Data created success');
 			}
+		}
+	}
+
+	public function print($id)
+	{
+		$prescription = Prescription::select([
+			'prescriptions.*',
+			'patients.name_en as patient_kh',
+			'patients.name_en as patient_kh',
+			'doctors.name_en as doctor_en',
+		])
+		->where('prescriptions.id', $id)
+		->with([
+			'detail' => function($q){
+				$q->select([
+					'prescription_details.*',
+					'medicines.name as medicine_name',
+					'data_parents.title_en as usage_en',
+				])
+				->leftJoin('medicines', 'medicines.id', '=', 'prescription_details.medicine_id')
+				->leftJoin('data_parents', 'data_parents.id', '=', 'prescription_details.usage_id');
+			}
+		])
+		->leftJoin('patients', 'patients.id', '=', 'prescriptions.patient_id')
+		->leftJoin('doctors', 'doctors.id', '=', 'prescriptions.doctor_id')
+		->first();
+		if ($prescription) {
+			$data['row'] = $prescription;
+			$data['usages'] = getParentDataSelection('comsumption');
+			$data['time_usage'] = getParentDataSelection('time_usage');
+			return view('prescription.print', $data);
+		}else{
+			abort(404);
 		}
 	}
 

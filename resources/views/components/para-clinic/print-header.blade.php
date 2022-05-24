@@ -39,5 +39,6 @@
 			<td width="13%"><b>ភេទ/Sex</b></td>
 			<td width="20%">: {{ $row->patient_gender }}</td>
 		</tr>
+		{!! $slot !!}
 	</table>
 </header>

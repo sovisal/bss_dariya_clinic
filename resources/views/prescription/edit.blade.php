@@ -34,7 +34,7 @@
 					<x-form.button type="submit" class="btn-submit" value="2" color="success" icon="bx bx-check" label="Complete"/>
 					<x-form.button type="submit" class="btn-submit" value="1" icon="bx bx-save" label="Save" />
 				</div>
-			</x-slot>			
+			</x-slot>
 			<table class="table-form striped">
 				<tr>
 					<th colspan="4" class="text-left tw-bg-gray-100">Prescription Code #{{ $row->code }}</th>

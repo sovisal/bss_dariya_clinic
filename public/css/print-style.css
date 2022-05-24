@@ -33,6 +33,30 @@ table tfoot { display: table-row-group!important; }
 .text-bold{
 	font-weight: bold;
 }
+.m-1,.my-1,.mt-1{
+	margin-top: 0.5rem;
+}
+.m-1,.my-1,.mb-1{
+	margin-bottom: 0.5rem;
+}
+.m-1,.mx-1,.ml-1{
+	margin-left: 0.5rem;
+}
+.m-1,.mx-1,.mr-1{
+	margin-right: 0.5rem;
+}
+.m-2,.my-2,.mt-2{
+	margin-top: 1rem;
+}
+.m-2,.my-2,.mb-2{
+	margin-bottom: 1rem;
+}
+.m-2,.mx-2,.ml-2{
+	margin-left: 1rem;
+}
+.m-2,.mx-2,.mr-2{
+	margin-right: 1rem;
+}
 .print-preview-a4{
 	width: 21cm;
 	height: 29.7cm;
@@ -60,15 +84,8 @@ table tfoot { display: table-row-group!important; }
 	border-top: 2px solid #1560BD;
 	border-bottom: 2px solid #1560BD;
 }
-.print-preview-a4 .echography-body{
-	margin-top: 5px;
-}
-.print-preview-a4 .echography-body *{
-	line-height: 1.5;
-}
-.print-preview-a4 .echography-body .title{
-	font-weight: bold;
-	margin: 10px 0;
+.print-preview-a4 header .table-info h2{
+	padding: 5px 0;
 }
 .print-preview-a4 .signature{
 	margin-top: 10px;
@@ -86,6 +103,43 @@ table tfoot { display: table-row-group!important; }
 	text-align: center;
 	line-height: 1.6;
 	font-weight: bold;
+}
+.print-preview-a4 .bring-this-back{
+	position: absolute;
+	width: calc(100% - 1cm);
+	bottom: 0;
+	right: 0;
+	text-align: right;
+	padding: 0.5cm 0.8cm;
+}
+
+.print-preview-a4 .echography-body{
+	margin-top: 5px;
+}
+.print-preview-a4 .echography-body *{
+	line-height: 1.5;
+}
+.print-preview-a4 .echography-body .title{
+	font-weight: bold;
+	margin: 10px 0;
+}
+
+.print-preview-a4 .prescription-body small,
+.print-preview-a4 .prescription-body small b{
+	font-size: 10px;
+}
+.print-preview-a4 .prescription-body table{
+	width: 100%;
+}
+.print-preview-a4 .prescription-body table th{
+	background: #f5f5f5;
+	text-align: left;
+}
+.print-preview-a4 .prescription-body table th,
+.print-preview-a4 .prescription-body table td{
+	padding: 3px 5px;
+	border: 1px solid #e0e0e0;
+	vertical-align: top;
 }
 
 @media print {
