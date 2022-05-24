@@ -19,7 +19,7 @@
                 <td width="30%">
                     <div class="d-flex">
                         <x-bss-form.select name="type" required id="btnShowRow">
-                            <option>Please choose</option>
+                            <option value="">Please choose</option>
                             @foreach ($labor_type as $data)
                                 <option value="{{ $data->id }}" data-price="{{ $data->price }}">{{ $data->name_en }}</option>
                             @endforeach
