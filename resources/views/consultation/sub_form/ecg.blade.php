@@ -14,8 +14,8 @@
                 <td width="20%" class="text-right"><small class="required">*</small> Choose Type</td>
                 <td>
                     <div class="d-flex">
-                        <x-bss-form.select name="type" required>
-                            <!-- <option value="">Please choose</option> -->
+                        <x-bss-form.select name="type" required id="ecg_type">
+                            <!-- <option>Please choose</option> -->
                             @foreach ($ecg_type as $data)
                                 <option value="{{ $data->id }}" data-price="{{ $data->price }}">{{ $data->name_en }}</option>
                             @endforeach
@@ -26,8 +26,8 @@
             <tr>
                 <td class="text-right"><small class="required">*</small> Analysed by</td>
                 <td>
-                    <x-bss-form.select name="doctor_id" required>
-                        <!-- <option value="">Please choose</option> -->
+                    <x-bss-form.select name="doctor_id" required id="ecg_doctor_id">
+                        <option value="">Please choose</option>
                         @foreach ($doctors as $data)
                             <option value="{{ $data->id }}">{{ $data->name_en }}</option>
                         @endforeach

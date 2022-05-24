@@ -141,14 +141,13 @@
 			}
 			refresh_treament_plan_label("{{ $consultation->patient_id }}");
 
-			$('.prescription_submit').click(function (){
+			$(document).on('submit', '#form_prescription', function (evt) {
 				$('[name^="time_usage_"]').each(function (i, e) {
 					if (!$(e).prop('checked')) {
 						$(e).val('OFF').prop('checked', true);
 					}
 				});
-				$('#form_prescription').submit();
-			});
+			})
 
 			$('.btn-submit').click(function (){
 				var value = $(this).val();
