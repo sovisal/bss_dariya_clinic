@@ -25,10 +25,10 @@
             <input type="hidden" name="test_id[]" value="{{ $row->id }}"/>
             <td class="text-center">{{ $i++ }}</td>
             <td>
-                <x-bss-form.select name="medicine_id[]" required :disabled="$is_edit">
-                    @if (!$is_edit)
-                        <option>Please choose</option>
-                    @endif
+                <x-bss-form.select name="medicine_id[]" required id="medicine_{{ $row->id }}">
+                    
+                        <option value="">Please choose</option>
+                    
                     @foreach ($medicine as $data)
                         <option value="{{ $data->id }}" {{ ($row->medicine_id ?? false) == $data->id ? 'selected' : '' }} >{{ $data->name }}</option>
                     @endforeach
