@@ -43,7 +43,18 @@
 				<tr>
 					<th colspan="4" class="text-left tw-bg-gray-100">Echo Code #dasd123</th>
 				</tr>
-				@include('echography.form_input')
+				<x-para-clinic.form-header :type="$type" :patient="$patient" :doctor="$doctor" :paymentType="$payment_type">
+					<tr>
+						<td class="text-right">Image(First)</td>
+						<td>
+							<x-bss-form.input name="img_1" :value="old('img_1')" type="file" />
+						</td>
+						<td class="text-right">Image (Second)</td>
+						<td>
+							<x-bss-form.input name="img_2" :value="old('img_2')" type="file" />
+						</td>
+					</tr>
+				</x-para-clinic.form-header>
 			</table>
 		</x-card>
 	</form>

@@ -1,7 +1,8 @@
 @props([
-	'title' => 'Detail'
+	'title' => 'Detail',
+	'foot' => true,
 ])
-<x-modal id="detail-modal" dialogClass="modal-lg">
+<x-modal id="detail-modal" dialogClass="modal-lg" :foot="$foot">
 	<x-slot name="header">
 		{{ $title }}
 	</x-slot>

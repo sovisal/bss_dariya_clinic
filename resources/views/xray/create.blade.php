@@ -35,7 +35,7 @@
 				<tr>
 					<th colspan="4" class="text-left tw-bg-gray-100">X-Ray Code #dasd123</th>
 				</tr>
-				@include('xray.form_input')
+				<x-para-clinic.form-header :type="$type" :patient="$patient" :doctor="$doctor" :paymentType="$payment_type" />
 			</table>
 		</x-card>
 	</form>

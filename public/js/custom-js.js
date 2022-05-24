@@ -15,6 +15,37 @@ const swalWithBootstrapButtons = Swal.mixin({
 });
 
 
+function getDetail(id, url, title = 'Detail'){
+	$.ajax({
+		type: "POST",
+		url: url,
+		data: {
+			'id': id,
+		},
+		success: function(rs){
+			if (rs.success) {
+				$('#detail-modal .type').html(rs.row.type_en);
+				$('#detail-modal .code').html(rs.row.code);
+				$('#detail-modal .name').html(rs.row.patient_en);
+				$('#detail-modal .requested_date').html(moment(rs.row.requested_date).format('DD/MM/YYYY HH:mm'));
+				$('#detail-modal .reqeusted_by').html(rs.row.reqeusted_name);
+				$('#detail-modal .physician').html(rs.row.doctor_en);
+				$('#detail-modal .payment_type').html(rs.row.payment_type);
+				$('#detail-modal .amount').html(rs.row.amount + ' USD');
+				$('#detail-modal .detail-status').html(rs.status_html);
+				$('#detail-modal .table-detail-result tbody').html(rs.tbody);
+				$('#detail-modal .btn-print').attr('onclick', `printPopup('${rs.print_url}')`);
+				$('#detail-modal .modal-header h3').html(title);
+				$('#detail-modal').modal();
+			}
+		},
+		error: function (rs){
+			alert(rs.message);
+		}
+	});
+}
+
+
 function formValidate(target = 'form') {
 	var rs = true;
 	$(target +" input,"+ target +" textarea,"+ target +" checkbox,"+ target +" radio,"+ target +" select").each(function () {

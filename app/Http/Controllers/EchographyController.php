@@ -107,7 +107,7 @@ class EchographyController extends Controller
 			}
 			return response()->json([
 				'success' => true,
-				'echography' => $echography,
+				'row' => $echography,
 				'status_html' => $status_html,
 				'print_url' => route('para_clinic.echography.print', $echography->id),
 				'tbody' => ((empty($attributes))? '<tr><th colspan="4" class="text-center">No result</th></tr>' : $tbody),

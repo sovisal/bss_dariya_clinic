@@ -17,34 +17,34 @@
 	<x-slot name="js">
 		<script>
 
-			function getDetail(id){
-				$.ajax({
-					type: "POST",
-					url: "{{ route('para_clinic.echography.getDetail') }}",
-					data: {
-						'id': id
-					},
-					success: function(rs){
-						if (rs.success) {
-							$('#detail-modal .type').html(rs.echography.type_en);
-							$('#detail-modal .code').html(rs.echography.code);
-							$('#detail-modal .name').html(rs.echography.patient_en);
-							$('#detail-modal .requested_date').html(moment(rs.echography.requested_date).format('DD/MM/YYYY HH:mm'));
-							$('#detail-modal .reqeusted_by').html(rs.echography.reqeusted_name);
-							$('#detail-modal .physician').html(rs.echography.doctor_en);
-							$('#detail-modal .payment_type').html(rs.echography.payment_type);
-							$('#detail-modal .amount').html(rs.echography.amount + ' USD');
-							$('#detail-modal .detail-status').html(rs.status_html);
-							$('#detail-modal .table-detail-result tbody').html(rs.tbody);
-							$('#detail-modal .btn-print').attr('onclick', `printPopup('${rs.print_url}')`);
-							$('#detail-modal').modal();
-						}
-					},
-					error: function (rs){
-						alert(rs.message);
-					}
-				});
-			}
+			// function getDetail(id){
+			// 	$.ajax({
+			// 		type: "POST",
+			// 		url: "{{ route('para_clinic.echography.getDetail') }}",
+			// 		data: {
+			// 			'id': id
+			// 		},
+			// 		success: function(rs){
+			// 			if (rs.success) {
+			// 				$('#detail-modal .type').html(rs.echography.type_en);
+			// 				$('#detail-modal .code').html(rs.echography.code);
+			// 				$('#detail-modal .name').html(rs.echography.patient_en);
+			// 				$('#detail-modal .requested_date').html(moment(rs.echography.requested_date).format('DD/MM/YYYY HH:mm'));
+			// 				$('#detail-modal .reqeusted_by').html(rs.echography.reqeusted_name);
+			// 				$('#detail-modal .physician').html(rs.echography.doctor_en);
+			// 				$('#detail-modal .payment_type').html(rs.echography.payment_type);
+			// 				$('#detail-modal .amount').html(rs.echography.amount + ' USD');
+			// 				$('#detail-modal .detail-status').html(rs.status_html);
+			// 				$('#detail-modal .table-detail-result tbody').html(rs.tbody);
+			// 				$('#detail-modal .btn-print').attr('onclick', `printPopup('${rs.print_url}')`);
+			// 				$('#detail-modal').modal();
+			// 			}
+			// 		},
+			// 		error: function (rs){
+			// 			alert(rs.message);
+			// 		}
+			// 	});
+			// }
 
 			function getImage(img_1, img_2){
 				var inner_slider;
@@ -99,7 +99,7 @@
 					<td class="text-center">{!! render_record_status($row->status) !!}</td>
 					<td class="text-center">{!! render_payment_status($row->payment_status) !!}</td>
 					<td class="text-right">
-						<x-form.button color="info" class="btn-sm" onclick="getDetail({{ $row->id }})" icon="bx bx-detail" />
+						<x-form.button color="info" class="btn-sm" onclick="getDetail({{ $row->id }}, '{{ route('para_clinic.echography.getDetail') }}')" icon="bx bx-detail" />
 						<x-form.button color="warning" class="btn-sm" onclick="getImage('{{ $row->image_1 }}', '{{ $row->image_2 }}')" icon="bx bx-image" />
 						<x-form.button color="dark" class="btn-sm" onclick="printPopup('{{ route('para_clinic.echography.print', $row->id) }}')" icon="bx bx-printer" />
 						@if ($row->status=='1')

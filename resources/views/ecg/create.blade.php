@@ -29,14 +29,13 @@
 			<x-slot name="footer">
 				<div>
 					<x-form.button type="submit" class="btn-submit" value="1" icon="bx bx-save" label="Save" />
-					<!-- <x-form.button type="reset" class="btn-submit" value="Cancel" color="danger" icon="bx bx-x" label="Cancel" /> -->
 				</div>
-			</x-slot>			
+			</x-slot>
 			<table class="table-form striped">
 				<tr>
 					<th colspan="4" class="text-left tw-bg-gray-100">ECG Code #dasd123</th>
 				</tr>
-				@include('ecg.form_input')
+				<x-para-clinic.form-header :type="$type" :patient="$patient" :doctor="$doctor" :paymentType="$payment_type" />
 			</table>
 		</x-card>
 	</form>

@@ -7,8 +7,22 @@
 		<script>
 			// Prescription Request
 			$('.table-medicine').append($('#sample_prescription').html());
+			$('.table-medicine select').each((_i, e) => {
+				$(e).select2({
+					dropdownAutoWidth: !0,
+					width: "100%",
+					dropdownParent: $(e).parent()
+				});
+			});
 			$(document).on('click', '.btn-add-medicine', function () {
 				$('.table-medicine').append($('#sample_prescription').html());
+				$('.table-medicine select').each((_i, e) => {
+					$(e).select2({
+						dropdownAutoWidth: !0,
+						width: "100%",
+						dropdownParent: $(e).parent()
+					});
+				});
 			});
 			$(document).on('change', '[name="qty[]"], [name="upd[]"], [name="nod[]"]', function () {
 				$this_row = $(this).parents('tr');
@@ -85,7 +99,7 @@
 						let obj = JSON.parse(rs);
 						for (i in obj) {
 							let newOption = new Option(name = obj[i], i, true, true);
-                    		$('#evaluation_indication').append(newOption);
+							$('#evaluation_indication').append(newOption);
 						}
 					},
 					error: function (rs) {
@@ -849,4 +863,6 @@
 	@include('consultation.sub_form.xray')
 	@include('consultation.sub_form.prescription')
 	@include('consultation.sub_form.labor')
+	
+	<x-para-clinic.modal-detail title="Detail" :foot="false" />
 </x-app-layout>
