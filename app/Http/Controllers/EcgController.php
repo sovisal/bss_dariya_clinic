@@ -60,7 +60,7 @@ class EcgController extends Controller
 			$ecg_type = EcgType::where('id', $request->type)->first();
 		}
 		if ($record = $ecg->create([
-			'code' => generate_code('ECG'),
+			'code' => generate_code('ECG', 'ecgs'),
 			'type' => $request->type,
 			'patient_id' => $request->patient_id,
 			'doctor_id' => $request->doctor_id,

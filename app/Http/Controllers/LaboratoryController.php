@@ -57,7 +57,7 @@ class LaboratoryController extends Controller
         if (sizeof($request->labor_item_id ?? []) > 0) {
             $laboratory = new Laboratory();
             if ($labor = $laboratory->create([
-                'code' => generate_code('L'),
+                'code' => generate_code('LAB', 'laboratories'),
                 'patient_id' => $request->patient_id,
                 'gender' => $request->gender ?: 0,
                 'age' => $request->age ?: 0,

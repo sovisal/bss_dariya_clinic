@@ -55,7 +55,7 @@ class XrayController extends Controller
 			$xray_type = XrayType::where('id', $request->type)->first();
 		}
 		if ($record = $xray->create([
-			'code' => generate_code('X'),
+			'code' => generate_code('XRA', 'xrays'),
 			'type' => $request->type,
 			'patient_id' => $request->patient_id,
 			'doctor_id' => $request->doctor_id,
