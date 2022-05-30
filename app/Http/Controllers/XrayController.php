@@ -55,7 +55,7 @@ class XrayController extends Controller
 			$xray_type = XrayType::where('id', $request->type)->first();
 		}
 		if ($record = $xray->create([
-			'code' => generate_code('X'),
+			'code' => generate_code('XRA', 'xrays'),
 			'type' => $request->type,
 			'patient_id' => $request->patient_id,
 			'doctor_id' => $request->doctor_id,
@@ -192,5 +192,19 @@ class XrayController extends Controller
 		if ($xray->update()) {
 			return redirect()->route('para_clinic.xray.index')->with('success', 'Data delete success');
 		}
+	}
+
+	public function show(Xray $xray)
+	{
+		append_array_to_obj($xray, unserialize($xray->attribute) ?: []);
+		if ($xray ?? false) {
+			$data['row'] = $xray;
+			$data['type'] = XrayType::where('status', 1)->orderBy('index', 'asc')->get();
+			$data['patient'] = Patient::orderBy('name_en', 'asc')->get();
+			$data['doctor'] = Doctor::orderBy('name_en', 'asc')->get();
+		} 
+		$data['payment_type'] = getParentDataSelection('payment_type');
+		$data['is_edit'] = true;
+		return view('xray.show', $data);
 	}
 }

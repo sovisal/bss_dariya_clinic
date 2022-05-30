@@ -49,7 +49,7 @@ class PrescriptionController extends Controller
 	{
 		$prescription = new Prescription();
 		if ($pre = $prescription->create([
-			'code' => generate_code('PRE'),
+			'code' => generate_code('PRE', 'prescriptions'),
 			'patient_id' => $request->patient_id,
 			'requested_by' => $request->requested_by ?: auth()->user()->doctor ?? 0,
 			'requested_at' => $request->requested_at ?: date('Y-m-d H:i:s'),
@@ -238,7 +238,7 @@ class PrescriptionController extends Controller
 		}
 		$data['prescription_detail'] = $prescription->detail()->get();
 		$data['is_edit'] = true;
-		return view('prescription.edit', $data);
+		return view('prescription.show', $data);
 	}
 
 	/**

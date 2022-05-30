@@ -16,11 +16,11 @@ class AppLayout extends Component
 	{
 
 		$menu = [
-			'home' => [
-				'can' => '',
-				'url' => route('home'),
-				'label' => 'Home',
-			],
+			// 'home' => [
+			// 	'can' => '',
+			// 	'url' => route('home'),
+			// 	'label' => 'Home',
+			// ],
 
 			'patient' => [
 				'can' => 'ViewAnyPatient',

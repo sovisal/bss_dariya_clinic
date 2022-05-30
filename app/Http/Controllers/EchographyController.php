@@ -58,7 +58,7 @@ class EchographyController extends Controller
             $echo_type = EchoType::where('id', $request->type)->first();
         }
 		if ($echo = $echography->create([
-			'code' => generate_code('ECHO'),
+			'code' => generate_code('ECH', 'echographies'),
 			'type' => $request->type,
 			'patient_id' => $request->patient_id,
 			'doctor_id' => $request->doctor_id,
@@ -181,7 +181,7 @@ class EchographyController extends Controller
 		} 
 		$data['payment_type'] = getParentDataSelection('payment_type');
 		$data['is_edit'] = true;
-		return view('echography.edit', $data);
+		return view('echography.show', $data);
 	}
 
 	/**

@@ -351,6 +351,17 @@ function render_payment_status ($st_num = 0) {
 }
 
 
-function generate_code ($type, $number = null) {
-	return $type . ($number ? str_pad($number, 6, '0', STR_PAD_LEFT) : date('ymd'));
+function generate_code ($prefix, $table_name) {
+
+	#1, Get info from table
+	#2, Check the current code incremet
+	#3, Get the value and += 1
+
+	$table_info = DB::select("SELECT TABLE_COMMENT FROM information_schema.TABLES WHERE TABLE_NAME = '{$table_name}';");
+	$obj = unserialize(current($table_info)->TABLE_COMMENT);
+	$obj['code_increment'] = $obj['code_increment'] ?? 0;
+	$code_increment = ++$obj['code_increment'];
+	DB::statement("ALTER TABLE {$table_name} COMMENT = '" . serialize($obj) ."';");
+
+	return $prefix . '-' . str_pad($code_increment, 5, "0", STR_PAD_LEFT);
 }

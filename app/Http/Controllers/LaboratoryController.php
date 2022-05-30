@@ -57,7 +57,7 @@ class LaboratoryController extends Controller
         if (sizeof($request->labor_item_id ?? []) > 0) {
             $laboratory = new Laboratory();
             if ($labor = $laboratory->create([
-                'code' => generate_code('L'),
+                'code' => generate_code('LAB', 'laboratories'),
                 'patient_id' => $request->patient_id,
                 'gender' => $request->gender ?: 0,
                 'age' => $request->age ?: 0,
@@ -102,9 +102,18 @@ class LaboratoryController extends Controller
      * @param  \App\Models\Laboratory  $laboratory
      * @return \Illuminate\Http\Response
      */
-    public function show(Laboratory $laboratory)
+    public function show(Laboratory $labor)
     {
-        //
+        if ($labor ?? false) {
+			$data['row'] = $labor;
+			$data['patient'] = Patient::orderBy('name_en', 'asc')->get();
+			$data['doctor'] = Doctor::orderBy('name_en', 'asc')->get();
+		}
+        $data['gender'] = getParentDataSelection('gender');
+		$data['payment_type'] = getParentDataSelection('payment_type');
+		$data['labor_detail'] = $labor->detail()->get();
+		$data['is_edit'] = true;
+		return view('labor.show', $data);
     }
 
     /**
