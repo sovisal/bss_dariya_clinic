@@ -80,36 +80,45 @@ class XrayController extends Controller
 	 */
 	public function getDetail(Request $request)
 	{
-		$xray = Xray::where('xrays.id', $request->id)
+		$row = Xray::where('xrays.id', $request->id)
 		->select([
 			'xrays.*',
-			'patients.name_en as patient_kh',
-			'doctors.name_en as doctor_en',
+			'patients.name_kh as patient_kh',
+			'physicians.name_en as physician',
+			'requestedBy.name_en as requested_by_name',
+			'paymentTypes.title_en as payment_type_en',
 			'xray_types.name_en as type_en'
 		])
 		->leftJoin('patients', 'patients.id', '=', 'xrays.patient_id')
-		->leftJoin('data_parents', 'data_parents.id', '=', 'patients.gender')
-		->leftJoin('doctors', 'doctors.id', '=', 'xrays.doctor_id')
+		->leftJoin('data_parents AS paymentTypes', 'paymentTypes.id', '=', 'xrays.payment_type')
+		->leftJoin('doctors AS physicians', 'physicians.id', '=', 'xrays.doctor_id')
+		->leftJoin('doctors AS requestedBy', 'requestedBy.id', '=', 'xrays.requested_by')
 		->leftJoin('xray_types', 'xray_types.id', '=', 'xrays.type')
 		->first();
 
-		if ($xray) {
-			$status_html = (($xray->status==2)? '<span class="badge badge-primary">Completed</span>' : '<span class="badge badge-light">Progress</span>');
-			$status_html .= (($xray->payment_status==2)? '<span class="badge badge-success tw-ml-1">Paid</span>' : '<span class="badge badge-light tw-ml-1">Unpaid</span>');
+		if ($row) {
+			$body = '';
 			$tbody = '';
-			$attributes = array_except(filter_unit_attr(unserialize($xray->attribute) ?: []), ['status', 'amount']);
+			$attributes = array_except(filter_unit_attr(unserialize($row->attribute) ?: []), ['status', 'amount']);
 			foreach ($attributes as $label => $attr) {
 				$tbody .= '<tr>
 								<td width="30%" class="text-right tw-bg-gray-100">'. __('form.xray.'. $label) .'</td>
 								<td>'. $attr .'</td>
 							</tr>';
 			}
+			$body = '<table class="table-form tw-mt-3 table-detail-result">
+						<thead>
+							<tr>
+								<th colspan="4" class="text-left tw-bg-gray-100">Result</th>
+							</tr>
+						</thead>
+						<tbody>'. ((empty($attributes))? '<tr><th colspan="4" class="text-center">No result</th></tr>' : $tbody) .'</tbody>
+					</table>';
 			return response()->json([
 				'success' => true,
-				'row' => $xray,
-				'status_html' => $status_html,
-				'print_url' => route('para_clinic.xray.print', $xray->id),
-				'tbody' => ((empty($attributes))? '<tr><th colspan="4" class="text-center">No result</th></tr>' : $tbody),
+				'header' => getParaClinicHeaderDetail($row),
+				'body' => $body,
+				'print_url' => route('para_clinic.xray.print', $row->id),
 			]);
 		}else{
 			return response()->json([

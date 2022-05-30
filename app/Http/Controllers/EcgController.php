@@ -85,36 +85,45 @@ class EcgController extends Controller
 	 */
 	public function getDetail(Request $request)
 	{
-		$ecg = Ecg::where('ecgs.id', $request->id)
+		$row = Ecg::where('ecgs.id', $request->id)
 		->select([
 			'ecgs.*',
-			'patients.name_en as patient_kh',
-			'doctors.name_en as doctor_en',
+			'patients.name_kh as patient_kh',
+			'physicians.name_en as physician',
+			'requestedBy.name_en as requested_by_name',
+			'paymentTypes.title_en as payment_type_en',
 			'ecg_types.name_en as type_en'
 		])
 		->leftJoin('patients', 'patients.id', '=', 'ecgs.patient_id')
-		->leftJoin('data_parents', 'data_parents.id', '=', 'patients.gender')
-		->leftJoin('doctors', 'doctors.id', '=', 'ecgs.doctor_id')
+		->leftJoin('data_parents AS paymentTypes', 'paymentTypes.id', '=', 'ecgs.payment_type')
+		->leftJoin('doctors AS physicians', 'physicians.id', '=', 'ecgs.doctor_id')
+		->leftJoin('doctors AS requestedBy', 'requestedBy.id', '=', 'ecgs.requested_by')
 		->leftJoin('ecg_types', 'ecg_types.id', '=', 'ecgs.type')
 		->first();
 
-		if ($ecg) {
-			$status_html = (($ecg->status==2)? '<span class="badge badge-primary">Completed</span>' : '<span class="badge badge-light">Progress</span>');
-			$status_html .= (($ecg->payment_status==2)? '<span class="badge badge-success tw-ml-1">Paid</span>' : '<span class="badge badge-light tw-ml-1">Unpaid</span>');
+		if ($row) {
+			$body = '';
 			$tbody = '';
-			$attributes = array_except(filter_unit_attr(unserialize($ecg->attribute) ?: []), ['status', 'amount']);
+			$attributes = array_except(filter_unit_attr(unserialize($row->attribute) ?: []), ['status', 'amount']);
 			foreach ($attributes as $label => $attr) {
 				$tbody .= '<tr>
 								<td width="30%" class="text-right tw-bg-gray-100">'. __('form.ecg.'. $label) .'</td>
 								<td>'. $attr .'</td>
 							</tr>';
 			}
+			$body = '<table class="table-form tw-mt-3 table-detail-result">
+						<thead>
+							<tr>
+								<th colspan="4" class="text-left tw-bg-gray-100">Result</th>
+							</tr>
+						</thead>
+						<tbody>'. ((empty($attributes))? '<tr><th colspan="4" class="text-center">No result</th></tr>' : $tbody) .'</tbody>
+					</table>';
 			return response()->json([
 				'success' => true,
-				'row' => $ecg,
-				'status_html' => $status_html,
-				'print_url' => route('para_clinic.ecg.print', $ecg->id),
-				'tbody' => ((empty($attributes))? '<tr><th colspan="4" class="text-center">No result</th></tr>' : $tbody),
+				'header' => getParaClinicHeaderDetail($row),
+				'body' => $body,
+				'print_url' => route('para_clinic.ecg.print', $row->id),
 			]);
 		}else{
 			return response()->json([

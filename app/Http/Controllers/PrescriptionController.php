@@ -68,12 +68,118 @@ class PrescriptionController extends Controller
 		}
 	}
 
+	/**
+	 * Display the specified resource.
+	 */
+	public function getDetail(Request $request)
+	{
+		$row = Prescription::select([
+			'prescriptions.*',
+			'patients.name_kh as patient_kh',
+			'physicians.name_en as physician',
+		])
+		->where('prescriptions.id', $request->id)
+		->with([
+			'detail' => function($q){
+				$q->select([
+					'prescription_details.*',
+					'medicines.name as medicine_name',
+					'data_parents.title_en as usage_en',
+				])
+				->leftJoin('medicines', 'medicines.id', '=', 'prescription_details.medicine_id')
+				->leftJoin('data_parents', 'data_parents.id', '=', 'prescription_details.usage_id');
+			}
+		])
+		->leftJoin('patients', 'patients.id', '=', 'prescriptions.patient_id')
+		->leftJoin('doctors AS physicians', 'physicians.id', '=', 'prescriptions.doctor_id')
+		->first();
+
+		if ($row) {
+			$header =  '<table class="table-form mb-1" width="100%">
+							<tr>
+								<td class="border-0 text-center"><b>No.'. $row->code .'</b></td>
+							</tr>
+							<tr>
+								<td class="border-0">Patient : '. $row->patient_kh .'</td>
+							</tr>
+							<tr>
+								<td class="border-0">Physician : '. $row->physician .'</td>
+							</tr>
+							<tr>
+								<td class="border-0">Date : '. date('d/m/Y H:i', strtotime($row->requested_at)) .'</td>
+							</tr>
+							<tr>
+								<td class="border-0">Status : '. (($row->status==2)? 'Completed' : 'Incompleted') .'</td>
+							</tr>
+							<tr>
+								<td class="border-0">Diagnosis : '. $row->diagnosis .'</td>
+							</tr>
+						</table>';
+			$tbody = '';
+			foreach ($row->detail as $i => $detail) {
+				$j = 0;
+				$usage_time_str = '';
+				$time_usage = getParentDataSelection('time_usage');
+				foreach ($time_usage as $id => $data){
+					if (in_array($id, explode(',', $detail->usage_times ?? []))){
+						if ($j==0){
+							$usage_time_str = $data;
+							$j++;
+						}else{
+							$usage_time_str .= ' - '. $data;
+						}
+					}
+				}
+				$tbody .= '<tr>
+							<td>'. str_pad(++$i, 2, '0', STR_PAD_LEFT) .'</td>
+							<td>'. $detail->medicine_name .'</td>
+							<td>'. $detail->qty .'</td>
+							<td>'. $detail->upd .'</td>
+							<td>'. $detail->nod .'</td>
+							<td>'. $detail->total .'</td>
+							<td>'. $detail->unit .'</td>
+							<td>'. $usage_time_str .'</td>
+							<td>'. $detail->usage_en .'</td>
+							<td>'. $detail->other .'</td>
+						</tr>';
+			}
+			$body = '<table class="table-form">
+						<tr class="text-center">
+							<th class="text-center">N&deg;</th>
+							<th>Medicine</th>
+							<th width="50px">QTY</th>
+							<th width="50px">U/D</th>
+							<th width="50px">NoD</th>
+							<th width="50px">Total</th>
+							<th width="50px">Unit</th>
+							<th width="160px">Usage Time</th>
+							<th>Usage</th>
+							<th>Note</th>
+						</tr>
+						'. (($tbody=='')? '<tr colspan="10" class="text-center">No result</td>' : $tbody) .'
+					</table>';
+			
+			return response()->json([
+				'success' => true,
+				'header' => $header,
+				'body' => $body,
+				'print_url' => route('prescription.print', $row->id),
+			]);
+		}else{
+			return response()->json([
+				'success' => false,
+				'message' => 'X-Ray not found!',
+			], 404);
+		}
+	}
+
 	public function print($id)
 	{
 		$prescription = Prescription::select([
 			'prescriptions.*',
 			'patients.name_en as patient_kh',
-			'patients.name_en as patient_kh',
+			'patients.age as patient_age',
+			'genders.title_en as patient_gender',
 			'doctors.name_en as doctor_en',
 		])
 		->where('prescriptions.id', $id)
@@ -89,6 +195,7 @@ class PrescriptionController extends Controller
 			}
 		])
 		->leftJoin('patients', 'patients.id', '=', 'prescriptions.patient_id')
+		->leftJoin('data_parents AS genders', 'genders.id', '=', 'patients.gender')
 		->leftJoin('doctors', 'doctors.id', '=', 'prescriptions.doctor_id')
 		->first();
 		if ($prescription) {

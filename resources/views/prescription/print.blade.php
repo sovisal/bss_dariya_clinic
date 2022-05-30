@@ -26,25 +26,25 @@
 					<th>Usage</th>
 					<th>Note</th>
 				</tr>
-				@foreach ($row->detail as $i => $row)
+				@foreach ($row->detail as $i => $detail)
 					<tr>
 						<td>{{ str_pad(++$i, 2, '0', STR_PAD_LEFT) }}</td>
-						<td>{{ $row->medicine_name }}</td>
-						<td>{{ $row->qty }}</td>
-						<td>{{ $row->upd }}</td>
-						<td>{{ $row->nod }}</td>
-						<td>{{ $row->total }}</td>
-						<td>{{ $row->unit }}</td>
+						<td>{{ $detail->medicine_name }}</td>
+						<td>{{ $detail->qty }}</td>
+						<td>{{ $detail->upd }}</td>
+						<td>{{ $detail->nod }}</td>
+						<td>{{ $detail->total }}</td>
+						<td>{{ $detail->unit }}</td>
 						<td>
 							@php
-								$i = 0;
+								$j = 0;
 							@endphp
 							@foreach ($time_usage as $id => $data)
-								@if (in_array($id, explode(',', $row->usage_times ?? [])))
-									@if ($i==0)
+								@if (in_array($id, explode(',', $detail->usage_times ?? [])))
+									@if ($j==0)
 										{{ $data }}
 										@php
-											$i++
+											$j++
 										@endphp
 									@else
 										- {{ $data }}
@@ -52,8 +52,8 @@
 								@endif
 							@endforeach
 						</td>
-						<td>{{ $row->usage_en }}</td>
-						<td>{{ $row->other }}</td>
+						<td>{{ $detail->usage_en }}</td>
+						<td>{{ $detail->other }}</td>
 					</tr>
 				@endforeach
 			</table>
