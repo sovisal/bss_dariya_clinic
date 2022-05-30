@@ -20,8 +20,9 @@ class PrescriptionController extends Controller
 	public function index()
 	{
 		$this->data['rows'] = Prescription::select([
-								'prescriptions.*', 'patients.name_en as patient_en',
-								'doctors.name_en as doctor_en',
+								'prescriptions.*', 
+								'patients.name_en as patient_en', 'patients.name_kh as patient_kh',
+								'doctors.name_en as doctor_en', 'doctors.name_kh as doctor_kh',
 							])
 							->where('prescriptions.status', '>=', 1)
 							->leftJoin('patients', 'patients.id', '=', 'prescriptions.patient_id')

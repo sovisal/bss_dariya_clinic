@@ -45,7 +45,7 @@
                     <div class="row">
                         @foreach ($data->item as $item)
                             <div class="col-4">
-                                <label><input type="checkbox" name="labor_item_id[]" value="{{ $item->id }}"> {{ $item->name_en }}</label>
+                                <label><input type="checkbox" name="labor_item_id[]" value="{{ $item->id }}"> {{ render_synonyms_name($item->name_en, $item->name_kh) }}</label>
                             </div>
                         @endforeach
                     </div>

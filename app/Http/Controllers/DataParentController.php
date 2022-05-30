@@ -155,8 +155,7 @@ class DataParentController extends Controller
         }
 
         if (sizeof($rows) > 0)  {
-            // return array_key_exists($id, $rows) ? ($rows[$id]['title_en'] . ' :: ' . $rows[$id]['title_kh']) : '';
-            return array_key_exists($id, $rows) ? $rows[$id]['title_en'] : '';
+            return array_key_exists($id, $rows) ? render_synonyms_name($rows[$id]['title_en'], $rows[$id]['title_kh']) : '';
         }
         return '';
     }
@@ -172,11 +171,7 @@ class DataParentController extends Controller
 
         $rows = [];
         array_map(function ($obj) use (&$rows) {
-            if ($obj['title_en'] && $obj['title_kh'] && $obj['title_en'] != $obj['title_kh']) {
-                $rows[$obj['id']] = $obj['title_en'] . ' :: ' . $obj['title_kh'];
-            } else {
-                $rows[$obj['id']] = $obj['title_en'] ?: $obj['title_kh'];
-            }
+            $rows[$obj['id']] = render_synonyms_name($obj['title_en'], $obj['title_kh']);
         }, DataParent::where('type', $type)->where($where_clause ?: ['status'=> 1])->orderBy('title_en', 'ASC')->get()->toArray());
 
         return $rows;

@@ -21,8 +21,8 @@
 				<tr>
 					<td class="text-center">{{ ++$i }}</td>
 					<td>{{ $row->code }}</td>
-					<td>{{ $row->patient_en }}</td>
-					<td>{{ $row->doctor_en }}</td>
+					<td>{{ render_synonyms_name($row->patient_en, $row->patient_kh) }}</td>
+					<td>{{ render_synonyms_name($row->doctor_en, $row->doctor_kh) }}</td>
 					<td class="text-center">{{ render_readable_date($row->requested_at) }}</td>
 					<td>{{ $row->diagnosis }}</td>
 					<td class="text-center">{!! render_record_status($row->status) !!}</td>

@@ -8,6 +8,7 @@
 				<tr>
 					<th>No</th>
 					<th>Name EN</th>
+					<th>Name KH</th>
 					<th class="text-right">Min</th>
 					<th>Max</th>
 					<th>Unit</th>
@@ -24,6 +25,7 @@
 				<tr>
 					<td class="text-center">{{ ++$i }}</td>
 					<td>{{ $row->name_en }}</td>
+					<td>{{ $row->name_kh }}</td>
 					<td class="text-right">{{ $row->min_range }}</td>
 					<td>{{ $row->max_range }}</td>
 					<td class="text-center">{!! apply_markdown_character($row->unit) !!}</td>

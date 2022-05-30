@@ -21,7 +21,7 @@
 						MD-{!! str_pad($medicine->id, 6, '0', STR_PAD_LEFT) !!}
 					</td>
 					<td>{{ $medicine->name }}</td>
-					<td>{{ $medicine->usage_name_kh }} :: {{ $medicine->usage_name_en }}</td>
+					<td>{{ render_synonyms_name($medicine->usage_name_en, $medicine->usage_name_kh) }}</td>
 					<td class="text-right"><span class="float-left">$</span> {{ number_format($medicine->price, 2) }}</td>
 					<td>{!! date('d-M-Y H:i', strtotime($medicine->updated_at)) !!}</td>
 					<td>{!! $medicine->updated_by_name !!}</td>

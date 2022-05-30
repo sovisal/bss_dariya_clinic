@@ -21,8 +21,8 @@
         @endphp
         <tr>
             <td class="text-center">{{ $i++ }}</td>
-            <td>{{ $item->category()->name_en }}</td>
-            <td>{{ $item->name_en }}</td>
+            <td>{{ render_synonyms_name($item->category()->name_en, $item->category()->name_kh) }}</td>
+            <td>{{ render_synonyms_name($item->name_en, $item->name_kh) }}</td>
             <td>
                 <input type="hidden" name="test_id[]" value="{{ $row->id }}"/>
                 <x-bss-form.input type="number" name='test_value[]' value="{{ $row->value ?: 0 }}" class="text-center"/>

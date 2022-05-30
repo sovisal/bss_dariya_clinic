@@ -57,11 +57,11 @@
 				<tr>
 					<td class="text-center">{{ ++$i }}</td>
 					<td>{{ $row->code }}</td>
-					<td>{{ $row->patient_en }}</td>
-					<td>{{ $row->doctor_en }}</td>
+					<td>{{ render_synonyms_name($row->patient_en, $row->patient_kh) }}</td>
+					<td>{{ render_synonyms_name($row->doctor_en, $row->doctor_kh) }}</td>
 					<td class="text-center">{{ render_readable_date($row->requested_at) }}</td>
 					<td class="text-right">{{ render_currency($row->amount) }}</td>
-					<td>{{ $row->type_en }}</td>
+					<td>{{ render_synonyms_name($row->type_en, $row->type_kh) }}</td>
 					<td class="text-center">{!! render_record_status($row->status) !!}</td>
 					<td class="text-center">{!! render_payment_status($row->payment_status) !!}</td>
 					<td class="text-right">

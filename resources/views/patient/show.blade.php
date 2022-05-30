@@ -115,15 +115,15 @@
 					</tr>
 					<tr>
 						<th>Villsage <span class="float-right">:</span></th>
-						<td>{{ $patient->address() ? $patient->address()->village_en : '' }}</td>
+						<td>{{ $patient->address() ? render_synonyms_name($patient->address()->village_en, $patient->address()->village_kh) : 'N/A' }}</td>
 						<th>Commune <span class="float-right">:</span></th>
-						<td>{{ $patient->address() ? $patient->address()->commune_en : '' }}</td>
+						<td>{{ $patient->address() ? render_synonyms_name($patient->address()->commune_en, $patient->address()->commune_kh) : 'N/A' }}</td>
 					</tr>
 					<tr>
 						<th>District <span class="float-right">:</span></th>
-						<td>{{ $patient->address() ? $patient->address()->district_en : '' }}</td>
+						<td>{{ $patient->address() ? render_synonyms_name($patient->address()->district_en, $patient->address()->district_kh) : 'N/A' }}</td>
 						<th>Province <span class="float-right">:</span></th>
-						<td>{{ $patient->address() ? $patient->address()->province_en : '' }}</td>
+						<td>{{ $patient->address() ? render_synonyms_name($patient->address()->province_en, $patient->address()->province_kh) : 'N/A' }}</td>
 					</tr>
 					<tr>
 						<th>Zip Code <span class="float-right">:</span></th>

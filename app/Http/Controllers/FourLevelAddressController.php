@@ -71,20 +71,20 @@ class FourLevelAddressController extends Controller
 		if ($return_type == 'selection') {
 			$html_elements = '<select __ATTRIBUTES__>';
 			foreach ($address as $addr) {
-				$html_elements .= '<option ' . (($selected && $selected == $addr['_code']) ? 'selected' : '') . ' value="' . $addr['_code'] . '">' . $addr['_name_kh'] . '</option>';
+				$html_elements .= '<option ' . (($selected && $selected == $addr['_code']) ? 'selected' : '') . ' value="' . $addr['_code'] . '">' . render_synonyms_name($addr['_name_en'], $addr['_name_kh']) . '</option>';
 			}
 			$html_elements .= '</select>';
 			return $html_elements;
 		} else if ($return_type == 'option') {
 			$html_elements = '<option value="">---- None ----</option>';
 			foreach ($address as $addr) {
-				$html_elements .= '<option ' . (($selected && $selected == $addr['_code']) ? 'selected' : '') . ' value="' . $addr['_code'] . '">' . $addr['_name_kh'] . ' :: ' . $addr['_name_en'] . '</option>';
+				$html_elements .= '<option ' . (($selected && $selected == $addr['_code']) ? 'selected' : '') . ' value="' . $addr['_code'] . '">' . render_synonyms_name($addr['_name_en'], $addr['_name_kh']) . '</option>';
 			}
 			return $html_elements;
 		} else if ($return_type == 'array_selection') {
 			$html_elements = [];
 			foreach ($address as $addr) {
-				$html_elements[$addr['_code']] = $addr['_name_kh'] . ' :: ' . $addr['_name_en'];
+				$html_elements[$addr['_code']] = render_synonyms_name($addr['_name_en'], $addr['_name_kh']);
 			}
 			return [$html_elements, $selected];
 		} else if ($return_type == 'datalist') {

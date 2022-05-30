@@ -103,7 +103,6 @@ class ConsultationController extends Controller
 	 */
 	public function update(Request $request, Consultation $consultation)
 	{
-		dd($request->all());
 		if ($request->submit_option == 'cancel') {
 			return redirect()->route('patient.index');
 		} else {

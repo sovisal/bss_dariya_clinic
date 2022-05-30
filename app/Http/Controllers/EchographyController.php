@@ -21,8 +21,13 @@ class EchographyController extends Controller
 	public function index()
 	{
 		$this->data['rows'] = Echography::select([
-			'echographies.*', 'patients.name_en as patient_en', 'doctors.name_en as doctor_en',
-			'echo_types.name_en as type_en'
+			'echographies.*', 
+			'patients.name_en as patient_en', 
+			'patients.name_kh as patient_kh', 
+			'doctors.name_en as doctor_en',
+			'doctors.name_kh as doctor_kh',
+			'echo_types.name_en as type_en',
+			'echo_types.name_kh as type_kh'
 		])
 		->where('echographies.status', '>=' , 1) //1-Draft, 2-Completed, Helper function render_record_status()
 		->leftJoin('patients', 'patients.id', '=', 'echographies.patient_id')

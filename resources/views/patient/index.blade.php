@@ -12,7 +12,7 @@
 			<x-slot name="thead">
 				<tr>
 					<th>Code</th>
-					<th>Name KH + Name EN</th>
+					<th>Name EN + Name KH</th>
 					<th>Date of birth</th>
 					<th>Gender</th>
 					<th>Phone</th>
@@ -37,7 +37,7 @@
 							PT-{!! str_pad($patient->id, 6, '0', STR_PAD_LEFT) !!}
 						</a>
 					</td>
-					<td>{!! $patient->name_kh !!} :: {!! $patient->name_en !!}</td>
+					<td>{!! render_synonyms_name($patient->name_en, $patient->name_kh) !!}</td>
 					<td class="text-center">{!! (($patient->date_of_birth)? date('d-M-Y', strtotime($patient->date_of_birth)) : '') !!}</td>
 					<td class="text-center">{!! getParentDataByType('gender', $patient->gender) !!}</td>
 					<td>{!! $patient->phone !!}</td>

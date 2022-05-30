@@ -17,7 +17,7 @@
                         <x-bss-form.select name="type" required id="xray_type">
                             <!-- <option>Please choose</option> -->
                             @foreach ($xray_type as $data)
-                                <option value="{{ $data->id }}" data-price="{{ $data->price }}">{{ $data->name_en }}</option>
+                                <option value="{{ $data->id }}" data-price="{{ $data->price }}">{{ render_synonyms_name($data->name_en, $data->name_kh) }}</option>
                             @endforeach
                         </x-bss-form.select>
                     </div>
@@ -29,7 +29,7 @@
                     <x-bss-form.select name="doctor_id" required id="xray_doctor_id">
                         <option value="">Please choose</option>
                         @foreach ($doctors as $data)
-                            <option value="{{ $data->id }}">{{ $data->name_en }}</option>
+                            <option value="{{ $data->id }}">{{ render_synonyms_name($data->name_en, $data->name_kh) }}</option>
                         @endforeach
                     </x-bss-form.select>
                 </td>

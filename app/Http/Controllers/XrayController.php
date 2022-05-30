@@ -21,8 +21,13 @@ class XrayController extends Controller
 	{
 		$this->data['rows'] = Xray::where('xrays.status', '>=' , 1)
 		->select([
-			'xrays.*', 'patients.name_en as patient_en', 'doctors.name_en as doctor_en',
-			'xray_types.name_en as type_en'
+			'xrays.*', 
+			'patients.name_en as patient_en', 
+			'patients.name_kh as patient_kh', 
+			'doctors.name_en as doctor_en',
+			'doctors.name_kh as doctor_kh',
+			'xray_types.name_en as type_en',
+			'xray_types.name_kh as type_kh'
 		])
 		->leftJoin('patients', 'patients.id', '=', 'xrays.patient_id')
 		->leftJoin('doctors', 'doctors.id', '=', 'xrays.doctor_id')

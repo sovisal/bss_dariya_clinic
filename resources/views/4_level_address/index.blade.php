@@ -13,7 +13,7 @@
 			<x-slot name="thead">
 				<tr>
 					<th>No</th>
-					<th>Name in Khmer :: Name ({{ $code_length == 2 ? 'District' : ($code_length == 4 ? 'Commune' : ($code_length == 6 ? 'Village' : 'Province')) }})</th>
+					<th>Name ({{ $code_length == 2 ? 'District' : ($code_length == 4 ? 'Commune' : ($code_length == 6 ? 'Village' : 'Province')) }})</th>
 					<th>						
 						{{ $code_length == 2 ? 'Commune' : ($code_length == 4 ? 'Village' : ($code_length == 6 ? '' : 'District')) }}
 					</th>
@@ -22,7 +22,7 @@
 			@foreach($address as $i => $addr)
 				<tr>
 					<td class="text-center">{{ ++$i }}</td>
-					<td>{{ $addr['_name_kh'] }} :: {{ $addr['_name_en'] }}</td>
+					<td>{{ render_synonyms_name($addr['_name_en'], $addr['_name_kh']) }}</td>
 					<td class="text-center">
 						{!! ($code_length < 6) ? '<a href="?addr=' . $addr['_code'] .'"><i class="bx bx-folder-open"></i></a>' : '--' !!}
 					</td>
