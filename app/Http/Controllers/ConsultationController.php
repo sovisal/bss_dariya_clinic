@@ -164,7 +164,7 @@ class ConsultationController extends Controller
 		$data['list_ecg'] 			= $patient->ecgs() 			? $patient->ecgs()->where('status', '>=', 1)->select('id', 'code')->get()->toArray() : [];
 
 		$label = array_map(function ($val) {
-			return '<a href="' . route('prescription.show', $val['id']) . '">' . ($val['code'] ?: 'N/A') . '</a>';
+			return '<span class="text-primary cursor-pointer hover:tw-text-blue-700 tw-duration-500" onclick="getDetail(\''. $val['id'] .'\',\'' . route('prescription.getDetail') . '\', \'Prescription Detail\')">' . ($val['code'] ?: 'N/A') . '</a>';
 		}, $data['list_prescription']);
 		$data['list_prescription'] = implode($label, ',  ');
 
