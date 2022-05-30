@@ -189,4 +189,18 @@ class EcgController extends Controller
 			return redirect()->route('para_clinic.ecg.index')->with('success', 'Data delete success');
 		}
 	}
+
+	public function show(Ecg $ecg)
+	{
+		append_array_to_obj($ecg, unserialize($ecg->attribute) ?: []);
+		if ($ecg ?? false) {
+			$data['row'] = $ecg;
+			$data['type'] = EcgType::where('status', 1)->orderBy('index', 'asc')->get();
+			$data['patient'] = Patient::orderBy('name_en', 'asc')->get();
+			$data['doctor'] = Doctor::orderBy('name_en', 'asc')->get();
+		}
+		$data['payment_type'] = getParentDataSelection('payment_type');
+		$data['is_edit'] = true;
+		return view('ecg.show', $data);
+	}
 }

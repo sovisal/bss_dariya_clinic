@@ -131,7 +131,7 @@ class PrescriptionController extends Controller
 		}
 		$data['prescription_detail'] = $prescription->detail()->get();
 		$data['is_edit'] = true;
-		return view('prescription.edit', $data);
+		return view('prescription.show', $data);
 	}
 
 	/**

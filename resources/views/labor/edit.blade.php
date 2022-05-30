@@ -37,7 +37,7 @@
 			</x-slot>			
 			<table class="table-form striped">
 				<tr>
-					<th colspan="4" class="text-left tw-bg-gray-100">Echo COde #dasd123</th>
+					<th colspan="4" class="text-left tw-bg-gray-100">Echo Code #{{ $row->code }}</th>
 				</tr>
 				@include('labor.form_input')
 			</table>

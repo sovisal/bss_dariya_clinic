@@ -171,7 +171,7 @@ class EchographyController extends Controller
 		} 
 		$data['payment_type'] = getParentDataSelection('payment_type');
 		$data['is_edit'] = true;
-		return view('echography.edit', $data);
+		return view('echography.show', $data);
 	}
 
 	/**

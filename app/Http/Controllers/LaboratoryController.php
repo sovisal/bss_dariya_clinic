@@ -102,9 +102,18 @@ class LaboratoryController extends Controller
      * @param  \App\Models\Laboratory  $laboratory
      * @return \Illuminate\Http\Response
      */
-    public function show(Laboratory $laboratory)
+    public function show(Laboratory $labor)
     {
-        //
+        if ($labor ?? false) {
+			$data['row'] = $labor;
+			$data['patient'] = Patient::orderBy('name_en', 'asc')->get();
+			$data['doctor'] = Doctor::orderBy('name_en', 'asc')->get();
+		}
+        $data['gender'] = getParentDataSelection('gender');
+		$data['payment_type'] = getParentDataSelection('payment_type');
+		$data['labor_detail'] = $labor->detail()->get();
+		$data['is_edit'] = true;
+		return view('labor.show', $data);
     }
 
     /**
