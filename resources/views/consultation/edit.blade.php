@@ -225,7 +225,6 @@
 					<td width="20%" class="text-right">Payment Type</td>
 					<td>
 						<x-bss-form.select name="payment_type" data-no_search="true">
-							<option value="">Select payment type</option>
 							@foreach ($payment_types as $id => $payment_type)
 								<option value="{{ $id }}" {{ ($consultation->payment_type == $id)? 'selected' : '' }}>{{ $payment_type }}</option>
 							@endforeach
@@ -237,7 +236,7 @@
 					<td>
 						<x-bss-form.select name="doctor_id">
 							@foreach ($doctors as $doctor)
-								<option value="{{ $doctor->id }}" {{ ($consultation->doctor_id == $doctor->id)? 'selected' : '' }}>{{ $doctor->name_en }}</option>
+								<option value="{{ $doctor->id }}" {{ ($consultation->doctor_id == $doctor->id)? 'selected' : '' }}>{{ render_synonyms_name($doctor->name_en, $doctor->name_kh) }}</option>
 							@endforeach
 						</x-bss-form.select>
 					</td>
