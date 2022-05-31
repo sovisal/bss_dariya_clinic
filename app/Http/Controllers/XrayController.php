@@ -151,7 +151,7 @@ class XrayController extends Controller
 		->leftJoin('doctors', 'doctors.id', '=', 'xrays.doctor_id')
 		->leftJoin('xray_types', 'xray_types.id', '=', 'xrays.type')
 		->find($id);
-		$xray->attribute = array_except(filter_unit_attr(unserialize($xray->attribute) ?: []), ['status', 'amount']);
+		$xray->attribute = array_except(filter_unit_attr(unserialize($xray->attribute) ?: []), ['status', 'amount', 'payment_type', 'requested_by']);
 		$data['xray'] = $xray;
 		return view('xray.print', $data);
 	}

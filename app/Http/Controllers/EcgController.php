@@ -156,7 +156,7 @@ class EcgController extends Controller
 		->leftJoin('doctors', 'doctors.id', '=', 'ecgs.doctor_id')
 		->leftJoin('ecg_types', 'ecg_types.id', '=', 'ecgs.type')
 		->find($id);
-		$ecg->attribute = array_except(filter_unit_attr(unserialize($ecg->attribute) ?: []), ['status', 'amount']);
+		$ecg->attribute = array_except(filter_unit_attr(unserialize($ecg->attribute) ?: []), ['status', 'amount', 'payment_type', 'requested_by']);
 		$data['ecg'] = $ecg;
 		return view('ecg.print', $data);
 	}
