@@ -1,21 +1,7 @@
 @import url('vendors.min.css');
-
 @font-face {
-	font-family: 'Rubik';
-	src: url('../../fonts/en/Rubik-Regular.ttf');
-}
-@font-face {
-	font-family: 'Rubik';
-	font-weight: Bold;
-	src: url('../../fonts/en/Rubik-Medium.ttf');
-}
-@font-face {
-	font-family: 'Rubik Light';
-	src: url('../../fonts/en/Rubik-Light.ttf');
-}
-@font-face {
-	font-family: 'Rubik-Medium';
-	src: url('../../fonts/en/Rubik-Medium.ttf');
+	font-family: 'Cour';
+	src: url('../../fonts/en/cour.ttf');
 }
 @font-face {
 	font-family: 'Koulen';
@@ -25,12 +11,28 @@
 	font-family: 'Khmer OS Battambang';
 	src: url('../../fonts/kh/KhmerOSbattambang.ttf');
 }
+@font-face {
+	font-family: 'Khmer OS Siemreap';
+	src: url('../../fonts/kh/KhmerOSsiemreap.ttf');
+}
+@font-face {
+	font-family: 'Khmer OS Moul Light';
+	src: url('../../fonts/kh/KhmerOSmuollight.ttf');
+}
+@font-face {
+	font-family: 'Poppins';
+	src: url('../../fonts/en/poppins/Poppins-Regular.ttf');
+}
+@font-face {
+	font-family: 'Open Sans';
+	src: url('../../fonts/en/Roboto-Regular.ttf');
+}
 body{
 	margin: 0;
 }
-body *{
+/* body *{
 	font-family: 'Rubik', 'Khmer OS Battambang';
-}
+} */
 img{
 	max-width: 100% !important;
 }
@@ -62,6 +64,13 @@ table{
 @page{
 	margin: 0;
 }
+table { page-break-inside:auto!important; }
+tr { page-break-inside:avoid!important; page-break-after:auto!important; }
+table thead { display: table-row-group!important; }
+table tfoot { display: table-row-group!important; }
+.KHMOULLIGHT{
+	font-family: 'Khmer OS Moul Light', 'Open Sans' !important;
+}
 .text-center{
 	text-align: center;
 }
@@ -74,11 +83,188 @@ table{
 .float-left{
 	float: left;
 }
-table { page-break-inside:auto!important; }
-tr { page-break-inside:avoid!important; page-break-after:auto!important; }
-table thead { display: table-row-group!important; }
-table tfoot { display: table-row-group!important; }
-/* When Print */
-@media print{
-	
+.text-uppercase{
+	text-transform: uppercase;
+}
+.text-underline{
+	text-decoration: underline;
+}
+.d-flex{
+	display: flex !important;
+}
+.justify-content-end{
+	justify-content: flex-end !important;
+}
+.flex-fill{
+	flex: 1 1 auto !important;
+}
+.text-bold{
+	font-weight: bold;
+}
+.m-1,.my-1,.mt-1{
+	margin-top: 0.5rem;
+}
+.m-1,.my-1,.mb-1{
+	margin-bottom: 0.5rem;
+}
+.m-1,.mx-1,.ml-1{
+	margin-left: 0.5rem;
+}
+.m-1,.mx-1,.mr-1{
+	margin-right: 0.5rem;
+}
+.m-2,.my-2,.mt-2{
+	margin-top: 1rem;
+}
+.m-2,.my-2,.mb-2{
+	margin-bottom: 1rem;
+}
+.m-2,.mx-2,.ml-2{
+	margin-left: 1rem;
+}
+.m-2,.mx-2,.mr-2{
+	margin-right: 1rem;
+}
+.print-preview-a4{
+	width: 21cm;
+	height: 29.7cm;
+	margin: 0 auto;
+	background: #fff;
+	border: 1px solid #ededed;
+	padding: 0.5cm;
+	position: relative;
+}
+.print-preview-a4 *:not(h1,h2,h3,h4,h5,h6){
+	font-size: 13px;
+	font-family: 'Khmer OS Siemreap', 'Open Sans' !important;
+}
+.print-preview-a4 .text-red{
+	color: red !important;
+}
+.text-blue{
+	color: #1560BD !important;
+}
+.print-preview-a4 h2{
+	font-size: 18px;
+}
+.print-preview-a4 header .table-info{
+	margin: 5px 0;
+	border-top: 2px solid #1560BD;
+	border-bottom: 2px solid #1560BD;
+}
+.print-preview-a4 header .table-info h2{
+	padding: 5px 0;
+}
+.print-preview-a4 .signature{
+	margin-top: 10px;
+	float: right;
+	width: 3.5cm;
+	line-height: 1.5;
+	font-weight: bold;
+}
+.print-preview-a4 footer{
+	border-top: 1px solid #000;
+	position: absolute;
+	width: calc(100% - 1cm);
+	bottom: 0;
+	padding: 5px 0;
+	text-align: center;
+	line-height: 1.6;
+	font-weight: bold;
+}
+.print-preview-a4 .bring-this-back{
+	position: absolute;
+	width: calc(100% - 1cm);
+	bottom: 0;
+	right: 0;
+	text-align: right;
+	padding: 0.5cm 0.8cm;
+}
+
+.print-preview-a4 .echography-body{
+	margin-top: 5px;
+}
+.print-preview-a4 .echography-body *{
+	line-height: 1.5;
+}
+.print-preview-a4 .echography-body .title{
+	font-weight: bold;
+	margin: 10px 0;
+}
+
+.print-preview-a4 .prescription-body small,
+.print-preview-a4 .prescription-body small b{
+	font-size: 10px;
+}
+.print-preview-a4 .prescription-body table{
+	width: 100%;
+}
+.print-preview-a4 .prescription-body table th{
+	background: #f5f5f5;
+	text-align: left;
+}
+.print-preview-a4 .prescription-body table th,
+.print-preview-a4 .prescription-body table td{
+	padding: 3px 5px;
+	border: 1px solid #e0e0e0;
+	vertical-align: top;
+}
+
+.print-preview-a4 .labor-body *{
+	font-family: 'Cour' !important;
+	font-size: 14px;
+}
+.print-preview-a4 .labor-body .leaders {
+	max-width: 40em;
+	padding: 0;
+	overflow-x: hidden;
+	list-style: none
+}
+.print-preview-a4 .labor-body .leaders div:before {
+	float: left;
+	width: 0;
+	white-space: nowrap;
+	content:". . . . . . . . . . . . . . . . . . . . "
+			". . . . . . . . . . . . . . . . . . . . "
+			". . . . . . . . . . . . . . . . . . . . "
+			". . . . . . . . . . . . . . . . . . . . "
+}
+.print-preview-a4 .labor-body .leaders span:first-child {
+	padding-right: 0.33em;
+	background: white
+}
+.print-preview-a4 .labor-body .leaders span + span {
+	float: right;
+	padding-left: 0.33em;
+	background: white
+}
+.print-preview-a4 .labor-body .type-section > h4 {
+	font-size: 15px;
+}
+
+@media print {
+	@page {
+		size: 21cm 29.7cm;
+		margin: 0;
+	}
+	.print-preview-a4{
+		width: 21cm;
+		height: 29.7cm;
+		display: block;
+		margin: 0 !important;
+		box-shadow: none;
+		border: none;
+	}
+	.text-red{
+		color: red !important;
+		-webkit-print-color-adjust: exact !important;
+		-moz-print-color-adjust: exact !important;
+		-o-print-color-adjust: exact !important;
+	}
+	.text-blue{
+		color: #1560BD !important;
+		-webkit-print-color-adjust: exact !important;
+		-moz-print-color-adjust: exact !important;
+		-o-print-color-adjust: exact !important;
+	}
 }

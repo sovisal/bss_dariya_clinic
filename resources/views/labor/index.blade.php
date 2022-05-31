@@ -29,8 +29,9 @@
 					<td class="text-right">{{ render_currency($row->amount) }}</td>
 					<td class="text-center">{!! render_record_status($row->status) !!}</td>
 					<td class="text-center">{!! render_payment_status($row->payment_status) !!}</td>
-					<td class="text-center">
-						<x-form.button color="info" class="btn-sm" href="{{ route('para_clinic.labor.edit', $row->id) }}" icon="bx bx-printer" />
+					<td class="text-right">
+						<x-form.button color="info" class="btn-sm" onclick="getDetail({{ $row->id }}, '{{ route('para_clinic.labor.getDetail') }}', 'Test Detail')" icon="bx bx-detail" />
+						<x-form.button color="dark" class="btn-sm" onclick="printPopup('{{ route('para_clinic.labor.print', $row->id) }}')" icon="bx bx-printer" />
 						@if ($row->status == 1)
 							<x-form.button color="secondary" class="btn-sm" href="{{ route('para_clinic.labor.edit', $row->id) }}" icon="bx bx-edit-alt" />
 							<x-form.button color="danger" class="confirmDelete btn-sm" data-id="{{ $row->id }}" icon="bx bx-trash" />
@@ -49,6 +50,7 @@
 		</x-table>
 	</x-card>
 
+	<x-para-clinic.modal-detail />
 	<x-modal-confirm-delete />
 
 </x-app-layout>

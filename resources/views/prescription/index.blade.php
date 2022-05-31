@@ -27,7 +27,7 @@
 					<td>{{ $row->diagnosis }}</td>
 					<td class="text-center">{!! render_record_status($row->status) !!}</td>
 					<td class="text-right">
-						<x-form.button color="info" class="btn-sm" onclick="getDetail({{ $row->id }}, '{{ route('prescription.getDetail') }}')" icon="bx bx-detail" />
+						<x-form.button color="info" class="btn-sm" onclick="getDetail({{ $row->id }}, '{{ route('prescription.getDetail') }}', 'Priscription Detail')" icon="bx bx-detail" />
 						<x-form.button color="dark" class="btn-sm" onclick="printPopup('{{ route('prescription.print', $row->id) }}')" icon="bx bx-printer" />
 						@if ($row->status == 1)
 							<x-form.button color="secondary" class="btn-sm" href="{{ route('prescription.edit', $row->id) }}" icon="bx bx-edit-alt" />
@@ -47,7 +47,7 @@
 		</x-table>
 	</x-card>
 
-	<x-para-clinic.modal-detail title="Priscription Detail" />
+	<x-para-clinic.modal-detail />
 
 	<x-modal-confirm-delete />
 </x-app-layout>

@@ -136,7 +136,7 @@ class EchographyController extends Controller
 	}
 
 	/**
-	 * Display the specified Image.
+	 * Print the specified Resourse.
 	 */
 	public function print($id)
 	{

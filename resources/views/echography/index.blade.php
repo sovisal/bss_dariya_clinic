@@ -99,7 +99,7 @@
 					<td class="text-center">{!! render_record_status($row->status) !!}</td>
 					<td class="text-center">{!! render_payment_status($row->payment_status) !!}</td>
 					<td class="text-right">
-						<x-form.button color="info" class="btn-sm" onclick="getDetail({{ $row->id }}, '{{ route('para_clinic.echography.getDetail') }}')" icon="bx bx-detail" />
+						<x-form.button color="info" class="btn-sm" onclick="getDetail({{ $row->id }}, '{{ route('para_clinic.echography.getDetail', 'Echography Detail') }}')" icon="bx bx-detail" />
 						<x-form.button color="warning" class="btn-sm" onclick="getImage('{{ $row->image_1 }}', '{{ $row->image_2 }}')" icon="bx bx-image" />
 						<x-form.button color="dark" class="btn-sm" onclick="printPopup('{{ route('para_clinic.echography.print', $row->id) }}')" icon="bx bx-printer" />
 						@if ($row->status=='1')
@@ -120,7 +120,7 @@
 		</x-table>
 	</x-card>
 
-	<x-para-clinic.modal-detail title="Echography Detail" />
+	<x-para-clinic.modal-detail />
 
 	<x-modal :foot="false" id="image-modal" dialogClass="modal-lg">
 		<x-slot name="header">

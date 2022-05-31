@@ -1,7 +1,7 @@
 <x-print-layout>
-	<x-slot name="css">
+	{{-- <x-slot name="css">
 		<link rel="stylesheet" href="{{ asset('css/print-style.css') }}">
-	</x-slot>
+	</x-slot> --}}
 
 	<section class="print-preview-a4">
 		<x-para-clinic.print-header :row="$xray" title="លទ្ធផលពិនិត្យ X-Ray" />

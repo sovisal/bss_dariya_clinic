@@ -134,7 +134,7 @@ class XrayController extends Controller
 	}
 
 	/**
-	 * Display the specified resource.
+	 * Print the specified resource.
 	 */
 	public function print($id)
 	{
