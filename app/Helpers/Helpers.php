@@ -182,25 +182,25 @@ function getParaClinicHeaderDetail($row = null)
 				<tbody>
 					<tr>
 						<td width="20%" class="text-right tw-bg-gray-100">Form</td>
-						<td class="type">'. $row->type_en .'</td>
+						<td class="type">'. render_synonyms_name($row->type_en, $row->type_kh) .'</td>
 						<td width="20%" class="text-right tw-bg-gray-100">Code</td>
 						<td class="code">'. $row->code .'</td>
 					</tr>
 					<tr>
 						<td class="text-right tw-bg-gray-100">Name</td>
-						<td class="name">'. $row->patient_kh .'</td>
+						<td class="name">'. render_synonyms_name($row->patient_en, $row->patient_kh) .'</td>
 						<td class="text-right tw-bg-gray-100">Requested date</td>
 						<td class="requested_date">'. date('d/m/Y H:i', strtotime($row->requested_at)) .'</td>
 					</tr>
 					<tr>
 						<td class="text-right tw-bg-gray-100">Requested by</td>
-						<td class="reqeusted_by">'. $row->requested_by_name .'</td>
+						<td class="reqeusted_by">'. render_synonyms_name($row->requested_en, $row->requested_kh) .'</td>
 						<td class="text-right tw-bg-gray-100">Physician</td>
-						<td class="physician">'. $row->physician .'</td>
+						<td class="physician">'. render_synonyms_name($row->physician_en, $row->physician_kh) .'</td>
 					</tr>
 					<tr>
 						<td class="text-right tw-bg-gray-100">Payment type</td>
-						<td class="payment_type">'. $row->payment_type_en .'</td>
+						<td class="payment_type">'. render_synonyms_name($row->payment_type_en, $row->payment_type_kh) .'</td>
 						<td class="text-right tw-bg-gray-100">Amount</td>
 						<td class="amount">'. $row->amount .' USD</td>
 					</tr>

@@ -117,13 +117,16 @@ class LaboratoryController extends Controller
 		$row = Laboratory::where('laboratories.id', $request->id)
 		->select([
 			'laboratories.*',
+			'patients.name_en as patient_en',
 			'patients.name_kh as patient_kh',
 			'patients.age as patient_age',
-			'patients.name_kh as patient_kh',
 			'genders.title_en as patient_gender',
-			'analysisBy.name_en as analysis_by_name',
-			'requestedBy.name_en as requested_by_name',
+			'analysisBy.name_en as analysis_en',
+			'analysisBy.name_kh as analysis_kh',
+			'requestedBy.name_en as requested_en',
+			'requestedBy.name_kh as requested_kh',
 			'paymentTypes.title_en as payment_type_en',
+			'paymentTypes.title_kh as payment_type_kh',
 		])
 		->leftJoin('patients', 'patients.id', '=', 'laboratories.patient_id')
 		->leftJoin('data_parents AS paymentTypes', 'paymentTypes.id', '=', 'laboratories.payment_type')
@@ -144,7 +147,7 @@ class LaboratoryController extends Controller
 							<tbody>
 								<tr>
 									<td class="text-right tw-bg-gray-100">Name</td>
-									<td>'. $row->patient_kh .'</td>
+									<td>'. render_synonyms_name($row->patient_en, $row->patient_kh) .'</td>
 									<td width="20%" class="text-right tw-bg-gray-100">Code</td>
 									<td>'. $row->code .'</td>
 								</tr>
@@ -156,9 +159,9 @@ class LaboratoryController extends Controller
 								</tr>
 								<tr>
 									<td class="text-right tw-bg-gray-100">Requested by</td>
-									<td>'. $row->requested_by_name .'</td>
+									<td>'. render_synonyms_name($row->requested_en, $row->requested_kh) .'</td>
 									<td class="text-right tw-bg-gray-100">Analysis by</td>
-									<td>'. $row->analysis_by_name .'</td>
+									<td>'. render_synonyms_name($row->analysis_en, $row->analysis_kh) .'</td>
 								</tr>
 								<tr>
 									<td class="text-right tw-bg-gray-100">Requested date</td>
@@ -169,7 +172,7 @@ class LaboratoryController extends Controller
 								<tr>
 									<td class="text-right tw-bg-gray-100">Result</td>
 									<td>
-										<textarea class="form-control">'. $row->payment_type_en .'</textarea>
+										<textarea class="form-control">'. $row->result .'</textarea>
 									</td>
 									<td class="text-right tw-bg-gray-100">Diagnosis</td>
 									<td>
@@ -178,7 +181,7 @@ class LaboratoryController extends Controller
 								</tr>
 								<tr>
 									<td class="text-right tw-bg-gray-100">Payment type</td>
-									<td>'. $row->payment_type_en .'</td>
+									<td>'. render_synonyms_name($row->payment_type_en, $row->payment_type_en) .'</td>
 									<td class="text-right tw-bg-gray-100">Amount</td>
 									<td><b>'. $row->amount .' USD</b></td>
 								</tr>
@@ -192,9 +195,9 @@ class LaboratoryController extends Controller
 								<td class="text-center">'. $i++ .'</td>
 								<td>'. render_synonyms_name($item->category()->name_en, $item->category()->name_kh) .'</td>
 								<td>'. render_synonyms_name($item->name_en, $item->name_kh) .'</td>
-								<td>'. ($detail->value ?: 0) .'</td>
-								<td>'. apply_markdown_character($item->unit) .'</td>
-								<td>'. $item->min_range .' - '. $item->max_range .'</td>
+								<th class="text-center"><strong>'. ($detail->value ?: 0) .'</strong></th>
+								<td class="text-center">'. apply_markdown_character($item->unit) .'</td>
+								<td class="text-center">'. $item->min_range .' - '. $item->max_range .'</td>
 							</tr>';
 			}
 			$body = '<div class="pt-1 tw-pb-1">Detail</div>

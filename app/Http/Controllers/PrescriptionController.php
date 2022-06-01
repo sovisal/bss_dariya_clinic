@@ -76,8 +76,10 @@ class PrescriptionController extends Controller
 	{
 		$row = Prescription::select([
 			'prescriptions.*',
+			'patients.name_en as patient_en',
 			'patients.name_kh as patient_kh',
-			'physicians.name_en as physician',
+			'physicians.name_en as physician_en',
+			'physicians.name_kh as physician_kh',
 		])
 		->where('prescriptions.id', $request->id)
 		->with([
@@ -96,26 +98,34 @@ class PrescriptionController extends Controller
 		->first();
 
 		if ($row) {
-			$header =  '<table class="table-form mb-1" width="100%">
-							<tr>
-								<td class="border-0 text-center"><b>No.'. $row->code .'</b></td>
-							</tr>
-							<tr>
-								<td class="border-0">Patient : '. $row->patient_kh .'</td>
-							</tr>
-							<tr>
-								<td class="border-0">Physician : '. $row->physician .'</td>
-							</tr>
-							<tr>
-								<td class="border-0">Date : '. date('d/m/Y H:i', strtotime($row->requested_at)) .'</td>
-							</tr>
-							<tr>
-								<td class="border-0">Status : '. (($row->status==2)? 'Completed' : 'Incompleted') .'</td>
-							</tr>
-							<tr>
-								<td class="border-0">Diagnosis : '. $row->diagnosis .'</td>
-							</tr>
-						</table>';
+			$status_html = (($row->status==2)? '<span class="badge badge-primary">Completed</span>' : '<span class="badge badge-light">Incompleted</span>');
+			$status_html .= (($row->payment_status==2)? '<span class="badge badge-success tw-ml-1">Paid</span>' : '<span class="badge badge-light tw-ml-1">Unpaid</span>');
+			$header =  '
+				<table class="table-form table-header-info">
+					<thead>
+						<tr>
+							<th colspan="4" class="text-left tw-bg-gray-100">Patient <span class="tw-pl-2 detail-status">'. $status_html .'</span></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td class="text-right tw-bg-gray-100">Name</td>
+							<td>'. render_synonyms_name($row->patient_en, $row->patient_kh) .'</td>
+							<td width="20%" class="text-right tw-bg-gray-100">Code</td>
+							<td>No.'. $row->code .'</td>
+						</tr>
+						<tr>
+							<td class="text-right tw-bg-gray-100">Physician</td>
+							<td>'. render_synonyms_name($row->physician_en, $row->physician_kh) .'</td>
+							<td width="20%" class="text-right tw-bg-gray-100">Date</td>
+							<td>'. date('d/m/Y H:i', strtotime($row->requested_at)) .'</td>
+						</tr>
+						<tr>
+							<td width="20%" class="text-right tw-bg-gray-100">Diagnosis</td>
+							<td colspan="3">'. $row->diagnosis .'</td>
+						</tr>
+					</tbody>
+				</table>';
 			$tbody = '';
 			foreach ($row->detail as $i => $detail) {
 				$j = 0;
@@ -132,19 +142,19 @@ class PrescriptionController extends Controller
 					}
 				}
 				$tbody .= '<tr>
-							<td>'. str_pad(++$i, 2, '0', STR_PAD_LEFT) .'</td>
+							<td class="text-center">'. str_pad(++$i, 2, '0', STR_PAD_LEFT) .'</td>
 							<td>'. $detail->medicine_name .'</td>
-							<td>'. $detail->qty .'</td>
-							<td>'. $detail->upd .'</td>
-							<td>'. $detail->nod .'</td>
-							<td>'. $detail->total .'</td>
+							<td class="text-center">'. $detail->qty .'</td>
+							<td class="text-center">'. $detail->upd .'</td>
+							<td class="text-center">'. $detail->nod .'</td>
+							<th class="text-center"><strong>'. $detail->total .'</strong></th>
 							<td>'. $detail->unit .'</td>
 							<td>'. $usage_time_str .'</td>
 							<td>'. $detail->usage_en .'</td>
 							<td>'. $detail->other .'</td>
 						</tr>';
 			}
-			$body = '<table class="table-form">
+			$body = '<table class="table-form  tw-mt-3 table-detail-result">
 						<tr class="text-center">
 							<th class="text-center">N&deg;</th>
 							<th>Medicine</th>

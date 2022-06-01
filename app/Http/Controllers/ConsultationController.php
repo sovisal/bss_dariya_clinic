@@ -168,7 +168,7 @@ class ConsultationController extends Controller
 		$data['list_prescription'] = implode($label, ',  ');
 
 		$label = array_map(function ($val) {
-			return '<a href="' . route('para_clinic.labor.show', $val['id']) . '">' . ($val['code'] ?: 'N/A') . '</a>';
+			return '<a class="text-primary cursor-pointer hover:tw-text-blue-700 tw-duration-500" onclick="getDetail(\''. $val['id'] .'\',\'' . route('para_clinic.labor.getDetail') . '\', \'Test Detail\')">' . ($val['code'] ?: 'N/A') . '</a>';
 		}, $data['list_labor']);
 		$data['list_labor'] = implode($label, ',  ');
 

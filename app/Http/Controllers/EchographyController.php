@@ -91,11 +91,16 @@ class EchographyController extends Controller
 		$row = Echography::where('echographies.id', $request->id)
 		->select([
 			'echographies.*',
+			'patients.name_en as patient_en',
 			'patients.name_kh as patient_kh',
-			'physicians.name_en as physician',
-			'requestedBy.name_en as requested_by_name',
+			'physicians.name_en as physician_en',
+			'physicians.name_kh as physician_kh',
+			'requestedBy.name_en as requested_en',
+			'requestedBy.name_kh as requested_kh',
 			'paymentTypes.title_en as payment_type_en',
-			'echo_types.name_en as type_en'
+			'paymentTypes.title_kh as payment_type_kh',
+			'echo_types.name_en as type_en',
+			'echo_types.name_kh as type_kh'
 		])
 		->leftJoin('patients', 'patients.id', '=', 'echographies.patient_id')
 		->leftJoin('data_parents AS paymentTypes', 'paymentTypes.id', '=', 'echographies.payment_type')
@@ -106,7 +111,7 @@ class EchographyController extends Controller
 		if ($row) {
 			$body = '';
 			$tbody = '';
-			$attributes = array_except(filter_unit_attr(unserialize($row->attribute) ?: []), ['status', 'amount']);
+			$attributes = array_except(filter_unit_attr(unserialize($row->attribute) ?: []), ['status', 'amount', 'payment_type']);
 			foreach ($attributes as $label => $attr) {
 				$tbody .= '<tr>
 								<td width="30%" class="text-right tw-bg-gray-100">'. __('form.echography.'. $label) .'</td>

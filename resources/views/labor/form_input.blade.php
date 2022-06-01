@@ -1,7 +1,7 @@
 <tr>
     <td class="text-right">Patient name <small class='required'>*</small></td>
     <td>
-        <x-bss-form.select name="patient_id" required :disabled="$is_edit">
+        <x-bss-form.select name="patient_id" required :disabled="$row->patient_id && $is_edit">
             @if (!$is_edit)
                 <option>Please choose patient</option>
             @endif
@@ -12,7 +12,7 @@
     </td>
     <td width="15%" class="text-right">Payment type <small class='required'>*</small></td>
     <td>
-        <x-bss-form.select name="payment_type" data-no_search="true" required :disabled="$is_edit">
+        <x-bss-form.select name="payment_type" data-no_search="true" required :disabled="$row->payment_type && $is_edit">
             @foreach ($payment_type as $id => $data)
                 <option value="{{ $id }}" {{ ($row->payment_type ?? false) == $id ? 'selected' : '' }}>{{ $data }}</option>
             @endforeach

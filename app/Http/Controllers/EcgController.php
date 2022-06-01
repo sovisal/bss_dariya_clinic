@@ -93,11 +93,16 @@ class EcgController extends Controller
 		$row = Ecg::where('ecgs.id', $request->id)
 		->select([
 			'ecgs.*',
+			'patients.name_en as patient_en',
 			'patients.name_kh as patient_kh',
-			'physicians.name_en as physician',
-			'requestedBy.name_en as requested_by_name',
+			'physicians.name_en as physician_en',
+			'physicians.name_kh as physician_kh',
+			'requestedBy.name_en as requested_en',
+			'requestedBy.name_kh as requested_kh',
 			'paymentTypes.title_en as payment_type_en',
-			'ecg_types.name_en as type_en'
+			'paymentTypes.title_kh as payment_type_kh',
+			'ecg_types.name_en as type_en',
+			'ecg_types.name_kh as type_kh'
 		])
 		->leftJoin('patients', 'patients.id', '=', 'ecgs.patient_id')
 		->leftJoin('data_parents AS paymentTypes', 'paymentTypes.id', '=', 'ecgs.payment_type')
