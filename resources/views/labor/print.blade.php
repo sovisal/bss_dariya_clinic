@@ -31,8 +31,10 @@
 										$item = $test->item();
 										$is_out_range = $item->min_range > 0 && $item->max_range > 0 &&
 											is_numeric($item->min_range) && is_numeric($item->max_range) &&
-											($test->value > $item->max_range || $test->value < $item->min_range);
-											
+											($test->value > $item->max_range || $test->value < $item->min_range) &&
+											str_contains($item->other, 'OUT_RANGE_COLOR_RED');
+
+										$is_negative_color = str_contains($item->other, 'NEGATIVE_COLOR_RED')
 									@endphp
 									<tr>
 										<td class="leaders">
@@ -42,12 +44,16 @@
 											</div>
 										</td>
 										<td width="14%">&nbsp; 
-											<strong style="color : {{ $is_out_range ? 'red' : 'black' }};">
+											<strong style="color : {{ $is_out_range || $is_negative_color ? 'red' : 'black' }};">
 												{{ $test->value }}
 											</strong>	
 										</td>
 										<td width="15%">{!! apply_markdown_character($item->unit) !!}</td>
-										<td width="28%">({{ $item->min_range }} - {{ $item->max_range }})</td>
+										<td width="28%">
+											@if (is_numeric($item->min_range) && is_numeric($item->max_range) && $item->max_range > 0 && $item->max_range > $item->min_range)
+												({{ $item->min_range }} - {{ $item->max_range }})
+											@endif
+										</td>
 									</tr>
 								@endforeach
 							</table>

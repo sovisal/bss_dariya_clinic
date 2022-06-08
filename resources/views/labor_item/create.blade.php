@@ -44,7 +44,7 @@
 					<td width="20%" class="text-right">Category <small class='required'>*</small></td>
 					<td>
 						<x-bss-form.select name="type" required>
-							<option>--------------</option>
+							<option value="">--------------</option>
 							@foreach ($type as $data)
 								<option value="{{ $data->id }}">{{ $data->name_en }}</option>
 							@endforeach
@@ -58,7 +58,7 @@
 					</td>
 				</tr>
                 <tr>
-					<td width="20%" class="text-right">Other</td>
+					<td width="20%" class="text-right">Syntax</td>
 					<td>
                         <x-bss-form.textarea name="other"> </x-bss-form.textarea>
 					</td>

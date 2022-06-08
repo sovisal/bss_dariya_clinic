@@ -25,7 +25,20 @@
 			<td>{{ render_synonyms_name($item->name_en, $item->name_kh) }}</td>
 			<td>
 				<input type="hidden" name="test_id[]" value="{{ $row->id }}"/>
-				<x-bss-form.input type="number" name='test_value[]' value="{{ $row->value ?: 0 }}" class="text-center"/>
+				@if(str_contains($item->other, 'VALUE_POSITIVE_NEGATIVE'))
+					<x-bss-form.select name="test_value[]" data-no_search="true">
+						@foreach (['POSITIVE' => 'POSITIVE', 'NEGATIVE' => 'NEGATIVE'] as $id => $data)
+							<option value="{{ $id }}" {{ $id == $row->value ? 'selected' : '' }}>{{ $data }}</option>
+						@endforeach
+					</x-bss-form.select>
+				@elseif(str_contains($item->other, 'VALUE_160_320'))
+					<x-bss-form.select name="test_value[]" data-no_search="true">
+						<option value="1/160" {{ '1/160' == $row->value ? 'selected' : '' }}>1/160</option>
+						<option value="1/320" {{ '1/320' == $row->value ? 'selected' : '' }}>1/320</option>
+					</x-bss-form.select>
+				@else
+					<x-bss-form.input type="number" name='test_value[]' value="{{ $row->value ?: 0 }}" class="text-center"/>
+				@endif
 			</td>
 			<td class="text-right">{{ $item->min_range }}</td>
 			<td>{{ $item->max_range }}</td>
