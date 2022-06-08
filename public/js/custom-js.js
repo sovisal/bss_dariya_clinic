@@ -868,4 +868,8 @@ $(document).ready(function () {
             } 
         });
     });
+
+	$(document).on('change', '.img_upload_preview', function (evt) {
+		document.getElementById($(this).data('output')).src = URL.createObjectURL(evt.target.files[0])
+	});
 });
