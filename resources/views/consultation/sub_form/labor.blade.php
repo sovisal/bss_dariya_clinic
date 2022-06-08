@@ -20,8 +20,10 @@
                     <div class="d-flex">
                         <x-bss-form.select name="type" required id="btnShowRow">
                             <option value="">Please choose</option>
-                            @foreach ($labor_type as $data)
-                                <option value="{{ $data->id }}" data-price="{{ $data->price }}">{{ $data->name_en }}</option>
+                            @foreach ($labor_type as $main_data)
+                                @foreach (array_merge([$main_data], $main_data->child) as $index => $data)
+                                    <option value="{{ $data->id }}" data-price="{{ $data->price }}">{{ $data->name_en }}</option>
+                                @endforeach
                             @endforeach
                         </x-bss-form.select>
                     </div>
@@ -29,27 +31,29 @@
             </tr>
         </table>
         <div>
-            @foreach ($labor_type as $data)
-                <div class="labor_row card p-2 labor_row_{{ $data->id }}">
-                    <u><b>{{ $data->name_en }}</b></u>
-                    <div style="width: 300px; position: absolute; right: 10px; top: 10px; text-align: right;">                        
-                        <label style="cursor: pointer;">
-                            <input type="checkbox" class="btnCheckRow">
-                            <u><b>All</b></u>
-                        </label>
-                        &nbsp;&nbsp; &nbsp; &nbsp; 
-                        <label style="cursor: pointer;" class="btnHideRow">
-                            <u class="text-danger"><b>Remove</b></u>
-                        </label>
+            @foreach ($labor_type as $main_data)
+                @foreach (array_merge([$main_data], $main_data->child) as $data)
+                    <div class="labor_row card p-2 labor_row_{{ $data->id }} labor_rows_of_{{ $main_data->id }}">
+                        <u><b>{{ $data->name_en }}</b></u>
+                        <div style="width: 300px; position: absolute; right: 10px; top: 10px; text-align: right;">                        
+                            <label style="cursor: pointer;">
+                                <input type="checkbox" class="btnCheckRow">
+                                <u><b>All</b></u>
+                            </label>
+                            &nbsp;&nbsp; &nbsp; &nbsp; 
+                            <label style="cursor: pointer;" class="btnHideRow">
+                                <u class="text-danger"><b>Remove</b></u>
+                            </label>
+                        </div>
+                        <div class="row">
+                            @foreach ($data->item as $item)
+                                <div class="col-3">
+                                    <label><input type="checkbox" name="labor_item_id[]" value="{{ $item->id }}"> {{ render_synonyms_name($item->name_en, $item->name_kh) }}</label>
+                                </div>
+                            @endforeach
+                        </div>
                     </div>
-                    <div class="row">
-                        @foreach ($data->item as $item)
-                            <div class="col-4">
-                                <label><input type="checkbox" name="labor_item_id[]" value="{{ $item->id }}"> {{ render_synonyms_name($item->name_en, $item->name_kh) }}</label>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
+                @endforeach
             @endforeach
         </div>
         <x-slot name="footer">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\LaborType;
 use App\Models\Laboratory;
 use App\Models\LaborDetail;
 use App\Models\Doctor;
@@ -247,7 +248,58 @@ class LaboratoryController extends Controller
 		->leftJoin('doctors AS requestedBy', 'requestedBy.id', '=', 'laboratories.requested_by')
 		->find($id);
 		$data['labor'] = $labor;
-		$data['labor_detail'] = $labor->detail()->get();
+
+		
+		// Prepare labor detail with 2 levels of groups
+		#1, get all labor detail concerned, and separate it by type id
+		$labor_detail = [];
+		foreach ($labor->detail()->get() ?? [] as $item) {
+			$type_id = $item->item()->type;
+			$labor_detail[$type_id][] = $item;
+		}
+
+
+		// #2, Get all template and apply Labor detail for it
+		$print_result = [];
+		$labor_types = LaborType::where('status', 1)->orderBy('index', 'asc')->regroupe() ?: [];
+		foreach ($labor_types as $main_data) {
+			$child_has_labor = [];
+			
+			foreach ($main_data->child as $sub_data) {
+				if (in_array($sub_data->id, array_keys($labor_detail))) {
+					$child_has_labor[] = [
+						'type' => 'label',
+						'data' => trim($sub_data->name_en, '- ')
+					];
+					$child_has_labor[] = [
+						'type' => 'result',
+						'data' => $labor_detail[$sub_data->id]
+					];
+				}
+			}
+
+			if (sizeof($child_has_labor) > 0) { // Check main type
+				$print_result[] = [
+					'type' => 'main_label',
+					'data' => $main_data->name_en
+				];
+				array_push($print_result, ...$child_has_labor);
+			} elseif (in_array($main_data->id, array_keys($labor_detail))) {
+				$print_result[] = [
+					'type' => 'main_label',
+					'data' => $main_data->name_en
+				];
+				$print_result[] = [
+					'type' => 'result',
+					'data' => $labor_detail[$main_data->id]
+				];
+			}
+		}
+
+		#3, See the debug to get understand
+		// dd($print_result);
+		
+		$data['labor_detail'] = $print_result;
 		return view('labor.print', $data);
 	}
 

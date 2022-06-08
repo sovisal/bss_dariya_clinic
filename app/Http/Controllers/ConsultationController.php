@@ -90,7 +90,7 @@ class ConsultationController extends Controller
 		$data['ecg_type'] = EcgType::where('status', 1)->orderBy('index', 'asc')->get();
 		$data['xray_type'] = XrayType::where('status', 1)->orderBy('index', 'asc')->get();
 		$data['echo_type'] = EchoType::where('status', 1)->orderBy('index', 'asc')->get();
-		$data['labor_type'] = LaborType::where('status', 1)->orderBy('index', 'asc')->get();
+		$data['labor_type'] = LaborType::where('status', 1)->orderBy('index', 'asc')->regroupe();
 
 		$data['medicine'] = Medicine::orderBy('name', 'asc')->get();
 		$data['usages'] = getParentDataSelection('comsumption');

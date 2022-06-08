@@ -16,157 +16,44 @@
 		</header>
 		<section class="labor-body">
 			<section class="type-section">
-				<h4 class="text-uppercase text-underline text-center mt-1">HEMATOLOGIE</h4>
-				<section class="category-section">
-					<div class="text-uppercase mt-1">NUMERATION GLOBULAIRI</div>
-					<table width="100%" class="ml-1">
-						<tr>
-							<td class="leaders">
-								<div>
-									<span >Leucocytes</span>
-									<span>:</span>
-								</div>
-							</td>
-							<td width="14%">10.7</td>
-							<td width="15%">10 3/uL</td>
-							<td width="28%">(4.00 - 10.00)</td>
-						</tr>
-						<tr>
-							<td class="leaders">
-								<div>
-									<span >Leucocytes</span>
-									<span>:</span>
-								</div>
-							</td>
-							<td width="14%">10.7</td>
-							<td width="15%">10 3/uL</td>
-							<td width="28%">(4.00 - 10.00)</td>
-						</tr>
-						<tr>
-							<td class="leaders">
-								<div>
-									<span >Leucocytes</span>
-									<span>:</span>
-								</div>
-							</td>
-							<td width="14%">10.7</td>
-							<td width="15%">10 3/uL</td>
-							<td width="28%">(4.00 - 10.00)</td>
-						</tr>
-						<tr>
-							<td class="leaders">
-								<div>
-									<span >Leucocytes</span>
-									<span>:</span>
-								</div>
-							</td>
-							<td width="14%">10.7</td>
-							<td width="15%">10 3/uL</td>
-							<td width="28%">(4.00 - 10.00)</td>
-						</tr>
-					</table>
-				</section>
-				<section class="category-section">
-					<div class="text-uppercase mt-1">NUMERATION GLOBULAIRI</div>
-					<table width="100%" class="ml-1">
-						<tr>
-							<td class="leaders">
-								<div>
-									<span >Leucocytes</span>
-									<span>:</span>
-								</div>
-							</td>
-							<td width="14%">10.7</td>
-							<td width="15%">10 3/uL</td>
-							<td width="28%">(4.00 - 10.00)</td>
-						</tr>
-						<tr>
-							<td class="leaders">
-								<div>
-									<span >Leucocytes</span>
-									<span>:</span>
-								</div>
-							</td>
-							<td width="14%">10.7</td>
-							<td width="15%">10 3/uL</td>
-							<td width="28%">(4.00 - 10.00)</td>
-						</tr>
-						<tr>
-							<td class="leaders">
-								<div>
-									<span >Leucocytes</span>
-									<span>:</span>
-								</div>
-							</td>
-							<td width="14%">10.7</td>
-							<td width="15%">10 3/uL</td>
-							<td width="28%">(4.00 - 10.00)</td>
-						</tr>
-						<tr>
-							<td class="leaders">
-								<div>
-									<span >Leucocytes</span>
-									<span>:</span>
-								</div>
-							</td>
-							<td width="14%">10.7</td>
-							<td width="15%">10 3/uL</td>
-							<td width="28%">(4.00 - 10.00)</td>
-						</tr>
-					</table>
-				</section>
-			</section>
-			<section class="type-section">
-				<h4 class="text-uppercase text-underline text-center mt-1">HEMATOLOGIE</h4>
-				<section class="category-section">
-					<div class="text-uppercase mt-1">NUMERATION GLOBULAIRI</div>
-					<table width="100%" class="ml-1">
-						<tr>
-							<td class="leaders">
-								<div>
-									<span >Leucocytes</span>
-									<span>:</span>
-								</div>
-							</td>
-							<td width="14%">10.7</td>
-							<td width="15%">10 3/uL</td>
-							<td width="28%">(4.00 - 10.00)</td>
-						</tr>
-						<tr>
-							<td class="leaders">
-								<div>
-									<span >Leucocytes</span>
-									<span>:</span>
-								</div>
-							</td>
-							<td width="14%">10.7</td>
-							<td width="15%">10 3/uL</td>
-							<td width="28%">(4.00 - 10.00)</td>
-						</tr>
-						<tr>
-							<td class="leaders">
-								<div>
-									<span >Leucocytes</span>
-									<span>:</span>
-								</div>
-							</td>
-							<td width="14%">10.7</td>
-							<td width="15%">10 3/uL</td>
-							<td width="28%">(4.00 - 10.00)</td>
-						</tr>
-						<tr>
-							<td class="leaders">
-								<div>
-									<span >Leucocytes</span>
-									<span>:</span>
-								</div>
-							</td>
-							<td width="14%">10.7</td>
-							<td width="15%">10 3/uL</td>
-							<td width="28%">(4.00 - 10.00)</td>
-						</tr>
-					</table>
-				</section>
+				@foreach ($labor_detail as $row_detail)
+					@if ($row_detail['type'] == 'main_label') 
+						<h4 class="text-uppercase text-underline text-center mt-1">{{ $row_detail['data'] }}</h4>
+					@elseif ($row_detail['type'] == 'label')
+						<section class="category-section">
+							<div class="text-uppercase mt-1">{{ $row_detail['data'] }}</div>
+						</section>
+					@elseif ($row_detail['type'] == 'result')
+						<section class="category-section">
+							<table width="100%" class="ml-1">
+								@foreach ($row_detail['data'] as $test)
+									@php 
+										$item = $test->item();
+										$is_out_range = $item->min_range > 0 && $item->max_range > 0 &&
+											is_numeric($item->min_range) && is_numeric($item->max_range) &&
+											($test->value > $item->max_range || $test->value < $item->min_range);
+											
+									@endphp
+									<tr>
+										<td class="leaders">
+											<div>
+												<span >{{ $item->name_en }}</span>
+												<span>:</span>
+											</div>
+										</td>
+										<td width="14%">&nbsp; 
+											<strong style="color : {{ $is_out_range ? 'red' : 'black' }};">
+												{{ $test->value }}
+											</strong>	
+										</td>
+										<td width="15%">{!! apply_markdown_character($item->unit) !!}</td>
+										<td width="28%">({{ $item->min_range }} - {{ $item->max_range }})</td>
+									</tr>
+								@endforeach
+							</table>
+						</section>
+					@endif
+				@endforeach
 			</section>
 		</section>
 		<div class="signature">
