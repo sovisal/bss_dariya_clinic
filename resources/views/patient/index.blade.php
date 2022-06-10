@@ -7,7 +7,7 @@
 	<x-slot name="header">
 		<x-form.button href="{{ route('patient.create') }}" class="btn-sm" icon="bx bx-plus" label="Create" />
 	</x-slot>
-	<x-card :foot="false">
+	<x-card :foot="false" :head="false">
 		<x-table class="table-hover table-bordered table-padding-sm" id="datatables" data-table="patients">
 			<x-slot name="thead">
 				<tr>

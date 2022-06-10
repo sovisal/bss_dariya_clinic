@@ -1,5 +1,7 @@
 <x-app-layout>
-	
+	<x-slot name="header">
+		<x-form.button href="{{ route('prescription.create') }}" label="Create" icon="bx bx-plus"/>
+	</x-slot>
 	<x-card :foot="false"  :head="false">
 		<x-table class="table-hover table-bordered" id="datatables" data-table="patients">
 			<x-slot name="thead">

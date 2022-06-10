@@ -31,7 +31,7 @@
 		</script>
 	</x-slot>
 
-	<x-card :foot="false">
+	<x-card :foot="false" :head="false">
 		<x-table class="table-bordered" id="datatables">
 			<x-slot name="thead">
 				<tr>

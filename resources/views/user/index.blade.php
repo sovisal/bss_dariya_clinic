@@ -3,7 +3,7 @@
 		<x-form.button href="{{ route('user.create') }}" icon="bx bx-plus" label="Create" />
 	</x-slot>
 
-	<x-card :foot="false">
+	<x-card :foot="false" :head="false">
 		<x-table id="datatables" class="table-hover table-bordered" data-table="users">
 			<x-slot name="thead">
 				<tr>

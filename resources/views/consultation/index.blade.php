@@ -1,5 +1,5 @@
 <x-app-layout>
-	<x-card :foot="false">
+	<x-card :foot="false" :head="false">
 		<x-table class="table-hover table-bordered table-padding-sm" id="datatables" data-table="consultations">
 			<x-slot name="thead">
 				<tr>

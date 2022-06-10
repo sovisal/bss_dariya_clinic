@@ -740,3 +740,10 @@ body.dark-layout .alert span ul li{
 	.navbar .nav-item.dropdown.show{
 		background: rgba(0, 0, 0, 0.25);
 	}
+
+	.custom-top-bar {
+		background-color: #37519E;
+	}
+	.custom-top-bar  a {
+		color: #eee!important;
+	}
