@@ -39,6 +39,9 @@ class PrescriptionController extends Controller
 	{
 		$data['patient'] = Patient::orderBy('name_en', 'asc')->get();
 		$data['doctor'] = Doctor::orderBy('name_en', 'asc')->get();
+		$data['medicine'] = Medicine::orderBy('name', 'asc')->get();
+		$data['usages'] = getParentDataSelection('comsumption');
+		$data['time_usage'] = getParentDataSelection('time_usage');
 		$data['is_edit'] = false;
 		return view('prescription.create', $data);
 	}
