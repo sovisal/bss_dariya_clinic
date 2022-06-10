@@ -36,7 +36,7 @@
 			// Labor
 			$('.labor_row').hide();
 			$(document).on('change', '.btnCheckRow', function () {
-				$this_row = $(this).parents('div.labor_row');
+				$this_row = $(this).parents('tr.labor_row');
 				$this_row.find('input[type="checkbox"]').prop('checked', $(this).prop('checked'));
 			});
 			$(document).on('change', '#btnShowRow', function () {
@@ -44,7 +44,7 @@
 				$('.labor_rows_of_' + $(this).val()).show();
 			});
 			$(document).on('click', '.btnHideRow', function () {
-				$this_row = $(this).parents('div.labor_row');
+				$this_row = $(this).parents('tr.labor_row');
 				$this_row.find('input[type="checkbox"]').prop('checked', false);
 				$this_row.hide();
 			});
