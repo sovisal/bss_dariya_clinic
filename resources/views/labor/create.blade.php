@@ -2,13 +2,20 @@
 	<x-slot name="js">
 		<script>
 			$(document).ready(function () {
-				$('[name="type"]').change(function () {
-					$_this = $(this);
-					$_option_selected = $(this).find('option:selected');
-					$_amount = $_option_selected.data('price');
-					
-					$('#amount_label').html($_amount);
-					$('[name="amount"]').val($_amount);
+				// Labor
+				$('.labor_row').hide();
+				$(document).on('change', '.btnCheckRow', function () {
+					$this_row = $(this).parents('tr.labor_row');
+					$this_row.find('input[type="checkbox"]').prop('checked', $(this).prop('checked'));
+				});
+				$(document).on('change', '#btnShowRow', function () {
+					$('.labor_row_' + $(this).val()).show();
+					$('.labor_rows_of_' + $(this).val()).show();
+				});
+				$(document).on('click', '.btnHideRow', function () {
+					$this_row = $(this).parents('tr.labor_row');
+					$this_row.find('input[type="checkbox"]').prop('checked', false);
+					$this_row.hide();
 				});
 			});
 		</script>
@@ -34,17 +41,12 @@
 			</x-slot>		
 			<table class="table-form striped">
 				<tr>
-					<th colspan="4" class="text-left tw-bg-gray-100">Echo COde #dasd123</th>
+					<th colspan="4" class="text-left tw-bg-gray-100">Echo</th>
 				</tr>
 				@include('labor.form_input')
 			</table>
 			<br>
-			<table class="table-form striped">
-				<tr>
-					<th colspan="4" class="text-left tw-bg-gray-100">Test Cases</th>
-				</tr>
-			</table>
+			@include('labor.form_input_new')
 		</x-card>
 	</form>
-
 </x-app-layout>
