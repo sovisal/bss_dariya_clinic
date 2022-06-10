@@ -52,16 +52,14 @@
 				<option value="">Please choose</option>
 			@endif
 			@foreach ($doctor as $data)
-				<option value="{{ $data->id }}" {{ ($row->requested_by ?? false) == $data->id ? 'selected' : '' }} >{{ render_synonyms_name($data->name_en, $data->name_kh) }}</option>
+				<option value="{{ $data->id }}" {{ ($row->requested_by ?? auth()->user()->doctor ?? false) == $data->id ? 'selected' : '' }} >{{ render_synonyms_name($data->name_en, $data->name_kh) }}</option>
 			@endforeach
 		</x-bss-form.select>
 	</td>
-	<td class="text-right">Physician <small class='required'>*</small></td>
+	<td class="text-right">Physician</td>
 	<td>
-		<x-bss-form.select name="doctor_id" required :disabled="$isEdit && $row->doctor_id">
-			@if (!$isEdit)
-				<option value="">Please choose</option>
-			@endif
+		<x-bss-form.select name="doctor_id" :disabled="$isEdit && $row->doctor_id">
+			<option value="">Please choose</option>
 			@foreach ($doctor as $data)
 				<option value="{{ $data->id }}" {{ ($row->doctor_id ?? false) == $data->id ? 'selected' : '' }} >{{ render_synonyms_name($data->name_en, $data->name_kh) }}</option>
 			@endforeach

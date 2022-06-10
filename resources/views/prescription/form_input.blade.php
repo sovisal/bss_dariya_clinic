@@ -27,14 +27,12 @@
 			@endforeach
 		</x-bss-form.select>
 	</td>
-	<td class="text-right">Analysis by <small class='required'>*</small></td>
+	<td class="text-right">Analysis by</td>
 	<td>
-		<x-bss-form.select name="doctor_id" required :disabled="$is_edit && $row->doctor_id">
-			@if (!$is_edit)
-				<option value="">Please choose</option>
-			@endif
+		<x-bss-form.select name="doctor_id" :disabled="$is_edit && $row->doctor_id">
+			<option value="">Please choose</option>
 			@foreach ($doctor as $data)
-				<option value="{{ $data->id }}" {{ ($row->doctor_id ?? auth()->user()->doctor ?? false) == $data->id ? 'selected' : '' }} >{{ render_synonyms_name($data->name_en, $data->name_kh) }}</option>
+				<option value="{{ $data->id }}" {{ ($row->doctor_id ?? false) == $data->id ? 'selected' : '' }} >{{ render_synonyms_name($data->name_en, $data->name_kh) }}</option>
 			@endforeach
 		</x-bss-form.select>
 	</td>

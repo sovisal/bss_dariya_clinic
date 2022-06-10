@@ -62,19 +62,43 @@ class EchographyController extends Controller
 		if ($request->type) {
             $echo_type = EchoType::where('id', $request->type)->first();
         }
+
+		if ($request->file('img_1')) {
+			$img_1_name = time() .'_image_1_'. rand(111,999) .'.png';
+			$request['image_1'] = $img_1_name;
+		}
+		if ($request->file('img_2')) {
+			$img_2_name = time() .'_image_2_'. rand(111,999) .'.png';
+			$request['image_2'] = $img_2_name;
+		}
+
 		if ($echo = $echography->create([
 			'code' => generate_code('ECH', 'echographies'),
 			'type' => $request->type,
 			'patient_id' => $request->patient_id,
-			'doctor_id' => $request->doctor_id,
+			'doctor_id' => $request->doctor_id ?: 0,
 			'requested_by' => $request->requested_by ?: auth()->user()->doctor ?? 0,
 			'payment_type' => $request->payment_type ?? 0,
 			'payment_status' => 0,
 			'requested_at' => $request->requested_at,
+			'image_1' => $request->image_1,
+			'image_2' => $request->image_2,
             'amount' => $request->amount ?: ($echo_type ? $echo_type->price : 0),
             'attribute' => $echo_type ? $echo_type->attribite : null,
 			'status' => 1,
 		])) {
+
+			$path = public_path('/images/echographies/');
+			File::makeDirectory($path, 0777, true, true);
+			if ($request->file('img_1')) {
+				$img_1 = $request->file('img_1');
+				Image::make($img_1->getRealPath())->save($path . $img_1_name);
+			}
+			if ($request->file('img_2')) {
+				$img_2 = $request->file('img_2');
+				Image::make($img_2->getRealPath())->save($path . $img_2_name);
+			}
+
 			if ($request->is_treament_plan) {
                 return redirect()->route('patient.consultation.edit', $request->consultation_id)->with('success', 'Data created success');
             } else {
@@ -203,6 +227,7 @@ class EchographyController extends Controller
 		$serialize = array_except($request->all(), ['_method', '_token', 'img_1', 'img_2']);
 		$request['attribute'] = serialize($serialize);
 		$request['amount'] = $request->amount ?? 0;
+		$request['doctor_id'] = $request->doctor_id ?? 0;
 		
 		$path = public_path('/images/echographies/');
 		File::makeDirectory($path, 0777, true, true);

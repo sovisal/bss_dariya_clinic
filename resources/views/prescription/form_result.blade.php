@@ -52,7 +52,7 @@
             <td>
                 <x-bss-form.select name="usage_id[]" required data-no_search="true" :select2="false">
                     @if (!$is_edit)
-                        <option>Please choose</option>
+                        <option value="">Please choose</option>
                     @endif
                     @foreach ($usages as $id => $data)
                         <option value="{{ $id }}" {{ ($row->usage_id ?? false) == $id ? 'selected' : '' }} >{{ $data }}</option>

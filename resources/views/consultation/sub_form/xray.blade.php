@@ -15,7 +15,7 @@
                 <td>
                     <div class="d-flex">
                         <x-bss-form.select name="type" required id="xray_type">
-                            <!-- <option>Please choose</option> -->
+                            <!-- <option value="">Please choose</option> -->
                             @foreach ($xray_type as $data)
                                 <option value="{{ $data->id }}" data-price="{{ $data->price }}">{{ render_synonyms_name($data->name_en, $data->name_kh) }}</option>
                             @endforeach

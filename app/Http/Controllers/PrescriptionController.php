@@ -263,6 +263,7 @@ class PrescriptionController extends Controller
 		// serialize all post into string
 		$serialize = array_except($request->all(), ['_method', '_token']);
 		$request['attribute'] = serialize($serialize);
+		$request['doctor_id'] = $request->doctor_id ?? 0;
 
 		if ($prescription->update($request->all())) {
 			$this->refresh_prescriotion_detail($request, $prescription->id);

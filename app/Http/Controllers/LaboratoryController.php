@@ -89,7 +89,7 @@ class LaboratoryController extends Controller
 			if ($request->is_treament_plan) {
 				return redirect()->route('patient.consultation.edit', $request->consultation_id)->with('error', 'No Test has been selected');
 			} else {
-				return redirect()->route('para_clinic.labor.edit', $labor->id)->with('error', 'No Test has been selected');
+				return redirect()->route('para_clinic.labor.create')->with('error', 'No Test has been selected');
 			}
 		}
 	}
@@ -331,6 +331,7 @@ class LaboratoryController extends Controller
 		$serialize = array_except($request->all(), ['_method', '_token']);
 		$request['attribute'] = serialize($serialize);
 		$request['amount'] = $request->amount ?? 0;
+		$request['doctor_id'] = $request->doctor_id ?? 0;
 
 		if ($labor->update($request->all())) {
 			// Do update the labor detail

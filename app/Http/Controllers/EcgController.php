@@ -66,9 +66,9 @@ class EcgController extends Controller
 		}
 		if ($record = $ecg->create([
 			'code' => generate_code('ECG', 'ecgs'),
-			'type' => $request->type,
-			'patient_id' => $request->patient_id,
-			'doctor_id' => $request->doctor_id,
+			'type' => $request->type ?: 0,
+			'patient_id' => $request->patient_id ?: 0,
+			'doctor_id' => $request->doctor_id ?: 0,
 			'requested_by' => $request->requested_by ?: auth()->user()->doctor ?? 0,
 			'payment_type' => $request->payment_type ?? 0,
 			'payment_status' => 0,
@@ -192,6 +192,7 @@ class EcgController extends Controller
 		$serialize = array_except($request->all(), ['_method', '_token']);
 		$request['attribute'] = serialize($serialize);
 		$request['amount'] = $request->amount ?? 0;
+		$request['doctor_id'] = $request->doctor_id ?? 0;
 
 		if ($ecg->update($request->all())) {
 			return redirect()->route('para_clinic.ecg.index')->with('success', 'Data update success');

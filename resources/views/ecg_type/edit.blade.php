@@ -1,4 +1,7 @@
 <x-app-layout>
+	<x-slot name="js">
+		<script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+	</x-slot>
 	<x-slot name="header">
 		<x-form.button href="{{ route('setting.ecg-type.index') }}" color="danger" icon="bx bx-left-arrow-alt" label="Back" />
 	</x-slot>

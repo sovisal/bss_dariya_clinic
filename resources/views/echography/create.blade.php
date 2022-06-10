@@ -41,17 +41,19 @@
 			</x-slot>
 			<table class="table-form striped">
 				<tr>
-					<th colspan="4" class="text-left tw-bg-gray-100">Echo Code #dasd123</th>
+					<th colspan="4" class="text-left tw-bg-gray-100">Echo</th>
 				</tr>
 				<x-para-clinic.form-header :type="$type" :patient="$patient" :doctor="$doctor" :paymentType="$payment_type">
-					<tr>
+					<tr valign="top">
 						<td class="text-right">Image(First)</td>
-						<td>
-							<x-bss-form.input name="img_1" :value="old('img_1')" type="file" />
+						<td width="30%">
+							<x-bss-form.input name="img_1" :value="old('img_1')" type="file" class="img_upload_preview" data-output="img_result_1"/>
+							<img src="#" alt="" id="img_result_1">
 						</td>
 						<td class="text-right">Image (Second)</td>
-						<td>
-							<x-bss-form.input name="img_2" :value="old('img_2')" type="file" />
+						<td width="30%">
+							<x-bss-form.input name="img_2" :value="old('img_2')" type="file" class="img_upload_preview" data-output="img_result_2"/>
+							<img src="#" alt="" id="img_result_2">
 						</td>
 					</tr>
 				</x-para-clinic.form-header>
