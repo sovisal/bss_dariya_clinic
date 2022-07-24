@@ -44,7 +44,7 @@ class AppLayout extends Component
 				],
 
 			],
-			
+
 			'prescription' => [
 				'can' => 'ViewAnyPrescription',
 				'url' => route('prescription.index'),
@@ -63,7 +63,7 @@ class AppLayout extends Component
 				'can' => 'ViewAnyParaClinic',
 				'url' => route('para_clinic.labor.index'),
 				'label' => 'Para Clinic',
-				
+
 				'sub' => [
 					'labor' => [
 						'can' => 'ViewAnyLabor',
@@ -72,7 +72,7 @@ class AppLayout extends Component
 						'label' => 'Labor',
 					],
 					'xray' => [
-						'can' => 'ViewAnyX-Ray',
+						'can' => 'ViewAnyXRay',
 						'url' => route('para_clinic.xray.index'),
 						'name' => ['index', 'create', 'edit', 'show'],
 						'label' => 'X-Ray',
@@ -84,7 +84,7 @@ class AppLayout extends Component
 						'label' => 'Echography',
 					],
 					'ecg' => [
-						'can' => 'ViewAnyX-Ray',
+						'can' => 'ViewAnyECG',
 						'url' => route('para_clinic.ecg.index'),
 						'name' => ['index', 'create', 'edit', 'show'],
 						'label' => 'ECG',
@@ -96,7 +96,7 @@ class AppLayout extends Component
 				'can' => 'DeveloperMode',
 				'url' => route('setting.edit'),
 				'label' => 'Setting',
-				
+
 				'sub' => [
 					'setting' => [
 						'can' => 'UpdateSetting',
@@ -107,49 +107,49 @@ class AppLayout extends Component
 					'labor-item' => [
 						'can' => 'UpdateSetting',
 						'url' => route('setting.labor-item.index'),
-						'name' => ['index','create', 'edit'],
+						'name' => ['index', 'create', 'edit'],
 						'label' => 'Labor Template',
 					],
 					'echo-type' => [
 						'can' => 'UpdateSetting',
 						'url' => route('setting.echo-type.index'),
-						'name' => ['index','create', 'edit'],
+						'name' => ['index', 'create', 'edit'],
 						'label' => 'Echo Template',
 					],
 					'ecg-type' => [
 						'can' => 'UpdateSetting',
 						'url' => route('setting.ecg-type.index'),
-						'name' => ['index','create', 'edit'],
+						'name' => ['index', 'create', 'edit'],
 						'label' => 'ECG Template',
 					],
 					'xray-type' => [
 						'can' => 'UpdateSetting',
 						'url' => route('setting.xray-type.index'),
-						'name' => ['index','create', 'edit'],
+						'name' => ['index', 'create', 'edit'],
 						'label' => 'Xray Template',
 					],
 					'data-parent' => [
 						'can' => 'UpdateSetting',
 						'url' => route('setting.data-parent.index'),
-						'name' => ['index','create', 'edit'],
+						'name' => ['index', 'create', 'edit'],
 						'label' => 'Data Selection',
 					],
 					'doctor' => [
 						'can' => 'ViewAnyDoctor',
 						'url' => route('setting.doctor.index'),
-						'name' => ['index','create', 'edit'],
+						'name' => ['index', 'create', 'edit'],
 						'label' => 'Doctor',
 					],
 					'medicine' => [
 						'can' => 'ViewAnyMedicine',
 						'url' => route('setting.medicine.index'),
-						'name' => ['index','create', 'edit'],
+						'name' => ['index', 'create', 'edit'],
 						'label' => 'Medicine',
 					],
 					'address' => [
 						'can' => 'UpdateSetting', // not yet create abilities
 						'url' => route('setting.address.index'),
-						'name' => ['index','create', 'edit'],
+						'name' => ['index', 'create', 'edit'],
 						'label' => 'Address',
 					],
 				],
@@ -163,19 +163,19 @@ class AppLayout extends Component
 					'user' => [
 						'can' => 'ViewAnyUser',
 						'url' => route('user.index'),
-						'name' => ['index','create', 'edit', 'ability'],
+						'name' => ['index', 'create', 'edit', 'ability'],
 						'label' => 'User',
 					],
 					'role' => [
 						'can' => 'ViewAnyRole',
 						'url' => route('user.role.index'),
-						'name' => ['index','create', 'edit', 'ability'],
+						'name' => ['index', 'create', 'edit', 'ability'],
 						'label' => 'Role',
 					],
 					'ability' => [
 						'can' => 'ViewAnyAbility',
 						'url' => route('user.ability.index'),
-						'name' => ['index','create', 'edit'],
+						'name' => ['index', 'create', 'edit'],
 						'label' => 'Ability',
 					],
 				],
@@ -184,14 +184,14 @@ class AppLayout extends Component
 		$setting = Setting::first();
 		if (!$setting) {
 			$setting = Setting::Create([
-									'clinic_name_kh' => 'Clinic KH',
-									'clinic_name_en' => 'Clinic EN',
-									'sign_name_kh' => 'Name KH',
-									'sign_name_en' => 'Name EN',
-									'phone' => 'Phone',
-									'address' => 'Address',
-									'description' => 'Description',
-								]);
+				'clinic_name_kh' => 'Clinic KH',
+				'clinic_name_en' => 'Clinic EN',
+				'sign_name_kh' => 'Name KH',
+				'sign_name_en' => 'Name EN',
+				'phone' => 'Phone',
+				'address' => 'Address',
+				'description' => 'Description',
+			]);
 		}
 
 		return view('layouts.app', compact('menu', 'setting'));
