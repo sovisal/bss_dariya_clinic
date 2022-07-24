@@ -19,17 +19,17 @@ class LaboratoryController extends Controller
 	public function index()
 	{
 		$this->data['rows'] = Laboratory::select([
-			'laboratories.*', 
-			'patients.name_en as patient_en', 
+			'laboratories.*',
+			'patients.name_en as patient_en',
 			'patients.name_kh as patient_kh',
 			'requester.name_en as requester_en',
 			'requester.name_kh as requester_kh',
 		])
-		->where('laboratories.status', '>=' , 1)
-		->leftJoin('patients', 'patients.id', '=', 'laboratories.patient_id')
-		->leftJoin('doctors as requester', 'requester.id', '=', 'laboratories.requested_by')
-		->orderBy('laboratories.id', 'desc')
-		->get();
+			->where('laboratories.status', '>=', 1)
+			->leftJoin('patients', 'patients.id', '=', 'laboratories.patient_id')
+			->leftJoin('doctors as requester', 'requester.id', '=', 'laboratories.requested_by')
+			->orderBy('laboratories.id', 'desc')
+			->get();
 		return view('labor.index', $this->data);
 	}
 
@@ -117,75 +117,75 @@ class LaboratoryController extends Controller
 	public function getDetail(Request $request)
 	{
 		$row = Laboratory::where('laboratories.id', $request->id)
-		->select([
-			'laboratories.*',
-			'patients.name_en as patient_en',
-			'patients.name_kh as patient_kh',
-			'patients.age as patient_age',
-			'genders.title_en as patient_gender',
-			'analysisBy.name_en as analysis_en',
-			'analysisBy.name_kh as analysis_kh',
-			'requestedBy.name_en as requested_en',
-			'requestedBy.name_kh as requested_kh',
-			'paymentTypes.title_en as payment_type_en',
-			'paymentTypes.title_kh as payment_type_kh',
-		])
-		->leftJoin('patients', 'patients.id', '=', 'laboratories.patient_id')
-		->leftJoin('data_parents AS paymentTypes', 'paymentTypes.id', '=', 'laboratories.payment_type')
-		->leftJoin('data_parents AS genders', 'genders.id', '=', 'patients.gender')
-		->leftJoin('doctors AS analysisBy', 'analysisBy.id', '=', 'laboratories.doctor_id')
-		->leftJoin('doctors AS requestedBy', 'requestedBy.id', '=', 'laboratories.requested_by')
-		->first();
+			->select([
+				'laboratories.*',
+				'patients.name_en as patient_en',
+				'patients.name_kh as patient_kh',
+				'patients.age as patient_age',
+				'genders.title_en as patient_gender',
+				'analysisBy.name_en as analysis_en',
+				'analysisBy.name_kh as analysis_kh',
+				'requestedBy.name_en as requested_en',
+				'requestedBy.name_kh as requested_kh',
+				'paymentTypes.title_en as payment_type_en',
+				'paymentTypes.title_kh as payment_type_kh',
+			])
+			->leftJoin('patients', 'patients.id', '=', 'laboratories.patient_id')
+			->leftJoin('data_parents AS paymentTypes', 'paymentTypes.id', '=', 'laboratories.payment_type')
+			->leftJoin('data_parents AS genders', 'genders.id', '=', 'patients.gender')
+			->leftJoin('doctors AS analysisBy', 'analysisBy.id', '=', 'laboratories.doctor_id')
+			->leftJoin('doctors AS requestedBy', 'requestedBy.id', '=', 'laboratories.requested_by')
+			->first();
 		if ($row) {
 			$tbody = '';
-			$status_html = (($row->status==2)? '<span class="badge badge-primary">Completed</span>' : '<span class="badge badge-light">Incompleted</span>');
-			$status_html .= (($row->payment_status==2)? '<span class="badge badge-success tw-ml-1">Paid</span>' : '<span class="badge badge-light tw-ml-1">Unpaid</span>');
+			$status_html = (($row->status == 2) ? '<span class="badge badge-primary">Completed</span>' : '<span class="badge badge-light">Incompleted</span>');
+			$status_html .= (($row->payment_status == 2) ? '<span class="badge badge-success tw-ml-1">Paid</span>' : '<span class="badge badge-light tw-ml-1">Unpaid</span>');
 			$header = '<table class="table-form table-header-info">
 							<thead>
 								<tr>
-									<th colspan="4" class="text-left tw-bg-gray-100">Patient <span class="tw-pl-2 detail-status">'. $status_html .'</span></th>
+									<th colspan="4" class="text-left tw-bg-gray-100">Patient <span class="tw-pl-2 detail-status">' . $status_html . '</span></th>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
 									<td class="text-right tw-bg-gray-100">Name</td>
-									<td>'. render_synonyms_name($row->patient_en, $row->patient_kh) .'</td>
+									<td>' . render_synonyms_name($row->patient_en, $row->patient_kh) . '</td>
 									<td width="20%" class="text-right tw-bg-gray-100">Code</td>
-									<td>'. $row->code .'</td>
+									<td>' . $row->code . '</td>
 								</tr>
 								<tr>
 									<td width="20%" class="text-right tw-bg-gray-100">Age</td>
-									<td>'. $row->patient_age .'</td>
+									<td>' . $row->patient_age . '</td>
 									<td width="20%" class="text-right tw-bg-gray-100">Gender</td>
-									<td>'. $row->patient_gender .'</td>
+									<td>' . $row->patient_gender . '</td>
 								</tr>
 								<tr>
 									<td class="text-right tw-bg-gray-100">Requested by</td>
-									<td>'. render_synonyms_name($row->requested_en, $row->requested_kh) .'</td>
+									<td>' . render_synonyms_name($row->requested_en, $row->requested_kh) . '</td>
 									<td class="text-right tw-bg-gray-100">Analysis by</td>
-									<td>'. render_synonyms_name($row->analysis_en, $row->analysis_kh) .'</td>
+									<td>' . render_synonyms_name($row->analysis_en, $row->analysis_kh) . '</td>
 								</tr>
 								<tr>
 									<td class="text-right tw-bg-gray-100">Requested date</td>
-									<td>'. date('d/m/Y H:i', strtotime($row->requested_at)) .'</td>
+									<td>' . date('d/m/Y H:i', strtotime($row->requested_at)) . '</td>
 									<td class="text-right tw-bg-gray-100">Analysis date</td>
-									<td>'. (($row->analysis_at)? date('d/m/Y H:i', strtotime($row->analysis_at)) : '') .'</td>
+									<td>' . (($row->analysis_at) ? date('d/m/Y H:i', strtotime($row->analysis_at)) : '') . '</td>
 								</tr>
 								<tr>
 									<td class="text-right tw-bg-gray-100">Result</td>
 									<td>
-										<textarea class="form-control">'. $row->result .'</textarea>
+										<textarea class="form-control">' . $row->result . '</textarea>
 									</td>
 									<td class="text-right tw-bg-gray-100">Diagnosis</td>
 									<td>
-										<textarea class="form-control">'. $row->diagnosis .'</textarea>
+										<textarea class="form-control">' . $row->diagnosis . '</textarea>
 									</td>
 								</tr>
 								<tr>
 									<td class="text-right tw-bg-gray-100">Payment type</td>
-									<td>'. render_synonyms_name($row->payment_type_en, $row->payment_type_en) .'</td>
+									<td>' . render_synonyms_name($row->payment_type_en, $row->payment_type_en) . '</td>
 									<td class="text-right tw-bg-gray-100">Amount</td>
-									<td><b>'. $row->amount .' USD</b></td>
+									<td><b>' . $row->amount . ' USD</b></td>
 								</tr>
 							</tbody>
 						</table>';
@@ -194,12 +194,12 @@ class LaboratoryController extends Controller
 				static $i = 1;
 				$item = $detail->item();
 				$tbody .= '<tr>
-								<td class="text-center">'. $i++ .'</td>
-								<td>'. render_synonyms_name($item->category()->name_en, $item->category()->name_kh) .'</td>
-								<td>'. render_synonyms_name($item->name_en, $item->name_kh) .'</td>
-								<th class="text-center"><strong>'. ($detail->value ?: 0) .'</strong></th>
-								<td class="text-center">'. apply_markdown_character($item->unit) .'</td>
-								<td class="text-center">'. $item->min_range .' - '. $item->max_range .'</td>
+								<td class="text-center">' . $i++ . '</td>
+								<td>' . render_synonyms_name($item->category()->name_en, $item->category()->name_kh) . '</td>
+								<td>' . render_synonyms_name($item->name_en, $item->name_kh) . '</td>
+								<th class="text-center"><strong>' . ($detail->value ?: 0) . '</strong></th>
+								<td class="text-center">' . apply_markdown_character($item->unit) . '</td>
+								<td class="text-center">' . $item->min_range . ' - ' . $item->max_range . '</td>
 							</tr>';
 			}
 			$body = '<div class="pt-1 tw-pb-1">Detail</div>
@@ -214,7 +214,7 @@ class LaboratoryController extends Controller
 								<th width="15%">Normal Range</th>
 							</tr>
 						</thead>
-						<tbody>'. (($tbody=='')? '<tr><th colspan="7" class="text-center">No result</th></tr>' : $tbody.'<tr></tr>' ) .'</tbody>
+						<tbody>' . (($tbody == '') ? '<tr><th colspan="7" class="text-center">No result</th></tr>' : $tbody . '<tr></tr>') . '</tbody>
 					</table>';
 			return response()->json([
 				'success' => true,
@@ -222,7 +222,7 @@ class LaboratoryController extends Controller
 				'body' => $body,
 				'print_url' => route('para_clinic.labor.print', $row->id),
 			]);
-		}else{
+		} else {
 			return response()->json([
 				'success' => false,
 				'message' => 'Laboratory not found!',
@@ -243,14 +243,14 @@ class LaboratoryController extends Controller
 			'doctors.name_kh as doctor_kh',
 			'requestedBy.name_en as requested_by_name',
 		])
-		->leftJoin('patients', 'patients.id', '=', 'laboratories.patient_id')
-		->leftJoin('data_parents', 'data_parents.id', '=', 'patients.gender')
-		->leftJoin('doctors', 'doctors.id', '=', 'laboratories.doctor_id')
-		->leftJoin('doctors AS requestedBy', 'requestedBy.id', '=', 'laboratories.requested_by')
-		->find($id);
+			->leftJoin('patients', 'patients.id', '=', 'laboratories.patient_id')
+			->leftJoin('data_parents', 'data_parents.id', '=', 'patients.gender')
+			->leftJoin('doctors', 'doctors.id', '=', 'laboratories.doctor_id')
+			->leftJoin('doctors AS requestedBy', 'requestedBy.id', '=', 'laboratories.requested_by')
+			->find($id);
 		$data['labor'] = $labor;
 
-		
+
 		// Prepare labor detail with 2 levels of groups
 		#1, get all labor detail concerned, and separate it by type id
 		$labor_detail = [];
@@ -265,7 +265,7 @@ class LaboratoryController extends Controller
 		$labor_types = LaborType::where('status', 1)->orderBy('index', 'asc')->regroupe() ?: [];
 		foreach ($labor_types as $main_data) {
 			$child_has_labor = [];
-			
+
 			foreach ($main_data->child as $sub_data) {
 				if (in_array($sub_data->id, array_keys($labor_detail))) {
 					$child_has_labor[] = [
@@ -299,7 +299,7 @@ class LaboratoryController extends Controller
 
 		#3, See the debug to get understand
 		// dd($print_result);
-		
+
 		$data['labor_detail'] = $print_result;
 		return view('labor.print', $data);
 	}

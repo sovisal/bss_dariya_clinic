@@ -18,11 +18,11 @@ class PatientController extends Controller
 	{
 		$data = [
 			'patients' => Patient::select([
-										'patients.*',
-										'updatedBy.name AS updated_by_name',
-									])
-									->join('users AS updatedBy', 'updatedBy.id', '=' ,'patients.updated_by')
-									->orderBy('name_kh', 'asc')->get()
+				'patients.*',
+				'updatedBy.name AS updated_by_name',
+			])
+				->join('users AS updatedBy', 'updatedBy.id', '=', 'patients.updated_by')
+				->orderBy('name_kh', 'asc')->get()
 		];
 		return view('patient.index', $data);
 	}
@@ -95,8 +95,8 @@ class PatientController extends Controller
 			$path = public_path('/images/patients/');
 			File::makeDirectory($path, 0777, true, true);
 			$photo = $request->file('photo');
-			$photo_name = time() .'_'. $patient->id .'.png';
-			Image::make($photo->getRealPath())->save($path.$photo_name);
+			$photo_name = time() . '_' . $patient->id . '.png';
+			Image::make($photo->getRealPath())->save($path . $photo_name);
 			$patient->update(['photo' => $photo_name]);
 		}
 
@@ -109,13 +109,13 @@ class PatientController extends Controller
 	public function show(Patient $patient)
 	{
 		$consultation = Consultation::where('patient_id', $patient->id)->get();
-		$save_consultation = $consultation->where('status', 'save')->first();
+		$save_consultation = $consultation->where('status', 1)->first();
 		$exist_consultation = $consultation->first();
-		// if ($save_consultation) {
-		// 	return redirect()->route('patient.consultation.edit', $save_consultation->id);
-		// }else if(!$exist_consultation){
-		// 	return redirect()->route('patient.consultation.create', ['patient' => $patient->id]);
-		// }
+		if ($save_consultation) {
+			return redirect()->route('patient.consultation.edit', $save_consultation->id);
+		} else if (!$exist_consultation) {
+			return redirect()->route('patient.consultation.create', ['patient' => $patient->id]);
+		}
 
 		$data = [
 			'patient' => $patient,
@@ -178,9 +178,9 @@ class PatientController extends Controller
 			$path = public_path('/images/patients/');
 			File::makeDirectory($path, 0777, true, true);
 			$photo = $request->file('photo');
-			$patient_photo = (($patient->photo!='')? $patient->photo : time() .'_'. $patient->id .'.png');
-			Image::make($photo->getRealPath())->save($path.$patient_photo);
-			$patient->update(['photo'=>$patient_photo]);
+			$patient_photo = (($patient->photo != '') ? $patient->photo : time() . '_' . $patient->id . '.png');
+			Image::make($photo->getRealPath())->save($path . $patient_photo);
+			$patient->update(['photo' => $patient_photo]);
 		}
 
 		return redirect()->route('patient.index')->with('success', __('alert.message.success.crud.update'));
@@ -194,8 +194,8 @@ class PatientController extends Controller
 		$address_id = $patient->address_id;
 		$patient_photo = $patient->photo;
 		if ($patient->delete()) {
-			$old_path =public_path('/images/patients/'. $patient_photo);
-			if(File::exists($old_path)) {
+			$old_path = public_path('/images/patients/' . $patient_photo);
+			if (File::exists($old_path)) {
 				File::delete($old_path);
 			}
 
@@ -208,7 +208,6 @@ class PatientController extends Controller
 	// get Product Select2
 	public function getSelect2()
 	{
-		return Patient::getSelect2(['status'=>'active'], ['name_kh', 'asc'], ['id', 'name_kh']);
+		return Patient::getSelect2(['status' => 'active'], ['name_kh', 'asc'], ['id', 'name_kh']);
 	}
-
 }
